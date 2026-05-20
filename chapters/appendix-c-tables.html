@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="An open undergraduate textbook for Econometrics I at the University of Granada. Combines lecture notes, R tutorials, and interactive self-assessment in a single reproducible volume.">
+
+<title>Appendix C — Statistical Tables – Econometrics I</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/appendix-b-wooldridge-cgl-crosswalk.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-acff971833d9769290026d534105daaa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/appendix-a-prerequisites.html">Appendices</a></li><li class="breadcrumb-item"><a href="../chapters/appendix-c-tables.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Statistical Tables</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Econometrics I</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Preface</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-initial-concepts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Initial Concepts</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-simple-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Simple Linear Regression Model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-multiple-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Multiple Linear Regression Model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-prediction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Prediction and Model Selection</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-nonlinear-qualitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Nonlinear Relationships and Qualitative Information</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-heteroskedasticity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heteroskedasticity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-autocorrelation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Autocorrelation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendix-a-prerequisites.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Mathematical and Statistical Prerequisites</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendix-b-wooldridge-cgl-crosswalk.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Wooldridge ↔︎ Carter–Griffiths–Lim Crosswalk</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendix-c-tables.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Statistical Tables</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-c-how-to-read" id="toc-sec-c-how-to-read" class="nav-link active" data-scroll-target="#sec-c-how-to-read">How to read these tables</a></li>
+  <li><a href="#sec-c-t" id="toc-sec-c-t" class="nav-link" data-scroll-target="#sec-c-t"><span class="header-section-number">C.1</span> C.1 Critical values of the <span class="math inline">\(t\)</span>-distribution</a></li>
+  <li><a href="#sec-c-f" id="toc-sec-c-f" class="nav-link" data-scroll-target="#sec-c-f"><span class="header-section-number">C.2</span> C.2 Critical values of the <span class="math inline">\(F\)</span>-distribution</a></li>
+  <li><a href="#sec-c-chi2" id="toc-sec-c-chi2" class="nav-link" data-scroll-target="#sec-c-chi2"><span class="header-section-number">C.3</span> C.3 Critical values of the <span class="math inline">\(\chi^{2}\)</span>-distribution</a></li>
+  <li><a href="#sec-c-dw" id="toc-sec-c-dw" class="nav-link" data-scroll-target="#sec-c-dw"><span class="header-section-number">C.4</span> C.4 Durbin–Watson bounds</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/appendix-a-prerequisites.html">Appendices</a></li><li class="breadcrumb-item"><a href="../chapters/appendix-c-tables.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Statistical Tables</span></a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Appendix C — Statistical Tables</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><em>Status: ported 2026-05-18. All tables generated reproducibly from R distribution functions, except the Durbin-Watson bounds (Durbin &amp; Watson 1951).</em></p>
+</blockquote>
+<p>This appendix gathers the critical-value tables we use most often in the book: the <span class="math inline">\(t\)</span>, <span class="math inline">\(F\)</span>, and <span class="math inline">\(\chi^{2}\)</span> distributions for the inferential procedures of Chapter 4, plus the Durbin–Watson bounds used in the serial-correlation diagnostic of Chapter 8. Because the entries below are produced inside R by the quantile functions <code>qt()</code>, <code>qf()</code>, and <code>qchisq()</code>, they are exact to machine precision rather than rounded as in printed appendices. A reader who wants a value not listed here can simply re-run the corresponding chunk with extra rows or columns.</p>
+<section id="sec-c-how-to-read" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-c-how-to-read">How to read these tables</h2>
+<p>A <strong>critical value</strong> <span class="math inline">\(c_{\alpha}\)</span> is the threshold a test statistic must cross to reject the null at significance level <span class="math inline">\(\alpha\)</span>: for a one-sided <span class="math inline">\(t\)</span>-test of <span class="math inline">\(H_{0}: \beta_{j} = 0\)</span> against <span class="math inline">\(H_{1}: \beta_{j} &gt; 0\)</span> at the 5% level, we reject when <span class="math inline">\(t &gt; c_{0.05}\)</span>. A <strong><span class="math inline">\(p\)</span>-value</strong> turns the question around: it is the smallest <span class="math inline">\(\alpha\)</span> at which the null would have been rejected given the observed statistic. The two views are equivalent — given a <span class="math inline">\(p\)</span>-value you know which critical values you would have crossed — but the tables here are organised around critical values because that is still how most printed inference works through.</p>
+<p>For the <span class="math inline">\(t\)</span>-distribution, the columns below report <strong>one-tailed</strong> upper-tail critical values: <span class="math inline">\(c\)</span> such that <span class="math inline">\(\Pr(T_{df} &gt; c) = \alpha\)</span>. For a <strong>two-tailed</strong> test at level <span class="math inline">\(\alpha\)</span>, look up the <span class="math inline">\(\alpha/2\)</span> column instead — so the 5% two-tailed critical value is the entry in the <span class="math inline">\(\alpha = 0.025\)</span> column. The <span class="math inline">\(F\)</span> and <span class="math inline">\(\chi^{2}\)</span> tables are intrinsically one-tailed (their statistics are non-negative) and need no such adjustment. The <span class="math inline">\(t\)</span> table is invoked in §4.5 for single-coefficient hypothesis testing; the <span class="math inline">\(F\)</span> table is used in §4.7 for joint tests and again in §7.3 for the Breusch–Pagan heteroskedasticity test; the <span class="math inline">\(\chi^{2}\)</span> table covers the large-sample variants of those tests; and the Durbin–Watson bounds in §C.4 are the reference for the serial-correlation diagnostic of §8.3.</p>
+</section>
+<section id="sec-c-t" class="level2" data-number="C.1">
+<h2 data-number="C.1" class="anchored" data-anchor-id="sec-c-t"><span class="header-section-number">C.1</span> C.1 Critical values of the <span class="math inline">\(t\)</span>-distribution</h2>
+<p>The entries below are one-tailed upper critical values <span class="math inline">\(c\)</span> such that <span class="math inline">\(\Pr(T_{df} &gt; c) = \alpha\)</span>. The last row, <span class="math inline">\(df = \infty\)</span>, coincides with the standard-normal quantiles <span class="math inline">\(z_{1-\alpha}\)</span> — the bridge formalised by the CLT in §A.4.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df_t    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>, <span class="cn">Inf</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>alpha_t <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.025</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>, <span class="fl">0.001</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>t_tab <span class="ot">&lt;-</span> <span class="fu">sapply</span>(alpha_t, <span class="cf">function</span>(a) <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> a, <span class="at">df =</span> df_t))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>t_tab <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(t_tab)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(t_tab) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"α = "</span>, <span class="fu">format</span>(alpha_t, <span class="at">scientific =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>t_tab <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">df =</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(df_t), <span class="st">"∞"</span>, <span class="fu">as.character</span>(df_t)),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>               t_tab)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  t_tab,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(alpha_t))),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"One-tailed critical values of the $t$-distribution. For a two-tailed test at level $</span><span class="sc">\\</span><span class="st">alpha$, read the $</span><span class="sc">\\</span><span class="st">alpha/2$ column."</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>One-tailed critical values of the <span class="math inline">\(t\)</span>-distribution. For a two-tailed test at level <span class="math inline">\(\alpha\)</span>, read the <span class="math inline">\(\alpha/2\)</span> column.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">df</th>
+<th style="text-align: right;">α = 0.100</th>
+<th style="text-align: right;">α = 0.050</th>
+<th style="text-align: right;">α = 0.025</th>
+<th style="text-align: right;">α = 0.010</th>
+<th style="text-align: right;">α = 0.005</th>
+<th style="text-align: right;">α = 0.001</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">3.078</td>
+<td style="text-align: right;">6.314</td>
+<td style="text-align: right;">12.706</td>
+<td style="text-align: right;">31.821</td>
+<td style="text-align: right;">63.657</td>
+<td style="text-align: right;">318.309</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">1.886</td>
+<td style="text-align: right;">2.920</td>
+<td style="text-align: right;">4.303</td>
+<td style="text-align: right;">6.965</td>
+<td style="text-align: right;">9.925</td>
+<td style="text-align: right;">22.327</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">1.638</td>
+<td style="text-align: right;">2.353</td>
+<td style="text-align: right;">3.182</td>
+<td style="text-align: right;">4.541</td>
+<td style="text-align: right;">5.841</td>
+<td style="text-align: right;">10.215</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">1.533</td>
+<td style="text-align: right;">2.132</td>
+<td style="text-align: right;">2.776</td>
+<td style="text-align: right;">3.747</td>
+<td style="text-align: right;">4.604</td>
+<td style="text-align: right;">7.173</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">1.476</td>
+<td style="text-align: right;">2.015</td>
+<td style="text-align: right;">2.571</td>
+<td style="text-align: right;">3.365</td>
+<td style="text-align: right;">4.032</td>
+<td style="text-align: right;">5.893</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">1.440</td>
+<td style="text-align: right;">1.943</td>
+<td style="text-align: right;">2.447</td>
+<td style="text-align: right;">3.143</td>
+<td style="text-align: right;">3.707</td>
+<td style="text-align: right;">5.208</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: right;">1.415</td>
+<td style="text-align: right;">1.895</td>
+<td style="text-align: right;">2.365</td>
+<td style="text-align: right;">2.998</td>
+<td style="text-align: right;">3.499</td>
+<td style="text-align: right;">4.785</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: right;">1.397</td>
+<td style="text-align: right;">1.860</td>
+<td style="text-align: right;">2.306</td>
+<td style="text-align: right;">2.896</td>
+<td style="text-align: right;">3.355</td>
+<td style="text-align: right;">4.501</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: right;">1.383</td>
+<td style="text-align: right;">1.833</td>
+<td style="text-align: right;">2.262</td>
+<td style="text-align: right;">2.821</td>
+<td style="text-align: right;">3.250</td>
+<td style="text-align: right;">4.297</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: right;">1.372</td>
+<td style="text-align: right;">1.812</td>
+<td style="text-align: right;">2.228</td>
+<td style="text-align: right;">2.764</td>
+<td style="text-align: right;">3.169</td>
+<td style="text-align: right;">4.144</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11</td>
+<td style="text-align: right;">1.363</td>
+<td style="text-align: right;">1.796</td>
+<td style="text-align: right;">2.201</td>
+<td style="text-align: right;">2.718</td>
+<td style="text-align: right;">3.106</td>
+<td style="text-align: right;">4.025</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12</td>
+<td style="text-align: right;">1.356</td>
+<td style="text-align: right;">1.782</td>
+<td style="text-align: right;">2.179</td>
+<td style="text-align: right;">2.681</td>
+<td style="text-align: right;">3.055</td>
+<td style="text-align: right;">3.930</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">13</td>
+<td style="text-align: right;">1.350</td>
+<td style="text-align: right;">1.771</td>
+<td style="text-align: right;">2.160</td>
+<td style="text-align: right;">2.650</td>
+<td style="text-align: right;">3.012</td>
+<td style="text-align: right;">3.852</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">14</td>
+<td style="text-align: right;">1.345</td>
+<td style="text-align: right;">1.761</td>
+<td style="text-align: right;">2.145</td>
+<td style="text-align: right;">2.624</td>
+<td style="text-align: right;">2.977</td>
+<td style="text-align: right;">3.787</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15</td>
+<td style="text-align: right;">1.341</td>
+<td style="text-align: right;">1.753</td>
+<td style="text-align: right;">2.131</td>
+<td style="text-align: right;">2.602</td>
+<td style="text-align: right;">2.947</td>
+<td style="text-align: right;">3.733</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16</td>
+<td style="text-align: right;">1.337</td>
+<td style="text-align: right;">1.746</td>
+<td style="text-align: right;">2.120</td>
+<td style="text-align: right;">2.583</td>
+<td style="text-align: right;">2.921</td>
+<td style="text-align: right;">3.686</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">17</td>
+<td style="text-align: right;">1.333</td>
+<td style="text-align: right;">1.740</td>
+<td style="text-align: right;">2.110</td>
+<td style="text-align: right;">2.567</td>
+<td style="text-align: right;">2.898</td>
+<td style="text-align: right;">3.646</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">18</td>
+<td style="text-align: right;">1.330</td>
+<td style="text-align: right;">1.734</td>
+<td style="text-align: right;">2.101</td>
+<td style="text-align: right;">2.552</td>
+<td style="text-align: right;">2.878</td>
+<td style="text-align: right;">3.610</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">19</td>
+<td style="text-align: right;">1.328</td>
+<td style="text-align: right;">1.729</td>
+<td style="text-align: right;">2.093</td>
+<td style="text-align: right;">2.539</td>
+<td style="text-align: right;">2.861</td>
+<td style="text-align: right;">3.579</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">20</td>
+<td style="text-align: right;">1.325</td>
+<td style="text-align: right;">1.725</td>
+<td style="text-align: right;">2.086</td>
+<td style="text-align: right;">2.528</td>
+<td style="text-align: right;">2.845</td>
+<td style="text-align: right;">3.552</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">21</td>
+<td style="text-align: right;">1.323</td>
+<td style="text-align: right;">1.721</td>
+<td style="text-align: right;">2.080</td>
+<td style="text-align: right;">2.518</td>
+<td style="text-align: right;">2.831</td>
+<td style="text-align: right;">3.527</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">22</td>
+<td style="text-align: right;">1.321</td>
+<td style="text-align: right;">1.717</td>
+<td style="text-align: right;">2.074</td>
+<td style="text-align: right;">2.508</td>
+<td style="text-align: right;">2.819</td>
+<td style="text-align: right;">3.505</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">23</td>
+<td style="text-align: right;">1.319</td>
+<td style="text-align: right;">1.714</td>
+<td style="text-align: right;">2.069</td>
+<td style="text-align: right;">2.500</td>
+<td style="text-align: right;">2.807</td>
+<td style="text-align: right;">3.485</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">24</td>
+<td style="text-align: right;">1.318</td>
+<td style="text-align: right;">1.711</td>
+<td style="text-align: right;">2.064</td>
+<td style="text-align: right;">2.492</td>
+<td style="text-align: right;">2.797</td>
+<td style="text-align: right;">3.467</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">25</td>
+<td style="text-align: right;">1.316</td>
+<td style="text-align: right;">1.708</td>
+<td style="text-align: right;">2.060</td>
+<td style="text-align: right;">2.485</td>
+<td style="text-align: right;">2.787</td>
+<td style="text-align: right;">3.450</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">26</td>
+<td style="text-align: right;">1.315</td>
+<td style="text-align: right;">1.706</td>
+<td style="text-align: right;">2.056</td>
+<td style="text-align: right;">2.479</td>
+<td style="text-align: right;">2.779</td>
+<td style="text-align: right;">3.435</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">1.314</td>
+<td style="text-align: right;">1.703</td>
+<td style="text-align: right;">2.052</td>
+<td style="text-align: right;">2.473</td>
+<td style="text-align: right;">2.771</td>
+<td style="text-align: right;">3.421</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28</td>
+<td style="text-align: right;">1.313</td>
+<td style="text-align: right;">1.701</td>
+<td style="text-align: right;">2.048</td>
+<td style="text-align: right;">2.467</td>
+<td style="text-align: right;">2.763</td>
+<td style="text-align: right;">3.408</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">29</td>
+<td style="text-align: right;">1.311</td>
+<td style="text-align: right;">1.699</td>
+<td style="text-align: right;">2.045</td>
+<td style="text-align: right;">2.462</td>
+<td style="text-align: right;">2.756</td>
+<td style="text-align: right;">3.396</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">30</td>
+<td style="text-align: right;">1.310</td>
+<td style="text-align: right;">1.697</td>
+<td style="text-align: right;">2.042</td>
+<td style="text-align: right;">2.457</td>
+<td style="text-align: right;">2.750</td>
+<td style="text-align: right;">3.385</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">40</td>
+<td style="text-align: right;">1.303</td>
+<td style="text-align: right;">1.684</td>
+<td style="text-align: right;">2.021</td>
+<td style="text-align: right;">2.423</td>
+<td style="text-align: right;">2.704</td>
+<td style="text-align: right;">3.307</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">60</td>
+<td style="text-align: right;">1.296</td>
+<td style="text-align: right;">1.671</td>
+<td style="text-align: right;">2.000</td>
+<td style="text-align: right;">2.390</td>
+<td style="text-align: right;">2.660</td>
+<td style="text-align: right;">3.232</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">90</td>
+<td style="text-align: right;">1.291</td>
+<td style="text-align: right;">1.662</td>
+<td style="text-align: right;">1.987</td>
+<td style="text-align: right;">2.368</td>
+<td style="text-align: right;">2.632</td>
+<td style="text-align: right;">3.183</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">120</td>
+<td style="text-align: right;">1.289</td>
+<td style="text-align: right;">1.658</td>
+<td style="text-align: right;">1.980</td>
+<td style="text-align: right;">2.358</td>
+<td style="text-align: right;">2.617</td>
+<td style="text-align: right;">3.160</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">∞</td>
+<td style="text-align: right;">1.282</td>
+<td style="text-align: right;">1.645</td>
+<td style="text-align: right;">1.960</td>
+<td style="text-align: right;">2.326</td>
+<td style="text-align: right;">2.576</td>
+<td style="text-align: right;">3.090</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>A handful of entries are worth memorising. With <span class="math inline">\(df = \infty\)</span> the table reproduces <span class="math inline">\(z_{0.975} = 1.96\)</span> (column <span class="math inline">\(\alpha = 0.025\)</span>) and <span class="math inline">\(z_{0.995} = 2.576\)</span> (column <span class="math inline">\(\alpha = 0.005\)</span>), the standard-normal critical values for two-sided tests at 5% and 1%. For <span class="math inline">\(df \geq 30\)</span> the rule of thumb that <span class="math inline">\(t\)</span> is “close to normal” already pays off: the 5% two-sided critical value (column <span class="math inline">\(\alpha = 0.025\)</span>) sits within 5% of 1.96.</p>
+</section>
+<section id="sec-c-f" class="level2" data-number="C.2">
+<h2 data-number="C.2" class="anchored" data-anchor-id="sec-c-f"><span class="header-section-number">C.2</span> C.2 Critical values of the <span class="math inline">\(F\)</span>-distribution</h2>
+<p>The <span class="math inline">\(F\)</span>-tables tabulate the upper-<span class="math inline">\(\alpha\)</span> critical value of <span class="math inline">\(F_{k_{1}, k_{2}}\)</span>, where <span class="math inline">\(k_{1}\)</span> is the <strong>numerator</strong> degrees of freedom (the number of restrictions in a joint test) and <span class="math inline">\(k_{2}\)</span> is the <strong>denominator</strong> degrees of freedom (typically <span class="math inline">\(n - k - 1\)</span> in a <span class="math inline">\(k\)</span>-regressor model with an intercept). We tabulate the two conventional significance levels separately.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>num_df <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">30</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>den_df <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">120</span>, <span class="cn">Inf</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>f_tab_05 <span class="ot">&lt;-</span> <span class="fu">outer</span>(den_df, num_df,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(d, n) <span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> n, <span class="at">df2 =</span> d))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>f_tab_05 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(f_tab_05)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(f_tab_05) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"k1 = "</span>, num_df)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>f_tab_05 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="st">`</span><span class="at">k2 (den. df)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(den_df), <span class="st">"∞"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                          <span class="fu">as.character</span>(den_df)),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                  f_tab_05)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  f_tab_05,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(num_df))),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Critical values of the $F$-distribution at $</span><span class="sc">\\</span><span class="st">alpha = 0.05$ (upper tail). Rows: denominator df $k_{2}$. Columns: numerator df $k_{1}$."</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Critical values of the <span class="math inline">\(F\)</span>-distribution at <span class="math inline">\(\alpha = 0.05\)</span> (upper tail). Rows: denominator df <span class="math inline">\(k_{2}\)</span>. Columns: numerator df <span class="math inline">\(k_{1}\)</span>.</caption>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">k2 (den. df)</th>
+<th style="text-align: right;">k1 = 1</th>
+<th style="text-align: right;">k1 = 2</th>
+<th style="text-align: right;">k1 = 3</th>
+<th style="text-align: right;">k1 = 4</th>
+<th style="text-align: right;">k1 = 5</th>
+<th style="text-align: right;">k1 = 6</th>
+<th style="text-align: right;">k1 = 7</th>
+<th style="text-align: right;">k1 = 8</th>
+<th style="text-align: right;">k1 = 10</th>
+<th style="text-align: right;">k1 = 15</th>
+<th style="text-align: right;">k1 = 20</th>
+<th style="text-align: right;">k1 = 30</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">10</td>
+<td style="text-align: right;">4.965</td>
+<td style="text-align: right;">4.103</td>
+<td style="text-align: right;">3.708</td>
+<td style="text-align: right;">3.478</td>
+<td style="text-align: right;">3.326</td>
+<td style="text-align: right;">3.217</td>
+<td style="text-align: right;">3.135</td>
+<td style="text-align: right;">3.072</td>
+<td style="text-align: right;">2.978</td>
+<td style="text-align: right;">2.845</td>
+<td style="text-align: right;">2.774</td>
+<td style="text-align: right;">2.700</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">15</td>
+<td style="text-align: right;">4.543</td>
+<td style="text-align: right;">3.682</td>
+<td style="text-align: right;">3.287</td>
+<td style="text-align: right;">3.056</td>
+<td style="text-align: right;">2.901</td>
+<td style="text-align: right;">2.790</td>
+<td style="text-align: right;">2.707</td>
+<td style="text-align: right;">2.641</td>
+<td style="text-align: right;">2.544</td>
+<td style="text-align: right;">2.403</td>
+<td style="text-align: right;">2.328</td>
+<td style="text-align: right;">2.247</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">20</td>
+<td style="text-align: right;">4.351</td>
+<td style="text-align: right;">3.493</td>
+<td style="text-align: right;">3.098</td>
+<td style="text-align: right;">2.866</td>
+<td style="text-align: right;">2.711</td>
+<td style="text-align: right;">2.599</td>
+<td style="text-align: right;">2.514</td>
+<td style="text-align: right;">2.447</td>
+<td style="text-align: right;">2.348</td>
+<td style="text-align: right;">2.203</td>
+<td style="text-align: right;">2.124</td>
+<td style="text-align: right;">2.039</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">25</td>
+<td style="text-align: right;">4.242</td>
+<td style="text-align: right;">3.385</td>
+<td style="text-align: right;">2.991</td>
+<td style="text-align: right;">2.759</td>
+<td style="text-align: right;">2.603</td>
+<td style="text-align: right;">2.490</td>
+<td style="text-align: right;">2.405</td>
+<td style="text-align: right;">2.337</td>
+<td style="text-align: right;">2.236</td>
+<td style="text-align: right;">2.089</td>
+<td style="text-align: right;">2.007</td>
+<td style="text-align: right;">1.919</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">30</td>
+<td style="text-align: right;">4.171</td>
+<td style="text-align: right;">3.316</td>
+<td style="text-align: right;">2.922</td>
+<td style="text-align: right;">2.690</td>
+<td style="text-align: right;">2.534</td>
+<td style="text-align: right;">2.421</td>
+<td style="text-align: right;">2.334</td>
+<td style="text-align: right;">2.266</td>
+<td style="text-align: right;">2.165</td>
+<td style="text-align: right;">2.015</td>
+<td style="text-align: right;">1.932</td>
+<td style="text-align: right;">1.841</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">40</td>
+<td style="text-align: right;">4.085</td>
+<td style="text-align: right;">3.232</td>
+<td style="text-align: right;">2.839</td>
+<td style="text-align: right;">2.606</td>
+<td style="text-align: right;">2.449</td>
+<td style="text-align: right;">2.336</td>
+<td style="text-align: right;">2.249</td>
+<td style="text-align: right;">2.180</td>
+<td style="text-align: right;">2.077</td>
+<td style="text-align: right;">1.924</td>
+<td style="text-align: right;">1.839</td>
+<td style="text-align: right;">1.744</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">60</td>
+<td style="text-align: right;">4.001</td>
+<td style="text-align: right;">3.150</td>
+<td style="text-align: right;">2.758</td>
+<td style="text-align: right;">2.525</td>
+<td style="text-align: right;">2.368</td>
+<td style="text-align: right;">2.254</td>
+<td style="text-align: right;">2.167</td>
+<td style="text-align: right;">2.097</td>
+<td style="text-align: right;">1.993</td>
+<td style="text-align: right;">1.836</td>
+<td style="text-align: right;">1.748</td>
+<td style="text-align: right;">1.649</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">120</td>
+<td style="text-align: right;">3.920</td>
+<td style="text-align: right;">3.072</td>
+<td style="text-align: right;">2.680</td>
+<td style="text-align: right;">2.447</td>
+<td style="text-align: right;">2.290</td>
+<td style="text-align: right;">2.175</td>
+<td style="text-align: right;">2.087</td>
+<td style="text-align: right;">2.016</td>
+<td style="text-align: right;">1.910</td>
+<td style="text-align: right;">1.750</td>
+<td style="text-align: right;">1.659</td>
+<td style="text-align: right;">1.554</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">∞</td>
+<td style="text-align: right;">3.841</td>
+<td style="text-align: right;">2.996</td>
+<td style="text-align: right;">2.605</td>
+<td style="text-align: right;">2.372</td>
+<td style="text-align: right;">2.214</td>
+<td style="text-align: right;">2.099</td>
+<td style="text-align: right;">2.010</td>
+<td style="text-align: right;">1.938</td>
+<td style="text-align: right;">1.831</td>
+<td style="text-align: right;">1.666</td>
+<td style="text-align: right;">1.571</td>
+<td style="text-align: right;">1.459</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>f_tab_01 <span class="ot">&lt;-</span> <span class="fu">outer</span>(den_df, num_df,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(d, n) <span class="fu">qf</span>(<span class="fl">0.99</span>, <span class="at">df1 =</span> n, <span class="at">df2 =</span> d))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>f_tab_01 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(f_tab_01)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(f_tab_01) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"k1 = "</span>, num_df)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>f_tab_01 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="st">`</span><span class="at">k2 (den. df)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(den_df), <span class="st">"∞"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                                          <span class="fu">as.character</span>(den_df)),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                  f_tab_01)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  f_tab_01,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(num_df))),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Critical values of the $F$-distribution at $</span><span class="sc">\\</span><span class="st">alpha = 0.01$ (upper tail). Rows: denominator df $k_{2}$. Columns: numerator df $k_{1}$."</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Critical values of the <span class="math inline">\(F\)</span>-distribution at <span class="math inline">\(\alpha = 0.01\)</span> (upper tail). Rows: denominator df <span class="math inline">\(k_{2}\)</span>. Columns: numerator df <span class="math inline">\(k_{1}\)</span>.</caption>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">k2 (den. df)</th>
+<th style="text-align: right;">k1 = 1</th>
+<th style="text-align: right;">k1 = 2</th>
+<th style="text-align: right;">k1 = 3</th>
+<th style="text-align: right;">k1 = 4</th>
+<th style="text-align: right;">k1 = 5</th>
+<th style="text-align: right;">k1 = 6</th>
+<th style="text-align: right;">k1 = 7</th>
+<th style="text-align: right;">k1 = 8</th>
+<th style="text-align: right;">k1 = 10</th>
+<th style="text-align: right;">k1 = 15</th>
+<th style="text-align: right;">k1 = 20</th>
+<th style="text-align: right;">k1 = 30</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">10</td>
+<td style="text-align: right;">10.044</td>
+<td style="text-align: right;">7.559</td>
+<td style="text-align: right;">6.552</td>
+<td style="text-align: right;">5.994</td>
+<td style="text-align: right;">5.636</td>
+<td style="text-align: right;">5.386</td>
+<td style="text-align: right;">5.200</td>
+<td style="text-align: right;">5.057</td>
+<td style="text-align: right;">4.849</td>
+<td style="text-align: right;">4.558</td>
+<td style="text-align: right;">4.405</td>
+<td style="text-align: right;">4.247</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">15</td>
+<td style="text-align: right;">8.683</td>
+<td style="text-align: right;">6.359</td>
+<td style="text-align: right;">5.417</td>
+<td style="text-align: right;">4.893</td>
+<td style="text-align: right;">4.556</td>
+<td style="text-align: right;">4.318</td>
+<td style="text-align: right;">4.142</td>
+<td style="text-align: right;">4.004</td>
+<td style="text-align: right;">3.805</td>
+<td style="text-align: right;">3.522</td>
+<td style="text-align: right;">3.372</td>
+<td style="text-align: right;">3.214</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">20</td>
+<td style="text-align: right;">8.096</td>
+<td style="text-align: right;">5.849</td>
+<td style="text-align: right;">4.938</td>
+<td style="text-align: right;">4.431</td>
+<td style="text-align: right;">4.103</td>
+<td style="text-align: right;">3.871</td>
+<td style="text-align: right;">3.699</td>
+<td style="text-align: right;">3.564</td>
+<td style="text-align: right;">3.368</td>
+<td style="text-align: right;">3.088</td>
+<td style="text-align: right;">2.938</td>
+<td style="text-align: right;">2.778</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">25</td>
+<td style="text-align: right;">7.770</td>
+<td style="text-align: right;">5.568</td>
+<td style="text-align: right;">4.675</td>
+<td style="text-align: right;">4.177</td>
+<td style="text-align: right;">3.855</td>
+<td style="text-align: right;">3.627</td>
+<td style="text-align: right;">3.457</td>
+<td style="text-align: right;">3.324</td>
+<td style="text-align: right;">3.129</td>
+<td style="text-align: right;">2.850</td>
+<td style="text-align: right;">2.699</td>
+<td style="text-align: right;">2.538</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">30</td>
+<td style="text-align: right;">7.562</td>
+<td style="text-align: right;">5.390</td>
+<td style="text-align: right;">4.510</td>
+<td style="text-align: right;">4.018</td>
+<td style="text-align: right;">3.699</td>
+<td style="text-align: right;">3.473</td>
+<td style="text-align: right;">3.304</td>
+<td style="text-align: right;">3.173</td>
+<td style="text-align: right;">2.979</td>
+<td style="text-align: right;">2.700</td>
+<td style="text-align: right;">2.549</td>
+<td style="text-align: right;">2.386</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">40</td>
+<td style="text-align: right;">7.314</td>
+<td style="text-align: right;">5.179</td>
+<td style="text-align: right;">4.313</td>
+<td style="text-align: right;">3.828</td>
+<td style="text-align: right;">3.514</td>
+<td style="text-align: right;">3.291</td>
+<td style="text-align: right;">3.124</td>
+<td style="text-align: right;">2.993</td>
+<td style="text-align: right;">2.801</td>
+<td style="text-align: right;">2.522</td>
+<td style="text-align: right;">2.369</td>
+<td style="text-align: right;">2.203</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">60</td>
+<td style="text-align: right;">7.077</td>
+<td style="text-align: right;">4.977</td>
+<td style="text-align: right;">4.126</td>
+<td style="text-align: right;">3.649</td>
+<td style="text-align: right;">3.339</td>
+<td style="text-align: right;">3.119</td>
+<td style="text-align: right;">2.953</td>
+<td style="text-align: right;">2.823</td>
+<td style="text-align: right;">2.632</td>
+<td style="text-align: right;">2.352</td>
+<td style="text-align: right;">2.198</td>
+<td style="text-align: right;">2.028</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">120</td>
+<td style="text-align: right;">6.851</td>
+<td style="text-align: right;">4.787</td>
+<td style="text-align: right;">3.949</td>
+<td style="text-align: right;">3.480</td>
+<td style="text-align: right;">3.174</td>
+<td style="text-align: right;">2.956</td>
+<td style="text-align: right;">2.792</td>
+<td style="text-align: right;">2.663</td>
+<td style="text-align: right;">2.472</td>
+<td style="text-align: right;">2.192</td>
+<td style="text-align: right;">2.035</td>
+<td style="text-align: right;">1.860</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">∞</td>
+<td style="text-align: right;">6.635</td>
+<td style="text-align: right;">4.605</td>
+<td style="text-align: right;">3.782</td>
+<td style="text-align: right;">3.319</td>
+<td style="text-align: right;">3.017</td>
+<td style="text-align: right;">2.802</td>
+<td style="text-align: right;">2.639</td>
+<td style="text-align: right;">2.511</td>
+<td style="text-align: right;">2.321</td>
+<td style="text-align: right;">2.039</td>
+<td style="text-align: right;">1.878</td>
+<td style="text-align: right;">1.696</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The bottom row (<span class="math inline">\(k_{2} = \infty\)</span>) is a useful sanity check: the <span class="math inline">\(F_{k_{1}, \infty}\)</span> distribution coincides (after scaling) with <span class="math inline">\(\chi^{2}_{k_{1}}/k_{1}\)</span>, so its 5% critical value equals <span class="math inline">\(\chi^{2}_{k_{1}, 0.95}/k_{1}\)</span>. Compare, for instance, the <span class="math inline">\((k_{1} = 4, k_{2} = \infty)\)</span> entry of the 5% <span class="math inline">\(F\)</span> table with <span class="math inline">\(\chi^{2}_{4, 0.95}/4\)</span> from the next section.</p>
+</section>
+<section id="sec-c-chi2" class="level2" data-number="C.3">
+<h2 data-number="C.3" class="anchored" data-anchor-id="sec-c-chi2"><span class="header-section-number">C.3</span> C.3 Critical values of the <span class="math inline">\(\chi^{2}\)</span>-distribution</h2>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_chi    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">100</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>alpha_chi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.025</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>chi_tab <span class="ot">&lt;-</span> <span class="fu">sapply</span>(alpha_chi, <span class="cf">function</span>(a) <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> a, <span class="at">df =</span> df_chi))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>chi_tab <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(chi_tab)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(chi_tab) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"α = "</span>, <span class="fu">format</span>(alpha_chi, <span class="at">scientific =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>chi_tab <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">df =</span> <span class="fu">as.character</span>(df_chi), chi_tab)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  chi_tab,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(alpha_chi))),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Upper-tail critical values of the $</span><span class="sc">\\</span><span class="st">chi^{2}$-distribution: $c$ such that $</span><span class="sc">\\</span><span class="st">Pr(</span><span class="sc">\\</span><span class="st">chi^{2}_{df} &gt; c) = </span><span class="sc">\\</span><span class="st">alpha$."</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Upper-tail critical values of the <span class="math inline">\(\chi^{2}\)</span>-distribution: <span class="math inline">\(c\)</span> such that <span class="math inline">\(\Pr(\chi^{2}_{df} &gt; c) = \alpha\)</span>.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">df</th>
+<th style="text-align: right;">α = 0.100</th>
+<th style="text-align: right;">α = 0.050</th>
+<th style="text-align: right;">α = 0.025</th>
+<th style="text-align: right;">α = 0.010</th>
+<th style="text-align: right;">α = 0.005</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">2.706</td>
+<td style="text-align: right;">3.841</td>
+<td style="text-align: right;">5.024</td>
+<td style="text-align: right;">6.635</td>
+<td style="text-align: right;">7.879</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">4.605</td>
+<td style="text-align: right;">5.991</td>
+<td style="text-align: right;">7.378</td>
+<td style="text-align: right;">9.210</td>
+<td style="text-align: right;">10.597</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">6.251</td>
+<td style="text-align: right;">7.815</td>
+<td style="text-align: right;">9.348</td>
+<td style="text-align: right;">11.345</td>
+<td style="text-align: right;">12.838</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">7.779</td>
+<td style="text-align: right;">9.488</td>
+<td style="text-align: right;">11.143</td>
+<td style="text-align: right;">13.277</td>
+<td style="text-align: right;">14.860</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">9.236</td>
+<td style="text-align: right;">11.070</td>
+<td style="text-align: right;">12.833</td>
+<td style="text-align: right;">15.086</td>
+<td style="text-align: right;">16.750</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">10.645</td>
+<td style="text-align: right;">12.592</td>
+<td style="text-align: right;">14.449</td>
+<td style="text-align: right;">16.812</td>
+<td style="text-align: right;">18.548</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: right;">12.017</td>
+<td style="text-align: right;">14.067</td>
+<td style="text-align: right;">16.013</td>
+<td style="text-align: right;">18.475</td>
+<td style="text-align: right;">20.278</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: right;">13.362</td>
+<td style="text-align: right;">15.507</td>
+<td style="text-align: right;">17.535</td>
+<td style="text-align: right;">20.090</td>
+<td style="text-align: right;">21.955</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: right;">14.684</td>
+<td style="text-align: right;">16.919</td>
+<td style="text-align: right;">19.023</td>
+<td style="text-align: right;">21.666</td>
+<td style="text-align: right;">23.589</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: right;">15.987</td>
+<td style="text-align: right;">18.307</td>
+<td style="text-align: right;">20.483</td>
+<td style="text-align: right;">23.209</td>
+<td style="text-align: right;">25.188</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15</td>
+<td style="text-align: right;">22.307</td>
+<td style="text-align: right;">24.996</td>
+<td style="text-align: right;">27.488</td>
+<td style="text-align: right;">30.578</td>
+<td style="text-align: right;">32.801</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">20</td>
+<td style="text-align: right;">28.412</td>
+<td style="text-align: right;">31.410</td>
+<td style="text-align: right;">34.170</td>
+<td style="text-align: right;">37.566</td>
+<td style="text-align: right;">39.997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">30</td>
+<td style="text-align: right;">40.256</td>
+<td style="text-align: right;">43.773</td>
+<td style="text-align: right;">46.979</td>
+<td style="text-align: right;">50.892</td>
+<td style="text-align: right;">53.672</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">50</td>
+<td style="text-align: right;">63.167</td>
+<td style="text-align: right;">67.505</td>
+<td style="text-align: right;">71.420</td>
+<td style="text-align: right;">76.154</td>
+<td style="text-align: right;">79.490</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">100</td>
+<td style="text-align: right;">118.498</td>
+<td style="text-align: right;">124.342</td>
+<td style="text-align: right;">129.561</td>
+<td style="text-align: right;">135.807</td>
+<td style="text-align: right;">140.169</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The <span class="math inline">\(\chi^{2}\)</span> table is the natural reference for large-sample versions of the joint test (the <strong>Wald statistic</strong> is asymptotically <span class="math inline">\(\chi^{2}_{q}\)</span> where <span class="math inline">\(q\)</span> is the number of restrictions) and for the Breusch–Pagan test of §7.3, whose <span class="math inline">\(LM\)</span> statistic is <span class="math inline">\(\chi^{2}_{k}\)</span> under the null of homoskedasticity.</p>
+</section>
+<section id="sec-c-dw" class="level2" data-number="C.4">
+<h2 data-number="C.4" class="anchored" data-anchor-id="sec-c-dw"><span class="header-section-number">C.4</span> C.4 Durbin–Watson bounds</h2>
+<p>The Durbin–Watson statistic <span class="math inline">\(d = \sum_{t=2}^{n}(\hat u_{t} - \hat u_{t-1})^{2} / \sum_{t=1}^{n}\hat u_{t}^{2}\)</span> does not have a single critical value: its exact null distribution depends on the design matrix <span class="math inline">\(\mathbf{X}\)</span>, not just on <span class="math inline">\(n\)</span> and the number of regressors. Durbin and Watson (1951) sidestepped this by tabulating two bounds, <span class="math inline">\(d_{L}\)</span> and <span class="math inline">\(d_{U}\)</span>, between which the <em>true</em> critical value must lie regardless of <span class="math inline">\(\mathbf{X}\)</span>. The bounds below are taken from Durbin, J. and Watson, G. S. (1951), “Testing for serial correlation in least squares regression. II,” <em>Biometrika</em> <strong>38</strong>(1), 159–178, for <span class="math inline">\(\alpha = 0.05\)</span> and <span class="math inline">\(k'\)</span> regressors excluding the constant. A representative subset is reproduced; consult the original tables for values of <span class="math inline">\(n\)</span> not listed.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dw_05 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n      =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">75</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k1  =</span> <span class="fu">c</span>(<span class="fl">1.08</span>, <span class="fl">1.20</span>, <span class="fl">1.29</span>, <span class="fl">1.35</span>, <span class="fl">1.44</span>, <span class="fl">1.50</span>, <span class="fl">1.60</span>, <span class="fl">1.65</span>, <span class="fl">1.72</span>, <span class="fl">1.76</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k1  =</span> <span class="fu">c</span>(<span class="fl">1.36</span>, <span class="fl">1.41</span>, <span class="fl">1.45</span>, <span class="fl">1.49</span>, <span class="fl">1.54</span>, <span class="fl">1.59</span>, <span class="fl">1.65</span>, <span class="fl">1.69</span>, <span class="fl">1.75</span>, <span class="fl">1.78</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k2  =</span> <span class="fu">c</span>(<span class="fl">0.95</span>, <span class="fl">1.10</span>, <span class="fl">1.21</span>, <span class="fl">1.28</span>, <span class="fl">1.39</span>, <span class="fl">1.46</span>, <span class="fl">1.57</span>, <span class="fl">1.63</span>, <span class="fl">1.71</span>, <span class="fl">1.75</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k2  =</span> <span class="fu">c</span>(<span class="fl">1.54</span>, <span class="fl">1.54</span>, <span class="fl">1.55</span>, <span class="fl">1.57</span>, <span class="fl">1.60</span>, <span class="fl">1.63</span>, <span class="fl">1.68</span>, <span class="fl">1.72</span>, <span class="fl">1.76</span>, <span class="fl">1.79</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k3  =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">1.00</span>, <span class="fl">1.12</span>, <span class="fl">1.21</span>, <span class="fl">1.34</span>, <span class="fl">1.42</span>, <span class="fl">1.54</span>, <span class="fl">1.61</span>, <span class="fl">1.69</span>, <span class="fl">1.74</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k3  =</span> <span class="fu">c</span>(<span class="fl">1.75</span>, <span class="fl">1.68</span>, <span class="fl">1.66</span>, <span class="fl">1.65</span>, <span class="fl">1.66</span>, <span class="fl">1.67</span>, <span class="fl">1.71</span>, <span class="fl">1.74</span>, <span class="fl">1.77</span>, <span class="fl">1.80</span>),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k4  =</span> <span class="fu">c</span>(<span class="fl">0.69</span>, <span class="fl">0.90</span>, <span class="fl">1.04</span>, <span class="fl">1.14</span>, <span class="fl">1.29</span>, <span class="fl">1.38</span>, <span class="fl">1.51</span>, <span class="fl">1.59</span>, <span class="fl">1.68</span>, <span class="fl">1.73</span>),</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k4  =</span> <span class="fu">c</span>(<span class="fl">1.97</span>, <span class="fl">1.83</span>, <span class="fl">1.77</span>, <span class="fl">1.74</span>, <span class="fl">1.72</span>, <span class="fl">1.72</span>, <span class="fl">1.74</span>, <span class="fl">1.76</span>, <span class="fl">1.79</span>, <span class="fl">1.81</span>),</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k5  =</span> <span class="fu">c</span>(<span class="fl">0.56</span>, <span class="fl">0.79</span>, <span class="fl">0.95</span>, <span class="fl">1.07</span>, <span class="fl">1.23</span>, <span class="fl">1.34</span>, <span class="fl">1.49</span>, <span class="fl">1.57</span>, <span class="fl">1.67</span>, <span class="fl">1.72</span>),</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k5  =</span> <span class="fu">c</span>(<span class="fl">2.21</span>, <span class="fl">1.99</span>, <span class="fl">1.89</span>, <span class="fl">1.83</span>, <span class="fl">1.79</span>, <span class="fl">1.77</span>, <span class="fl">1.77</span>, <span class="fl">1.78</span>, <span class="fl">1.80</span>, <span class="fl">1.82</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dw_05) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=1 dL"</span>, <span class="st">"k'=1 dU"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=2 dL"</span>, <span class="st">"k'=2 dU"</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=3 dL"</span>, <span class="st">"k'=3 dU"</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=4 dL"</span>, <span class="st">"k'=4 dU"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=5 dL"</span>, <span class="st">"k'=5 dU"</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  dw_05,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">2</span>,</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="dv">10</span>)),</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Durbin–Watson 5% bounds $d_{L}$ and $d_{U}$ by sample size $n$ and number of regressors $k'$ excluding the constant. Source: Durbin &amp; Watson (1951)."</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Durbin–Watson 5% bounds <span class="math inline">\(d_{L}\)</span> and <span class="math inline">\(d_{U}\)</span> by sample size <span class="math inline">\(n\)</span> and number of regressors <span class="math inline">\(k'\)</span> excluding the constant. Source: Durbin &amp; Watson (1951).</caption>
+<colgroup>
+<col style="width: 4%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">n</th>
+<th style="text-align: right;">k’=1 dL</th>
+<th style="text-align: right;">k’=1 dU</th>
+<th style="text-align: right;">k’=2 dL</th>
+<th style="text-align: right;">k’=2 dU</th>
+<th style="text-align: right;">k’=3 dL</th>
+<th style="text-align: right;">k’=3 dU</th>
+<th style="text-align: right;">k’=4 dL</th>
+<th style="text-align: right;">k’=4 dU</th>
+<th style="text-align: right;">k’=5 dL</th>
+<th style="text-align: right;">k’=5 dU</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">15</td>
+<td style="text-align: right;">1.08</td>
+<td style="text-align: right;">1.36</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">1.54</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">1.75</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">1.97</td>
+<td style="text-align: right;">0.56</td>
+<td style="text-align: right;">2.21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">20</td>
+<td style="text-align: right;">1.20</td>
+<td style="text-align: right;">1.41</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">1.54</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.68</td>
+<td style="text-align: right;">0.90</td>
+<td style="text-align: right;">1.83</td>
+<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">1.99</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">25</td>
+<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">1.45</td>
+<td style="text-align: right;">1.21</td>
+<td style="text-align: right;">1.55</td>
+<td style="text-align: right;">1.12</td>
+<td style="text-align: right;">1.66</td>
+<td style="text-align: right;">1.04</td>
+<td style="text-align: right;">1.77</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">1.89</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">30</td>
+<td style="text-align: right;">1.35</td>
+<td style="text-align: right;">1.49</td>
+<td style="text-align: right;">1.28</td>
+<td style="text-align: right;">1.57</td>
+<td style="text-align: right;">1.21</td>
+<td style="text-align: right;">1.65</td>
+<td style="text-align: right;">1.14</td>
+<td style="text-align: right;">1.74</td>
+<td style="text-align: right;">1.07</td>
+<td style="text-align: right;">1.83</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">40</td>
+<td style="text-align: right;">1.44</td>
+<td style="text-align: right;">1.54</td>
+<td style="text-align: right;">1.39</td>
+<td style="text-align: right;">1.60</td>
+<td style="text-align: right;">1.34</td>
+<td style="text-align: right;">1.66</td>
+<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">1.72</td>
+<td style="text-align: right;">1.23</td>
+<td style="text-align: right;">1.79</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">50</td>
+<td style="text-align: right;">1.50</td>
+<td style="text-align: right;">1.59</td>
+<td style="text-align: right;">1.46</td>
+<td style="text-align: right;">1.63</td>
+<td style="text-align: right;">1.42</td>
+<td style="text-align: right;">1.67</td>
+<td style="text-align: right;">1.38</td>
+<td style="text-align: right;">1.72</td>
+<td style="text-align: right;">1.34</td>
+<td style="text-align: right;">1.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">75</td>
+<td style="text-align: right;">1.60</td>
+<td style="text-align: right;">1.65</td>
+<td style="text-align: right;">1.57</td>
+<td style="text-align: right;">1.68</td>
+<td style="text-align: right;">1.54</td>
+<td style="text-align: right;">1.71</td>
+<td style="text-align: right;">1.51</td>
+<td style="text-align: right;">1.74</td>
+<td style="text-align: right;">1.49</td>
+<td style="text-align: right;">1.77</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">100</td>
+<td style="text-align: right;">1.65</td>
+<td style="text-align: right;">1.69</td>
+<td style="text-align: right;">1.63</td>
+<td style="text-align: right;">1.72</td>
+<td style="text-align: right;">1.61</td>
+<td style="text-align: right;">1.74</td>
+<td style="text-align: right;">1.59</td>
+<td style="text-align: right;">1.76</td>
+<td style="text-align: right;">1.57</td>
+<td style="text-align: right;">1.78</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">150</td>
+<td style="text-align: right;">1.72</td>
+<td style="text-align: right;">1.75</td>
+<td style="text-align: right;">1.71</td>
+<td style="text-align: right;">1.76</td>
+<td style="text-align: right;">1.69</td>
+<td style="text-align: right;">1.77</td>
+<td style="text-align: right;">1.68</td>
+<td style="text-align: right;">1.79</td>
+<td style="text-align: right;">1.67</td>
+<td style="text-align: right;">1.80</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">200</td>
+<td style="text-align: right;">1.76</td>
+<td style="text-align: right;">1.78</td>
+<td style="text-align: right;">1.75</td>
+<td style="text-align: right;">1.79</td>
+<td style="text-align: right;">1.74</td>
+<td style="text-align: right;">1.80</td>
+<td style="text-align: right;">1.73</td>
+<td style="text-align: right;">1.81</td>
+<td style="text-align: right;">1.72</td>
+<td style="text-align: right;">1.82</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The four-region decision rule
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Given an observed Durbin–Watson statistic <span class="math inline">\(d\)</span>, the test for <strong>positive</strong> first-order autocorrelation at level <span class="math inline">\(\alpha\)</span> partitions the unit-line into four regions:</p>
+<ul>
+<li><span class="math inline">\(d &lt; d_{L}\)</span>: <strong>reject</strong> <span class="math inline">\(H_{0}\)</span> in favour of positive autocorrelation.</li>
+<li><span class="math inline">\(d_{L} \leq d \leq d_{U}\)</span>: <strong>inconclusive</strong> — the test cannot decide.</li>
+<li><span class="math inline">\(d_{U} &lt; d &lt; 4 - d_{U}\)</span>: <strong>do not reject</strong> <span class="math inline">\(H_{0}\)</span> of no autocorrelation.</li>
+<li><span class="math inline">\(4 - d_{U} \leq d \leq 4 - d_{L}\)</span>: <strong>inconclusive</strong> (negative side).</li>
+<li><span class="math inline">\(d &gt; 4 - d_{L}\)</span>: <strong>reject</strong> <span class="math inline">\(H_{0}\)</span> in favour of <strong>negative</strong> autocorrelation.</li>
+</ul>
+<p>Inconclusive regions are the price paid for the design-free bounds: when <span class="math inline">\(d\)</span> falls into one of them, switch to a test that does not depend on the design matrix (e.g.&nbsp;the Breusch–Godfrey LM test of §8.3), which is now standard in applied work.</p>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/appendix-b-wooldridge-cgl-crosswalk.html" class="pagination-link" aria-label="Wooldridge ↔ Carter–Griffiths–Lim Crosswalk">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Wooldridge ↔︎ Carter–Griffiths–Lim Crosswalk</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Statistical Tables"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Status: ported 2026-05-18. All tables generated reproducibly from R distribution functions, except the Durbin-Watson bounds (Durbin &amp; Watson 1951).*</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>This appendix gathers the critical-value tables we use most often in the book: the $t$, $F$, and $\chi^{2}$ distributions for the inferential procedures of Chapter 4, plus the Durbin–Watson bounds used in the serial-correlation diagnostic of Chapter 8. Because the entries below are produced inside R by the quantile functions <span class="in">`qt()`</span>, <span class="in">`qf()`</span>, and <span class="in">`qchisq()`</span>, they are exact to machine precision rather than rounded as in printed appendices. A reader who wants a value not listed here can simply re-run the corresponding chunk with extra rows or columns.</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to read these tables {#sec-c-how-to-read .unnumbered}</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>A **critical value** $c_{\alpha}$ is the threshold a test statistic must cross to reject the null at significance level $\alpha$: for a one-sided $t$-test of $H_{0}: \beta_{j} = 0$ against $H_{1}: \beta_{j} &gt; 0$ at the 5% level, we reject when $t &gt; c_{0.05}$. A **$p$-value** turns the question around: it is the smallest $\alpha$ at which the null would have been rejected given the observed statistic. The two views are equivalent --- given a $p$-value you know which critical values you would have crossed --- but the tables here are organised around critical values because that is still how most printed inference works through.</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>For the $t$-distribution, the columns below report **one-tailed** upper-tail critical values: $c$ such that $\Pr(T_{df} &gt; c) = \alpha$. For a **two-tailed** test at level $\alpha$, look up the $\alpha/2$ column instead --- so the 5% two-tailed critical value is the entry in the $\alpha = 0.025$ column. The $F$ and $\chi^{2}$ tables are intrinsically one-tailed (their statistics are non-negative) and need no such adjustment. The $t$ table is invoked in §4.5 for single-coefficient hypothesis testing; the $F$ table is used in §4.7 for joint tests and again in §7.3 for the Breusch–Pagan heteroskedasticity test; the $\chi^{2}$ table covers the large-sample variants of those tests; and the Durbin–Watson bounds in §C.4 are the reference for the serial-correlation diagnostic of §8.3.</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## C.1 Critical values of the $t$-distribution {#sec-c-t}</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>The entries below are one-tailed upper critical values $c$ such that $\Pr(T_{df} &gt; c) = \alpha$. The last row, $df = \infty$, coincides with the standard-normal quantiles $z_{1-\alpha}$ --- the bridge formalised by the CLT in §A.4.</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-t-table}</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>df_t    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>, <span class="cn">Inf</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>alpha_t <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.025</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>, <span class="fl">0.001</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>t_tab <span class="ot">&lt;-</span> <span class="fu">sapply</span>(alpha_t, <span class="cf">function</span>(a) <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> a, <span class="at">df =</span> df_t))</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>t_tab <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(t_tab)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(t_tab) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"α = "</span>, <span class="fu">format</span>(alpha_t, <span class="at">scientific =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>t_tab <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">df =</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(df_t), <span class="st">"∞"</span>, <span class="fu">as.character</span>(df_t)),</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>               t_tab)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  t_tab,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(alpha_t))),</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"One-tailed critical values of the $t$-distribution. For a two-tailed test at level $</span><span class="sc">\\</span><span class="st">alpha$, read the $</span><span class="sc">\\</span><span class="st">alpha/2$ column."</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>A handful of entries are worth memorising. With $df = \infty$ the table reproduces $z_{0.975} = 1.96$ (column $\alpha = 0.025$) and $z_{0.995} = 2.576$ (column $\alpha = 0.005$), the standard-normal critical values for two-sided tests at 5% and 1%. For $df \geq 30$ the rule of thumb that $t$ is "close to normal" already pays off: the 5% two-sided critical value (column $\alpha = 0.025$) sits within 5% of 1.96.</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## C.2 Critical values of the $F$-distribution {#sec-c-f}</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>The $F$-tables tabulate the upper-$\alpha$ critical value of $F_{k_{1}, k_{2}}$, where $k_{1}$ is the **numerator** degrees of freedom (the number of restrictions in a joint test) and $k_{2}$ is the **denominator** degrees of freedom (typically $n - k - 1$ in a $k$-regressor model with an intercept). We tabulate the two conventional significance levels separately.</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-f-table-05}</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>num_df <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">30</span>)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>den_df <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">120</span>, <span class="cn">Inf</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>f_tab_05 <span class="ot">&lt;-</span> <span class="fu">outer</span>(den_df, num_df,</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(d, n) <span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> n, <span class="at">df2 =</span> d))</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>f_tab_05 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(f_tab_05)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(f_tab_05) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"k1 = "</span>, num_df)</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>f_tab_05 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="st">`</span><span class="at">k2 (den. df)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(den_df), <span class="st">"∞"</span>,</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>                                          <span class="fu">as.character</span>(den_df)),</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>                  f_tab_05)</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>  f_tab_05,</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(num_df))),</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Critical values of the $F$-distribution at $</span><span class="sc">\\</span><span class="st">alpha = 0.05$ (upper tail). Rows: denominator df $k_{2}$. Columns: numerator df $k_{1}$."</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-f-table-01}</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>f_tab_01 <span class="ot">&lt;-</span> <span class="fu">outer</span>(den_df, num_df,</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(d, n) <span class="fu">qf</span>(<span class="fl">0.99</span>, <span class="at">df1 =</span> n, <span class="at">df2 =</span> d))</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>f_tab_01 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(f_tab_01)</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(f_tab_01) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"k1 = "</span>, num_df)</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>f_tab_01 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="st">`</span><span class="at">k2 (den. df)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(den_df), <span class="st">"∞"</span>,</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>                                          <span class="fu">as.character</span>(den_df)),</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>                  f_tab_01)</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  f_tab_01,</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(num_df))),</span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Critical values of the $F$-distribution at $</span><span class="sc">\\</span><span class="st">alpha = 0.01$ (upper tail). Rows: denominator df $k_{2}$. Columns: numerator df $k_{1}$."</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>The bottom row ($k_{2} = \infty$) is a useful sanity check: the $F_{k_{1}, \infty}$ distribution coincides (after scaling) with $\chi^{2}_{k_{1}}/k_{1}$, so its 5% critical value equals $\chi^{2}_{k_{1}, 0.95}/k_{1}$. Compare, for instance, the $(k_{1} = 4, k_{2} = \infty)$ entry of the 5% $F$ table with $\chi^{2}_{4, 0.95}/4$ from the next section.</span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## C.3 Critical values of the $\chi^{2}$-distribution {#sec-c-chi2}</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-chi2-table}</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>df_chi    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">100</span>)</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>alpha_chi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.025</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>)</span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>chi_tab <span class="ot">&lt;-</span> <span class="fu">sapply</span>(alpha_chi, <span class="cf">function</span>(a) <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> a, <span class="at">df =</span> df_chi))</span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>chi_tab <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(chi_tab)</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(chi_tab) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"α = "</span>, <span class="fu">format</span>(alpha_chi, <span class="at">scientific =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>chi_tab <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">df =</span> <span class="fu">as.character</span>(df_chi), chi_tab)</span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>  chi_tab,</span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(alpha_chi))),</span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Upper-tail critical values of the $</span><span class="sc">\\</span><span class="st">chi^{2}$-distribution: $c$ such that $</span><span class="sc">\\</span><span class="st">Pr(</span><span class="sc">\\</span><span class="st">chi^{2}_{df} &gt; c) = </span><span class="sc">\\</span><span class="st">alpha$."</span></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>The $\chi^{2}$ table is the natural reference for large-sample versions of the joint test (the **Wald statistic** is asymptotically $\chi^{2}_{q}$ where $q$ is the number of restrictions) and for the Breusch–Pagan test of §7.3, whose $LM$ statistic is $\chi^{2}_{k}$ under the null of homoskedasticity.</span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a><span class="fu">## C.4 Durbin–Watson bounds {#sec-c-dw}</span></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>The Durbin–Watson statistic $d = \sum_{t=2}^{n}(\hat u_{t} - \hat u_{t-1})^{2} / \sum_{t=1}^{n}\hat u_{t}^{2}$ does not have a single critical value: its exact null distribution depends on the design matrix $\mathbf{X}$, not just on $n$ and the number of regressors. Durbin and Watson (1951) sidestepped this by tabulating two bounds, $d_{L}$ and $d_{U}$, between which the *true* critical value must lie regardless of $\mathbf{X}$. The bounds below are taken from Durbin, J. and Watson, G. S. (1951), "Testing for serial correlation in least squares regression. II," *Biometrika* **38**(1), 159–178, for $\alpha = 0.05$ and $k'$ regressors excluding the constant. A representative subset is reproduced; consult the original tables for values of $n$ not listed.</span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-dw-table}</span></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>dw_05 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a>  <span class="at">n      =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">75</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>),</span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k1  =</span> <span class="fu">c</span>(<span class="fl">1.08</span>, <span class="fl">1.20</span>, <span class="fl">1.29</span>, <span class="fl">1.35</span>, <span class="fl">1.44</span>, <span class="fl">1.50</span>, <span class="fl">1.60</span>, <span class="fl">1.65</span>, <span class="fl">1.72</span>, <span class="fl">1.76</span>),</span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k1  =</span> <span class="fu">c</span>(<span class="fl">1.36</span>, <span class="fl">1.41</span>, <span class="fl">1.45</span>, <span class="fl">1.49</span>, <span class="fl">1.54</span>, <span class="fl">1.59</span>, <span class="fl">1.65</span>, <span class="fl">1.69</span>, <span class="fl">1.75</span>, <span class="fl">1.78</span>),</span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k2  =</span> <span class="fu">c</span>(<span class="fl">0.95</span>, <span class="fl">1.10</span>, <span class="fl">1.21</span>, <span class="fl">1.28</span>, <span class="fl">1.39</span>, <span class="fl">1.46</span>, <span class="fl">1.57</span>, <span class="fl">1.63</span>, <span class="fl">1.71</span>, <span class="fl">1.75</span>),</span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k2  =</span> <span class="fu">c</span>(<span class="fl">1.54</span>, <span class="fl">1.54</span>, <span class="fl">1.55</span>, <span class="fl">1.57</span>, <span class="fl">1.60</span>, <span class="fl">1.63</span>, <span class="fl">1.68</span>, <span class="fl">1.72</span>, <span class="fl">1.76</span>, <span class="fl">1.79</span>),</span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k3  =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">1.00</span>, <span class="fl">1.12</span>, <span class="fl">1.21</span>, <span class="fl">1.34</span>, <span class="fl">1.42</span>, <span class="fl">1.54</span>, <span class="fl">1.61</span>, <span class="fl">1.69</span>, <span class="fl">1.74</span>),</span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k3  =</span> <span class="fu">c</span>(<span class="fl">1.75</span>, <span class="fl">1.68</span>, <span class="fl">1.66</span>, <span class="fl">1.65</span>, <span class="fl">1.66</span>, <span class="fl">1.67</span>, <span class="fl">1.71</span>, <span class="fl">1.74</span>, <span class="fl">1.77</span>, <span class="fl">1.80</span>),</span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k4  =</span> <span class="fu">c</span>(<span class="fl">0.69</span>, <span class="fl">0.90</span>, <span class="fl">1.04</span>, <span class="fl">1.14</span>, <span class="fl">1.29</span>, <span class="fl">1.38</span>, <span class="fl">1.51</span>, <span class="fl">1.59</span>, <span class="fl">1.68</span>, <span class="fl">1.73</span>),</span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k4  =</span> <span class="fu">c</span>(<span class="fl">1.97</span>, <span class="fl">1.83</span>, <span class="fl">1.77</span>, <span class="fl">1.74</span>, <span class="fl">1.72</span>, <span class="fl">1.72</span>, <span class="fl">1.74</span>, <span class="fl">1.76</span>, <span class="fl">1.79</span>, <span class="fl">1.81</span>),</span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k5  =</span> <span class="fu">c</span>(<span class="fl">0.56</span>, <span class="fl">0.79</span>, <span class="fl">0.95</span>, <span class="fl">1.07</span>, <span class="fl">1.23</span>, <span class="fl">1.34</span>, <span class="fl">1.49</span>, <span class="fl">1.57</span>, <span class="fl">1.67</span>, <span class="fl">1.72</span>),</span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k5  =</span> <span class="fu">c</span>(<span class="fl">2.21</span>, <span class="fl">1.99</span>, <span class="fl">1.89</span>, <span class="fl">1.83</span>, <span class="fl">1.79</span>, <span class="fl">1.77</span>, <span class="fl">1.77</span>, <span class="fl">1.78</span>, <span class="fl">1.80</span>, <span class="fl">1.82</span>)</span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dw_05) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n"</span>,</span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=1 dL"</span>, <span class="st">"k'=1 dU"</span>,</span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=2 dL"</span>, <span class="st">"k'=2 dU"</span>,</span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=3 dL"</span>, <span class="st">"k'=3 dU"</span>,</span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=4 dL"</span>, <span class="st">"k'=4 dU"</span>,</span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=5 dL"</span>, <span class="st">"k'=5 dU"</span></span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a>  dw_05,</span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">2</span>,</span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="dv">10</span>)),</span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Durbin–Watson 5% bounds $d_{L}$ and $d_{U}$ by sample size $n$ and number of regressors $k'$ excluding the constant. Source: Durbin &amp; Watson (1951)."</span></span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## The four-region decision rule</span></span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>Given an observed Durbin–Watson statistic $d$, the test for **positive** first-order autocorrelation at level $\alpha$ partitions the unit-line into four regions:</span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$d &lt; d_{L}$: **reject** $H_{0}$ in favour of positive autocorrelation.</span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$d_{L} \leq d \leq d_{U}$: **inconclusive** --- the test cannot decide.</span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$d_{U} &lt; d &lt; 4 - d_{U}$: **do not reject** $H_{0}$ of no autocorrelation.</span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$4 - d_{U} \leq d \leq 4 - d_{L}$: **inconclusive** (negative side).</span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$d &gt; 4 - d_{L}$: **reject** $H_{0}$ in favour of **negative** autocorrelation.</span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a>Inconclusive regions are the price paid for the design-free bounds: when $d$ falls into one of them, switch to a test that does not depend on the design matrix (e.g. the Breusch–Godfrey LM test of §8.3), which is now standard in applied work.</span>
+<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
