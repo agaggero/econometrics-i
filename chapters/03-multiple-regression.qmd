@@ -9,7 +9,7 @@ title: "The Multiple Linear Regression Model"
 By the end of this chapter the reader should be able to:
 
 - Explain why the simple linear regression is rarely enough for credible empirical work, and read each MLR slope as a *ceteris paribus* (partial) effect.
-- Write the multiple linear regression model in matrix form, $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{u}$, and derive the OLS solution $\hat{\boldsymbol{\beta}} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}$.
+- Write the multiple linear regression model in matrix form, $\mathbf{y} = \mathbf{X}\beta + \mathbf{u}$, and derive the OLS solution $\hat{\beta} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}$.
 - State the Gauss--Markov assumptions MLR.1--MLR.5 and recognise which one each empirical pathology violates.
 - Show, in matrix form, that OLS is unbiased under MLR.1--MLR.4 and has variance $\sigma^2(\mathbf{X}'\mathbf{X})^{-1}$ under MLR.1--MLR.5.
 - Predict the *direction* and *sign* of omitted-variable bias from an auxiliary regression, and verify it numerically on real data.
@@ -89,37 +89,37 @@ $$
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 1 & x_{n1} & x_{n2} & \cdots & x_{nk}
 \end{pmatrix}_{n\times (k+1)}, \quad
-\boldsymbol{\beta} = \begin{pmatrix} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_k \end{pmatrix}_{(k+1)\times 1}, \quad
+\beta = \begin{pmatrix} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_k \end{pmatrix}_{(k+1)\times 1}, \quad
 \mathbf{u} = \begin{pmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{pmatrix}_{n\times 1}.
 $$
 
 The MLR model for the entire sample is then
 $$
-\mathbf{y} \;=\; \mathbf{X}\boldsymbol{\beta} + \mathbf{u}.
+\mathbf{y} \;=\; \mathbf{X}\beta + \mathbf{u}.
 $$
 
 The first column of $\mathbf{X}$ is a column of ones, which absorbs the intercept $\beta_0$. From now on we will write proofs in matrix form; this is the standard notation in [@wooldridge2020] and pays dividends from Chapter 4 onwards.
 
 ## 3.4 OLS in matrix form
 
-The ordinary least squares (OLS) estimator chooses $\hat{\boldsymbol{\beta}}$ to minimise the sum of squared residuals
+The ordinary least squares (OLS) estimator chooses $\hat{\beta}$ to minimise the sum of squared residuals
 $$
-\mathrm{SSR}(\boldsymbol{\beta}) \;=\; (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})'(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
-\;=\; \mathbf{y}'\mathbf{y} - 2\boldsymbol{\beta}'\mathbf{X}'\mathbf{y} + \boldsymbol{\beta}'\mathbf{X}'\mathbf{X}\boldsymbol{\beta}.
+\mathrm{SSR}(\beta) \;=\; (\mathbf{y}-\mathbf{X}\beta)'(\mathbf{y}-\mathbf{X}\beta)
+\;=\; \mathbf{y}'\mathbf{y} - 2\beta'\mathbf{X}'\mathbf{y} + \beta'\mathbf{X}'\mathbf{X}\beta.
 $$
 
-Differentiating with respect to $\boldsymbol{\beta}$ and setting the result to zero gives the **normal equations**
+Differentiating with respect to $\beta$ and setting the result to zero gives the **normal equations**
 $$
-\mathbf{X}'\mathbf{X}\,\hat{\boldsymbol{\beta}} \;=\; \mathbf{X}'\mathbf{y}.
+\mathbf{X}'\mathbf{X}\,\hat{\beta} \;=\; \mathbf{X}'\mathbf{y}.
 $$
 
 If $\mathbf{X}'\mathbf{X}$ is invertible --- which is exactly Assumption MLR.3 below --- the unique solution is
 
 $$
-\boxed{\;\hat{\boldsymbol{\beta}} \;=\; (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}.\;}
+\boxed{\;\hat{\beta} \;=\; (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}.\;}
 $$
 
-The fitted values are $\hat{\mathbf{y}} = \mathbf{X}\hat{\boldsymbol{\beta}}$ and the residuals are $\hat{\mathbf{u}} = \mathbf{y} - \hat{\mathbf{y}}$. By construction the normal equations imply $\mathbf{X}'\hat{\mathbf{u}} = \mathbf{0}$: residuals are orthogonal to every regressor, including the constant. In particular the sample mean of $\hat{\mathbf{u}}$ is zero whenever the model contains an intercept.
+The fitted values are $\hat{\mathbf{y}} = \mathbf{X}\hat{\beta}$ and the residuals are $\hat{\mathbf{u}} = \mathbf{y} - \hat{\mathbf{y}}$. By construction the normal equations imply $\mathbf{X}'\hat{\mathbf{u}} = \mathbf{0}$: residuals are orthogonal to every regressor, including the constant. In particular the sample mean of $\hat{\mathbf{u}}$ is zero whenever the model contains an intercept.
 
 ::: {.callout-warning}
 ## Common mistake: confusing $u$ with $\hat u$
@@ -187,21 +187,21 @@ MLR.3 only rules out *exact* linear dependence among the regressors. Two highly 
 
 Under MLR.1--MLR.4,
 $$
-\mathbb{E}[\hat{\boldsymbol{\beta}}\mid\mathbf{X}] = \boldsymbol{\beta}.
+\mathbb{E}[\hat{\beta}\mid\mathbf{X}] = \beta.
 $$
 :::
 
 *Proof sketch.* Starting from the OLS solution,
 $$
-\hat{\boldsymbol{\beta}} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}
-= (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'(\mathbf{X}\boldsymbol{\beta} + \mathbf{u})
-= \boldsymbol{\beta} + (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{u}.
+\hat{\beta} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}
+= (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'(\mathbf{X}\beta + \mathbf{u})
+= \beta + (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{u}.
 $$
 Taking conditional expectations and using MLR.4 ($\mathbb{E}[\mathbf{u}\mid\mathbf{X}] = \mathbf{0}$),
 $$
-\mathbb{E}[\hat{\boldsymbol{\beta}}\mid\mathbf{X}] = \boldsymbol{\beta} + (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}' \mathbb{E}[\mathbf{u}\mid\mathbf{X}] = \boldsymbol{\beta}.
+\mathbb{E}[\hat{\beta}\mid\mathbf{X}] = \beta + (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}' \mathbb{E}[\mathbf{u}\mid\mathbf{X}] = \beta.
 $$
-By the law of iterated expectations, $\mathbb{E}[\hat{\boldsymbol{\beta}}] = \boldsymbol{\beta}$ unconditionally as well. $\quad\square$
+By the law of iterated expectations, $\mathbb{E}[\hat{\beta}] = \beta$ unconditionally as well. $\quad\square$
 
 The proof makes the role of MLR.4 transparent: any correlation between $\mathbf{X}$ and $\mathbf{u}$ enters the bias term $(\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}' \mathbb{E}[\mathbf{u}\mid\mathbf{X}]$. This is the matrix-form home of the omitted-variable bias formula we derive in §3.9.
 
@@ -212,13 +212,13 @@ The proof makes the role of MLR.4 transparent: any correlation between $\mathbf{
 
 Under MLR.1--MLR.5,
 $$
-\operatorname{Var}(\hat{\boldsymbol{\beta}}\mid\mathbf{X}) = \sigma^2 (\mathbf{X}'\mathbf{X})^{-1}.
+\operatorname{Var}(\hat{\beta}\mid\mathbf{X}) = \sigma^2 (\mathbf{X}'\mathbf{X})^{-1}.
 $$
 :::
 
-*Proof sketch.* From the proof of unbiasedness, $\hat{\boldsymbol{\beta}} - \boldsymbol{\beta} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{u}$. Hence
+*Proof sketch.* From the proof of unbiasedness, $\hat{\beta} - \beta = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{u}$. Hence
 $$
-\operatorname{Var}(\hat{\boldsymbol{\beta}}\mid\mathbf{X})
+\operatorname{Var}(\hat{\beta}\mid\mathbf{X})
 = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\, \operatorname{Var}(\mathbf{u}\mid\mathbf{X})\, \mathbf{X}(\mathbf{X}'\mathbf{X})^{-1}
 = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\,(\sigma^2\mathbf{I}_n)\,\mathbf{X}(\mathbf{X}'\mathbf{X})^{-1}
 = \sigma^2 (\mathbf{X}'\mathbf{X})^{-1}.

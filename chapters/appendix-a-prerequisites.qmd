@@ -329,7 +329,7 @@ a_{n1} & a_{n2} & \cdots & a_{nk}
 \end{pmatrix}.
 $$
 
-Throughout this book, the **data matrix** $\mathbf{X}$ has one row per observation and one column per regressor (including a leading column of ones for the intercept). The outcome vector $\mathbf{y}$ has length $n$. With this convention, the multiple regression model is written in matrix form as $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{u}$.
+Throughout this book, the **data matrix** $\mathbf{X}$ has one row per observation and one column per regressor (including a leading column of ones for the intercept). The outcome vector $\mathbf{y}$ has length $n$. With this convention, the multiple regression model is written in matrix form as $\mathbf{y} = \mathbf{X}\beta + \mathbf{u}$.
 
 ### Transpose
 
@@ -363,7 +363,7 @@ $$
 (\mathbf{A}')^{-1} = (\mathbf{A}^{-1})'.
 $$
 
-The matrix-form OLS estimator in §3.4 is $\hat{\boldsymbol{\beta}} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}$, which requires $\mathbf{X}'\mathbf{X}$ to be invertible.
+The matrix-form OLS estimator in §3.4 is $\hat{\beta} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}$, which requires $\mathbf{X}'\mathbf{X}$ to be invertible.
 
 ### Rank and the no-multicollinearity assumption
 

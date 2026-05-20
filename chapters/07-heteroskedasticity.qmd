@@ -74,13 +74,13 @@ Assume MLR.1--MLR.4 hold and only MLR.5 fails. Three statements summarise the co
 ::: {.callout-note}
 ## The correct (sandwich) variance under heteroskedasticity
 
-If we collect the conditional variances on the diagonal of a matrix $\boldsymbol{\Omega} = \operatorname{diag}(\sigma_1^2, \dots, \sigma_n^2)$, the *correct* conditional variance of the OLS estimator is
+If we collect the conditional variances on the diagonal of a matrix $\Omega = \operatorname{diag}(\sigma_1^2, \dots, \sigma_n^2)$, the *correct* conditional variance of the OLS estimator is
 
 $$
-\operatorname{Var}(\hat{\boldsymbol\beta} \mid \mathbf{X}) \;=\; (\mathbf{X}'\mathbf{X})^{-1}\,\mathbf{X}'\boldsymbol{\Omega}\mathbf{X}\,(\mathbf{X}'\mathbf{X})^{-1}.
+\operatorname{Var}(\hat{\beta} \mid \mathbf{X}) \;=\; (\mathbf{X}'\mathbf{X})^{-1}\,\mathbf{X}'\Omega\mathbf{X}\,(\mathbf{X}'\mathbf{X})^{-1}.
 $$
 
-The "bread" $(\mathbf{X}'\mathbf{X})^{-1}$ surrounds the "meat" $\mathbf{X}'\boldsymbol{\Omega}\mathbf{X}$ --- which is why this form is universally called a **sandwich** estimator. The usual OLS formula simply replaces $\boldsymbol{\Omega}$ by $\sigma^2 \mathbf{I}_n$ and collapses the sandwich to a single slice. The White / HC1 estimator we use in §7.4 estimates $\boldsymbol{\Omega}$ by $\operatorname{diag}(\hat u_1^2, \dots, \hat u_n^2)$, with a small-sample degrees-of-freedom correction.
+The "bread" $(\mathbf{X}'\mathbf{X})^{-1}$ surrounds the "meat" $\mathbf{X}'\Omega\mathbf{X}$ --- which is why this form is universally called a **sandwich** estimator. The usual OLS formula simply replaces $\Omega$ by $\sigma^2 \mathbf{I}_n$ and collapses the sandwich to a single slice. The White / HC1 estimator we use in §7.4 estimates $\Omega$ by $\operatorname{diag}(\hat u_1^2, \dots, \hat u_n^2)$, with a small-sample degrees-of-freedom correction.
 :::
 
 In short: heteroskedasticity is a *standard-error* problem, not a *coefficient* problem. The fix is to repair the inferential machinery (robust SEs) or, if we can afford the extra modelling, to use an estimator that exploits the variance structure (WLS).
@@ -195,7 +195,7 @@ $$
 \operatorname{se}_{\text{robust}}(\hat\beta_1) \;=\; \sqrt{\,\dfrac{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)^2 \,\hat u_i^2}{\Bigl[\displaystyle\sum_{i=1}^{n} (x_i - \bar x)^2\Bigr]^2}\,}.
 $$
 
-The general matrix expression is the sandwich estimator of §7.2 with $\boldsymbol{\Omega}$ replaced by $\operatorname{diag}(\hat u_1^2, \dots, \hat u_n^2)$. Several variants exist (HC0, HC1, HC2, HC3) that differ in their finite-sample degrees-of-freedom correction; **HC1** is the default reported by Stata's `, robust` option and is the standard in published applied work.
+The general matrix expression is the sandwich estimator of §7.2 with $\Omega$ replaced by $\operatorname{diag}(\hat u_1^2, \dots, \hat u_n^2)$. Several variants exist (HC0, HC1, HC2, HC3) that differ in their finite-sample degrees-of-freedom correction; **HC1** is the default reported by Stata's `, robust` option and is the standard in published applied work.
 
 Robust SEs leave the point estimates $\hat\beta_j$ unchanged. Only the variance --- and therefore the $t$-statistics, $p$-values, and confidence intervals --- is corrected.
 
@@ -487,10 +487,10 @@ When should you prefer Weighted Least Squares to OLS with robust standard errors
 
 *A full answer is given in the Instructor Edition.*
 
-**Exercise 7.4 ★★ --- Why the sandwich.** Show that under homoskedasticity ($\boldsymbol{\Omega} = \sigma^2 \mathbf{I}_n$), the sandwich variance
+**Exercise 7.4 ★★ --- Why the sandwich.** Show that under homoskedasticity ($\Omega = \sigma^2 \mathbf{I}_n$), the sandwich variance
 
 $$
-(\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\boldsymbol{\Omega}\mathbf{X}(\mathbf{X}'\mathbf{X})^{-1}
+(\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\Omega\mathbf{X}(\mathbf{X}'\mathbf{X})^{-1}
 $$
 
 reduces to the usual OLS variance $\sigma^2(\mathbf{X}'\mathbf{X})^{-1}$. Use this to argue, in one paragraph, that the robust standard error is *never worse asymptotically* than the OLS standard error.

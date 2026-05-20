@@ -73,7 +73,7 @@ A reader who follows CGL chapter-by-chapter will notice that CGL covers MLR (its
 
 The two books are close cousins, but they make four pedagogical choices differently. None of these are right-or-wrong; they reflect the authors' background and audience.
 
-**Matrix algebra.** Wooldridge introduces the matrix form $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{u}$ as an appendix to Chapter 3 and uses index notation in the main text. CGL relegates matrix algebra to a late chapter and an appendix, preferring scalar notation throughout the body of the book. This book follows Wooldridge: the matrix form appears in §3.4. Readers whose linear algebra is rusty should consult Appendix A.5 before tackling that section.
+**Matrix algebra.** Wooldridge introduces the matrix form $\mathbf{y} = \mathbf{X}\beta + \mathbf{u}$ as an appendix to Chapter 3 and uses index notation in the main text. CGL relegates matrix algebra to a late chapter and an appendix, preferring scalar notation throughout the body of the book. This book follows Wooldridge: the matrix form appears in §3.4. Readers whose linear algebra is rusty should consult Appendix A.5 before tackling that section.
 
 **Running examples.** CGL's signature dataset is `food`, the food expenditure / income example used to motivate the simple linear regression model. Across its later chapters CGL also leans on capital-asset-pricing-model regressions and on US wage data. Wooldridge --- and therefore this book --- builds the running narrative around `wage1` (hourly wages and education), `hprice1` and `hprice2` (housing prices), and various education-and-earnings datasets that ship in the `wooldridge` R package. Both authors use the data ethically and consistently; only the *headline* example differs.
 

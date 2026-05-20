@@ -29,7 +29,7 @@ $$
 y_t = \beta_0 + \beta_1 x_{1t} + \beta_2 x_{2t} + \cdots + \beta_k x_{kt} + u_t.
 $$
 
-In matrix form, $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{u}$, exactly as before --- only the index has changed. A typical example is monthly company-level data:
+In matrix form, $\mathbf{y} = \mathbf{X}\beta + \mathbf{u}$, exactly as before --- only the index has changed. A typical example is monthly company-level data:
 
 | Month     | Sales $y_t$ | Advertising $x_t$ |
 |-----------|-------------|-------------------|
@@ -40,7 +40,7 @@ In matrix form, $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{u}$, exactl
 | Nov 2020  | 175         | 24                |
 | Dec 2020  | 190         | 30                |
 
-Mechanically, almost everything from Chapters 2–6 carries over: OLS still solves $\min_{\boldsymbol\beta} \sum_t (y_t - \mathbf{x}_t'\boldsymbol\beta)^2$; the partialling-out interpretation is unchanged; nonlinear and qualitative regressors behave as before. What changes is the **error structure**. Two errors $u_t$ and $u_s$ refer to the *same* economic unit observed at *different* points in time, and there is no reason in general for them to be uncorrelated.
+Mechanically, almost everything from Chapters 2–6 carries over: OLS still solves $\min_{\beta} \sum_t (y_t - \mathbf{x}_t'\beta)^2$; the partialling-out interpretation is unchanged; nonlinear and qualitative regressors behave as before. What changes is the **error structure**. Two errors $u_t$ and $u_s$ refer to the *same* economic unit observed at *different* points in time, and there is no reason in general for them to be uncorrelated.
 
 ::: {.callout-note}
 ## Recap of MLR.2 (random sampling) in time-series context
@@ -111,11 +111,11 @@ Higher-order processes (AR(2), AR($p$), ARMA, …) exist and are studied in Econ
 
 ### 8.2.3 Consequences for OLS
 
-What does autocorrelation do to the OLS estimator $\hat{\boldsymbol\beta}$?
+What does autocorrelation do to the OLS estimator $\hat{\beta}$?
 
-1. **OLS is still unbiased and consistent** --- provided the conditional mean is correctly specified, i.e. $\mathbb{E}[u_t \mid \mathbf{x}_t] = 0$. Autocorrelation is a property of the *off-diagonal* elements of $\operatorname{Var}(\mathbf{u})$ and does not push the average estimate away from $\boldsymbol\beta$. The point estimates are not the problem.
+1. **OLS is still unbiased and consistent** --- provided the conditional mean is correctly specified, i.e. $\mathbb{E}[u_t \mid \mathbf{x}_t] = 0$. Autocorrelation is a property of the *off-diagonal* elements of $\operatorname{Var}(\mathbf{u})$ and does not push the average estimate away from $\beta$. The point estimates are not the problem.
 2. **OLS is no longer BLUE.** It is no longer the minimum-variance linear unbiased estimator; an alternative estimator (Generalised Least Squares, see §8.4) is more efficient.
-3. **The conventional OLS standard errors are wrong.** The textbook formula $\operatorname{Var}(\hat{\boldsymbol\beta}) = \sigma^2 (\mathbf{X}'\mathbf{X})^{-1}$ presupposes $\operatorname{Var}(\mathbf{u}) = \sigma^2 \mathbf{I}_n$, which fails. With **positive** autocorrelation the OLS-reported standard errors typically *understate* the true sampling variability, $t$-statistics are too large, $p$-values too small, and confidence intervals too narrow. The "optimistic $t$-statistics" of the motivating question are exactly this artefact.
+3. **The conventional OLS standard errors are wrong.** The textbook formula $\operatorname{Var}(\hat{\beta}) = \sigma^2 (\mathbf{X}'\mathbf{X})^{-1}$ presupposes $\operatorname{Var}(\mathbf{u}) = \sigma^2 \mathbf{I}_n$, which fails. With **positive** autocorrelation the OLS-reported standard errors typically *understate* the true sampling variability, $t$-statistics are too large, $p$-values too small, and confidence intervals too narrow. The "optimistic $t$-statistics" of the motivating question are exactly this artefact.
 
 ::: {.callout-warning}
 ## Causality vs efficiency: the lagged-dependent-variable trap
@@ -293,11 +293,11 @@ y_n - \rho\,y_{n-1}
 \end{pmatrix}.
 $$
 
-Running OLS on $(\mathbf{Y}^*, \mathbf{X}^*)$ delivers $\hat{\boldsymbol\beta}_{\text{GLS}}$.
+Running OLS on $(\mathbf{Y}^*, \mathbf{X}^*)$ delivers $\hat{\beta}_{\text{GLS}}$.
 
 ### 8.4.2 The Cochrane–Orcutt iterative procedure
 
-The catch: $\rho$ is unknown. We need to estimate it. The **Cochrane–Orcutt (CO)** procedure is the simplest feasible-GLS algorithm: alternate between estimating $\rho$ from residuals and re-estimating $\boldsymbol\beta$ on the quasi-differenced data, until $\rho$ stabilises.
+The catch: $\rho$ is unknown. We need to estimate it. The **Cochrane–Orcutt (CO)** procedure is the simplest feasible-GLS algorithm: alternate between estimating $\rho$ from residuals and re-estimating $\beta$ on the quasi-differenced data, until $\rho$ stabilises.
 
 ::: {.callout-note}
 ## Algorithm: Cochrane–Orcutt iterative procedure
@@ -306,7 +306,7 @@ The catch: $\rho$ is unknown. We need to estimate it. The **Cochrane–Orcutt (C
 2. Estimate $\rho$ by regressing $\hat u_t$ on $\hat u_{t-1}$ (no intercept):
 $$\hat\rho = \frac{\sum_{t=2}^{n}\hat u_t\,\hat u_{t-1}}{\sum_{t=2}^{n}\hat u_{t-1}^2}.$$
 3. Form the quasi-differenced variables $y_t^* = y_t - \hat\rho\,y_{t-1}$, $x_t^* = x_t - \hat\rho\,x_{t-1}$ (and, if Prais–Winsten, the rescaled first observation).
-4. Run OLS on $(y_t^*, x_t^*)$ to get new $\hat{\boldsymbol\beta}^{(2)}$; compute new residuals $\hat u_t^{(2)}$.
+4. Run OLS on $(y_t^*, x_t^*)$ to get new $\hat{\beta}^{(2)}$; compute new residuals $\hat u_t^{(2)}$.
 5. Plug $\hat u_t^{(2)}$ back into step 2 to update $\hat\rho$.
 6. Iterate until $\hat\rho$ converges (changes negligibly between iterations).
 
