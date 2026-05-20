@@ -1,0 +1,151 @@
+---
+title: "Statistical Tables"
+---
+
+> *Status: ported 2026-05-18. All tables generated reproducibly from R distribution functions, except the Durbin-Watson bounds (Durbin & Watson 1951).*
+
+This appendix gathers the critical-value tables we use most often in the book: the $t$, $F$, and $\chi^{2}$ distributions for the inferential procedures of Chapter 4, plus the Durbin–Watson bounds used in the serial-correlation diagnostic of Chapter 8. Because the entries below are produced inside R by the quantile functions `qt()`, `qf()`, and `qchisq()`, they are exact to machine precision rather than rounded as in printed appendices. A reader who wants a value not listed here can simply re-run the corresponding chunk with extra rows or columns.
+
+## How to read these tables {#sec-c-how-to-read .unnumbered}
+
+A **critical value** $c_{\alpha}$ is the threshold a test statistic must cross to reject the null at significance level $\alpha$: for a one-sided $t$-test of $H_{0}: \beta_{j} = 0$ against $H_{1}: \beta_{j} > 0$ at the 5% level, we reject when $t > c_{0.05}$. A **$p$-value** turns the question around: it is the smallest $\alpha$ at which the null would have been rejected given the observed statistic. The two views are equivalent --- given a $p$-value you know which critical values you would have crossed --- but the tables here are organised around critical values because that is still how most printed inference works through.
+
+For the $t$-distribution, the columns below report **one-tailed** upper-tail critical values: $c$ such that $\Pr(T_{df} > c) = \alpha$. For a **two-tailed** test at level $\alpha$, look up the $\alpha/2$ column instead --- so the 5% two-tailed critical value is the entry in the $\alpha = 0.025$ column. The $F$ and $\chi^{2}$ tables are intrinsically one-tailed (their statistics are non-negative) and need no such adjustment. The $t$ table is invoked in §4.5 for single-coefficient hypothesis testing; the $F$ table is used in §4.7 for joint tests and again in §7.3 for the Breusch–Pagan heteroskedasticity test; the $\chi^{2}$ table covers the large-sample variants of those tests; and the Durbin–Watson bounds in §C.4 are the reference for the serial-correlation diagnostic of §8.3.
+
+## C.1 Critical values of the $t$-distribution {#sec-c-t}
+
+The entries below are one-tailed upper critical values $c$ such that $\Pr(T_{df} > c) = \alpha$. The last row, $df = \infty$, coincides with the standard-normal quantiles $z_{1-\alpha}$ --- the bridge formalised by the CLT in §A.4.
+
+```{r appC-t-table}
+df_t    <- c(1:30, 40, 60, 90, 120, Inf)
+alpha_t <- c(0.10, 0.05, 0.025, 0.01, 0.005, 0.001)
+
+t_tab <- sapply(alpha_t, function(a) qt(1 - a, df = df_t))
+t_tab <- as.data.frame(t_tab)
+colnames(t_tab) <- paste0("α = ", format(alpha_t, scientific = FALSE))
+t_tab <- cbind(df = ifelse(is.infinite(df_t), "∞", as.character(df_t)),
+               t_tab)
+
+knitr::kable(
+  t_tab,
+  digits  = 3,
+  align   = c("l", rep("r", length(alpha_t))),
+  caption = "One-tailed critical values of the $t$-distribution. For a two-tailed test at level $\\alpha$, read the $\\alpha/2$ column."
+)
+```
+
+A handful of entries are worth memorising. With $df = \infty$ the table reproduces $z_{0.975} = 1.96$ (column $\alpha = 0.025$) and $z_{0.995} = 2.576$ (column $\alpha = 0.005$), the standard-normal critical values for two-sided tests at 5% and 1%. For $df \geq 30$ the rule of thumb that $t$ is "close to normal" already pays off: the 5% two-sided critical value (column $\alpha = 0.025$) sits within 5% of 1.96.
+
+## C.2 Critical values of the $F$-distribution {#sec-c-f}
+
+The $F$-tables tabulate the upper-$\alpha$ critical value of $F_{k_{1}, k_{2}}$, where $k_{1}$ is the **numerator** degrees of freedom (the number of restrictions in a joint test) and $k_{2}$ is the **denominator** degrees of freedom (typically $n - k - 1$ in a $k$-regressor model with an intercept). We tabulate the two conventional significance levels separately.
+
+```{r appC-f-table-05}
+num_df <- c(1, 2, 3, 4, 5, 6, 7, 8, 10, 15, 20, 30)
+den_df <- c(10, 15, 20, 25, 30, 40, 60, 120, Inf)
+
+f_tab_05 <- outer(den_df, num_df,
+                  function(d, n) qf(0.95, df1 = n, df2 = d))
+f_tab_05 <- as.data.frame(f_tab_05)
+colnames(f_tab_05) <- paste0("k1 = ", num_df)
+f_tab_05 <- cbind(`k2 (den. df)` = ifelse(is.infinite(den_df), "∞",
+                                          as.character(den_df)),
+                  f_tab_05)
+
+knitr::kable(
+  f_tab_05,
+  digits  = 3,
+  align   = c("l", rep("r", length(num_df))),
+  caption = "Critical values of the $F$-distribution at $\\alpha = 0.05$ (upper tail). Rows: denominator df $k_{2}$. Columns: numerator df $k_{1}$."
+)
+```
+
+```{r appC-f-table-01}
+f_tab_01 <- outer(den_df, num_df,
+                  function(d, n) qf(0.99, df1 = n, df2 = d))
+f_tab_01 <- as.data.frame(f_tab_01)
+colnames(f_tab_01) <- paste0("k1 = ", num_df)
+f_tab_01 <- cbind(`k2 (den. df)` = ifelse(is.infinite(den_df), "∞",
+                                          as.character(den_df)),
+                  f_tab_01)
+
+knitr::kable(
+  f_tab_01,
+  digits  = 3,
+  align   = c("l", rep("r", length(num_df))),
+  caption = "Critical values of the $F$-distribution at $\\alpha = 0.01$ (upper tail). Rows: denominator df $k_{2}$. Columns: numerator df $k_{1}$."
+)
+```
+
+The bottom row ($k_{2} = \infty$) is a useful sanity check: the $F_{k_{1}, \infty}$ distribution coincides (after scaling) with $\chi^{2}_{k_{1}}/k_{1}$, so its 5% critical value equals $\chi^{2}_{k_{1}, 0.95}/k_{1}$. Compare, for instance, the $(k_{1} = 4, k_{2} = \infty)$ entry of the 5% $F$ table with $\chi^{2}_{4, 0.95}/4$ from the next section.
+
+## C.3 Critical values of the $\chi^{2}$-distribution {#sec-c-chi2}
+
+```{r appC-chi2-table}
+df_chi    <- c(1:10, 15, 20, 30, 50, 100)
+alpha_chi <- c(0.10, 0.05, 0.025, 0.01, 0.005)
+
+chi_tab <- sapply(alpha_chi, function(a) qchisq(1 - a, df = df_chi))
+chi_tab <- as.data.frame(chi_tab)
+colnames(chi_tab) <- paste0("α = ", format(alpha_chi, scientific = FALSE))
+chi_tab <- cbind(df = as.character(df_chi), chi_tab)
+
+knitr::kable(
+  chi_tab,
+  digits  = 3,
+  align   = c("l", rep("r", length(alpha_chi))),
+  caption = "Upper-tail critical values of the $\\chi^{2}$-distribution: $c$ such that $\\Pr(\\chi^{2}_{df} > c) = \\alpha$."
+)
+```
+
+The $\chi^{2}$ table is the natural reference for large-sample versions of the joint test (the **Wald statistic** is asymptotically $\chi^{2}_{q}$ where $q$ is the number of restrictions) and for the Breusch–Pagan test of §7.3, whose $LM$ statistic is $\chi^{2}_{k}$ under the null of homoskedasticity.
+
+## C.4 Durbin–Watson bounds {#sec-c-dw}
+
+The Durbin–Watson statistic $d = \sum_{t=2}^{n}(\hat u_{t} - \hat u_{t-1})^{2} / \sum_{t=1}^{n}\hat u_{t}^{2}$ does not have a single critical value: its exact null distribution depends on the design matrix $\mathbf{X}$, not just on $n$ and the number of regressors. Durbin and Watson (1951) sidestepped this by tabulating two bounds, $d_{L}$ and $d_{U}$, between which the *true* critical value must lie regardless of $\mathbf{X}$. The bounds below are taken from Durbin, J. and Watson, G. S. (1951), "Testing for serial correlation in least squares regression. II," *Biometrika* **38**(1), 159–178, for $\alpha = 0.05$ and $k'$ regressors excluding the constant. A representative subset is reproduced; consult the original tables for values of $n$ not listed.
+
+```{r appC-dw-table}
+dw_05 <- data.frame(
+  n      = c(15, 20, 25, 30, 40, 50, 75, 100, 150, 200),
+  dL_k1  = c(1.08, 1.20, 1.29, 1.35, 1.44, 1.50, 1.60, 1.65, 1.72, 1.76),
+  dU_k1  = c(1.36, 1.41, 1.45, 1.49, 1.54, 1.59, 1.65, 1.69, 1.75, 1.78),
+  dL_k2  = c(0.95, 1.10, 1.21, 1.28, 1.39, 1.46, 1.57, 1.63, 1.71, 1.75),
+  dU_k2  = c(1.54, 1.54, 1.55, 1.57, 1.60, 1.63, 1.68, 1.72, 1.76, 1.79),
+  dL_k3  = c(0.82, 1.00, 1.12, 1.21, 1.34, 1.42, 1.54, 1.61, 1.69, 1.74),
+  dU_k3  = c(1.75, 1.68, 1.66, 1.65, 1.66, 1.67, 1.71, 1.74, 1.77, 1.80),
+  dL_k4  = c(0.69, 0.90, 1.04, 1.14, 1.29, 1.38, 1.51, 1.59, 1.68, 1.73),
+  dU_k4  = c(1.97, 1.83, 1.77, 1.74, 1.72, 1.72, 1.74, 1.76, 1.79, 1.81),
+  dL_k5  = c(0.56, 0.79, 0.95, 1.07, 1.23, 1.34, 1.49, 1.57, 1.67, 1.72),
+  dU_k5  = c(2.21, 1.99, 1.89, 1.83, 1.79, 1.77, 1.77, 1.78, 1.80, 1.82)
+)
+
+colnames(dw_05) <- c(
+  "n",
+  "k'=1 dL", "k'=1 dU",
+  "k'=2 dL", "k'=2 dU",
+  "k'=3 dL", "k'=3 dU",
+  "k'=4 dL", "k'=4 dU",
+  "k'=5 dL", "k'=5 dU"
+)
+
+knitr::kable(
+  dw_05,
+  digits  = 2,
+  align   = c("l", rep("r", 10)),
+  caption = "Durbin–Watson 5% bounds $d_{L}$ and $d_{U}$ by sample size $n$ and number of regressors $k'$ excluding the constant. Source: Durbin & Watson (1951)."
+)
+```
+
+::: {.callout-note}
+## The four-region decision rule
+
+Given an observed Durbin–Watson statistic $d$, the test for **positive** first-order autocorrelation at level $\alpha$ partitions the unit-line into four regions:
+
+- $d < d_{L}$: **reject** $H_{0}$ in favour of positive autocorrelation.
+- $d_{L} \leq d \leq d_{U}$: **inconclusive** --- the test cannot decide.
+- $d_{U} < d < 4 - d_{U}$: **do not reject** $H_{0}$ of no autocorrelation.
+- $4 - d_{U} \leq d \leq 4 - d_{L}$: **inconclusive** (negative side).
+- $d > 4 - d_{L}$: **reject** $H_{0}$ in favour of **negative** autocorrelation.
+
+Inconclusive regions are the price paid for the design-free bounds: when $d$ falls into one of them, switch to a test that does not depend on the design matrix (e.g. the Breusch–Godfrey LM test of §8.3), which is now standard in applied work.
+:::

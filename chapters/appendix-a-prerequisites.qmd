@@ -1,0 +1,474 @@
+---
+title: "Mathematical and Statistical Prerequisites"
+---
+
+> *Status: ported 2026-05-18. Includes content translated back from the Spanish edition per gap report G8.*
+
+This appendix collects the mathematical and statistical tools used throughout the book. It is meant as a reference: skim it once at the start of the course, then come back to individual sections as they are invoked. The level is deliberately operational --- enough to follow the derivations in the main text without turning the book into a course on real analysis [@wooldridge2020]. We adopt Wooldridge's notation everywhere: population parameters are $\beta_0, \beta_1, \dots$; the population error is $u$; the sample residual is $\hat u$; fitted values are $\hat y$; and the usual sums of squares are SST, SSE, and SSR.
+
+## Learning outcomes {.unnumbered}
+
+By the end of this appendix the reader should be able to:
+
+- Manipulate exponents and logarithms confidently, and read off elasticities and semi-elasticities from log-transformed equations.
+- Compute single-variable derivatives and partial derivatives, and use first-order conditions to solve a small optimisation problem.
+- State and apply the linearity of expectation, the formulas for variance and covariance, and the conditional-expectation properties used by Wooldridge.
+- Recall the shapes and uses of the normal, $t$, $\chi^2$, and $F$ distributions, and locate critical values in standard tables.
+- Read and manipulate a vector or matrix, including transpose, inverse, and rank, well enough to follow the matrix form of OLS in §3.4.
+- Install R and RStudio, load the `wooldridge` package, and run a first inspection of the `wage1` dataset.
+
+## A.1 Algebra refresher
+
+### Functions and notation
+
+A function $f: \mathbb{R} \to \mathbb{R}$ assigns to each real number $x$ a real number $f(x)$. The graphs we draw in this book are almost always of functions of one or two variables. A linear function takes the form
+
+$$
+f(x) = \beta_0 + \beta_1 x,
+$$
+
+with intercept $\beta_0$ and slope $\beta_1$. The slope $\beta_1$ tells us by how many units $f(x)$ changes when $x$ increases by one unit. This is exactly how we will read every estimated coefficient in the book.
+
+### Exponents and powers
+
+For any real number $a$ and any integers $m, n$:
+
+$$
+a^{m} \cdot a^{n} = a^{m+n},\qquad
+\frac{a^{m}}{a^{n}} = a^{m-n},\qquad
+(a^{m})^{n} = a^{mn},\qquad
+a^{0} = 1\ (a\neq 0).
+$$
+
+The square-root function is the exponent $1/2$: $\sqrt{a} = a^{1/2}$ for $a\geq 0$.
+
+### Logarithms
+
+The natural logarithm $\ln(x)$ is the inverse of the exponential function $e^{x}$: $\ln(e^{x}) = x$ and $e^{\ln(x)} = x$ for $x > 0$. The properties we use over and over are:
+
+$$
+\ln(xy) = \ln(x) + \ln(y),\quad
+\ln\!\left(\tfrac{x}{y}\right) = \ln(x) - \ln(y),\quad
+\ln(x^{a}) = a\,\ln(x),\quad
+\ln(1) = 0.
+$$
+
+A useful approximation, exploited throughout the book, is that for small changes,
+
+$$
+\ln(x + \Delta x) - \ln(x) \approx \frac{\Delta x}{x}.
+$$
+
+That is, a difference of logs is approximately a *percentage change*. This is why log-transformed regressions are so popular in applied work --- they let us read coefficients as elasticities or percentage effects.
+
+:::{.callout-note}
+## Definition: elasticity and semi-elasticity
+
+In the **log-log** specification $\ln(y) = \beta_0 + \beta_1 \ln(x) + u$, the coefficient $\beta_1$ is an **elasticity**: a 1% increase in $x$ raises $y$ by approximately $\beta_1$%.
+
+In the **log-level** specification $\ln(y) = \beta_0 + \beta_1 x + u$, the coefficient $\beta_1$ is a **semi-elasticity**: a one-unit increase in $x$ raises $y$ by approximately $100\,\beta_1\%$.
+
+Forward reference: these interpretations are used systematically from Chapter 2 onwards, and become central in the dummy-variables chapter where we read $\beta_1$ as a "log-wage gap" of $100\,\beta_1$%.
+:::
+
+### Summations
+
+The summation symbol $\sum$ is shorthand we cannot live without:
+
+$$
+\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n.
+$$
+
+Two properties used constantly:
+
+$$
+\sum_{i=1}^{n} (a x_i + b y_i) = a \sum_{i=1}^{n} x_i + b \sum_{i=1}^{n} y_i,\qquad
+\sum_{i=1}^{n} c = n\,c.
+$$
+
+The sample mean is $\bar x = \tfrac{1}{n}\sum_{i=1}^{n} x_i$, and a property we will use in the OLS derivation is $\sum_{i=1}^{n} (x_i - \bar x) = 0$.
+
+:::{.callout-warning}
+## Common mistake: $\ln(x + y) \ne \ln(x) + \ln(y)$
+
+The log of a *sum* is not the sum of the logs. This trips up many first-time users when they try to "simplify" terms like $\ln(\beta_0 + \beta_1 x)$ --- they cannot be split. Logarithms split products, not sums.
+:::
+
+## A.2 Calculus refresher
+
+### Derivatives of a single variable
+
+The derivative $f'(x)$ measures the instantaneous rate of change of $f$ at $x$:
+
+$$
+f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}.
+$$
+
+The rules we need are short:
+
+$$
+\frac{d}{dx}(c) = 0,\quad
+\frac{d}{dx}(x^{n}) = n\,x^{n-1},\quad
+\frac{d}{dx}\!\left(e^{x}\right) = e^{x},\quad
+\frac{d}{dx}\!\left(\ln x\right) = \frac{1}{x}.
+$$
+
+Linearity, product, quotient, and chain rules:
+
+$$
+(af + bg)' = a f' + b g',\qquad
+(fg)' = f'g + fg',
+$$
+$$
+\left(\frac{f}{g}\right)' = \frac{f'g - fg'}{g^{2}},\qquad
+(f\circ g)'(x) = f'\!\bigl(g(x)\bigr)\, g'(x).
+$$
+
+### Partial derivatives
+
+For a function of several variables $f(x_1, x_2, \dots, x_k)$, the partial derivative with respect to $x_j$ holds the other variables fixed:
+
+$$
+\frac{\partial f}{\partial x_j} = \lim_{h\to 0} \frac{f(\dots, x_j + h, \dots) - f(\dots, x_j, \dots)}{h}.
+$$
+
+This is precisely the *ceteris paribus* reading we want from a multiple regression: for the population model
+
+$$
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u,
+$$
+
+we have $\partial y / \partial x_1 = \beta_1$ holding $x_2$ fixed --- the so-called *partial effect*. Chapter 3 makes this interpretation precise.
+
+### First-order conditions and optimisation
+
+To find an interior minimum or maximum of a smooth function, set the derivative to zero (the **first-order condition**, FOC) and check the second-order condition (FOC for a minimum requires $f''(x^\star) > 0$). For functions of several variables, set every partial derivative to zero simultaneously.
+
+:::{.callout-note}
+## Example: minimising a simple quadratic
+
+Consider $f(\beta) = \sum_{i=1}^{n} (y_i - \beta)^{2}$. The FOC is
+
+$$
+\frac{d f}{d \beta} = -2\sum_{i=1}^{n} (y_i - \beta) = 0 \;\Longleftrightarrow\; \beta = \frac{1}{n}\sum_{i=1}^{n} y_i = \bar y.
+$$
+
+The minimiser is the sample mean. This is exactly the structure of OLS: OLS minimises a sum of squared residuals by setting partial derivatives equal to zero. We carry out this derivation in detail in §2.4.
+:::
+
+## A.3 Probability refresher
+
+### Random variables
+
+A **random variable** $X$ is a numerical summary of the outcome of a random experiment. It is *discrete* if it can take only a countable number of values (e.g. the number of children in a household), and *continuous* if it can take any value in an interval (e.g. an hourly wage). Throughout the book we write the (unknown) population mean as $\mu = \mathbb{E}(X)$ and the population variance as $\sigma^{2} = \operatorname{Var}(X)$.
+
+### Expectation
+
+The expected value of $X$, denoted $\mathbb{E}(X)$, is a population average. The properties below are used on essentially every page of the book.
+
+$$
+\mathbb{E}(c) = c,\qquad
+\mathbb{E}(aX + b) = a\,\mathbb{E}(X) + b,
+$$
+$$
+\mathbb{E}(aX_1 + bX_2) = a\,\mathbb{E}(X_1) + b\,\mathbb{E}(X_2),\qquad
+\mathbb{E}\!\left(\sum_{i=1}^{n} a_i X_i\right) = \sum_{i=1}^{n} a_i\,\mathbb{E}(X_i).
+$$
+
+The last identity is **linearity of expectation**: it holds whether or not the $X_i$ are independent.
+
+### Variance
+
+The variance measures dispersion around the mean:
+
+$$
+\operatorname{Var}(X) = \sigma^{2} = \mathbb{E}\!\bigl[(X - \mathbb{E}(X))^{2}\bigr] = \mathbb{E}(X^{2}) - \bigl[\mathbb{E}(X)\bigr]^{2}.
+$$
+
+The standard deviation is $\sigma = \sqrt{\operatorname{Var}(X)}$ and has the same units as $X$. Useful properties:
+
+$$
+\operatorname{Var}(c) = 0,\qquad
+\operatorname{Var}(aX + b) = a^{2}\operatorname{Var}(X).
+$$
+
+Notice that an additive constant $b$ shifts the distribution but does *not* affect its dispersion. A multiplicative constant $a$ scales the variance by $a^{2}$, not by $a$.
+
+### Covariance and correlation
+
+The covariance between two random variables measures the direction of their linear co-movement:
+
+$$
+\operatorname{Cov}(X, Y) = \mathbb{E}\!\bigl[(X - \mathbb{E}(X))(Y - \mathbb{E}(Y))\bigr] = \mathbb{E}(XY) - \mathbb{E}(X)\,\mathbb{E}(Y).
+$$
+
+If either $\mathbb{E}(X) = 0$ or $\mathbb{E}(Y) = 0$, the second expression collapses to $\operatorname{Cov}(X, Y) = \mathbb{E}(XY)$. Properties:
+
+$$
+\operatorname{Cov}(aX, bY) = ab\,\operatorname{Cov}(X, Y),\qquad
+\operatorname{Cov}(X, X) = \operatorname{Var}(X).
+$$
+
+If $X$ and $Y$ are independent, then $\operatorname{Cov}(X, Y) = 0$. The converse is false in general: zero covariance only rules out *linear* dependence. The **correlation coefficient** rescales the covariance to lie in $[-1, 1]$:
+
+$$
+\operatorname{Corr}(X, Y) = \rho_{XY} = \frac{\operatorname{Cov}(X, Y)}{\sqrt{\operatorname{Var}(X)}\sqrt{\operatorname{Var}(Y)}}.
+$$
+
+### Variance of a sum
+
+A formula we will use many times in the book is
+
+$$
+\operatorname{Var}(aX + bY) = a^{2}\operatorname{Var}(X) + b^{2}\operatorname{Var}(Y) + 2ab\,\operatorname{Cov}(X, Y).
+$$
+
+When $\operatorname{Cov}(X, Y) = 0$ this simplifies to $\operatorname{Var}(X + Y) = \operatorname{Var}(X) + \operatorname{Var}(Y)$. The general $n$-variable version,
+
+$$
+\operatorname{Var}\!\left(\sum_{i=1}^{n} a_i X_i\right) = \sum_{i=1}^{n} a_i^{2}\,\operatorname{Var}(X_i) + 2\sum_{i<j} a_i a_j\,\operatorname{Cov}(X_i, X_j),
+$$
+
+is invoked when we derive the sampling variance of the OLS estimator.
+
+### Conditional expectation
+
+The **conditional expectation** $\mathbb{E}(Y \mid X)$ is the mean of $Y$ given knowledge of $X$. It is itself a function of $X$. The properties we use most often are:
+
+$$
+\mathbb{E}(X \mid X) = X,\qquad
+\mathbb{E}\bigl(g(X) \mid X\bigr) = g(X),
+$$
+$$
+\mathbb{E}\bigl(a Y + b(X) \mid X\bigr) = a\,\mathbb{E}(Y \mid X) + b(X).
+$$
+
+If $X$ and $Y$ are independent, $\mathbb{E}(Y \mid X) = \mathbb{E}(Y)$. Finally, the **Law of Iterated Expectations** (also called the tower property) is the single most useful tool in the book:
+
+$$
+\mathbb{E}\bigl[\mathbb{E}(Y \mid X)\bigr] = \mathbb{E}(Y).
+$$
+
+The zero conditional mean assumption $\mathbb{E}(u \mid x) = 0$ that underpins OLS unbiasedness in §3.2 is a statement about conditional expectation in exactly this sense.
+
+:::{.callout-warning}
+## Common mistake: $\operatorname{Cov}(X, Y) = 0$ does not mean independence
+
+Zero covariance only rules out *linear* association. Two variables can have $\operatorname{Cov}(X, Y) = 0$ and still be deterministically related --- the textbook example is $X \sim \text{Uniform}(-1, 1)$ and $Y = X^{2}$, which satisfy $\operatorname{Cov}(X, Y) = 0$ even though $Y$ is a function of $X$.
+:::
+
+## A.4 Statistical inference refresher
+
+### Sampling distributions
+
+We will repeatedly contrast a population quantity (e.g. $\beta_1$) with its estimator computed from a sample (e.g. $\hat \beta_1$). The estimator is itself a random variable --- it varies from sample to sample --- and its distribution is called the **sampling distribution**. Two features of the sampling distribution determine the quality of the estimator:
+
+- The **mean**: an estimator $\hat\theta$ is *unbiased* for $\theta$ if $\mathbb{E}(\hat\theta) = \theta$.
+- The **variance**: among unbiased estimators, the one with the smallest variance is the most *efficient*. The Gauss-Markov theorem in Chapter 3 makes this comparison formal for OLS.
+
+### The Central Limit Theorem
+
+If $X_1, X_2, \dots, X_n$ are independent and identically distributed (i.i.d.) with mean $\mu$ and variance $\sigma^{2} < \infty$, then
+
+$$
+\sqrt{n}\,\frac{\bar X_n - \mu}{\sigma} \;\xrightarrow{d}\; \mathcal{N}(0, 1)\quad\text{as } n \to \infty.
+$$
+
+The remarkable point is that the *shape* of the underlying distribution of $X_i$ does not matter: the sample mean is approximately normal in large samples, whatever $X$ looks like. This is why $t$- and $z$-statistics built from OLS estimators are approximately normal in large samples, even when the errors $u$ are not.
+
+### The normal distribution
+
+The standard normal $\mathcal{N}(0, 1)$ has density
+
+$$
+\phi(z) = \frac{1}{\sqrt{2\pi}}\,\exp\!\left(-\tfrac{1}{2} z^{2}\right),
+$$
+
+is symmetric about $0$, and has $\mathbb{E}(Z) = 0$, $\operatorname{Var}(Z) = 1$. Two-sided critical values you will memorise: $z_{0.975} = 1.96$ (5% level) and $z_{0.995} = 2.576$ (1% level). A general normal $X \sim \mathcal{N}(\mu, \sigma^{2})$ can always be standardised to $Z = (X - \mu)/\sigma$.
+
+### The $t$, $\chi^{2}$, and $F$ distributions
+
+These three distributions appear naturally when we test hypotheses about regression coefficients.
+
+- The $\chi^{2}_{k}$ distribution is the distribution of a sum of $k$ squared independent standard normals. It is non-negative, right-skewed, and has mean $k$.
+- The $t_{k}$ distribution is the ratio $Z / \sqrt{V/k}$ where $Z \sim \mathcal{N}(0, 1)$ and $V \sim \chi^{2}_{k}$ are independent. It is symmetric and bell-shaped, with heavier tails than the standard normal; as $k\to\infty$ it converges to $\mathcal{N}(0, 1)$.
+- The $F_{k_1, k_2}$ distribution is the ratio $(V_1/k_1) / (V_2/k_2)$ of two independent $\chi^{2}$ random variables divided by their respective degrees of freedom. It is non-negative and right-skewed.
+
+In §4.3 we will use $t$-statistics for single-coefficient tests, $F$-statistics for joint tests, and $\chi^{2}$ variants for large-sample tests. Critical values are tabulated in any statistical software; in R you will use `qt()`, `qf()`, and `qchisq()`.
+
+:::{.callout-note}
+## Definition: $p$-value
+
+The $p$-value of a test is the probability, under the null hypothesis, of observing a test statistic at least as extreme as the one we got. Small $p$-values are evidence against the null. The conventional thresholds are 1%, 5%, and 10%, but the $p$-value itself is what you should report --- not just "rejected" or "not rejected".
+:::
+
+### Confidence intervals
+
+A $(1 - \alpha)$ confidence interval for a parameter $\theta$ is a random interval that, in repeated samples, contains the true $\theta$ with probability $1 - \alpha$. For an estimator $\hat\theta$ with approximate normal sampling distribution and standard error $\mathrm{se}(\hat\theta)$, the standard 95% interval is $\hat\theta \pm 1.96 \cdot \mathrm{se}(\hat\theta)$. Chapter 4 builds confidence intervals for individual OLS coefficients in exactly this form.
+
+## A.5 Linear algebra refresher
+
+The matrix form of OLS in §3.4 needs a small bag of linear-algebra tools. We collect them here.
+
+### Vectors and matrices
+
+A column **vector** of length $n$ is a stack of $n$ real numbers:
+
+$$
+\mathbf{x} = \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix}.
+$$
+
+A **matrix** of dimension $n \times k$ is a rectangular array of $n$ rows and $k$ columns:
+
+$$
+\mathbf{A} = \begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1k} \\
+a_{21} & a_{22} & \cdots & a_{2k} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nk}
+\end{pmatrix}.
+$$
+
+Throughout this book, the **data matrix** $\mathbf{X}$ has one row per observation and one column per regressor (including a leading column of ones for the intercept). The outcome vector $\mathbf{y}$ has length $n$. With this convention, the multiple regression model is written in matrix form as $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{u}$.
+
+### Transpose
+
+The **transpose** $\mathbf{A}'$ swaps rows and columns: if $\mathbf{A}$ is $n \times k$, then $\mathbf{A}'$ is $k \times n$, with $(\mathbf{A}')_{ij} = a_{ji}$. Key properties:
+
+$$
+(\mathbf{A}')' = \mathbf{A},\qquad
+(\mathbf{A} + \mathbf{B})' = \mathbf{A}' + \mathbf{B}',\qquad
+(\mathbf{A}\mathbf{B})' = \mathbf{B}'\mathbf{A}'.
+$$
+
+### Matrix multiplication
+
+The product $\mathbf{A}\mathbf{B}$ is defined when the number of columns of $\mathbf{A}$ equals the number of rows of $\mathbf{B}$. If $\mathbf{A}$ is $n\times k$ and $\mathbf{B}$ is $k\times m$, then $\mathbf{A}\mathbf{B}$ is $n\times m$ with entries
+
+$$
+(\mathbf{A}\mathbf{B})_{ij} = \sum_{\ell=1}^{k} a_{i\ell}\, b_{\ell j}.
+$$
+
+Matrix multiplication is associative ($(\mathbf{A}\mathbf{B})\mathbf{C} = \mathbf{A}(\mathbf{B}\mathbf{C})$) and distributive over addition, but **not commutative**: in general $\mathbf{A}\mathbf{B} \ne \mathbf{B}\mathbf{A}$.
+
+### Inverse and identity
+
+The $k\times k$ **identity matrix** $\mathbf{I}_k$ has ones on the diagonal and zeros elsewhere. It satisfies $\mathbf{I}_k \mathbf{A} = \mathbf{A} \mathbf{I}_k = \mathbf{A}$ for any conformable $\mathbf{A}$.
+
+A square matrix $\mathbf{A}$ is **invertible** (or non-singular) if there exists a matrix $\mathbf{A}^{-1}$ with $\mathbf{A}\mathbf{A}^{-1} = \mathbf{A}^{-1}\mathbf{A} = \mathbf{I}_k$. Properties:
+
+$$
+(\mathbf{A}^{-1})^{-1} = \mathbf{A},\qquad
+(\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1}\mathbf{A}^{-1},\qquad
+(\mathbf{A}')^{-1} = (\mathbf{A}^{-1})'.
+$$
+
+The matrix-form OLS estimator in §3.4 is $\hat{\boldsymbol{\beta}} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}$, which requires $\mathbf{X}'\mathbf{X}$ to be invertible.
+
+### Rank and the no-multicollinearity assumption
+
+The **rank** of a matrix is the number of linearly independent columns (equivalently, of linearly independent rows). A square $k\times k$ matrix is invertible if and only if it has full rank $k$. For the data matrix $\mathbf{X}$ of dimension $n \times k$, the condition $\operatorname{rank}(\mathbf{X}) = k$ is the **no perfect multicollinearity** assumption (Wooldridge's MLR.3): no column of $\mathbf{X}$ is an exact linear combination of the others. When this fails, $\mathbf{X}'\mathbf{X}$ is singular and OLS cannot be computed.
+
+:::{.callout-warning}
+## Common mistake: confusing perfect and near-perfect multicollinearity
+
+Perfect multicollinearity (e.g. including both a dummy for male and a dummy for female *plus* an intercept --- the "dummy-variable trap") makes OLS literally impossible to compute. Near multicollinearity (highly but not perfectly correlated regressors) is a different beast: the estimator still exists, but its variance becomes large. We discuss both, and the diagnostic VIF, in Chapter 3.
+:::
+
+## A.6 Setting up R and RStudio
+
+The empirical labs in every chapter assume a working installation of R (≥ 4.2) and RStudio. If you have never installed them, follow these steps once:
+
+1. Download and install **R** from [https://cran.r-project.org/](https://cran.r-project.org/).
+2. Download and install **RStudio Desktop** (free edition) from [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/).
+3. Open RStudio. The "Console" pane on the left is where you type R commands.
+
+We will use a handful of contributed packages throughout the book. Install them once, then in each session load only the ones you need.
+
+```{r appA-install}
+#| eval: false
+install.packages(c(
+  "wooldridge",   # textbook datasets
+  "readxl",       # read Excel files
+  "lmtest",       # tests after lm() (Chs. 4, 7)
+  "sandwich",     # robust standard errors (Ch. 7)
+  "orcutt"        # Cochrane-Orcutt procedure (Ch. 8)
+))
+```
+
+The `wooldridge` package ships the datasets that Wooldridge uses in his textbook, including `wage1`, which we work with in Chapter 1.
+
+```{r appA-setup}
+#| message: false
+library(wooldridge)
+data("wage1")
+```
+
+A first sanity check on any dataset is to look at its structure, its head, and a summary.
+
+```{r appA-explore}
+str(wage1)
+head(wage1)
+summary(wage1[, c("wage", "educ", "exper", "tenure")])
+```
+
+The output of `str()` tells us that `wage1` is a data frame with `r nrow(wage1)` observations and `r ncol(wage1)` variables; `head()` prints the first six rows; and `summary()` gives the five-number summary plus the mean for each variable.
+
+:::{.callout-note}
+## Quick R glossary
+
+- `<-` is the **assignment** operator: `x <- 5` stores 5 in the object `x`.
+- `c()` **combines** values into a vector: `c(1, 2, 3)`.
+- `data.frame` is the standard table structure: one column per variable, one row per observation.
+- `$` extracts a column by name: `wage1$wage`.
+- `?function_name` opens the help file for `function_name`.
+:::
+
+## A.7 First plots
+
+A picture is almost always the right place to start. The two functions we use most often in this book are `hist()` for a single variable and `plot()` for a scatterplot of two variables.
+
+```{r appA-hist}
+#| fig-cap: "Distribution of hourly wages in wage1 (1976 USD). Note the long right tail."
+hist(wage1$wage,
+     main = "Distribution of hourly wages",
+     xlab = "Wage (USD/hour)",
+     col  = "lightblue",
+     breaks = 30)
+```
+
+```{r appA-hist-educ}
+#| fig-cap: "Distribution of years of education in wage1, with visible piles at 12 and 16 years."
+hist(wage1$educ,
+     main = "Distribution of years of education",
+     xlab = "Years of education",
+     col  = "lightgreen",
+     breaks = 15)
+```
+
+A scatterplot reveals bivariate structure:
+
+```{r appA-scatter}
+#| fig-cap: "Wage versus years of education in wage1."
+plot(wage1$educ, wage1$wage,
+     xlab = "Years of education",
+     ylab = "Hourly wage (USD)",
+     main = "Wage vs. education",
+     pch  = 16,
+     col  = rgb(0, 0, 1, 0.3))
+```
+
+Conditional means --- the average of one variable within bins of another --- are a non-parametric preview of regression. In base R, `tapply()` does the job:
+
+```{r appA-tapply}
+tapply(wage1$wage, wage1$educ,  mean)
+tapply(wage1$wage, wage1$female, mean)
+```
+
+The first table is the average wage at each level of education; the second is the average wage by gender. Chapter 1 discusses the interpretation of these numbers at length (and why they are *not* causal effects). The mechanics of computing them belong here, in the prerequisites.
+
+::: {.callout-note}
+## Where to go next
+
+Readers who feel rusty on any block above should skim a standard reference before tackling Chapter 2: Wooldridge's own Appendices A--D are an excellent and notation-consistent companion [@wooldridge2020]. Linear algebra at the level of §A.5 is covered in any first-year text; for a quick refresher tailored to econometrics, see Wooldridge's Appendix D.
+:::

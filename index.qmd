@@ -1,0 +1,59 @@
+---
+title: "Preface"
+---
+
+# Preface {.unnumbered}
+
+> *Econometrics I — Theory, Practice, and Applications* is the open companion textbook for the Econometrics I course at the University of Granada (UGR), Faculty of Economics and Business Studies. It consolidates three years of teaching materials — lecture notes, R tutorials, and interactive self-assessments — into a single reproducible volume.
+
+## What this book is
+
+A unified second-year undergraduate text that walks the reader from the *idea* of an econometric model to the practical estimation, inference, and diagnostic skills required to analyse real economic data. Each chapter follows the same six-section template:
+
+1. **Learning outcomes**
+2. **Motivating empirical question**
+3. **Theory**
+4. **Worked example in R**
+5. **Self-check** (interactive quiz)
+6. **Exercises** (★ easy, ★★ medium, ★★★ analytical)
+
+## How this book is organised
+
+| Chapter | Topic |
+|---|---|
+| 1 | Initial Concepts |
+| 2 | The Simple Linear Regression Model |
+| 3 | The Multiple Linear Regression Model |
+| 4 | Inference |
+| 5 | Prediction and Model Selection |
+| 6 | Nonlinear Relationships and Qualitative Information |
+| 7 | Heteroskedasticity |
+| 8 | Autocorrelation |
+| App. A | Mathematical and Statistical Prerequisites |
+| App. B | Wooldridge ↔ Carter–Griffiths–Lim crosswalk |
+| App. C | Statistical tables |
+
+## Editions and license
+
+This book is released under a **Creative Commons Attribution 4.0 International (CC BY 4.0)** license. An equivalent Spanish edition is available as *Econometría I — Teoría, práctica y aplicaciones*.
+
+## How to use the source materials
+
+The textbook is built with [Quarto](https://quarto.org). Each chapter is a `.qmd` file that combines prose, executable R code, and interactive quizzes. To rebuild the book locally:
+
+```bash
+quarto render                  # English edition (default)
+quarto render --profile es     # Spanish edition
+```
+
+## Required R packages
+
+```r
+install.packages(c("wooldridge", "readxl", "lmtest", "sandwich", "orcutt"))
+# Companion package (data + helpers)
+# remotes::install_github("agaggero-ugr/econometricsUGR")
+```
+
+## Acknowledgements
+
+UGR Department of Quantitative Methods for Economics and Business; the students of three consecutive cohorts (2023/24, 2024/25, 2025/26) whose questions shaped this text; and the authors of *Introductory Econometrics* (Wooldridge) and *Principles of Econometrics* (Carter–Griffiths–Lim) on whose pedagogical traditions this book builds.

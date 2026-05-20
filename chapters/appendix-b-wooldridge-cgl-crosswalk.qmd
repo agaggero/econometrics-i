@@ -1,0 +1,100 @@
+---
+title: "Wooldridge ↔ Carter–Griffiths–Lim Crosswalk"
+---
+
+> *Status: ported 2026-05-18. Reviewed by editor: pending.*
+
+## B.1 Why this crosswalk exists
+
+Many UGR students arrive at this course with a copy of Carter, Griffiths and Lim's *Principles of Econometrics* 5e (CGL) on the shelf [@cgl2017], because that is the blue book the library stocks in bulk. This textbook, however, follows the notation of Wooldridge's *Introductory Econometrics* 7e [@wooldridge2020], in line with decision D9. The two presentations are pedagogically compatible --- they cover the same OLS theory, the same Gauss--Markov theorem, the same heteroskedasticity and autocorrelation diagnostics --- but they label the same objects with different letters and, in one notorious case (sums of squares), with the *same* letters in a different order. The purpose of this appendix is not to re-teach any of that material but to give the reader a one-page dictionary so that flipping between the two books does not become a source of confusion. Read §B.2 once before Chapter 2, glance at §B.3 when you start a new chapter, and consult §B.4--B.5 only if you mean to use CGL as your main reading companion.
+
+## B.2 Notation crosswalk (extended)
+
+The table below collects every notational difference that has bitten a student in tutorial during the last three editions of this course. Wooldridge notation is what appears in the main text of this book; the CGL column is what you will see if you open the blue book to the corresponding chapter.
+
+| Concept | Wooldridge (this book) | Carter–Griffiths–Lim 5e |
+|---|---|---|
+| Population intercept | $\beta_0$ | $\beta_1$ |
+| Population slope on $x_1$ | $\beta_1$ | $\beta_2$ |
+| Population slope on $x_j$ (MLR) | $\beta_j$ | $\beta_{j+1}$ |
+| Error term | $u$ | $e$ |
+| Fitted value | $\hat{y}$ | $\hat{y}$ |
+| Residual | $\hat{u}$ | $\hat{e}$ |
+| Total sum of squares | SST $= \sum (y_i - \bar y)^2$ | SST $= \sum (y_i - \bar y)^2$ |
+| Sum of squared residuals | SSR $= \sum \hat u_i^2$ | SSE $= \sum \hat e_i^2$ |
+| Explained sum of squares | SSE $= \sum (\hat y_i - \bar y)^2$ | SSR $= \sum (\hat y_i - \bar y)^2$ |
+| Coefficient of determination | $R^2 = 1 - \text{SSR}/\text{SST}$ | $R^2 = 1 - \text{SSE}/\text{SST}$ |
+| Sample size | $n$ | $N$ (sometimes $n$) |
+| Number of regressors (excl. intercept) | $k$ | $K - 1$ |
+| Number of parameters (incl. intercept) | $k + 1$ | $K$ |
+| Estimator of $\beta_j$ | $\hat\beta_j$ | $b_{j+1}$ |
+| Standard error of $\hat\beta_j$ | $\operatorname{se}(\hat\beta_j)$ | $\widehat{\operatorname{sd}}(b_{j+1})$ or $\operatorname{se}(b_{j+1})$ |
+| Error variance | $\sigma^2$ | $\sigma^2$ |
+| Estimator of $\sigma^2$ | $\hat\sigma^2 = \text{SSR}/(n-k-1)$ | $\hat\sigma^2 = \text{SSE}/(N-K)$ |
+| $t$-statistic for $H_0\!: \beta_j = 0$ | $t = \hat\beta_j / \operatorname{se}(\hat\beta_j)$ | $t = b_{j+1} / \operatorname{se}(b_{j+1})$ |
+| $F$-statistic, $q$ restrictions | $F$ with df $(q, n-k-1)$ | $F$ with df $(J, N-K)$ |
+| 95% confidence interval | $\hat\beta_j \pm t_{0.975,\,n-k-1}\cdot\operatorname{se}(\hat\beta_j)$ | $b_{j+1} \pm t_c\cdot\operatorname{se}(b_{j+1})$ |
+| Heteroskedasticity-robust SE | "heteroskedasticity-robust" / HC0–HC3 (via `sandwich::vcovHC`, `lmtest::coeftest`) | "White" standard errors |
+| AR(1) error process | $u_t = \rho\,u_{t-1} + \varepsilon_t$ | $e_t = \rho\,e_{t-1} + v_t$ |
+| Dummy / indicator variable | dummy variable, $d \in \{0,1\}$ | indicator variable, $D \in \{0,1\}$ |
+| Interaction | $\beta_3\, x_1 x_2$ | $\beta_4\, x_2 x_3$ |
+| Quadratic | $\beta_1 x + \beta_2 x^2$ | $\beta_2 x + \beta_3 x^2$ |
+| Log-level | $\ln(y) = \beta_0 + \beta_1 x + u$ | $\ln(y) = \beta_1 + \beta_2 x + e$ |
+| Level-log | $y = \beta_0 + \beta_1 \ln(x) + u$ | $y = \beta_1 + \beta_2 \ln(x) + e$ |
+| Log-log (elasticity) | $\ln(y) = \beta_0 + \beta_1 \ln(x) + u$ | $\ln(y) = \beta_1 + \beta_2 \ln(x) + e$ |
+
+::: {.callout-warning}
+## The SSR/SSE swap
+
+The names "SSR" and "SSE" are **swapped** between the two textbook traditions. In Wooldridge, **SSR** is the sum of *squared residuals* and **SSE** is the *explained* sum of squares. In CGL, **SSE** is the sum of squared *errors* (i.e. residuals) and **SSR** is the *regression* (explained) sum of squares. Both books define $R^2 = 1 - (\text{residual SS})/\text{SST}$ --- they only disagree on which three letters spell "residual SS". When you read software output, note that R's `summary(lm())` and `anova(lm())` follow Wooldridge's convention: the row labelled "Residuals" is SSR in this book's notation.
+:::
+
+A second subtlety hides in the indexing convention. CGL writes the multiple regression model with $K$ parameters in total, indexed $\beta_1, \beta_2, \dots, \beta_K$, so the intercept is $\beta_1$ and the slope on the $j$-th regressor is $\beta_{j+1}$. Wooldridge writes the same model with $k$ regressors *plus* an intercept, indexed $\beta_0, \beta_1, \dots, \beta_k$, so the slope on $x_j$ is simply $\beta_j$. The residual degrees-of-freedom expression therefore reads $N-K$ in CGL and $n-k-1$ in Wooldridge --- numerically the same thing, written differently.
+
+## B.3 Chapter mapping (extended)
+
+The table below maps each chapter of this book to the corresponding chapters in Wooldridge 7e and CGL 5e, with approximate page ranges in CGL for students using the blue book as a secondary reference. Page numbers refer to the 5th edition in English (Wiley, 2017); they shift by 2--3 pages in the international edition.
+
+| Chapter in this book | Wooldridge 7e | CGL 5e (chapter) | CGL 5e (approx. pp.) |
+|---|---|---|---|
+| Ch. 1 Initial Concepts | Ch. 1 | Ch. 1 An Introduction to Econometrics | 1--40 |
+| Ch. 2 Simple Linear Regression | Ch. 2 | Ch. 2 The Simple Linear Regression Model | 41--110 |
+| Ch. 3 Multiple Linear Regression | Ch. 3 | Ch. 5 The Multiple Regression Model | 187--240 |
+| Ch. 4 Inference | Ch. 4 | Ch. 3 Interval Estimation and Hypothesis Testing; Ch. 6 Further Inference in the Multiple Regression Model | 111--150; 241--290 |
+| Ch. 5 Prediction | parts of Ch. 6 | Ch. 4 Prediction, Goodness-of-Fit, and Modeling Issues | 151--186 |
+| Ch. 6 Nonlinear forms & dummies | Ch. 6 (functional form), Ch. 7 (dummies) | Ch. 7 Using Indicator Variables; portions of Ch. 4 (nonlinear functional forms) | 291--340; 162--180 |
+| Ch. 7 Heteroskedasticity | Ch. 8 | Ch. 8 Heteroskedasticity | 341--380 |
+| Ch. 8 Autocorrelation / time series | Ch. 10--12 | Ch. 9 Regression with Time-Series Data: Stationary Variables | 381--440 |
+| Appendix A Prerequisites | Apps. A--D | Probability Primer; Apps. A--C | xxiii--xl; 581--640 |
+
+A reader who follows CGL chapter-by-chapter will notice that CGL covers MLR (its Ch. 5) only *after* interval estimation and hypothesis testing (its Ch. 3) and prediction (its Ch. 4) in the simple-regression setting. Wooldridge inverts this: he finishes MLR mechanics in Ch. 3 before opening inference in Ch. 4. This textbook follows Wooldridge --- so if your CGL is the main reading, expect to flip back and forth between its Ch. 2--3 and its Ch. 5--6 as you work through our Chapters 2--4.
+
+## B.4 Where the two diverge pedagogically
+
+The two books are close cousins, but they make four pedagogical choices differently. None of these are right-or-wrong; they reflect the authors' background and audience.
+
+**Matrix algebra.** Wooldridge introduces the matrix form $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{u}$ as an appendix to Chapter 3 and uses index notation in the main text. CGL relegates matrix algebra to a late chapter and an appendix, preferring scalar notation throughout the body of the book. This book follows Wooldridge: the matrix form appears in §3.4. Readers whose linear algebra is rusty should consult Appendix A.5 before tackling that section.
+
+**Running examples.** CGL's signature dataset is `food`, the food expenditure / income example used to motivate the simple linear regression model. Across its later chapters CGL also leans on capital-asset-pricing-model regressions and on US wage data. Wooldridge --- and therefore this book --- builds the running narrative around `wage1` (hourly wages and education), `hprice1` and `hprice2` (housing prices), and various education-and-earnings datasets that ship in the `wooldridge` R package. Both authors use the data ethically and consistently; only the *headline* example differs.
+
+**Flavour.** CGL has a slightly more applied flavour: the chapters open with practical motivation and the derivations are kept to a minimum. Wooldridge is slightly more rigorous: each result is stated as a numbered theorem, with the assumptions (MLR.1 through MLR.6) named and reused. Neither book pretends to be a graduate text, but a student who plans to continue with Econometrics II at UGR will find Wooldridge's habit of naming assumptions a useful preparation.
+
+**Indicator vs. dummy.** CGL says "indicator variable" everywhere; Wooldridge says "dummy variable" (and uses "indicator" only as a synonym in passing). The two words refer to the same object --- a regressor taking values in $\{0,1\}$ --- and we use "dummy" in the main text of this book to match Wooldridge. CGL's "Chow test for structural change" is exactly Wooldridge's "Chow test"; CGL's "interaction term between indicator and continuous variable" is Wooldridge's "interaction with a dummy". Same idea, two costumes.
+
+**Heteroskedasticity tests.** Both books teach the Breusch--Pagan test and the Goldfeld--Quandt test in their heteroskedasticity chapters. CGL additionally develops the **White general test** (which Wooldridge treats more briefly as the "special case of Breusch--Pagan with squares and cross-products"). Chapter 7 of this book sides with Wooldridge but mentions the White test by name; readers interested in the longer treatment should consult CGL §8.6.
+
+## B.5 If you only have CGL: a reading map for this book
+
+The following pairing lets a CGL-only reader follow this book chapter-by-chapter. Each bullet pairs one of our chapters with the CGL chapter and section to read alongside it.
+
+- **Our Ch. 1 (Initial Concepts)** ↔ CGL Ch. 1 (especially §1.1--1.5 on what econometrics is, types of data, and the simple regression idea).
+- **Our Ch. 2 (Simple Linear Regression)** ↔ CGL Ch. 2 (entire chapter), translating $\beta_1, \beta_2 \to \beta_0, \beta_1$ and $e \to u$ as you read.
+- **Our Ch. 3 (Multiple Linear Regression)** ↔ CGL Ch. 5 §5.1--5.6 for the mechanics and the Gauss--Markov theorem; the matrix form in §3.4 of this book does not appear in CGL until its Appendix.
+- **Our Ch. 4 (Inference)** ↔ CGL Ch. 3 §3.1--3.6 for $t$- and confidence-interval logic in the simple regression setting, then CGL Ch. 6 §6.1--6.3 for the $F$-test and joint hypotheses in MLR. Be aware that CGL splits this material in two; this book treats it together.
+- **Our Ch. 5 (Prediction)** ↔ CGL Ch. 4 §4.1--4.3 (point and interval prediction) and §4.5--4.6 (functional form, residual diagnostics).
+- **Our Ch. 6 (Nonlinear forms & dummies)** ↔ CGL Ch. 7 (entire chapter) for indicator variables and Chow tests; supplement with CGL §4.5 for the log/quadratic functional-form material.
+- **Our Ch. 7 (Heteroskedasticity)** ↔ CGL Ch. 8 (entire chapter). The White test is in CGL §8.6 and is worth reading even though this book treats it briefly.
+- **Our Ch. 8 (Autocorrelation)** ↔ CGL Ch. 9 §9.1--9.5 for AR(1) errors, the Durbin--Watson test, and feasible GLS / Cochrane--Orcutt. CGL's notation $e_t = \rho e_{t-1} + v_t$ is what this book writes as $u_t = \rho u_{t-1} + \varepsilon_t$.
+- **Our Appendix A (Prerequisites)** ↔ CGL Probability Primer and Appendices A--C. The conditional-expectation material in §A.3 of this book is in CGL's Probability Primer §P.4; the linear-algebra material in §A.5 is in CGL's Appendix B.
+
+A CGL-only reader who works through the book in this order will have no trouble keeping up; the only sustained effort required is the mechanical translation of indices and the constant attention to the SSR/SSE swap flagged in §B.2.

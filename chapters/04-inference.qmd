@@ -1,0 +1,582 @@
+---
+title: "Inference"
+---
+
+> *Status: ported 2026-05-18. Reviewed by editor: pending.*
+
+## Learning outcomes {.unnumbered}
+
+By the end of this chapter the reader should be able to:
+
+- State the Classical Linear Model assumptions (MLR.1--MLR.6) and explain what the normality assumption MLR.6 adds to Gauss--Markov.
+- Derive the sampling distribution of $\hat{\beta}_j$ under the CLM and explain why standardisation produces a $t_{n-k-1}$ statistic rather than a standard normal.
+- Construct and interpret a $(1-\alpha)\times 100\%$ confidence interval for an individual coefficient.
+- Run a four-step hypothesis test (two-sided and one-sided) for a single coefficient, and read off the corresponding $p$-value.
+- Carry out an $F$-test for joint significance, distinguishing the overall $F$-test from a restricted-vs-unrestricted comparison.
+- Reproduce all of the above in R using `summary()`, `confint()`, `qt()`, `qf()`, `pt()`, `pf()`, `anova()` and manual arithmetic on the fitted model.
+
+## Motivating empirical question {.unnumbered}
+
+> *Once we hold education, experience and age fixed, do `IQ` scores and schooling **jointly** matter for monthly earnings --- or could the apparent contribution of cognitive ability and education have arisen by chance?*
+
+We met IQ briefly in Chapter 3 as a candidate proxy for unobserved ability. Now we have to decide, formally, whether the coefficients we estimate are far enough from zero to take seriously. The tools of the chapter --- $t$-statistics, $p$-values, confidence intervals and the $F$-test --- are designed precisely for that decision.
+
+## 4.1 From estimation to inference
+
+Chapters 2 and 3 produced **point estimates** $\hat{\beta}_j$ from a sample. These numbers are random: a different sample would have given different numbers. The question of inference is whether what we learned from *our* sample lets us say anything credible about the unknown population parameter $\beta_j$.
+
+Statistical inference provides two complementary tools [@wooldridge2020]:
+
+1. **Confidence intervals.** A range of plausible values for the unknown parameter, with a calibrated long-run coverage probability.
+2. **Hypothesis tests.** A formal procedure for deciding whether the data are compatible with a specific claim about the parameter --- most often, the claim that the parameter equals zero.
+
+Both tools rely on knowing the *sampling distribution* of $\hat{\beta}_j$. Under Gauss--Markov we only know its mean ($\beta_j$) and variance; we do not know its shape. To say anything precise about probabilities --- "the chance of observing a coefficient this far from zero, if the truth is zero, is less than 1%" --- we need a distribution. That is what the next assumption gives us.
+
+## 4.2 The Classical Linear Model (CLM) assumptions
+
+Gauss--Markov gave us unbiasedness, a closed-form variance and the BLUE property of OLS. For exact (finite-sample) inference we need one more assumption.
+
+::: {.callout-note}
+## Definition: MLR.6 (Normality of the error term)
+
+Conditional on the regressors $\mathbf{X}$, the population error $u$ is normally distributed with mean zero and constant variance:
+
+$$
+u \mid \mathbf{X} \;\sim\; \mathcal{N}(0,\,\sigma^2).
+$$
+
+The full set MLR.1--MLR.6 is called the **Classical Linear Model (CLM) assumptions**.
+:::
+
+Why normality, and where does it come from? In many applied settings $u$ is a sum of a large number of small, independent omitted factors, and a central-limit heuristic suggests its distribution should be roughly bell-shaped. The assumption is strong: it can fail badly for skewed outcomes such as wages or counts. We will see in Chapter 6 that taking $\log$ of the dependent variable often does a lot to make the residuals look symmetric.
+
+The pay-off is large. Under MLR.1--MLR.6, the OLS estimator inherits the normality of $u$:
+
+$$
+\hat{\beta}_j \mid \mathbf{X} \;\sim\; \mathcal{N}\!\left(\beta_j,\,\operatorname{Var}(\hat{\beta}_j)\right).
+$$
+
+This is an *exact* statement that holds in any sample size, not just asymptotically. With $n$ large, the central limit theorem delivers approximately the same conclusion even without MLR.6, but only the CLM gives us exact small-sample inference.
+
+::: {.callout-warning}
+## Common mistake: confusing the normality of $u$ with the normality of $y$
+
+MLR.6 is a statement about the *error* $u$, conditional on the regressors. It is *not* the claim that the marginal distribution of $y$ is normal. Wages, for example, are right-skewed; that does not by itself contradict MLR.6, because the systematic component $\beta_0 + \beta_1 x_1 + \cdots$ can absorb the skewness.
+:::
+
+## 4.3 The $t$-distribution
+
+If $\sigma^2$ were known we could standardise $\hat{\beta}_j$ directly:
+
+$$
+Z \;=\; \frac{\hat{\beta}_j - \beta_j}{\sqrt{\operatorname{Var}(\hat{\beta}_j)}} \;\sim\; \mathcal{N}(0,1).
+$$
+
+In practice $\sigma^2$ is unknown and is replaced by the OLS estimator $\hat{\sigma}^2 = \mathrm{SSR}/(n-k-1)$. Plugging $\hat{\sigma}^2$ into the standard error introduces an extra source of variability, and the standardised statistic is no longer standard normal: it is **$t$-distributed** with $n-k-1$ degrees of freedom,
+
+$$
+t \;=\; \frac{\hat{\beta}_j - \beta_j}{\operatorname{se}(\hat{\beta}_j)} \;\sim\; t_{\,n-k-1}.
+$$
+
+The $t$-distribution is symmetric, bell-shaped and centred at zero, but it has **heavier tails** than $\mathcal{N}(0,1)$ --- a reflection of the extra uncertainty from estimating $\sigma^2$. As the degrees of freedom $n-k-1$ grow, the tails thin out and $t_{n-k-1}$ converges to $\mathcal{N}(0,1)$. For $n-k-1 \geq 120$ the two distributions are virtually indistinguishable; for small samples the $t$ is noticeably wider.
+
+That is the whole reason this chapter uses $t$ critical values like $2.013$ (for $\alpha = 0.05$, $df = 45$) rather than the familiar $1.96$ from the normal table.
+
+## 4.4 Confidence intervals
+
+::: {.callout-note}
+## Definition: confidence interval for $\beta_j$
+
+A $(1-\alpha)\times 100\%$ confidence interval for $\beta_j$ is
+
+$$
+\hat{\beta}_j \;\pm\; t_{\alpha/2,\,n-k-1}\,\cdot\,\operatorname{se}(\hat{\beta}_j),
+$$
+
+where $t_{\alpha/2,\,n-k-1}$ is the critical value of the $t$-distribution that leaves probability $\alpha/2$ in each tail.
+:::
+
+For the canonical 95% interval, $\alpha = 0.05$ and the critical value is $t_{0.025,\,n-k-1}$. With moderately large samples this is close to $1.96$, but in small samples it can be appreciably larger.
+
+::: {.callout-warning}
+## Common mistake: misreading the "95%"
+
+A 95% confidence interval is a statement about the **procedure**, not about the realised interval. If we drew many independent samples and built one interval from each, about 95% of those intervals would contain the true $\beta_j$. It is **not** correct to say that there is a 95% probability that the particular interval $[L, U]$ we computed from our one sample contains $\beta_j$ --- $\beta_j$ is a fixed (if unknown) number, and the realised interval either covers it or it does not.
+:::
+
+Confidence intervals and two-sided hypothesis tests are two sides of the same coin: a $(1-\alpha)$ CI for $\beta_j$ contains zero **if and only if** the two-sided $t$-test of $H_0:\beta_j = 0$ at level $\alpha$ fails to reject.
+
+## 4.5 Hypothesis testing in four steps
+
+We test claims about a single coefficient $\beta_j$ using a standard four-step procedure. Let $c$ be the hypothesised value (usually $c = 0$, "the variable does not matter").
+
+**Step 1. State $H_0$ and $H_1$.** There are three useful forms:
+
+- *Two-sided:* $H_0: \beta_j = c$ versus $H_1: \beta_j \neq c$.
+- *Right one-sided:* $H_0: \beta_j \leq c$ versus $H_1: \beta_j > c$.
+- *Left one-sided:* $H_0: \beta_j \geq c$ versus $H_1: \beta_j < c$.
+
+The choice between one- and two-sided is driven by **economic theory**, not by the data: if theory tells us a priori that $\beta_j$ cannot be negative, a one-sided test is appropriate.
+
+**Step 2. Choose a significance level $\alpha$ and read off the critical value.** Standard choices are $\alpha = 0.10$, $0.05$, $0.01$. The critical value is
+
+- $t_{\alpha/2,\,n-k-1}$ for a two-sided test,
+- $t_{\alpha,\,n-k-1}$ for a one-sided test.
+
+**Step 3. Compute the $t$-statistic.**
+
+$$
+t \;=\; \frac{\hat{\beta}_j - c}{\operatorname{se}(\hat{\beta}_j)}.
+$$
+
+For the default $c = 0$ this reduces to $t = \hat{\beta}_j / \operatorname{se}(\hat{\beta}_j)$, which is exactly the number R reports in the third column of `summary(lm(...))`.
+
+**Step 4. Compare and conclude.**
+
+- Two-sided: reject $H_0$ if $|t| > t_{\alpha/2,\,n-k-1}$.
+- Right one-sided: reject $H_0$ if $t > t_{\alpha,\,n-k-1}$.
+- Left one-sided: reject $H_0$ if $t < -t_{\alpha,\,n-k-1}$.
+
+If $H_0$ is rejected we say the coefficient is *statistically significant* at the chosen level. If we fail to reject we say the data are *consistent with* $H_0$ --- we never "accept" $H_0$, because the test was designed to detect departures from it, not to confirm it.
+
+::: {.callout-warning}
+## Common mistake: statistical significance is not economic significance
+
+A coefficient can be statistically significant (small $p$-value) but economically tiny, and a coefficient can be economically large but statistically insignificant in a small sample. Always report both: the *magnitude* of $\hat{\beta}_j$ in the units of the problem, and the precision with which it is estimated. A 1% return to one extra year of education and a 10% return are both "significantly different from zero" in a large sample, but only one of them is policy-relevant.
+:::
+
+## 4.6 The $p$-value
+
+The four-step procedure forces us to fix $\alpha$ in advance. A more informative alternative is to report the $p$-value.
+
+::: {.callout-note}
+## Definition: $p$-value
+
+The $p$-value is the probability, computed *under $H_0$*, of observing a test statistic at least as extreme as the one we got. Equivalently, it is the smallest significance level $\alpha$ at which we would reject $H_0$.
+:::
+
+For a two-sided test of $H_0:\beta_j = 0$ with computed statistic $t$,
+
+$$
+p \;=\; 2 \cdot \Pr\!\left(T_{n-k-1} > |t|\right) \;=\; 2\,\bigl[1 - F_t(|t|;\,n-k-1)\bigr],
+$$
+
+where $F_t$ is the CDF of the $t_{n-k-1}$ distribution. For a one-sided test the $p$-value is exactly half of this (when the sign of $\hat{\beta}_j$ agrees with the alternative).
+
+Conventional rules of thumb [@wooldridge2020]:
+
+- $p < 0.01$: strong evidence against $H_0$ (reject at the 1% level).
+- $p < 0.05$: evidence against $H_0$ (reject at the 5% level).
+- $p < 0.10$: weak evidence against $H_0$ (reject at the 10% level).
+- $p \geq 0.10$: insufficient evidence to reject $H_0$.
+
+R reports two-sided $p$-values by default in the `Pr(>|t|)` column of `summary(lm(...))`, together with significance stars: `***` for $p < 0.001$, `**` for $p < 0.01$, `*` for $p < 0.05$, `.` for $p < 0.10$.
+
+::: {.callout-warning}
+## Common mistake: a small $p$-value is not a causal certificate
+
+Statistical significance tells us that $\hat{\beta}_j$ is unlikely to have arisen by sampling noise if the truth were zero. It says **nothing** about whether $x_j$ *causes* $y$. Causal interpretation still requires the population assumption $\mathbb{E}[u \mid \mathbf{X}] = 0$ (MLR.4) --- no $p$-value, however small, can rescue a regression contaminated by omitted-variable bias or by reverse causality.
+:::
+
+## 4.7 The $F$-test for joint significance
+
+Single-coefficient $t$-tests are the right tool when we have one parameter in mind. Often, though, the question is whether **several** coefficients are jointly zero:
+
+- "Are `educ` *and* `IQ` jointly irrelevant for wages once we control for hours, experience and age?"
+- "Do the squared terms in a polynomial in `exper` add anything to the model?"
+- "Do *any* of the regressors matter --- is the overall regression worth running?"
+
+These are joint hypotheses, and they require a joint test. Doing $q$ separate $t$-tests does **not** answer the joint question, because the size of the combined procedure is no longer $\alpha$, and because two coefficients can be jointly informative even when each is individually borderline.
+
+### 4.7.1 Restricted vs unrestricted models
+
+Let the **unrestricted** model be the regression with $k$ slopes,
+
+$$
+y = \beta_0 + \beta_1 x_1 + \cdots + \beta_k x_k + u.
+$$
+
+Suppose we want to test that the last $q$ slopes are zero,
+
+$$
+H_0:\;\beta_{k-q+1} = \beta_{k-q+2} = \cdots = \beta_k = 0,
+$$
+
+against the alternative that *at least one* of them is non-zero. The **restricted** model imposes $H_0$ by dropping those $q$ regressors:
+
+$$
+y = \beta_0 + \beta_1 x_1 + \cdots + \beta_{k-q} x_{k-q} + u.
+$$
+
+Let $\mathrm{SSR}_U$ and $\mathrm{SSR}_R$ denote the sum of squared residuals of the unrestricted and restricted models. Because dropping regressors can never reduce the SSR, we always have $\mathrm{SSR}_R \geq \mathrm{SSR}_U$; the question is whether the *gap* is big enough to be inconsistent with $H_0$.
+
+::: {.callout-note}
+## Definition: the $F$-statistic
+
+Under $H_0$ and MLR.1--MLR.6,
+
+$$
+F \;=\; \frac{(\mathrm{SSR}_R - \mathrm{SSR}_U)/q}{\mathrm{SSR}_U/(n-k-1)} \;\sim\; F_{q,\,n-k-1}.
+$$
+
+Reject $H_0$ at level $\alpha$ if $F > F_{q,\,n-k-1,\,\alpha}$, the upper-$\alpha$ critical value of the $F$ distribution with $q$ and $n-k-1$ degrees of freedom.
+:::
+
+An equivalent formulation uses the $R^2$ of each model:
+
+$$
+F \;=\; \frac{(R^2_U - R^2_R)/q}{(1 - R^2_U)/(n-k-1)}.
+$$
+
+The two formulas are algebraically identical whenever $y$ is the same in both regressions; they differ only when the restricted model has a different dependent variable (e.g. an $F$-test of $\log y$ versus $y$, which the formula above does **not** cover).
+
+### 4.7.2 The overall $F$-test
+
+A special case is the test that **every** slope is zero,
+
+$$
+H_0:\;\beta_1 = \beta_2 = \cdots = \beta_k = 0.
+$$
+
+Here the restricted model is the regression on a constant alone, and $R^2_R = 0$. The $F$-statistic collapses to
+
+$$
+F \;=\; \frac{R^2/k}{(1-R^2)/(n-k-1)},
+$$
+
+which is exactly the number R prints at the bottom line of `summary(lm(...))` under "F-statistic", together with its $p$-value.
+
+### 4.7.3 $F$ versus $t$: a useful identity
+
+For a *single* restriction ($q = 1$), the $F$-statistic equals the square of the corresponding $t$-statistic:
+
+$$
+F \;=\; t^2, \qquad F_{1,\,n-k-1} \;=\; \bigl(t_{n-k-1}\bigr)^2.
+$$
+
+The $t$- and $F$-tests deliver identical conclusions in this case; the $F$ machinery is only strictly necessary when $q \geq 2$.
+
+## 4.8 Lab: Inference in R
+
+We work with `wage2` from the **wooldridge** package: a cross-section of $n = 935$ U.S. men in the 1980 National Longitudinal Survey, with information on monthly earnings (`wage`), weekly hours (`hours`), an IQ test score (`IQ`), years of schooling (`educ`), years of work experience (`exper`), tenure with the current employer (`tenure`) and age. The goal is to translate the four-step inference machinery into R commands and then check that the built-in shortcuts give the same answers.
+
+```{r ch04-setup}
+#| message: false
+library(wooldridge)
+data("wage2")
+```
+
+### A first regression and its `summary()`
+
+Start with a simple regression of monthly wage on weekly hours:
+
+```{r ch04-model1}
+model1 <- lm(wage ~ hours, data = wage2)
+summary(model1)
+```
+
+The `summary()` block reports, for each coefficient, the estimate $\hat{\beta}_j$, its standard error $\operatorname{se}(\hat{\beta}_j)$, the $t$-statistic $\hat{\beta}_j/\operatorname{se}(\hat{\beta}_j)$, and the two-sided $p$-value. At the bottom we see the overall $F$-statistic and its $p$-value, which test $H_0: \beta_{\text{hours}} = 0$ in this single-regressor case.
+
+Now move to a richer specification:
+
+```{r ch04-model2}
+model2 <- lm(wage ~ hours + educ + exper + IQ + age, data = wage2)
+summary(model2)
+```
+
+Read the table line by line: `educ` and `IQ` both have large $t$-statistics and tiny $p$-values, so each is individually significant at the 1% level even after controlling for the others. `hours` is negative and significant (men who work longer hours earn slightly less *per week of hours worked*, conditional on the other covariates --- a hint that hours are correlated with occupational mix). `exper` and `age` are statistically indistinguishable from zero in this specification.
+
+### Manual confidence intervals with `qt()`
+
+Pull out the coefficients and standard errors programmatically, then build a 95% CI by hand.
+
+```{r ch04-ci-manual}
+beta_hat <- coef(model2)
+se_hat   <- summary(model2)$coefficients[, "Std. Error"]
+
+n  <- nobs(model2)
+k  <- length(beta_hat) - 1     # number of slope coefficients
+df <- n - k - 1
+
+t_crit <- qt(0.975, df)
+t_crit                           # critical value t_{0.025, df}
+```
+
+The critical value is close to $1.96$ because the degrees of freedom are large, but not identical. The manual 95% CI for $\beta_{\text{IQ}}$ is
+
+```{r ch04-ci-iq}
+IQ_LB <- beta_hat["IQ"] - t_crit * se_hat["IQ"]
+IQ_UB <- beta_hat["IQ"] + t_crit * se_hat["IQ"]
+c(lower = IQ_LB, upper = IQ_UB)
+```
+
+and for $\beta_{\text{hours}}$:
+
+```{r ch04-ci-hours}
+hours_LB <- beta_hat["hours"] - t_crit * se_hat["hours"]
+hours_UB <- beta_hat["hours"] + t_crit * se_hat["hours"]
+c(lower = hours_LB, upper = hours_UB)
+```
+
+The built-in shortcut delivers all the intervals in one call:
+
+```{r ch04-confint}
+confint(model2, level = 0.95)
+```
+
+The numbers in the `IQ` and `hours` rows match what we computed by hand. Notice that the 95% interval for `IQ` excludes zero (consistent with the small $p$-value in the `summary()`), while the intervals for `exper` and `age` do contain zero (consistent with their non-significance).
+
+### Manual $t$-test for a single coefficient
+
+Suppose we want to test $H_0: \beta_{\text{educ}} = 0$ against the two-sided alternative at the 5% level. Step by step:
+
+```{r ch04-ttest-manual}
+b_educ  <- coef(model2)["educ"]
+se_educ <- summary(model2)$coefficients["educ", "Std. Error"]
+
+t_stat  <- b_educ / se_educ
+p_value <- 2 * pt(-abs(t_stat), df)   # two-sided p-value
+
+c(t = t_stat, p = p_value)
+summary(model2)$coefficients["educ", c("t value", "Pr(>|t|)")]
+```
+
+The bottom two lines are identical (up to rounding): the manual computation reproduces exactly what R prints. The $t$-statistic is far above the 5% critical value of roughly $1.96$, so we reject $H_0$. Education has a statistically significant partial effect on monthly earnings even after controlling for hours, experience, IQ and age.
+
+### Manual $F$-test for joint significance
+
+Now the headline question of the chapter: are `educ` and `IQ` *jointly* relevant once `hours`, `exper` and `age` are in the model? Formally,
+
+$$
+H_0:\;\beta_{\text{educ}} = \beta_{\text{IQ}} = 0
+\quad\text{vs.}\quad H_1:\;\text{at least one of them }\neq 0,
+$$
+
+so $q = 2$.
+
+The unrestricted model is `model2` above. The restricted model drops `educ` and `IQ`:
+
+```{r ch04-restricted}
+model3 <- lm(wage ~ hours + exper + age, data = wage2)
+summary(model3)
+```
+
+Compute the SSRs by hand:
+
+```{r ch04-ssr}
+SSR_u <- sum(residuals(model2)^2)
+SSR_r <- sum(residuals(model3)^2)
+c(SSR_unrestricted = SSR_u, SSR_restricted = SSR_r)
+```
+
+Now the $F$-statistic:
+
+```{r ch04-fstat}
+q    <- 2                # restrictions
+df_u <- n - k - 1        # df of the unrestricted model
+
+F_stat <- ((SSR_r - SSR_u) / q) / (SSR_u / df_u)
+F_crit <- qf(0.95, df1 = q, df2 = df_u)
+p_val  <- 1 - pf(F_stat, df1 = q, df2 = df_u)
+
+c(F = F_stat, F_crit_5pct = F_crit, p = p_val)
+```
+
+The $F$-statistic is far above the 5% critical value and the $p$-value is essentially zero, so we strongly reject $H_0$: `educ` and `IQ` are jointly significant determinants of `wage`.
+
+R provides the same test in one line via `anova()`, which compares two nested models:
+
+```{r ch04-anova}
+anova(model3, model2)
+```
+
+The `F` and `Pr(>F)` columns reproduce the manual computation. Reporting the $F$-test from `anova()` is the recommended workflow; the manual derivation matters because it lets you see exactly *what is being compared*.
+
+### $F = t^2$ in a single-restriction test
+
+The identity at the end of §4.7 is easy to verify numerically. Test $H_0: \beta_{\text{educ}} = 0$ both ways:
+
+```{r ch04-f-equals-t2}
+t_educ <- summary(model2)$coefficients["educ", "t value"]
+
+mR <- lm(wage ~ hours + exper + IQ + age, data = wage2)   # drop educ only
+ft <- anova(mR, model2)
+F_single <- ft$F[2]
+
+c(t_squared = t_educ^2, F = F_single)
+```
+
+The two numbers agree, as the algebra predicts.
+
+### One-sided vs two-sided
+
+Suppose theory tells us that an extra year of experience cannot lower monthly earnings, so the relevant alternative is *right-sided*: $H_0: \beta_{\text{exper}} \leq 0$ vs $H_1: \beta_{\text{exper}} > 0$. The same $t$-statistic feeds a different $p$-value:
+
+```{r ch04-onesided}
+co <- summary(model2)$coefficients["exper", ]
+t_exper <- co["t value"]
+
+p_one_sided <- 1 - pt(t_exper, df)         # right-tail
+p_two_sided <- 2 * pt(-abs(t_exper), df)   # default in summary()
+
+c(t = t_exper, p_one_sided = p_one_sided, p_two_sided = p_two_sided)
+```
+
+When $t > 0$ and the alternative is on the right, the one-sided $p$-value is exactly half the two-sided one. A coefficient that is borderline under the default two-sided test can become clearly significant once we are willing to commit to a sign a priori --- but that commitment must come from economics, not from peeking at the data first.
+
+## Self-check {.unnumbered}
+
+Six short multiple-choice questions. Try each one before opening the answer.
+
+::: {.callout-tip collapse="true"}
+## Q1. What MLR.6 buys us
+
+Adding MLR.6 (normality of $u$) to the Gauss--Markov assumptions allows us to:
+
+- A. Prove that OLS is unbiased.
+- B. Prove that OLS has the smallest variance among linear unbiased estimators.
+- C. Derive the *exact* finite-sample distribution of $\hat{\beta}_j$ and run $t$- and $F$-tests in any sample size.
+- D. Estimate $\sigma^2$.
+
+**Answer: C.** Unbiasedness (A) follows from MLR.1--MLR.4; BLUE (B) from MLR.1--MLR.5; the estimator $\hat{\sigma}^2$ (D) is defined regardless of MLR.6. Only MLR.6 gives us *exact* normality of $\hat{\beta}_j$ and therefore exact $t$ and $F$ inference in finite samples.
+:::
+
+::: {.callout-tip collapse="true"}
+## Q2. Why $t$ and not $z$?
+
+Under MLR.1--MLR.6 we use $t_{n-k-1}$ rather than $\mathcal{N}(0,1)$ for inference on a single coefficient because:
+
+- A. OLS is biased in finite samples.
+- B. The standard error uses an *estimated* $\hat{\sigma}^2$, and the resulting standardised statistic has heavier tails than the standard normal.
+- C. The error term is heteroskedastic.
+- D. The regressors are non-stochastic.
+
+**Answer: B.** Replacing the unknown $\sigma$ in the standard error with $\hat{\sigma}$ introduces extra variability that the $t$-distribution accounts for. As $n - k - 1 \to \infty$, the $t$ converges to the standard normal.
+:::
+
+::: {.callout-tip collapse="true"}
+## Q3. A 95% confidence interval
+
+A 95% confidence interval for $\beta_j$ that excludes zero implies:
+
+- A. The two-sided $t$-test of $H_0:\beta_j = 0$ rejects at the 5% level.
+- B. The true $\beta_j$ definitely is non-zero.
+- C. The estimated coefficient is economically large.
+- D. OLS is unbiased.
+
+**Answer: A.** A CI and a two-sided test at the matching level are algebraically equivalent: the CI excludes the null value if and only if the test rejects. The CI says nothing about magnitude (C) or about OLS bias (D), and a single sample cannot certify (B).
+:::
+
+::: {.callout-tip collapse="true"}
+## Q4. Reading a $p$-value
+
+A coefficient has a two-sided $p$-value of $0.03$. Which statement is correct?
+
+- A. It is statistically significant at the 5% level but not at the 1% level.
+- B. It is significant at every conventional level.
+- C. It is not significant at the 5% level.
+- D. The coefficient is economically important.
+
+**Answer: A.** Recall $p$ is the smallest $\alpha$ at which we reject; $0.01 < 0.03 < 0.05$ places significance between the 1% and 5% levels. Statistical significance carries no information about economic magnitude.
+:::
+
+::: {.callout-tip collapse="true"}
+## Q5. The $F$-statistic
+
+To test $H_0:\beta_1 = \beta_2 = 0$ jointly in a regression with $k$ slopes and sample size $n$, we use:
+
+- A. Two separate $t$-tests, one for each coefficient.
+- B. $F = \dfrac{(\mathrm{SSR}_R - \mathrm{SSR}_U)/q}{\mathrm{SSR}_U/(n-k-1)}$, distributed $F_{q,\,n-k-1}$ under $H_0$.
+- C. A $\chi^2$-test on $\hat{\beta}_1 + \hat{\beta}_2$.
+- D. A $z$-test, comparing the sum of the estimates with $1.96$.
+
+**Answer: B.** Separate $t$-tests do not control the size of the joint procedure and miss the case in which two regressors are individually weak but jointly informative.
+:::
+
+::: {.callout-tip collapse="true"}
+## Q6. Significance vs causation
+
+A regressor $x_j$ has a coefficient with $p < 0.001$. Which of the following is true?
+
+- A. A small $p$-value rules out omitted-variable bias.
+- B. Statistical significance proves $x_j$ causes $y$.
+- C. Statistical significance and causal identification are equivalent.
+- D. The $p$-value tells us $\hat{\beta}_j$ is unlikely to be zero by chance, but says nothing about whether $x_j$ *causes* $y$ --- causal identification still requires $\mathbb{E}[u\mid \mathbf{X}] = 0$.
+
+**Answer: D.** Section 4.6 is explicit on this point: inference is about ruling out sampling noise, not about ruling out confounding.
+:::
+
+## Exercises {.unnumbered}
+
+**Exercise 4.1 ★ --- Reading a `summary()` output.** Using the `wage2` dataset, estimate the model
+
+$$
+\mathrm{wage} = \beta_0 + \beta_1\,\mathrm{educ} + \beta_2\,\mathrm{exper} + \beta_3\,\mathrm{tenure} + u
+$$
+
+with `lm()` and inspect `summary()`. (a) Which coefficients are significant at the 5% level? (b) Report the magnitude *and* the standard error of $\hat{\beta}_1$; what is the economic interpretation? (c) State the null hypothesis that the overall $F$-statistic at the bottom of `summary()` tests.
+
+::: {.callout-tip collapse="true"}
+## Show answer
+
+(a) All three slopes are positive and have $p$-values well below $0.05$ (each $t$-statistic is comfortably above $2$ in absolute value), so `educ`, `exper` and `tenure` are individually significant at the 5% level. (b) $\hat{\beta}_1$ is roughly 60 monthly-dollars per extra year of schooling, with a standard error of about 6 --- an effect that is both statistically and economically meaningful. (c) The overall $F$-statistic tests $H_0:\beta_1 = \beta_2 = \beta_3 = 0$ (none of the regressors matters) against the alternative that at least one slope is non-zero.
+:::
+
+**Exercise 4.2 ★ --- Manual 95% CI.** For the same model, build a 95% confidence interval for $\beta_{\mathrm{educ}}$ from scratch, using `coef()`, `summary()$coefficients[, "Std. Error"]` and `qt()`. Verify your interval against `confint(m)["educ", ]`. Does the interval contain zero? What conclusion follows for a two-sided $t$-test of $H_0:\beta_{\mathrm{educ}} = 0$ at the 5% level?
+
+::: {.callout-tip collapse="true"}
+## Show answer
+
+```r
+m  <- lm(wage ~ educ + exper + tenure, data = wage2)
+b  <- coef(m)["educ"]
+se <- summary(m)$coefficients["educ", "Std. Error"]
+df <- nobs(m) - length(coef(m))    # n - k - 1
+tc <- qt(0.975, df)
+ci_manual <- c(b - tc * se, b + tc * se)
+confint(m)["educ", ]                # should match
+```
+
+The interval does not contain zero, so the two-sided $t$-test of $H_0:\beta_{\mathrm{educ}} = 0$ at the 5% level rejects --- consistent with the (tiny) `Pr(>|t|)` value in `summary()`.
+:::
+
+**Exercise 4.3 ★ --- Manual $F$-test.** In the model $\mathrm{wage} = \beta_0 + \beta_1\,\mathrm{educ} + \beta_2\,\mathrm{exper} + \beta_3\,\mathrm{tenure} + u$ on `wage2`, test $H_0:\beta_2 = \beta_3 = 0$ by comparing the SSRs of the unrestricted and the restricted (drop `exper` and `tenure`) models. Compute the critical value with `qf()` at the 5% level and the $p$-value with `pf()`. Verify against `anova()`.
+
+::: {.callout-tip collapse="true"}
+## Show answer
+
+```r
+mU <- lm(wage ~ educ + exper + tenure, data = wage2)
+mR <- lm(wage ~ educ,                  data = wage2)
+
+SSR_u <- sum(resid(mU)^2)
+SSR_r <- sum(resid(mR)^2)
+n  <- nobs(mU); k <- length(coef(mU)) - 1; q <- 2
+df_u <- n - k - 1
+
+F_stat <- ((SSR_r - SSR_u) / q) / (SSR_u / df_u)
+F_crit <- qf(0.95, q, df_u)
+p_val  <- 1 - pf(F_stat, q, df_u)
+anova(mR, mU)
+```
+
+The $F$-statistic is well above $F_{2,\,n-k-1,\,0.05}$ and the $p$-value is essentially zero. We reject $H_0$: experience and tenure are jointly significant given education.
+:::
+
+**Exercise 4.4 ★★ --- One-sided test from theory.** Economic theory suggests that an extra year of tenure cannot decrease monthly earnings, so the relevant alternative is right-sided: $H_0:\beta_{\mathrm{tenure}} \leq 0$ vs $H_1:\beta_{\mathrm{tenure}} > 0$. Using the regression of `wage` on `educ + exper + tenure`, compute the one-sided $p$-value from `summary()` output and decide at the 5% level. How does it compare with the default two-sided $p$-value that R prints?
+
+*A full answer is given in the Instructor Edition.*
+
+**Exercise 4.5 ★★ --- Joint vs individual significance.** In the model of Exercise 4.1, add `IQ` and `age` as regressors. (a) Are `IQ` and `age` *individually* significant at the 5% level? (b) Are they *jointly* significant at the 5% level (use `anova()`)? (c) Construct an example, or explain in words, in which two regressors are individually insignificant yet jointly significant. What feature of the data drives this gap?
+
+*A full answer is given in the Instructor Edition.*
+
+**Exercise 4.6 ★★★ --- $F$ from $R^2$.** Show, starting from the SSR-based formula, that whenever the unrestricted and restricted models share the same dependent variable, the $F$-statistic can be written as
+
+$$
+F \;=\; \frac{(R^2_U - R^2_R)/q}{(1 - R^2_U)/(n-k-1)}.
+$$
+
+Then verify the identity numerically for the $F$-test of $H_0:\beta_{\mathrm{exper}} = \beta_{\mathrm{tenure}} = 0$ in Exercise 4.3, by pulling the two $R^2$ values out of `summary()` and plugging them in. Why does the formula *fail* if the dependent variable in the restricted model is $\log(\mathrm{wage})$ rather than $\mathrm{wage}$?
+
+*A full answer is given in the Instructor Edition.*

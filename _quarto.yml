@@ -1,0 +1,79 @@
+project:
+  type: book
+  output-dir: _output
+
+book:
+  title: "Econometrics I"
+  subtitle: "Theory, Practice, and Applications"
+  author: "Alessio Gaggero"
+  date: today
+  language: en
+  description: |
+    An open undergraduate textbook for Econometrics I at the
+    University of Granada. Combines lecture notes, R tutorials,
+    and interactive self-assessment in a single reproducible volume.
+  chapters:
+    - index.qmd
+    - chapters/01-initial-concepts.qmd
+    - chapters/02-simple-regression.qmd
+    - chapters/03-multiple-regression.qmd
+    - chapters/04-inference.qmd
+    - chapters/05-prediction.qmd
+    - chapters/06-nonlinear-qualitative.qmd
+    - chapters/07-heteroskedasticity.qmd
+    - chapters/08-autocorrelation.qmd
+
+  appendices:
+    - chapters/appendix-a-prerequisites.qmd
+    - chapters/appendix-b-wooldridge-cgl-crosswalk.qmd
+    - chapters/appendix-c-tables.qmd
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    number-sections: true
+    toc: true
+    toc-depth: 3
+    code-fold: show
+    code-tools: true
+    mathjax: true
+    fig-align: center
+
+  pdf:
+    documentclass: scrbook
+    papersize: a4
+    geometry:
+      - margin=2.5cm
+    number-sections: true
+    toc: true
+    toc-depth: 2
+    fig-align: center
+    keep-tex: true
+    include-in-header:
+      text: |
+        \usepackage{booktabs}
+        \usepackage{amsmath,amssymb,amsthm,mathtools}
+        \usepackage{bm}
+
+  epub:
+    toc: true
+    toc-depth: 2
+
+bibliography: references.bib
+
+license: "CC BY 4.0"
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+
+knitr:
+  opts_chunk:
+    fig.width: 7
+    fig.height: 5
+    fig.align: center
+    comment: ""
