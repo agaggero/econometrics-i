@@ -2,7 +2,6 @@
 title: "Autocorrelation"
 ---
 
-> *Status: ported 2026-05-18. Reviewed by editor: pending. Includes content ported from Spanish edition per gap report G9.*
 
 ## Learning outcomes {.unnumbered}
 

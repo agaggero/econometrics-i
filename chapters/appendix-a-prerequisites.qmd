@@ -2,7 +2,6 @@
 title: "Mathematical and Statistical Prerequisites"
 ---
 
-> *Status: ported 2026-05-18. Includes content translated back from the Spanish edition per gap report G8.*
 
 This appendix collects the mathematical and statistical tools used throughout the book. It is meant as a reference: skim it once at the start of the course, then come back to individual sections as they are invoked. The level is deliberately operational --- enough to follow the derivations in the main text without turning the book into a course on real analysis [@wooldridge2020]. We adopt Wooldridge's notation everywhere: population parameters are $\beta_0, \beta_1, \dots$; the population error is $u$; the sample residual is $\hat u$; fitted values are $\hat y$; and the usual sums of squares are SST, SSE, and SSR.
 

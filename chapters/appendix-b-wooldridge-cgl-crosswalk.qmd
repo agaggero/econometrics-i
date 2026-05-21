@@ -2,7 +2,6 @@
 title: "Wooldridge ↔ Carter–Griffiths–Lim Crosswalk"
 ---
 
-> *Status: ported 2026-05-18. Reviewed by editor: pending.*
 
 ## B.1 Why this crosswalk exists
 
