@@ -22,7 +22,7 @@ A marketing analyst regresses quarterly sales on advertising and a time trend, g
 
 ## 8.1 From cross-section to time series
 
-In Chapters 1–7 every observation was a *unit* (a worker, a firm, a household) sampled at a single point in time. We indexed observations by $i = 1,\dots,n$. Time series are different: there is one unit --- a country, a firm, a household, a market --- and we observe it repeatedly across discrete periods. We replace the index $i$ with $t = 1,\dots,n$, and the population model becomes
+`\lettrine[lines=3]{I}{n}`{=latex} Chapters 1–7 every observation was a *unit* (a worker, a firm, a household) sampled at a single point in time. We indexed observations by $i = 1,\dots,n$. Time series are different: there is one unit --- a country, a firm, a household, a market --- and we observe it repeatedly across discrete periods. We replace the index $i$ with $t = 1,\dots,n$, and the population model becomes
 
 $$
 y_t = \beta_0 + \beta_1 x_{1t} + \beta_2 x_{2t} + \cdots + \beta_k x_{kt} + u_t.

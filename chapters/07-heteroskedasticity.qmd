@@ -22,7 +22,7 @@ A regression of hourly wages on years of education delivers a clean point estima
 
 ## 7.1 Introduction
 
-In Chapter 4 we listed the multiple linear regression assumptions MLR.1--MLR.6 that justify OLS. The **homoskedasticity** assumption MLR.5 states that the error variance is the same for every value of the regressors:
+`\lettrine[lines=3]{I}{n}`{=latex} Chapter 4 we listed the multiple linear regression assumptions MLR.1--MLR.6 that justify OLS. The **homoskedasticity** assumption MLR.5 states that the error variance is the same for every value of the regressors:
 
 $$
 \operatorname{Var}(u_i \mid \mathbf{x}_i) \;=\; \sigma^2, \qquad i = 1, \dots, n.

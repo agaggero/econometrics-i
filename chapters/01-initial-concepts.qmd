@@ -22,7 +22,7 @@ This single question drives the rest of the course. A correlation between school
 
 ## 1.1 What is econometrics?
 
-Econometrics is the application of statistical methods to economic data, with the goal of giving empirical content to economic relationships [@wooldridge2020; @cgl2017]. Its main objective is the **estimation of relationships between variables**. Typical pairs of interest in this course include:
+`\lettrine[lines=3]{E}{conometrics}`{=latex} is the application of statistical methods to economic data, with the goal of giving empirical content to economic relationships [@wooldridge2020; @cgl2017]. Its main objective is the **estimation of relationships between variables**. Typical pairs of interest in this course include:
 
 - Education $\Rightarrow$ Salary
 - Class attendance $\Rightarrow$ Final grade

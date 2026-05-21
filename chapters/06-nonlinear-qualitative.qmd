@@ -22,7 +22,7 @@ A linear regression of wages on experience implicitly assumes that the tenth yea
 
 ## 6.1 Nonlinear relationships in a linear model
 
-Many economic relationships are not straight lines. Diminishing returns to experience, inverted-U Kuznets curves, U-shaped average cost curves, and constant-elasticity demand curves all violate strict linearity in the variables. Fortunately the workhorse model of this course requires linearity only in the **parameters**. A specification such as
+`\lettrine[lines=3]{M}{any}`{=latex} economic relationships are not straight lines. Diminishing returns to experience, inverted-U Kuznets curves, U-shaped average cost curves, and constant-elasticity demand curves all violate strict linearity in the variables. Fortunately the workhorse model of this course requires linearity only in the **parameters**. A specification such as
 $$
 y = \beta_0 + \beta_1 x + \beta_2 x^2 + u
 $$

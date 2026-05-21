@@ -23,7 +23,7 @@ The labour-economics literature [@wooldridge2020] has long documented a "beauty 
 
 ## 2.1 Introduction
 
-Regression analysis investigates the relationship between two or more variables. In this chapter we focus on the **simple linear regression** model (SLR), which relates a dependent variable $y$ to a single independent variable $x$:
+`\lettrine[lines=3]{R}{egression}`{=latex} analysis investigates the relationship between two or more variables. In this chapter we focus on the **simple linear regression** model (SLR), which relates a dependent variable $y$ to a single independent variable $x$:
 
 $$
 y = \beta_0 + \beta_1 x + u.

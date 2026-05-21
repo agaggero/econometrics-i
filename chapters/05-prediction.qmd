@@ -22,7 +22,7 @@ The answer turns on a distinction that is easy to miss: the first recruiter is r
 
 ## 5.1 Causality vs. prediction
 
-Up to Chapter 4 we have used regression for one purpose: to estimate the *ceteris paribus* effect of $x$ on $y$. The coefficient $\beta_j$ was the object of interest, and the entire apparatus of Gauss--Markov assumptions, $t$-tests, and $F$-tests was in the service of getting $\hat\beta_j$ right --- unbiased, efficient, and with valid standard errors.
+`\lettrine[lines=3]{U}{p}`{=latex} to Chapter 4 we have used regression for one purpose: to estimate the *ceteris paribus* effect of $x$ on $y$. The coefficient $\beta_j$ was the object of interest, and the entire apparatus of Gauss--Markov assumptions, $t$-tests, and $F$-tests was in the service of getting $\hat\beta_j$ right --- unbiased, efficient, and with valid standard errors.
 
 Econometrics also has a second, equally legitimate use: **prediction**. Here we do not particularly care about the value of any individual $\beta_j$; we care about the accuracy of the fitted value $\hat y_0$ for a new observation.
 

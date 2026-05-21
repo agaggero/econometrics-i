@@ -22,7 +22,7 @@ We met IQ briefly in Chapter 3 as a candidate proxy for unobserved ability. Now 
 
 ## 4.1 From estimation to inference
 
-Chapters 2 and 3 produced **point estimates** $\hat{\beta}_j$ from a sample. These numbers are random: a different sample would have given different numbers. The question of inference is whether what we learned from *our* sample lets us say anything credible about the unknown population parameter $\beta_j$.
+`\lettrine[lines=3]{C}{hapters}`{=latex} 2 and 3 produced **point estimates** $\hat{\beta}_j$ from a sample. These numbers are random: a different sample would have given different numbers. The question of inference is whether what we learned from *our* sample lets us say anything credible about the unknown population parameter $\beta_j$.
 
 Statistical inference provides two complementary tools [@wooldridge2020]:
 

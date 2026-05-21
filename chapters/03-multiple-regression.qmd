@@ -22,7 +22,7 @@ Chapter 1 showed that the raw wage gap by education in `wage1` confounds schooli
 
 ## 3.1 Motivation: the problem with simple regression
 
-The simple linear regression model
+`\lettrine[lines=3]{T}{he}`{=latex} simple linear regression model
 $$
 y = \beta_0 + \beta_1 x + u
 $$
