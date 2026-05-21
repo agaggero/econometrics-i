@@ -20,7 +20,7 @@ By the end of this chapter the reader should be able to:
 
 We met IQ briefly in Chapter 3 as a candidate proxy for unobserved ability. Now we have to decide, formally, whether the coefficients we estimate are far enough from zero to take seriously. The tools of the chapter --- $t$-statistics, $p$-values, confidence intervals and the $F$-test --- are designed precisely for that decision.
 
-## 4.1 From estimation to inference
+## From estimation to inference
 
 `\lettrine[lines=3]{C}{hapters}`{=latex} 2 and 3 produced **point estimates** $\hat{\beta}_j$ from a sample. These numbers are random: a different sample would have given different numbers. The question of inference is whether what we learned from *our* sample lets us say anything credible about the unknown population parameter $\beta_j$.
 
@@ -31,7 +31,7 @@ Statistical inference provides two complementary tools [@wooldridge2020]:
 
 Both tools rely on knowing the *sampling distribution* of $\hat{\beta}_j$. Under Gauss--Markov we only know its mean ($\beta_j$) and variance; we do not know its shape. To say anything precise about probabilities --- "the chance of observing a coefficient this far from zero, if the truth is zero, is less than 1%" --- we need a distribution. That is what the next assumption gives us.
 
-## 4.2 The Classical Linear Model (CLM) assumptions
+## The Classical Linear Model (CLM) assumptions
 
 Gauss--Markov gave us unbiasedness, a closed-form variance and the BLUE property of OLS. For exact (finite-sample) inference we need one more assumption.
 
@@ -63,7 +63,7 @@ This is an *exact* statement that holds in any sample size, not just asymptotica
 MLR.6 is a statement about the *error* $u$, conditional on the regressors. It is *not* the claim that the marginal distribution of $y$ is normal. Wages, for example, are right-skewed; that does not by itself contradict MLR.6, because the systematic component $\beta_0 + \beta_1 x_1 + \cdots$ can absorb the skewness.
 :::
 
-## 4.3 The $t$-distribution
+## The $t$-distribution
 
 If $\sigma^2$ were known we could standardise $\hat{\beta}_j$ directly:
 
@@ -81,7 +81,7 @@ The $t$-distribution is symmetric, bell-shaped and centred at zero, but it has *
 
 That is the whole reason this chapter uses $t$ critical values like $2.013$ (for $\alpha = 0.05$, $df = 45$) rather than the familiar $1.96$ from the normal table.
 
-## 4.4 Confidence intervals
+## Confidence intervals
 
 ::: {.callout-note}
 ## Definition: confidence interval for $\beta_j$
@@ -105,7 +105,7 @@ A 95% confidence interval is a statement about the **procedure**, not about the 
 
 Confidence intervals and two-sided hypothesis tests are two sides of the same coin: a $(1-\alpha)$ CI for $\beta_j$ contains zero **if and only if** the two-sided $t$-test of $H_0:\beta_j = 0$ at level $\alpha$ fails to reject.
 
-## 4.5 Hypothesis testing in four steps
+## Hypothesis testing in four steps
 
 We test claims about a single coefficient $\beta_j$ using a standard four-step procedure. Let $c$ be the hypothesised value (usually $c = 0$, "the variable does not matter").
 
@@ -144,7 +144,7 @@ If $H_0$ is rejected we say the coefficient is *statistically significant* at th
 A coefficient can be statistically significant (small $p$-value) but economically tiny, and a coefficient can be economically large but statistically insignificant in a small sample. Always report both: the *magnitude* of $\hat{\beta}_j$ in the units of the problem, and the precision with which it is estimated. A 1% return to one extra year of education and a 10% return are both "significantly different from zero" in a large sample, but only one of them is policy-relevant.
 :::
 
-## 4.6 The $p$-value
+## The $p$-value
 
 The four-step procedure forces us to fix $\alpha$ in advance. A more informative alternative is to report the $p$-value.
 
@@ -177,7 +177,7 @@ R reports two-sided $p$-values by default in the `Pr(>|t|)` column of `summary(l
 Statistical significance tells us that $\hat{\beta}_j$ is unlikely to have arisen by sampling noise if the truth were zero. It says **nothing** about whether $x_j$ *causes* $y$. Causal interpretation still requires the population assumption $\mathbb{E}[u \mid \mathbf{X}] = 0$ (MLR.4) --- no $p$-value, however small, can rescue a regression contaminated by omitted-variable bias or by reverse causality.
 :::
 
-## 4.7 The $F$-test for joint significance
+## The $F$-test for joint significance
 
 Single-coefficient $t$-tests are the right tool when we have one parameter in mind. Often, though, the question is whether **several** coefficients are jointly zero:
 
@@ -187,7 +187,7 @@ Single-coefficient $t$-tests are the right tool when we have one parameter in mi
 
 These are joint hypotheses, and they require a joint test. Doing $q$ separate $t$-tests does **not** answer the joint question, because the size of the combined procedure is no longer $\alpha$, and because two coefficients can be jointly informative even when each is individually borderline.
 
-### 4.7.1 Restricted vs unrestricted models
+### Restricted vs unrestricted models
 
 Let the **unrestricted** model be the regression with $k$ slopes,
 
@@ -229,7 +229,7 @@ $$
 
 The two formulas are algebraically identical whenever $y$ is the same in both regressions; they differ only when the restricted model has a different dependent variable (e.g. an $F$-test of $\log y$ versus $y$, which the formula above does **not** cover).
 
-### 4.7.2 The overall $F$-test
+### The overall $F$-test
 
 A special case is the test that **every** slope is zero,
 
@@ -245,7 +245,7 @@ $$
 
 which is exactly the number R prints at the bottom line of `summary(lm(...))` under "F-statistic", together with its $p$-value.
 
-### 4.7.3 $F$ versus $t$: a useful identity
+### $F$ versus $t$: a useful identity
 
 For a *single* restriction ($q = 1$), the $F$-statistic equals the square of the corresponding $t$-statistic:
 
@@ -255,7 +255,7 @@ $$
 
 The $t$- and $F$-tests deliver identical conclusions in this case; the $F$ machinery is only strictly necessary when $q \geq 2$.
 
-## 4.8 Lab: Inference in R
+## Lab: Inference in R
 
 We work with `wage2` from the **wooldridge** package: a cross-section of $n = 935$ U.S. men in the 1980 National Longitudinal Survey, with information on monthly earnings (`wage`), weekly hours (`hours`), an IQ test score (`IQ`), years of schooling (`educ`), years of work experience (`exper`), tenure with the current employer (`tenure`) and age. The goal is to translate the four-step inference machinery into R commands and then check that the built-in shortcuts give the same answers.
 

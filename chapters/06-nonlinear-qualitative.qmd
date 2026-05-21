@@ -20,7 +20,7 @@ By the end of this chapter the reader should be able to:
 
 A linear regression of wages on experience implicitly assumes that the tenth year of experience pays exactly the same as the first. Common sense and decades of labour-economics evidence both suggest otherwise: the wage--experience profile is *concave*. Likewise, a single coefficient on `female` captures an average gap in intercepts but says nothing about whether the *return* to experience differs by gender. The tools in this chapter --- quadratics, logs, interactions, dummies, and the Chow test --- let us answer questions of this form without abandoning OLS.
 
-## 6.1 Nonlinear relationships in a linear model
+## Nonlinear relationships in a linear model
 
 `\lettrine[lines=3]{M}{any}`{=latex} economic relationships are not straight lines. Diminishing returns to experience, inverted-U Kuznets curves, U-shaped average cost curves, and constant-elasticity demand curves all violate strict linearity in the variables. Fortunately the workhorse model of this course requires linearity only in the **parameters**. A specification such as
 $$
@@ -39,7 +39,7 @@ Two practical takeaways follow.
 A regression model is *linear in parameters* if it can be written as $y = \beta_0 + \beta_1 g_1(\mathbf{x}) + \cdots + \beta_k g_k(\mathbf{x}) + u$, where $g_1,\dots,g_k$ are known functions of the regressors. The functions $g_j$ may be highly nonlinear (squares, logs, interactions, ratios), but each enters multiplied by a single unknown coefficient. OLS estimation, the Gauss--Markov theorem, and the inference machinery of Chapters 3--5 all apply.
 :::
 
-## 6.2 Quadratic models
+## Quadratic models
 
 The simplest way to capture a nonlinear shape is to add the square of a regressor:
 $$
@@ -86,7 +86,7 @@ The formula $x^* = -\beta_1/(2\beta_2)$ always exists, but the turning point is 
 
 In R, the squared term is included with `I(exper^2)`. The wrapper `I()` (for "as is") protects the `^` operator from being parsed by R's formula language as the symbol for crossed effects.
 
-## 6.3 Logarithmic transformations
+## Logarithmic transformations
 
 Taking the natural logarithm of one or both sides of the regression equation changes how the coefficient is interpreted. The four cases in common use are summarised below, with $\beta_1$ denoting the slope on the (possibly transformed) regressor.
 
@@ -115,7 +115,7 @@ then an additional year of age is associated with approximately a $0.02 \times 1
 The natural log is undefined at zero and negative numbers. Before logging a variable, check that all observations are strictly positive. For variables that are zero for many units (e.g. hours worked, donations, exports), $\ln$ is not an option without further care --- alternatives include $\ln(1 + x)$, the inverse hyperbolic sine, or a two-part model. We stick to strictly positive variables in this chapter.
 :::
 
-## 6.4 Interaction terms
+## Interaction terms
 
 An **interaction term** lets one regressor modify the partial effect of another. With two continuous regressors $x_1$ and $x_2$,
 $$
@@ -135,7 +135,7 @@ The same idea applies when one of the two variables is a dummy (Section 6.5.2) a
 A model that contains $x_1 \cdot x_2$ but omits $x_1$ and/or $x_2$ on their own forces the partial effect of the omitted main effect through zero. Unless you have a very strong theoretical reason to do so, *always include the main effects whenever you include their interaction.* In R, the syntax `x1*x2` automatically expands to `x1 + x2 + x1:x2`, which prevents this mistake.
 :::
 
-## 6.5 Dummy variables
+## Dummy variables
 
 Qualitative information --- gender, marital status, region, sector, season --- enters a regression via **dummy variables** (also called *indicator* or *binary* variables). A dummy takes the value 1 when the characteristic of interest is present and 0 otherwise:
 $$
@@ -150,7 +150,7 @@ Three kinds of qualitative variable are typical in applied work.
 
 For an ordinal variable you have a choice. You can treat it as continuous and include a single slope coefficient (assuming the effect of moving from 2 to 3 equals the effect of moving from 4 to 5), or you can convert it into a set of dummies and let the data tell you whether the steps are equally spaced. The lab in §6.8 does both for comparison.
 
-### 6.5.1 The dummy variable trap
+### The dummy variable trap
 
 If a qualitative variable has $J$ categories, you can include at most $J - 1$ dummies in a regression that also contains an intercept. Including all $J$ would create perfect multicollinearity with the constant: the $J$ dummies sum to a column of ones, which is exactly the intercept column. OLS cannot then identify the individual coefficients --- the matrix $X^{\prime}X$ is singular --- and any software will either drop one of the dummies automatically or refuse to compute. The dropped category is called the **reference** or **base** category, and every other dummy coefficient is interpreted as a *difference relative to it*.
 
@@ -168,7 +168,7 @@ $$
 The dummy shifts the regression line *down* by 5 euros for women but leaves the *slope* on age unchanged. Men and women are predicted to gain the same 2 euros per year of age; only the intercept differs.
 :::
 
-### 6.5.2 Slope dummies (interactions with a dummy)
+### Slope dummies (interactions with a dummy)
 
 To allow *both* the intercept and the slope to differ between groups, interact the dummy with a continuous regressor. The model
 $$
@@ -190,7 +190,7 @@ $$
 The intercept dummy ($-5$) and the slope dummy ($-1$) capture two different forms of inequality: women start out lower *and* gain less from ageing.
 :::
 
-## 6.6 The Chow test
+## The Chow test
 
 Suppose we suspect that the *entire* regression --- intercept and every slope --- differs between two groups (men vs women, before vs after a reform, treated vs control regions). The **Chow test** is the $F$-test of the joint null
 $$
@@ -212,7 +212,7 @@ Algebraically, the same test can be run by pooling the data, fully interacting t
 The Chow $F$-statistic is derived under the assumption that the error variance is the same in the two groups. If the two subsamples have very different residual variances, the test can be misleading. Modern practice is either to use a heteroskedasticity-robust version (e.g. a Wald test with robust standard errors on the interacted regression) or to log the dependent variable, both of which we revisit in Chapter 7.
 :::
 
-## 6.7 Lab A: nonlinear forms in the `beauty` dataset (Tutorial 6)
+## Lab A: nonlinear forms in the `beauty` dataset (Tutorial 6)
 
 The `beauty` dataset from the **wooldridge** package contains hourly wages, years of education and experience, an ordinal `looks` score from 1 to 5, and dummies for gender and marital status. We use it to fit a linear baseline, add a quadratic term in experience, log the wage, and finally introduce an interaction between looks and education.
 
@@ -299,7 +299,7 @@ sapply(c(12, 16), me)
 
 A simple $t$-test on the interaction coefficient (the line `looks:educ` in the summary table) tells us whether the premium genuinely varies with education or is statistically indistinguishable from a constant.
 
-## 6.8 Lab B: dummies and the Chow test (Tutorial 7)
+## Lab B: dummies and the Chow test (Tutorial 7)
 
 This lab returns to the gender question that opened the chapter. We use the same `beauty` data, build categorical dummies from the ordinal `looks` variable, and finish with a manual Chow test.
 

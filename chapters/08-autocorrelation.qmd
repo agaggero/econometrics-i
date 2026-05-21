@@ -20,7 +20,7 @@ By the end of this chapter the reader should be able to:
 
 A marketing analyst regresses quarterly sales on advertising and a time trend, gets a $t$-statistic of 7.4 on advertising, and proudly reports a "highly significant" effect. The board approves a 30 % budget increase. Next year sales disappoint. What went wrong? Very often, the answer is **autocorrelation**: the errors at quarter $t$ are correlated with the errors at $t-1$, OLS standard errors are too small, and the $t$-statistic is overstated. This chapter is about diagnosing and fixing that problem.
 
-## 8.1 From cross-section to time series
+## From cross-section to time series
 
 `\lettrine[lines=3]{I}{n}`{=latex} Chapters 1–7 every observation was a *unit* (a worker, a firm, a household) sampled at a single point in time. We indexed observations by $i = 1,\dots,n$. Time series are different: there is one unit --- a country, a firm, a household, a market --- and we observe it repeatedly across discrete periods. We replace the index $i$ with $t = 1,\dots,n$, and the population model becomes
 
@@ -51,9 +51,9 @@ In a time series there is no random sampling across units. Successive errors $u_
 
 The contrast with Chapter 7 is useful. Heteroskedasticity is a cross-sectional pathology in which $\operatorname{Var}(u_i)$ varies with the regressors but errors across units are independent. Autocorrelation is its time-series cousin: the off-diagonal elements of the error variance--covariance matrix are nonzero, while the diagonal may or may not stay constant. Both leave OLS unbiased but invalidate its standard errors.
 
-## 8.2 Definition, AR(1) structure, and consequences
+## Definition, AR(1) structure, and consequences
 
-### 8.2.1 Definition
+### Definition
 
 ::: {.callout-note}
 ## Definition (Autocorrelation)
@@ -82,7 +82,7 @@ with at least one off-diagonal element $\gamma_k = \operatorname{Cov}(u_t, u_{t-
 
 Under the classical cross-sectional assumptions, the off-diagonal entries are all zero and $\operatorname{Var}(\mathbf{u}) = \sigma^2 \mathbf{I}_n$. Autocorrelation drops that simplification.
 
-### 8.2.2 The AR(1) workhorse
+### The AR(1) workhorse
 
 Almost all of the chapter --- and the vast majority of applied undergraduate work --- uses one specific model for serial dependence: the **first-order autoregressive** process, or AR(1):
 
@@ -108,7 +108,7 @@ So $\gamma_k = \rho^k \sigma^2$ with $\sigma^2 = \sigma_\varepsilon^2/(1-\rho^2)
 
 Higher-order processes (AR(2), AR($p$), ARMA, …) exist and are studied in Econometrics II; for our purposes AR(1) is enough to fix ideas and to motivate the diagnostics and corrections that follow.
 
-### 8.2.3 Consequences for OLS
+### Consequences for OLS
 
 What does autocorrelation do to the OLS estimator $\hat{\beta}$?
 
@@ -130,11 +130,11 @@ then $y_{t-1}$ depends on $u_{t-1}$, and $u_{t-1}$ is correlated with $u_t$ thro
 
 The intuition for why positive autocorrelation makes OLS standard errors too small is worth dwelling on: if successive errors carry information about one another, then $n$ correlated observations contain less independent information than $n$ uncorrelated ones. The effective sample size is smaller than the nominal $n$, but the OLS formula treats every observation as a fresh draw. The reported precision is therefore exaggerated.
 
-## 8.3 Detection
+## Detection
 
 We have two complementary toolkits: *graphical* (quick, intuitive) and *analytical* (formal hypothesis tests). The recommended workflow is to look first and test second.
 
-### 8.3.1 Graphical methods
+### Graphical methods
 
 **Time plot of residuals.** Plot $\hat u_t$ against $t$. If the errors are uncorrelated, the residuals should scatter randomly around zero --- no visible pattern, no clustering, no obvious cycles. If you see **long runs** of same-sign residuals (many consecutive positives, then many consecutive negatives), that is the visual signature of $\rho>0$. If residuals alternate in a sawtooth pattern, that is $\rho<0$.
 
@@ -142,7 +142,7 @@ We have two complementary toolkits: *graphical* (quick, intuitive) and *analytic
 
 The three benchmark shapes are: a featureless cloud ($\rho\approx 0$), an upward-sloping line ($\rho>0$), and a downward-sloping line ($\rho<0$). In the lab below you will see all three.
 
-### 8.3.2 The Durbin–Watson test
+### The Durbin–Watson test
 
 The Durbin–Watson (DW) statistic is the workhorse formal test for first-order autocorrelation.
 
@@ -200,7 +200,7 @@ $$DW = \frac{18.796}{22.844} \approx 0.823.$$
 For $n=10$ and $k=1$ regressors, the 5 % bounds are $d_L = 0.879$, $d_U = 1.320$. Since $DW < d_L$, we reject $H_0$ and conclude that the residuals exhibit **positive** first-order autocorrelation. (We will use this same example to illustrate Cochrane–Orcutt in §8.4.)
 :::
 
-### 8.3.3 When DW fails: Durbin's $h$-test
+### When DW fails: Durbin's $h$-test
 
 The DW test rests on two assumptions that often go unstated: the error process is AR(1), and the regression does **not** include a lagged dependent variable. The lagged-dependent-variable case --- discussed in the warning box of §8.2.3 --- is precisely the case in which OLS becomes inconsistent, and where DW itself becomes badly biased toward 2 (toward the null of no autocorrelation), which is the worst possible behaviour for a diagnostic test.
 
@@ -230,11 +230,11 @@ At the 5 % level the critical value is $z_{0.975}=1.96$. Since $|h|=1.91 < 1.96$
 
 Other tests exist --- the Breusch–Godfrey LM test, which handles higher-order processes; the Ljung–Box portmanteau test on residual autocorrelations --- and are covered in Econometrics II. For this course, DW (or Durbin's $h$ when needed) is the standard tool.
 
-## 8.4 Correction: from GLS to Cochrane–Orcutt
+## Correction: from GLS to Cochrane–Orcutt
 
 If OLS is inefficient under AR(1), what should we do? The answer is **Generalised Least Squares (GLS)**: transform the model so that the transformed errors are white noise, then run OLS on the transformed model.
 
-### 8.4.1 The GLS quasi-difference
+### The GLS quasi-difference
 
 Start from the model and its $\rho$-multiplied lag:
 
@@ -294,7 +294,7 @@ $$
 
 Running OLS on $(\mathbf{Y}^*, \mathbf{X}^*)$ delivers $\hat{\beta}_{\text{GLS}}$.
 
-### 8.4.2 The Cochrane–Orcutt iterative procedure
+### The Cochrane–Orcutt iterative procedure
 
 The catch: $\rho$ is unknown. We need to estimate it. The **Cochrane–Orcutt (CO)** procedure is the simplest feasible-GLS algorithm: alternate between estimating $\rho$ from residuals and re-estimating $\beta$ on the quasi-differenced data, until $\rho$ stabilises.
 
@@ -332,7 +332,7 @@ The slope barely moves --- OLS was unbiased to start with --- but the new DW com
 
 The takeaway: in the AR(1) world, OLS gives you the right *point* estimates (on average) but the wrong *uncertainty*; Cochrane–Orcutt fixes the uncertainty without much changing the point.
 
-## 8.5 Lab: Autocorrelation in R
+## Lab: Autocorrelation in R
 
 The lab follows the workflow of Tutorial 9 (`autocorr_demo.xlsx`): regress quarterly sales on advertising and a time trend, diagnose autocorrelation visually and with Durbin–Watson, and correct it with Cochrane–Orcutt. To keep the chapter self-contained and reproducible without the external `.xlsx`, we generate a synthetic version of the tutorial dataset that has the same structure (sales depending on advertising and a trend, with AR(1) errors of known $\rho$). The interactive tutorial `LEARNR/08_autocorrelation.Rmd` uses an identical simulation.
 
@@ -357,7 +357,7 @@ head(autocorr_demo)
 
 The true data-generating process has slope `0.8` on advertising, a time-trend coefficient `0.3`, and AR(1) errors with $\rho = 0.7$ (strong positive autocorrelation). A real analyst would not know any of these numbers.
 
-### 8.5.1 OLS and a first look at the residuals
+### OLS and a first look at the residuals
 
 ```{r ch08-ols}
 fit <- lm(sales ~ advertising + time, data = autocorr_demo)
@@ -376,7 +376,7 @@ abline(h = 0, lty = 2)
 
 The residuals trace out long, smooth excursions above and below zero: this is exactly the picture of $\rho>0$. Compare with what an uncorrelated residual series should look like (a featureless cloud around zero) and the difference is obvious.
 
-### 8.5.2 The lag plot
+### The lag plot
 
 ```{r ch08-lag-plot}
 #| fig-cap: "Lag plot of OLS residuals: $\\hat u_t$ versus $\\hat u_{t-1}$. The upward tilt confirms positive first-order autocorrelation."
@@ -401,7 +401,7 @@ rho_hat
 
 The residual autocorrelation $\hat\rho$ should be close to the true $0.7$, and $2(1-\hat\rho)$ gives a quick approximation to what the Durbin–Watson statistic will report.
 
-### 8.5.3 Durbin–Watson
+### Durbin–Watson
 
 ```{r ch08-dw}
 dwtest(fit)
@@ -409,7 +409,7 @@ dwtest(fit)
 
 The DW statistic is well below 2, the $p$-value is tiny, and we reject $H_0: \rho = 0$ in favour of positive autocorrelation. (Compare DW to $2(1-\hat\rho)$ from the previous chunk: the two should agree to within rounding.)
 
-### 8.5.4 Cochrane–Orcutt correction
+### Cochrane–Orcutt correction
 
 ```{r ch08-co}
 co <- cochrane.orcutt(fit)
@@ -434,7 +434,7 @@ Two observations are typical of this kind of correction:
 2. The **standard errors** in the CO output are larger than the OLS standard errors. The OLS $t$-statistics were inflated; the corrected ones are more honest. Hypotheses that were "highly significant" under OLS may become merely significant, or even fail to reject.
 3. The DW statistic on the transformed residuals is close to 2, indicating that the AR(1) correction has done its job. (If it has not --- if DW is still far from 2 --- the residuals may follow a richer process such as AR(2), which is beyond the scope of this chapter.)
 
-### 8.5.5 A manual one-step Cochrane–Orcutt
+### A manual one-step Cochrane–Orcutt
 
 To see exactly what `cochrane.orcutt()` does internally, here is a one-step version of the algorithm:
 

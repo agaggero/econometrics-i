@@ -20,7 +20,7 @@ By the end of this chapter the reader should be able to:
 
 A regression of hourly wages on years of education delivers a clean point estimate of the return to schooling. But the spread of wages around the regression line is **not** the same for high-school dropouts and for PhDs: graduates fan out across a much wider range of salaries. The textbook OLS formula for the standard error of $\hat\beta_1$ assumes the spread is constant. When it is not, the reported standard errors are wrong, the $t$-statistics are wrong, and the policy recommendations built on them are wrong. This chapter shows how to diagnose the problem and how to fix it.
 
-## 7.1 Introduction
+## Introduction
 
 `\lettrine[lines=3]{I}{n}`{=latex} Chapter 4 we listed the multiple linear regression assumptions MLR.1--MLR.6 that justify OLS. The **homoskedasticity** assumption MLR.5 states that the error variance is the same for every value of the regressors:
 
@@ -62,7 +62,7 @@ Heteroskedasticity is the **rule rather than the exception** in cross-sectional 
 These are precisely the data structures applied economists work with, which is why robust standard errors have become the default in modern practice.
 :::
 
-## 7.2 Consequences of heteroskedasticity
+## Consequences of heteroskedasticity
 
 Assume MLR.1--MLR.4 hold and only MLR.5 fails. Three statements summarise the consequences:
 
@@ -84,17 +84,17 @@ The "bread" $(\mathbf{X}'\mathbf{X})^{-1}$ surrounds the "meat" $\mathbf{X}'\Ome
 
 In short: heteroskedasticity is a *standard-error* problem, not a *coefficient* problem. The fix is to repair the inferential machinery (robust SEs) or, if we can afford the extra modelling, to use an estimator that exploits the variance structure (WLS).
 
-## 7.3 Detection of heteroskedasticity
+## Detection of heteroskedasticity
 
 We describe one informal diagnostic and two formal tests. The informal plot is cheap and should be the first thing you look at; the formal tests give a structured decision rule.
 
-### 7.3.1 Informal detection: residual plots
+### Informal detection: residual plots
 
 After estimating the OLS model, compute the residuals $\hat u_i = y_i - \hat y_i$ and plot them against either the fitted values $\hat y_i$ or against each regressor $x_j$. The visual fingerprint of heteroskedasticity is a **fan** or **wedge** shape: the vertical spread of the residual cloud widens (or narrows) as you move along the horizontal axis. Squared residuals $\hat u_i^2$ against $x_j$ make the pattern even more obvious because the sign of the residual no longer matters.
 
 If the cloud looks like a horizontal band of roughly constant thickness, homoskedasticity is plausible. If it spreads out --- as it typically does when $x_j$ is income, firm size, or any other "scale" variable --- heteroskedasticity is the natural suspect.
 
-### 7.3.2 The Goldfeld--Quandt test
+### The Goldfeld--Quandt test
 
 The Goldfeld--Quandt (GQ) test is appropriate when you suspect heteroskedasticity is driven by **one specific** regressor. The idea is simple: split the sample into a low-$x$ group and a high-$x$ group and compare the residual variances of the two subsamples.
 
@@ -113,7 +113,7 @@ $$
 
 The GQ test was historically popular in small samples and is intuitive, but it requires the analyst to *commit* to a single sorting variable and to a sample-splitting rule. The Breusch--Pagan test, introduced next, drops both of these commitments.
 
-### 7.3.3 The Breusch--Pagan test
+### The Breusch--Pagan test
 
 The Breusch--Pagan (BP) test detects heteroskedasticity related to **any** of the regressors. It is the workhorse formal test in modern applied work.
 
@@ -144,11 +144,11 @@ The intuition is direct: if the squared residual is *systematically* explained b
 Do not run GQ, then BP, then White, and report whichever rejects "first". This is a form of $p$-hacking. Pick one test based on what you suspect *before* looking at the residuals, or --- following modern practice --- skip the testing step altogether and report robust standard errors by default.
 :::
 
-## 7.4 Remedies
+## Remedies
 
 There are two main remedies, suited to two different states of knowledge.
 
-### 7.4.1 Weighted Least Squares (WLS)
+### Weighted Least Squares (WLS)
 
 Suppose we know (or are willing to model) the form of the conditional variance:
 
@@ -184,7 +184,7 @@ Each observation receives weight $w_i = 1 / h(\mathbf{x}_i)$. Observations with 
 WLS is only BLUE under *correctly specified* weights. With wrong weights it can be *less* efficient than OLS, and its standard errors are again incorrect. If you have only a vague idea of the variance structure, prefer robust standard errors.
 :::
 
-### 7.4.2 Heteroskedasticity-robust standard errors
+### Heteroskedasticity-robust standard errors
 
 When the form of $h(\mathbf{x})$ is unknown, the safer remedy is to keep OLS for the point estimates and to compute **heteroskedasticity-consistent (HC) standard errors**, also called **robust** or **White standard errors** after [@white1980].
 
@@ -206,7 +206,7 @@ Robust SEs leave the point estimates $\hat\beta_j$ unchanged. Only the variance 
 - **In doubt** $\Rightarrow$ report robust SEs. In modern applied econometrics, robust SEs have become the default rather than a backup. Many journals expect them by construction.
 :::
 
-## 7.5 Lab: Heteroskedasticity in R
+## Lab: Heteroskedasticity in R
 
 This lab follows Tutorial 8 of the course. The dataset `het_data.xlsx` is a custom cross-section of household-level consumption and income, divided into three income groups (`group` $\in \{1, 2, 3\}$, low to high). We fit a simple Engel-curve-style regression of consumption on income, detect heteroskedasticity, and then fix it twice --- first by WLS and then by robust standard errors.
 

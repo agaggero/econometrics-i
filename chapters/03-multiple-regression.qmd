@@ -20,7 +20,7 @@ By the end of this chapter the reader should be able to:
 
 Chapter 1 showed that the raw wage gap by education in `wage1` confounds schooling with experience, tenure, and demographics; Chapter 2 fitted a simple regression of `wage` on `educ` and explicitly warned that the OLS slope could not be read causally. The multiple linear regression (MLR) model is the workhorse we use to take that warning seriously: by including controls, we move from raw conditional means to **partial effects** --- the change in $y$ associated with a one-unit change in one regressor, *holding all the others fixed*.
 
-## 3.1 Motivation: the problem with simple regression
+## Motivation: the problem with simple regression
 
 `\lettrine[lines=3]{T}{he}`{=latex} simple linear regression model
 $$
@@ -49,7 +49,7 @@ Two cautions deserve emphasis from the outset:
 - Adding controls is **not** the same as identifying causality. We will see in §3.9 that the bias only disappears for the variables whose relevant confounders we actually include.
 - Including too many or highly correlated regressors can *inflate variance* without removing bias. There is no free lunch.
 
-## 3.2 The MLR model
+## The MLR model
 
 ::: {.callout-note}
 ## Definition: the multiple linear regression model
@@ -77,7 +77,7 @@ says: across two workers with the *same* age, experience, and tenure but differi
 A widespread error is to read $\hat\beta_1$ as "the effect on $y$ of changing $x_1$" without the conditioning clause. In MLR every slope is conditional on the other regressors in the equation. If you change which controls you include, you change what $\beta_1$ means --- not just its numerical value.
 :::
 
-## 3.3 Matrix notation
+## Matrix notation
 
 For a sample of $n$ observations it is far cleaner to stack the model into matrix form. Define
 $$
@@ -99,7 +99,7 @@ $$
 
 The first column of $\mathbf{X}$ is a column of ones, which absorbs the intercept $\beta_0$. From now on we will write proofs in matrix form; this is the standard notation in [@wooldridge2020] and pays dividends from Chapter 4 onwards.
 
-## 3.4 OLS in matrix form
+## OLS in matrix form
 
 The ordinary least squares (OLS) estimator chooses $\hat{\beta}$ to minimise the sum of squared residuals
 $$
@@ -126,7 +126,7 @@ The fitted values are $\hat{\mathbf{y}} = \mathbf{X}\hat{\beta}$ and the residua
 As in Chapter 1, $u$ is a *population, unobservable* object. The residual $\hat u_i = y_i - \hat y_i$ is the *sample* counterpart, produced *after* estimation. We will use $\hat{\mathbf{u}}$ to compute variance estimates and $R^2$, but we will never observe $\mathbf{u}$ itself.
 :::
 
-## 3.5 Gauss--Markov assumptions for MLR
+## Gauss--Markov assumptions for MLR
 
 We now collect the assumptions under which OLS has its classical properties. They generalise the simple-regression assumptions of Chapter 2.
 
@@ -179,7 +179,7 @@ Assumptions MLR.1--MLR.4 deliver **unbiasedness** (next section); add MLR.5 and 
 MLR.3 only rules out *exact* linear dependence among the regressors. Two highly correlated --- but not perfectly correlated --- variables (say `educ` and `IQ`) still satisfy MLR.3. They will inflate the variance of OLS estimates (the $R_j^2$ in the variance formula will be close to 1), but they do not bias them and they do not break the model.
 :::
 
-## 3.6 Unbiasedness of OLS (matrix form)
+## Unbiasedness of OLS (matrix form)
 
 ::: {.callout-note}
 ## Theorem: unbiasedness of OLS
@@ -204,7 +204,7 @@ By the law of iterated expectations, $\mathbb{E}[\hat{\beta}] = \beta$ unconditi
 
 The proof makes the role of MLR.4 transparent: any correlation between $\mathbf{X}$ and $\mathbf{u}$ enters the bias term $(\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}' \mathbb{E}[\mathbf{u}\mid\mathbf{X}]$. This is the matrix-form home of the omitted-variable bias formula we derive in §3.9.
 
-## 3.7 Variance of OLS estimators (matrix form)
+## Variance of OLS estimators (matrix form)
 
 ::: {.callout-note}
 ## Theorem: variance of OLS
@@ -240,7 +240,7 @@ $$
 $$
 which is unbiased under MLR.1--MLR.5. The denominator $n - k - 1$ is the degrees of freedom: sample size minus number of estimated coefficients (including the intercept).
 
-## 3.8 $R^2$ and adjusted $R^2$
+## $R^2$ and adjusted $R^2$
 
 As in simple regression, total variation in $y$ decomposes into explained and residual variation,
 $$
@@ -264,7 +264,7 @@ Unlike $R^2$, $\bar R^2$ can *fall* when an irrelevant variable is added --- the
 A high $R^2$ does not mean the model is causal, nor that it predicts well out of sample. A regression of `educ` on `educ_squared` and `educ_cubed` will have an $R^2$ of essentially 1 and no economic content. Treat $R^2$ as a goodness-of-fit *summary*, not as a model-selection criterion. The AIC and BIC, introduced in Chapter 5, are better suited for the latter task.
 :::
 
-## 3.9 Omitted variable bias
+## Omitted variable bias
 
 Omitted variable bias (OVB) is the formal name for the problem motivated in §3.1. Suppose the **true** population model is
 $$
@@ -335,7 +335,7 @@ This is the canonical "ability bias" of the labour-economics literature. A naive
 Adding a variable whose true coefficient is zero does **not** create bias (the OVB formula gives bias $= 0 \cdot \tilde\delta_1 = 0$). But it inflates the variance of every other slope through the $R_j^2$ term in §3.7. The empirical rule of thumb is: include controls justified by theory or by your identification strategy, not regressors that happen to "look significant".
 :::
 
-## 3.10 Lab: Multiple Regression in R
+## Lab: Multiple Regression in R
 
 We work with `wage1` again --- a cross-section of 526 U.S. workers from May 1976, shipped with the `wooldridge` package. The lab has three parts: nested wage regressions, an OVB demonstration, and a perfect-multicollinearity warning.
 

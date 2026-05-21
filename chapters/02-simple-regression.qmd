@@ -21,7 +21,7 @@ By the end of this chapter the reader should be able to:
 
 The labour-economics literature [@wooldridge2020] has long documented a "beauty premium" --- workers who are rated as more physically attractive tend to earn higher wages. Whether the premium is causal (looks open doors) or driven by confounding (looks correlate with health, social skills, family background) is a separate question. Before we can even *ask* that question we need a tool that turns a cloud of points into a single number. That tool is the **simple linear regression** of wage on a measure of looks. In §2.11 we estimate exactly this regression on Hamermesh's `beauty` dataset.
 
-## 2.1 Introduction
+## Introduction
 
 `\lettrine[lines=3]{R}{egression}`{=latex} analysis investigates the relationship between two or more variables. In this chapter we focus on the **simple linear regression** model (SLR), which relates a dependent variable $y$ to a single independent variable $x$:
 
@@ -49,7 +49,7 @@ Each of the following is a simple linear regression of one outcome on one regres
 - Blood pressure on age: $\widehat{\text{BP}} = 100 + 0.5\cdot\text{Age}$.
 :::
 
-## 2.2 The population regression function
+## The population regression function
 
 The model $y = \beta_0 + \beta_1 x + u$ involves the unobservable disturbance $u$. To turn it into a statement we can in principle test, we impose a key assumption on the conditional mean of the error:
 
@@ -79,7 +79,7 @@ The fundamental problem with the PRF is that it **cannot be observed**. It is a 
 The PRF $\mathbb{E}[y \mid x] = \beta_0 + \beta_1 x$ is a property of the *population*: $\beta_0$ and $\beta_1$ are fixed but unknown. The SRF $\hat y = \hat\beta_0 + \hat\beta_1 x$ (next section) is a *random* line whose intercept and slope change from sample to sample. Confusing the two is the single most common conceptual error in this course.
 :::
 
-## 2.3 The sample regression function
+## The sample regression function
 
 Let $\{(x_i, y_i) : i = 1, 2, \ldots, n\}$ be a random sample of size $n$ from the population. For each observation $i$ the population model is
 
@@ -95,7 +95,7 @@ $$
 
 where $\hat\beta_0$ and $\hat\beta_1$ are **estimates** of the population parameters $\beta_0$ and $\beta_1$, obtained from the data. The hats remind us at every step that these are sample-based quantities. Two different samples from the same population would, in general, yield two different SRFs.
 
-## 2.4 Ordinary Least Squares (OLS)
+## Ordinary Least Squares (OLS)
 
 Given a scatter plot of $(x_i, y_i)$ data points, infinitely many lines could be drawn through the cloud, each with a different $(\hat\beta_0, \hat\beta_1)$. How do we choose the "best" line?
 
@@ -167,7 +167,7 @@ The formal definition of the residual $\hat u_i$ follows in §2.4.1; the algebra
 *Data: 41 estudiantes de Econometría I, curso 2024--25, UGR (recogidos por el autor).*
 :::
 
-### 2.4.1 The residual
+### The residual
 
 For each observation $i$, the **residual** is the vertical distance between the observed $y_i$ and the value predicted by the SRF:
 
@@ -177,7 +177,7 @@ $$
 
 The residual is the sample analogue of the population disturbance $u_i$. It is observable as soon as we have estimates $(\hat\beta_0, \hat\beta_1)$; the disturbance $u_i$ is *never* observable.
 
-### 2.4.2 The sum of squared residuals
+### The sum of squared residuals
 
 We want the line that makes the residuals as small as possible in some overall sense. Squaring (rather than taking absolute values) penalises large deviations more heavily and yields a smooth, differentiable objective. The OLS method chooses $\hat\beta_0$ and $\hat\beta_1$ to minimise the **sum of squared residuals**:
 
@@ -185,7 +185,7 @@ $$
 \mathrm{SSR} = \sum_{i=1}^{n} \hat u_i^{\,2} = \sum_{i=1}^{n}\bigl(y_i - \hat\beta_0 - \hat\beta_1 x_i\bigr)^2.
 $$
 
-### 2.4.3 Derivation of the OLS estimators
+### Derivation of the OLS estimators
 
 Differentiating $\mathrm{SSR}$ with respect to $\hat\beta_0$ and $\hat\beta_1$ and setting the derivatives to zero gives the *first-order conditions* (FOCs):
 
@@ -234,7 +234,7 @@ The OLS solution has three mechanical properties that follow directly from the f
 
 These are **algebraic** properties of OLS: they hold by construction in *every* sample, no matter how the data were generated. They are not statistical properties about the population.
 
-## 2.5 The Gauss--Markov assumptions for SLR
+## The Gauss--Markov assumptions for SLR
 
 OLS gives a number from any sample, but for that number to have desirable *statistical* properties --- unbiasedness, minimum variance, sensible standard errors --- we need assumptions about the population. The five **Gauss--Markov assumptions for SLR** are the bedrock of the rest of this chapter.
 
@@ -268,7 +268,7 @@ $$
 SLR.1--SLR.3 are technical conditions that make the estimator well-defined. SLR.4 is what makes the estimator **unbiased** and lets us interpret $\beta_1$ as a *ceteris paribus* effect; it is also the assumption hardest to verify and most often violated in practice. SLR.5 is needed only for the **variance** formula and the Gauss--Markov efficiency result, not for unbiasedness.
 :::
 
-## 2.6 Unbiasedness of OLS
+## Unbiasedness of OLS
 
 Under SLR.1--SLR.4 the OLS estimators are unbiased. We sketch the argument for $\hat\beta_1$; the algebra for $\hat\beta_0$ is similar.
 
@@ -292,7 +292,7 @@ By the law of iterated expectations, $\mathbb{E}[\hat\beta_1] = \beta_1$. The sa
 The statement $\mathbb{E}[\hat\beta_1] = \beta_1$ does *not* say "our number is exactly right". It says that if we drew many independent samples from the same population and computed $\hat\beta_1$ in each one, the long-run average of all those estimates would equal $\beta_1$. Any individual estimate may be above or below the truth.
 :::
 
-## 2.7 Sampling variances of OLS estimators
+## Sampling variances of OLS estimators
 
 How precise are the OLS estimates? Under SLR.1--SLR.5, conditioning on the regressors:
 
@@ -312,7 +312,7 @@ Three drivers of the precision of $\hat\beta_1$ stand out:
 
 These three drivers reappear, in similar form, in every regression model in the rest of the book.
 
-## 2.8 The Gauss--Markov theorem
+## The Gauss--Markov theorem
 
 The single most important "why use OLS?" result is the **Gauss--Markov theorem**.
 
@@ -332,7 +332,7 @@ with equality only when every $d_i = 0$, i.e. when $\tilde\beta_1 = \hat\beta_1$
 The Gauss--Markov theorem does **not** say that OLS is the best estimator in some absolute sense. It says: among *linear, unbiased* estimators, OLS has minimum variance. There may well be *biased* estimators (ridge, LASSO) or *nonlinear* estimators (quantile regression) with lower mean squared error in particular settings.
 :::
 
-## 2.9 Estimation of $\sigma^2$
+## Estimation of $\sigma^2$
 
 The error variance $\sigma^2$ enters the variance formulas above, but it is itself unknown --- we never observe the population errors $u_i$, only the residuals $\hat u_i$. The natural sample-based estimator is
 
@@ -350,7 +350,7 @@ $$
 
 The standard error is the workhorse of inference in Chapter 4 --- everything we will say about confidence intervals and $t$-tests is built on top of it.
 
-## 2.10 Goodness of fit: $R^2$
+## Goodness of fit: $R^2$
 
 Two regressions can have the same slope estimate and yet very different fits, depending on how much of the variation in $y$ the regressor accounts for. To measure fit, decompose the total variation in $y$ as
 
@@ -376,7 +376,7 @@ $R^2$ is the fraction of the sample variation in $y$ that is "explained" by $x$.
 In labour, health, and education economics, $R^2$ values of 5--15 % are completely normal: individual outcomes depend on many things we never measure. A small $R^2$ does *not* by itself invalidate the slope estimate --- $\hat\beta_1$ can still be unbiased, statistically significant, and policy-relevant. Conversely, a high $R^2$ does *not* validate a model in which SLR.4 fails: $\hat\beta_1$ can be precisely estimated and badly biased.
 :::
 
-## 2.11 Lab: simple linear regression in R
+## Lab: simple linear regression in R
 
 In this lab we estimate two simple regressions using the **wooldridge** package: the wage--looks regression from §2.4 ("Lab A") and the birth-weight--smoking regression ("Lab B"). Both are short cross-sections, both have small $R^2$, and both illustrate the warning above.
 
@@ -387,7 +387,7 @@ data("beauty")
 data("bwght")
 ```
 
-### 2.11.1 Lab A --- Wages and physical appearance (`beauty`)
+### Lab A --- Wages and physical appearance (`beauty`)
 
 The `beauty` dataset, used by Hammermesh and Biddle (1994) and reproduced in @wooldridge2020, contains hourly wages and a five-point rating of physical appearance for a sample of U.S. workers. The variable `looks` takes integer values from 1 ("homely") to 5 ("strikingly beautiful"), with 3 being "average". The variable `wage` is the hourly wage in U.S. dollars.
 
@@ -466,7 +466,7 @@ c(R2_manual = 1 - SSR / SST, R2_lm = summary(fit_beauty)$r.squared)
 
 The two pairs of numbers match (up to numerical rounding), as the theory predicts.
 
-### 2.11.2 Lab B --- Birth weight and smoking (`bwght`)
+### Lab B --- Birth weight and smoking (`bwght`)
 
 The `bwght` dataset records the birth weight (in ounces) and average daily cigarette consumption of the mother during pregnancy, among other variables, for a sample of U.S. births. Maternal smoking is one of the most studied determinants of birth weight, with clear medical plausibility for a *negative* effect.
 

@@ -20,7 +20,7 @@ By the end of this chapter the reader should be able to:
 
 This single question drives the rest of the course. A correlation between schooling and wages is easy to compute; turning that correlation into a credible statement about the causal return to education is hard. The tools we develop --- the linear model, the assumptions on the error term, randomisation, controls, and tests --- are all in the service of answering questions of this form.
 
-## 1.1 What is econometrics?
+## What is econometrics?
 
 `\lettrine[lines=3]{E}{conometrics}`{=latex} is the application of statistical methods to economic data, with the goal of giving empirical content to economic relationships [@wooldridge2020; @cgl2017]. Its main objective is the **estimation of relationships between variables**. Typical pairs of interest in this course include:
 
@@ -38,7 +38,7 @@ In general we write $X \Rightarrow Y$, where $X$ is the **independent variable**
 
 These "how much" questions are everywhere. A city council wonders how much violent crime will fall if it spends an additional million euros on policing. A local business must estimate the relationship between advertising spending and sales. A university must estimate how much enrolment will drop if it raises tuition by 300 euros. None of these questions can be answered by economic theory alone --- they require data, a statistical model, and the discipline of econometrics.
 
-## 1.2 The econometric model
+## The econometric model
 
 An econometric model has **two** components:
 
@@ -71,7 +71,7 @@ The functional form is itself a hypothesis about how the variables are connected
 The error $u$ is a *population* object: it represents every determinant of $Y$ that is not in the model, and it is **unobservable**. The residual $\hat u_i = y_i - \hat y_i$ is its *sample* counterpart, obtained after estimating the model. Following Wooldridge's notation, we keep $u$ and $\hat u$ strictly separate throughout the book.
 :::
 
-## 1.3 Uses of econometrics
+## Uses of econometrics
 
 We use econometric models for three broad purposes:
 
@@ -81,11 +81,11 @@ We use econometric models for three broad purposes:
 
 The third use --- credible causal inference from observational data --- is at the heart of the so-called **Credibility Revolution** in empirical economics. Hypothesis testing and prediction are sometimes called "Led Zeppelin" econometrics; causal inference is the modern emphasis [@cgl2017].
 
-## 1.4 Correlation does not imply causation
+## Correlation does not imply causation
 
 One of the most important lessons of the course --- repeated, if necessary, on every page --- is that **correlation does not imply causation**. The fact that two variables move together does not establish that one of them causes the other. Two reasons stand out: *selection bias* and *omitted variables*.
 
-### 1.4.1 Selection bias
+### Selection bias
 
 ::: {.callout-note}
 ## Example: ventilators and deaths
@@ -99,7 +99,7 @@ The observed correlation between ventilator use and death is *positive*; the tru
 
 The lesson is general: whenever treatment is not assigned randomly, simple comparisons of outcomes between treated and untreated units confound the causal effect of the treatment with the characteristics of the units that selected into it.
 
-### 1.4.2 Omitted variable bias
+### Omitted variable bias
 
 ::: {.callout-note}
 ## Example: ice cream and drowning
@@ -111,7 +111,7 @@ Of course not. The **omitted variable** is *temperature*. Hot weather causes bot
 
 Whenever a variable that influences $Y$ is also correlated with $X$ but is left out of the model, the estimate of the effect of $X$ will be biased. We will study this formally as **omitted variable bias** in Chapter 3.
 
-### 1.4.3 Why randomisation solves the problem
+### Why randomisation solves the problem
 
 If we **randomly** assign individuals to a treatment group and a control group, then on average the two groups will have the same observable and unobservable characteristics *before* the treatment is administered. Any difference in outcomes *after* the treatment can therefore be attributed to the treatment itself.
 
@@ -131,9 +131,9 @@ Randomisation forces the second term on the right to zero on average. That is wh
 A study finds that students at private schools score higher on standardised tests. Can we conclude that private schools *cause* better performance? No --- students at private schools tend to come from wealthier families with more resources at home, more educated parents, and so on. The "treatment" (attending a private school) is not randomly assigned, so the comparison is contaminated by selection.
 :::
 
-## 1.5 Types of experiments
+## Types of experiments
 
-### 1.5.1 Randomised experiments
+### Randomised experiments
 
 A randomised experiment assigns participants to two or more groups by lot: one group receives the intervention (the **treatment**); another serves as the **control** and receives a placebo or standard treatment. Randomisation ensures the groups are comparable, eliminates selection bias on average, and permits causal inference.
 
@@ -142,7 +142,7 @@ Genuine randomised experiments are common in clinical medicine but **rare in eco
 - *Ethical constraints* --- we cannot randomly assign individuals to poverty, unemployment, or disease.
 - *Cost* --- well-designed field experiments are expensive and slow to run.
 
-### 1.5.2 Quasi-experiments
+### Quasi-experiments
 
 In a **quasi-experiment**, assignment to treatment is not random but is based on some **observable** criterion --- often a threshold, an eligibility rule, or a policy change that hits some units but not others.
 
@@ -152,11 +152,11 @@ In a **quasi-experiment**, assignment to treatment is not random but is based on
 During the COVID-19 pandemic, lockdown (the treatment) was assigned by the *Junta de Andalucía* only to municipalities with infection rates above 1{,}000 per 100{,}000 inhabitants. Municipalities just above and just below the threshold are arguably similar, so comparing their outcomes can approximate a random experiment. We return to this kind of design later in the book.
 :::
 
-### 1.5.3 Nonexperimental (observational) data
+### Nonexperimental (observational) data
 
 With **nonexperimental** data, all variables are collected simultaneously and the values are neither fixed nor repeatable by the researcher. Survey data are the classic example --- the U.S. Current Population Survey (CPS) and the Spanish *Encuesta de Población Activa* (EPA) both belong to this category. Most of the datasets we use in this book are nonexperimental, which is precisely why the issue of selection bias matters so much.
 
-## 1.6 Types of economic data
+## Types of economic data
 
 Economic data come in several "flavours". Aggregation can be *micro* (households, firms, workers) or *macro* (regions, countries); variables can be *quantitative* (numbers) or *qualitative* (categories, e.g. employed / unemployed). For econometrics what matters most is the **structure** of the dataset: do we have one snapshot, a sequence over time, or repeated observations of the same units?
 
@@ -186,7 +186,7 @@ Independent cross-sections drawn in different periods and stacked together. Diff
 
 The data structure matters because it determines the questions we can answer. With a cross-section we can study how outcomes vary *across* units at one moment in time. With a time-series we can study how a single quantity evolves *over* time. With a panel we can do both --- and, crucially, we can control for time-invariant unobserved characteristics of each unit, an important tool in modern causal inference. With a pooled cross-section we can study how a relationship changes between periods (for example, before and after a policy reform).
 
-## 1.7 Lab: Exploring economic data in R
+## Lab: Exploring economic data in R
 
 The rest of the chapter is a guided exploration of the `wage1` dataset shipped with the **wooldridge** R package. The dataset is a *cross-section* of 526 U.S. workers observed in May 1976, with information on hourly wages, education, experience, tenure, and a handful of demographic variables. (The mechanics of installing R and the `wooldridge` package are covered in Appendix A; the first formal regression with `lm()` is the opening lab of Chapter 2.)
 

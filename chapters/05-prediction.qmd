@@ -20,7 +20,7 @@ By the end of this chapter the reader should be able to:
 
 The answer turns on a distinction that is easy to miss: the first recruiter is reporting uncertainty about the *average* wage of people like this candidate, while the second is reporting uncertainty about *this* candidate's actual wage. The same fitted model produces both numbers --- they answer different questions. This chapter is about that distinction and the related question of how to choose between competing models in the first place.
 
-## 5.1 Causality vs. prediction
+## Causality vs. prediction
 
 `\lettrine[lines=3]{U}{p}`{=latex} to Chapter 4 we have used regression for one purpose: to estimate the *ceteris paribus* effect of $x$ on $y$. The coefficient $\beta_j$ was the object of interest, and the entire apparatus of Gauss--Markov assumptions, $t$-tests, and $F$-tests was in the service of getting $\hat\beta_j$ right --- unbiased, efficient, and with valid standard errors.
 
@@ -39,7 +39,7 @@ A model can be excellent for one purpose and poor for the other. A predictor of 
 A high $R^2$ tells you that the fitted values track $y$ well. It does **not** tell you that any individual coefficient measures a causal effect. The identification strategy --- random assignment, an instrument, a natural experiment, or a credible argument that $\mathbb{E}[u \mid x] = 0$ --- is what licences causal interpretation. Fit-based selection criteria such as adjusted $R^2$, AIC, and BIC are tools for prediction; they cannot rescue a model that suffers from omitted-variable bias.
 :::
 
-## 5.2 Point prediction
+## Point prediction
 
 Consider, for clarity, the simple linear regression (SLR) model:
 
@@ -79,11 +79,11 @@ So $\hat y_0$ is an **unbiased predictor** of $y_0$. In fact, under SLR.1--SLR.5
 The same number $\hat y_0$ is *both* the point prediction of the individual outcome $y_0$ *and* the estimate of the conditional mean $\mathbb{E}[y \mid x_0]$. The two interpretations of $\hat y_0$ are numerically identical, but they have different *uncertainty*. The next section makes this concrete.
 :::
 
-## 5.3 Forecast variance and prediction intervals
+## Forecast variance and prediction intervals
 
 A point estimate is rarely enough. We need an interval that quantifies uncertainty --- and there are two distinct uncertainties to quantify.
 
-### 5.3.1 Confidence interval for the conditional mean $\mathbb{E}[y \mid x_0]$
+### Confidence interval for the conditional mean $\mathbb{E}[y \mid x_0]$
 
 The conditional mean $\mathbb{E}[y \mid x_0] = \beta_0 + \beta_1 x_0$ is a fixed (non-random) population quantity. Its estimator is $\hat y_0 = \hat\beta_0 + \hat\beta_1 x_0$, which is random because the OLS estimates are random. Its variance is
 
@@ -99,7 +99,7 @@ $$
 
 with $t_c$ the appropriate critical value of a $t$-distribution with $n - k - 1$ degrees of freedom.
 
-### 5.3.2 Prediction interval for an individual outcome $y_0$
+### Prediction interval for an individual outcome $y_0$
 
 The new outcome $y_0 = \beta_0 + \beta_1 x_0 + u_0$ is random because *both* the OLS estimates *and* the new error $u_0$ are random. Assuming $u_0$ is independent of the sample,
 
@@ -132,7 +132,7 @@ A few more observations on the formulas:
 - Both variances grow as $x_0$ moves *away from the sample mean* $\bar x$. Predictions are most precise near the centre of the data; predicting at the edges (or extrapolating beyond them) is dangerous.
 - Both variances shrink as $\mathrm{SST}_x$ grows. More spread-out regressors give more leverage to pin down the slope, which in turn tightens prediction.
 
-### 5.3.3 Worked numerical example
+### Worked numerical example
 
 Suppose we have estimated the SLR
 
@@ -162,7 +162,7 @@ $$
 
 The CI is roughly $\pm 1.20$ wide around the point prediction; the PI is roughly $\pm 4.14$ wide. The ratio is set by the relative size of the "$1$" against $1/n + (x_0 - \bar x)^2/\mathrm{SST}_x = 0.09$. Here the new-draw uncertainty dwarfs the parameter uncertainty by an order of magnitude.
 
-## 5.4 Prediction in MLR
+## Prediction in MLR
 
 Real wage models include more than one regressor. Nothing essential changes in the construction of $\hat y_0$ and the two intervals --- the formulas just become vector--matrix versions of the SLR formulas.
 
@@ -180,11 +180,11 @@ Dropping the "$1$" gives the variance of $\hat y_0$ as an estimator of $\mathbb{
 The prediction formulas assume that $(y_0, x_0)$ comes from the *same population* as the sample. If $x_0$ is far outside the range of the regressors actually observed --- predicting wages for someone with 30 years of education and 80 years of experience, say --- both intervals can be technically computed, but neither is trustworthy. There is no information in the sample about what happens at those values. Stay inside the support of the data.
 :::
 
-## 5.5 Model selection: $R^2$, adjusted $R^2$, AIC, BIC
+## Model selection: $R^2$, adjusted $R^2$, AIC, BIC
 
 Suppose we have several candidate regression models for the same outcome. How do we choose? Four criteria are commonly used.
 
-### 5.5.1 $R^2$ and the garbage-variable problem
+### $R^2$ and the garbage-variable problem
 
 The coefficient of determination
 
@@ -196,7 +196,7 @@ measures the proportion of the variation of $y$ explained by the model. It has o
 
 If we picked our model by maximising $R^2$, we would include every regressor we could lay our hands on --- including dozens of irrelevant ones. The model would fit the sample beautifully and predict horribly out of sample. This is the classic *overfitting* problem. The slides illustrate it by simulating a model with two genuine regressors $X_1, X_2$ and then adding 196 "garbage" variables of pure noise: $R^2$ climbs steadily towards 1 as garbage piles up, even though none of the new variables has any predictive content.
 
-### 5.5.2 Adjusted $R^2$
+### Adjusted $R^2$
 
 A simple fix is to penalise complexity. The **adjusted $R^2$** is
 
@@ -212,7 +212,7 @@ A few useful facts:
 - Unlike $R^2$, $\bar R^2$ can *decrease* when an irrelevant regressor is added --- and in the garbage simulation, it does.
 - $\bar R^2$ can in principle be negative if the model is so poor that $\hat\sigma^2$ exceeds the sample variance of $y$.
 
-### 5.5.3 AIC and BIC
+### AIC and BIC
 
 The **Akaike Information Criterion** and the **Bayesian Information Criterion** combine model fit (a log-likelihood) with a complexity penalty:
 
@@ -234,11 +234,11 @@ $$
 If two models use different dependent variables (e.g.\ `wage` and `log(wage)`), or are estimated on different sub-samples, their AIC and BIC are *not* comparable --- the log-likelihoods are on different scales. The same warning applies to $R^2$ and $\bar R^2$.
 :::
 
-### 5.5.4 Nested $F$-test
+### Nested $F$-test
 
 When one model is nested inside another --- the smaller model is obtained by setting some coefficients of the larger model to zero --- the **$F$-test of joint restrictions** (Chapter 4) is the formal test of "are these extra regressors jointly informative?". In R, `anova(small, big)` does it. The test answers a different question from AIC/BIC: it asks whether the data *reject* the smaller model in favour of the larger, not which model is "best" by some predictive criterion.
 
-### 5.5.5 Putting it together
+### Putting it together
 
 In practice we report all four criteria side by side. They usually agree on the broad ranking; when they disagree, the disagreement is informative:
 
@@ -247,7 +247,7 @@ In practice we report all four criteria side by side. They usually agree on the 
 
 And, always: model selection criteria choose the model that *fits* best on the criterion at hand. They do not choose the model that *identifies a causal parameter* best. That choice belongs to the identification strategy.
 
-## 5.6 Lab: Prediction and Model Selection in R
+## Lab: Prediction and Model Selection in R
 
 We work with the `wage1` dataset of 526 U.S.\ workers (Chapter 1). The goal is to (i) fit a sequence of nested wage models, (ii) compare them using $\bar R^2$, AIC, BIC, and an $F$-test, (iii) produce point predictions and the two interval estimates for a specific worker, and (iv) visualise the difference between the confidence band for the mean and the prediction band for an individual.
 
