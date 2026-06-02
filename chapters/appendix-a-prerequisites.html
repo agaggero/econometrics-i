@@ -366,55 +366,55 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Preface</span></span></a>
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/01-initial-concepts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Initial Concepts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Initial Concepts</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/02-simple-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Simple Linear Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Simple Linear Regression Model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03-multiple-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Multiple Linear Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Multiple Linear Regression Model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/04-inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/05-prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Prediction and Model Selection</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Prediction and Model Selection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/06-nonlinear-qualitative.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Nonlinear Relationships and Qualitative Information</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Nonlinear Relationships and Qualitative Information</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/07-heteroskedasticity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heteroskedasticity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Heteroskedasticity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/08-autocorrelation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Autocorrelation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Autocorrelation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -523,9 +523,6 @@ window.Quarto = {
 </header>
 
 
-<blockquote class="blockquote">
-<p><em>Status: ported 2026-05-18. Includes content translated back from the Spanish edition per gap report G8.</em></p>
-</blockquote>
 <p>This appendix collects the mathematical and statistical tools used throughout the book. It is meant as a reference: skim it once at the start of the course, then come back to individual sections as they are invoked. The level is deliberately operational — enough to follow the derivations in the main text without turning the book into a course on real analysis <span class="citation" data-cites="wooldridge2020">(<a href="#ref-wooldridge2020" role="doc-biblioref">Wooldridge 2020</a>)</span>. We adopt Wooldridge’s notation everywhere: population parameters are <span class="math inline">\(\beta_0, \beta_1, \dots\)</span>; the population error is <span class="math inline">\(u\)</span>; the sample residual is <span class="math inline">\(\hat u\)</span>; fitted values are <span class="math inline">\(\hat y\)</span>; and the usual sums of squares are SST, SSE, and SSR.</p>
 <section id="learning-outcomes" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="learning-outcomes">Learning outcomes</h2>
@@ -551,17 +548,19 @@ f(x) = \beta_0 + \beta_1 x,
 </section>
 <section id="exponents-and-powers" class="level3" data-number="A.1.2">
 <h3 data-number="A.1.2" class="anchored" data-anchor-id="exponents-and-powers"><span class="header-section-number">A.1.2</span> Exponents and powers</h3>
-<p>For any real number <span class="math inline">\(a\)</span> and any integers <span class="math inline">\(m, n\)</span>:</p>
+<p>Every interest-rate, growth, and elasticity calculation you will do this term either <em>is</em> an exponentiation or hides one inside <code>exp(...)</code> or <code>log(...)</code>, so the rules below are the algebraic plumbing of the entire course.</p>
+<p>For any <span class="math inline">\(a &gt; 0\)</span> and any real numbers <span class="math inline">\(m, n\)</span>:</p>
 <p><span class="math display">\[
 a^{m} \cdot a^{n} = a^{m+n},\qquad
 \frac{a^{m}}{a^{n}} = a^{m-n},\qquad
 (a^{m})^{n} = a^{mn},\qquad
-a^{0} = 1\ (a\neq 0).
+a^{0} = 1.
 \]</span></p>
-<p>The square-root function is the exponent <span class="math inline">\(1/2\)</span>: <span class="math inline">\(\sqrt{a} = a^{1/2}\)</span> for <span class="math inline">\(a\geq 0\)</span>.</p>
+<p>(The same identities hold for any real <span class="math inline">\(a \neq 0\)</span> when <span class="math inline">\(m, n\)</span> are integers; the <span class="math inline">\(a &gt; 0\)</span> restriction matters as soon as we allow fractional exponents — for instance, the square root, <span class="math inline">\(\sqrt{a} = a^{1/2}\)</span>, is defined for <span class="math inline">\(a \geq 0\)</span> only.)</p>
 </section>
 <section id="logarithms" class="level3" data-number="A.1.3">
 <h3 data-number="A.1.3" class="anchored" data-anchor-id="logarithms"><span class="header-section-number">A.1.3</span> Logarithms</h3>
+<p>Logging a regressor lets us read coefficients as percentage effects, which is half of what makes regressions communicable to non-economists — so the log rules below are not optional.</p>
 <p>The natural logarithm <span class="math inline">\(\ln(x)\)</span> is the inverse of the exponential function <span class="math inline">\(e^{x}\)</span>: <span class="math inline">\(\ln(e^{x}) = x\)</span> and <span class="math inline">\(e^{\ln(x)} = x\)</span> for <span class="math inline">\(x &gt; 0\)</span>. The properties we use over and over are:</p>
 <p><span class="math display">\[
 \ln(xy) = \ln(x) + \ln(y),\quad
@@ -592,6 +591,7 @@ a^{0} = 1\ (a\neq 0).
 </section>
 <section id="summations" class="level3" data-number="A.1.4">
 <h3 data-number="A.1.4" class="anchored" data-anchor-id="summations"><span class="header-section-number">A.1.4</span> Summations</h3>
+<p>Every estimator in the book is a sum — <span class="math inline">\(\hat\beta_1\)</span>, <span class="math inline">\(\bar y\)</span>, <span class="math inline">\(\mathrm{SST}_x\)</span> — so once you can manipulate <span class="math inline">\(\sum\)</span> cleanly, you can manipulate OLS.</p>
 <p>The summation symbol <span class="math inline">\(\sum\)</span> is shorthand we cannot live without:</p>
 <p><span class="math display">\[
 \sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n.
@@ -621,10 +621,22 @@ a^{0} = 1\ (a\neq 0).
 <h2 data-number="A.2" class="anchored" data-anchor-id="a.2-calculus-refresher"><span class="header-section-number">A.2</span> A.2 Calculus refresher</h2>
 <section id="derivatives-of-a-single-variable" class="level3" data-number="A.2.1">
 <h3 data-number="A.2.1" class="anchored" data-anchor-id="derivatives-of-a-single-variable"><span class="header-section-number">A.2.1</span> Derivatives of a single variable</h3>
+<p>OLS is the algorithm that sets the derivative of the sum of squared residuals to zero; you cannot derive a single coefficient in this book without this tool.</p>
 <p>The derivative <span class="math inline">\(f'(x)\)</span> measures the instantaneous rate of change of <span class="math inline">\(f\)</span> at <span class="math inline">\(x\)</span>:</p>
 <p><span class="math display">\[
 f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}.
 \]</span></p>
+<p>Visually, the derivative is the <strong>slope of the tangent</strong> to the graph of <span class="math inline">\(f\)</span> at <span class="math inline">\(x\)</span>. The fraction inside the limit is the slope of a <strong>secant</strong> between two nearby points <span class="math inline">\(x\)</span> and <span class="math inline">\(x + h\)</span>; as <span class="math inline">\(h\)</span> shrinks, the secant pivots towards the tangent.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="appendix-a-prerequisites_files/figure-html/appA-derivative-fig-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Derivative as the slope of the tangent. The dashed blue line is a secant from <span class="math inline">\(x=2\)</span> to <span class="math inline">\(x=3.5\)</span>; as the second point slides toward <span class="math inline">\(x=2\)</span>, the secant rotates onto the solid red tangent line. Its slope, <span class="math inline">\(f'(2)=4\)</span>, is the derivative of <span class="math inline">\(f(x)=x^2\)</span> at <span class="math inline">\(x=2\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <p>The rules we need are short:</p>
 <p><span class="math display">\[
 \frac{d}{dx}(c) = 0,\quad
@@ -643,6 +655,7 @@ f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}.
 </section>
 <section id="partial-derivatives" class="level3" data-number="A.2.2">
 <h3 data-number="A.2.2" class="anchored" data-anchor-id="partial-derivatives"><span class="header-section-number">A.2.2</span> Partial derivatives</h3>
+<p>This <em>is</em> the ceteris paribus interpretation of <span class="math inline">\(\beta_j\)</span>: the partial derivative of <span class="math inline">\(\mathbb{E}[y \mid \mathbf{x}]\)</span> with respect to <span class="math inline">\(x_j\)</span>, holding the other regressors fixed. Everything Chapter 3 says about “controlling for” is the operator below in disguise.</p>
 <p>For a function of several variables <span class="math inline">\(f(x_1, x_2, \dots, x_k)\)</span>, the partial derivative with respect to <span class="math inline">\(x_j\)</span> holds the other variables fixed:</p>
 <p><span class="math display">\[
 \frac{\partial f}{\partial x_j} = \lim_{h\to 0} \frac{f(\dots, x_j + h, \dots) - f(\dots, x_j, \dots)}{h}.
@@ -655,7 +668,8 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u,
 </section>
 <section id="first-order-conditions-and-optimisation" class="level3" data-number="A.2.3">
 <h3 data-number="A.2.3" class="anchored" data-anchor-id="first-order-conditions-and-optimisation"><span class="header-section-number">A.2.3</span> First-order conditions and optimisation</h3>
-<p>To find an interior minimum or maximum of a smooth function, set the derivative to zero (the <strong>first-order condition</strong>, FOC) and check the second-order condition (FOC for a minimum requires <span class="math inline">\(f''(x^\star) &gt; 0\)</span>). For functions of several variables, set every partial derivative to zero simultaneously.</p>
+<p>Both OLS (minimising SSR) and Maximum Likelihood (maximising the log-likelihood) reduce to the same three-step recipe: take derivatives, set them to zero, solve.</p>
+<p>To find an interior minimum or maximum of a smooth function, set the derivative to zero (the <strong>first-order condition</strong>, FOC) and check the second-order condition. A <em>sufficient</em> condition for a strict local minimum is <span class="math inline">\(f''(x^\star) &gt; 0\)</span>; the <em>necessary</em> second-order condition is the weaker <span class="math inline">\(f''(x^\star) \geq 0\)</span>. The distinction matters because edge cases like <span class="math inline">\(f(x) = x^4\)</span> have a minimum at <span class="math inline">\(x = 0\)</span> with <span class="math inline">\(f''(0) = 0\)</span>. For functions of several variables, set every partial derivative to zero simultaneously.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -679,17 +693,17 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u,
 <h2 data-number="A.3" class="anchored" data-anchor-id="a.3-probability-refresher"><span class="header-section-number">A.3</span> A.3 Probability refresher</h2>
 <section id="random-variables" class="level3" data-number="A.3.1">
 <h3 data-number="A.3.1" class="anchored" data-anchor-id="random-variables"><span class="header-section-number">A.3.1</span> Random variables</h3>
-<p>A <strong>random variable</strong> <span class="math inline">\(X\)</span> is a numerical summary of the outcome of a random experiment. It is <em>discrete</em> if it can take only a countable number of values (e.g.&nbsp;the number of children in a household), and <em>continuous</em> if it can take any value in an interval (e.g.&nbsp;an hourly wage). Throughout the book we write the (unknown) population mean as <span class="math inline">\(\mu = \mathbb{E}(X)\)</span> and the population variance as <span class="math inline">\(\sigma^{2} = \operatorname{Var}(X)\)</span>.</p>
+<p>A <strong>random variable</strong> <span class="math inline">\(X\)</span> is a numerical summary of the outcome of a random experiment. It is <em>discrete</em> if it can take only a countable number of values (e.g.&nbsp;the number of children in a household), and <em>continuous</em> if it can take any value in an interval (e.g.&nbsp;an hourly wage). Throughout the book we write the (unknown) population mean as <span class="math inline">\(\mu = \mathbb{E}[X]\)</span> and the population variance as <span class="math inline">\(\sigma^{2} = \operatorname{Var}(X)\)</span>.</p>
 </section>
 <section id="expectation" class="level3" data-number="A.3.2">
 <h3 data-number="A.3.2" class="anchored" data-anchor-id="expectation"><span class="header-section-number">A.3.2</span> Expectation</h3>
-<p>The expected value of <span class="math inline">\(X\)</span>, denoted <span class="math inline">\(\mathbb{E}(X)\)</span>, is a population average. The properties below are used on essentially every page of the book.</p>
+<p>The expected value of <span class="math inline">\(X\)</span>, denoted <span class="math inline">\(\mathbb{E}[X]\)</span>, is a population average. The properties below are used on essentially every page of the book.</p>
 <p><span class="math display">\[
-\mathbb{E}(c) = c,\qquad
-\mathbb{E}(aX + b) = a\,\mathbb{E}(X) + b,
+\mathbb{E}[c] = c,\qquad
+\mathbb{E}[aX + b] = a\,\mathbb{E}[X] + b,
 \]</span> <span class="math display">\[
-\mathbb{E}(aX_1 + bX_2) = a\,\mathbb{E}(X_1) + b\,\mathbb{E}(X_2),\qquad
-\mathbb{E}\!\left(\sum_{i=1}^{n} a_i X_i\right) = \sum_{i=1}^{n} a_i\,\mathbb{E}(X_i).
+\mathbb{E}[aX_1 + bX_2] = a\,\mathbb{E}[X_1] + b\,\mathbb{E}[X_2],\qquad
+\mathbb{E}\!\left[\sum_{i=1}^{n} a_i X_i\right] = \sum_{i=1}^{n} a_i\,\mathbb{E}[X_i].
 \]</span></p>
 <p>The last identity is <strong>linearity of expectation</strong>: it holds whether or not the <span class="math inline">\(X_i\)</span> are independent.</p>
 </section>
@@ -697,7 +711,7 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u,
 <h3 data-number="A.3.3" class="anchored" data-anchor-id="variance"><span class="header-section-number">A.3.3</span> Variance</h3>
 <p>The variance measures dispersion around the mean:</p>
 <p><span class="math display">\[
-\operatorname{Var}(X) = \sigma^{2} = \mathbb{E}\!\bigl[(X - \mathbb{E}(X))^{2}\bigr] = \mathbb{E}(X^{2}) - \bigl[\mathbb{E}(X)\bigr]^{2}.
+\operatorname{Var}(X) = \sigma^{2} = \mathbb{E}\!\bigl[(X - \mathbb{E}[X])^{2}\bigr] = \mathbb{E}[X^{2}] - \bigl(\mathbb{E}[X]\bigr)^{2}.
 \]</span></p>
 <p>The standard deviation is <span class="math inline">\(\sigma = \sqrt{\operatorname{Var}(X)}\)</span> and has the same units as <span class="math inline">\(X\)</span>. Useful properties:</p>
 <p><span class="math display">\[
@@ -705,14 +719,24 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u,
 \operatorname{Var}(aX + b) = a^{2}\operatorname{Var}(X).
 \]</span></p>
 <p>Notice that an additive constant <span class="math inline">\(b\)</span> shifts the distribution but does <em>not</em> affect its dispersion. A multiplicative constant <span class="math inline">\(a\)</span> scales the variance by <span class="math inline">\(a^{2}\)</span>, not by <span class="math inline">\(a\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="appendix-a-prerequisites_files/figure-html/appA-variance-fig-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Variance as spread, not location. Both samples have the same mean (50), but the right panel has three times the standard deviation. The variance captures the dispersion around the mean — <em>not</em> where the mean is. Adding a constant <span class="math inline">\(b\)</span> would shift each red line left or right without changing the shape; multiplying by <span class="math inline">\(a\)</span> would stretch each histogram horizontally by <span class="math inline">\(|a|\)</span> and the variance by <span class="math inline">\(a^2\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="covariance-and-correlation" class="level3" data-number="A.3.4">
 <h3 data-number="A.3.4" class="anchored" data-anchor-id="covariance-and-correlation"><span class="header-section-number">A.3.4</span> Covariance and correlation</h3>
 <p>The covariance between two random variables measures the direction of their linear co-movement:</p>
 <p><span class="math display">\[
-\operatorname{Cov}(X, Y) = \mathbb{E}\!\bigl[(X - \mathbb{E}(X))(Y - \mathbb{E}(Y))\bigr] = \mathbb{E}(XY) - \mathbb{E}(X)\,\mathbb{E}(Y).
+\operatorname{Cov}(X, Y) = \mathbb{E}\!\bigl[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])\bigr] = \mathbb{E}[XY] - \mathbb{E}[X]\,\mathbb{E}[Y].
 \]</span></p>
-<p>If either <span class="math inline">\(\mathbb{E}(X) = 0\)</span> or <span class="math inline">\(\mathbb{E}(Y) = 0\)</span>, the second expression collapses to <span class="math inline">\(\operatorname{Cov}(X, Y) = \mathbb{E}(XY)\)</span>. Properties:</p>
+<p>If either <span class="math inline">\(\mathbb{E}[X] = 0\)</span> or <span class="math inline">\(\mathbb{E}[Y] = 0\)</span>, the second expression collapses to <span class="math inline">\(\operatorname{Cov}(X, Y) = \mathbb{E}[XY]\)</span>. Properties:</p>
 <p><span class="math display">\[
 \operatorname{Cov}(aX, bY) = ab\,\operatorname{Cov}(X, Y),\qquad
 \operatorname{Cov}(X, X) = \operatorname{Var}(X).
@@ -736,18 +760,18 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u,
 </section>
 <section id="conditional-expectation" class="level3" data-number="A.3.6">
 <h3 data-number="A.3.6" class="anchored" data-anchor-id="conditional-expectation"><span class="header-section-number">A.3.6</span> Conditional expectation</h3>
-<p>The <strong>conditional expectation</strong> <span class="math inline">\(\mathbb{E}(Y \mid X)\)</span> is the mean of <span class="math inline">\(Y\)</span> given knowledge of <span class="math inline">\(X\)</span>. It is itself a function of <span class="math inline">\(X\)</span>. The properties we use most often are:</p>
+<p>The <strong>conditional expectation</strong> <span class="math inline">\(\mathbb{E}[Y \mid X]\)</span> is the mean of <span class="math inline">\(Y\)</span> given knowledge of <span class="math inline">\(X\)</span>. It is itself a function of <span class="math inline">\(X\)</span>. The properties we use most often are:</p>
 <p><span class="math display">\[
-\mathbb{E}(X \mid X) = X,\qquad
-\mathbb{E}\bigl(g(X) \mid X\bigr) = g(X),
+\mathbb{E}[X \mid X] = X,\qquad
+\mathbb{E}\bigl[g(X) \mid X\bigr] = g(X),
 \]</span> <span class="math display">\[
-\mathbb{E}\bigl(a Y + b(X) \mid X\bigr) = a\,\mathbb{E}(Y \mid X) + b(X).
+\mathbb{E}\bigl[a Y + b(X) \mid X\bigr] = a\,\mathbb{E}[Y \mid X] + b(X).
 \]</span></p>
-<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, <span class="math inline">\(\mathbb{E}(Y \mid X) = \mathbb{E}(Y)\)</span>. Finally, the <strong>Law of Iterated Expectations</strong> (also called the tower property) is the single most useful tool in the book:</p>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, <span class="math inline">\(\mathbb{E}[Y \mid X] = \mathbb{E}[Y]\)</span>. Finally, the <strong>Law of Iterated Expectations</strong> (also called the tower property) is the single most useful tool in the book:</p>
 <p><span class="math display">\[
-\mathbb{E}\bigl[\mathbb{E}(Y \mid X)\bigr] = \mathbb{E}(Y).
+\mathbb{E}\bigl[\mathbb{E}[Y \mid X]\bigr] = \mathbb{E}[Y].
 \]</span></p>
-<p>The zero conditional mean assumption <span class="math inline">\(\mathbb{E}(u \mid x) = 0\)</span> that underpins OLS unbiasedness in §3.2 is a statement about conditional expectation in exactly this sense.</p>
+<p>The zero conditional mean assumption <span class="math inline">\(\mathbb{E}[u \mid x] = 0\)</span> that underpins OLS unbiasedness in §3.2 is a statement about conditional expectation in exactly this sense.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -769,8 +793,8 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u,
 <h3 data-number="A.4.1" class="anchored" data-anchor-id="sampling-distributions"><span class="header-section-number">A.4.1</span> Sampling distributions</h3>
 <p>We will repeatedly contrast a population quantity (e.g.&nbsp;<span class="math inline">\(\beta_1\)</span>) with its estimator computed from a sample (e.g.&nbsp;<span class="math inline">\(\hat \beta_1\)</span>). The estimator is itself a random variable — it varies from sample to sample — and its distribution is called the <strong>sampling distribution</strong>. Two features of the sampling distribution determine the quality of the estimator:</p>
 <ul>
-<li>The <strong>mean</strong>: an estimator <span class="math inline">\(\hat\theta\)</span> is <em>unbiased</em> for <span class="math inline">\(\theta\)</span> if <span class="math inline">\(\mathbb{E}(\hat\theta) = \theta\)</span>.</li>
-<li>The <strong>variance</strong>: among unbiased estimators, the one with the smallest variance is the most <em>efficient</em>. The Gauss-Markov theorem in Chapter 3 makes this comparison formal for OLS.</li>
+<li>The <strong>mean</strong>: an estimator <span class="math inline">\(\hat\theta\)</span> is <em>unbiased</em> for <span class="math inline">\(\theta\)</span> if <span class="math inline">\(\mathbb{E}[\hat\theta] = \theta\)</span>.</li>
+<li>The <strong>variance</strong>: among <em>linear</em> unbiased estimators, the one with the smallest variance is the most <em>efficient</em>. The Gauss-Markov theorem in Chapter 3 makes this comparison formal for OLS. The “linear” qualifier is load-bearing: nonlinear estimators (ridge, LASSO, quantile regression) can sometimes do strictly better in mean-squared-error terms by accepting a small bias in exchange for a large variance reduction.</li>
 </ul>
 </section>
 <section id="the-central-limit-theorem" class="level3" data-number="A.4.2">
@@ -787,7 +811,7 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u,
 <p><span class="math display">\[
 \phi(z) = \frac{1}{\sqrt{2\pi}}\,\exp\!\left(-\tfrac{1}{2} z^{2}\right),
 \]</span></p>
-<p>is symmetric about <span class="math inline">\(0\)</span>, and has <span class="math inline">\(\mathbb{E}(Z) = 0\)</span>, <span class="math inline">\(\operatorname{Var}(Z) = 1\)</span>. Two-sided critical values you will memorise: <span class="math inline">\(z_{0.975} = 1.96\)</span> (5% level) and <span class="math inline">\(z_{0.995} = 2.576\)</span> (1% level). A general normal <span class="math inline">\(X \sim \mathcal{N}(\mu, \sigma^{2})\)</span> can always be standardised to <span class="math inline">\(Z = (X - \mu)/\sigma\)</span>.</p>
+<p>is symmetric about <span class="math inline">\(0\)</span>, and has <span class="math inline">\(\mathbb{E}[Z] = 0\)</span>, <span class="math inline">\(\operatorname{Var}(Z) = 1\)</span>. Two-sided critical values you will memorise: <span class="math inline">\(z_{0.975} = 1.96\)</span> (5% level) and <span class="math inline">\(z_{0.995} = 2.576\)</span> (1% level). A general normal <span class="math inline">\(X \sim \mathcal{N}(\mu, \sigma^{2})\)</span> can always be standardised to <span class="math inline">\(Z = (X - \mu)/\sigma\)</span>.</p>
 </section>
 <section id="the-t-chi2-and-f-distributions" class="level3" data-number="A.4.4">
 <h3 data-number="A.4.4" class="anchored" data-anchor-id="the-t-chi2-and-f-distributions"><span class="header-section-number">A.4.4</span> The <span class="math inline">\(t\)</span>, <span class="math inline">\(\chi^{2}\)</span>, and <span class="math inline">\(F\)</span> distributions</h3>
@@ -798,6 +822,16 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u,
 <li>The <span class="math inline">\(F_{k_1, k_2}\)</span> distribution is the ratio <span class="math inline">\((V_1/k_1) / (V_2/k_2)\)</span> of two independent <span class="math inline">\(\chi^{2}\)</span> random variables divided by their respective degrees of freedom. It is non-negative and right-skewed.</li>
 </ul>
 <p>In §4.3 we will use <span class="math inline">\(t\)</span>-statistics for single-coefficient tests, <span class="math inline">\(F\)</span>-statistics for joint tests, and <span class="math inline">\(\chi^{2}\)</span> variants for large-sample tests. Critical values are tabulated in any statistical software; in R you will use <code>qt()</code>, <code>qf()</code>, and <code>qchisq()</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="appendix-a-prerequisites_files/figure-html/appA-distributions-fig-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>The four reference distributions. Normal and <span class="math inline">\(t_5\)</span> live on the real line and are symmetric, with the <span class="math inline">\(t\)</span> noticeably heavier-tailed at low degrees of freedom; the <span class="math inline">\(t_{30}\)</span> overlay (grey dashed) in the second panel shows how quickly the <span class="math inline">\(t\)</span> approaches <span class="math inline">\(N(0,1)\)</span> as df grows. The <span class="math inline">\(\chi^2_5\)</span> and <span class="math inline">\(F_{5,30}\)</span> live on the non-negative half-line and are right-skewed — which is why their critical values come from the <em>upper</em> tail.</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -822,6 +856,7 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u,
 <p>The matrix form of OLS in §3.4 needs a small bag of linear-algebra tools. We collect them here.</p>
 <section id="vectors-and-matrices" class="level3" data-number="A.5.1">
 <h3 data-number="A.5.1" class="anchored" data-anchor-id="vectors-and-matrices"><span class="header-section-number">A.5.1</span> Vectors and matrices</h3>
+<p>Wooldridge writes the multiple-regression model as <span class="math inline">\(\mathbf{y} = \mathbf{X}\beta + \mathbf{u}\)</span>, and the rest of his Chapter 3 is one long matrix calculation — you need to be able to follow it.</p>
 <p>A column <strong>vector</strong> of length <span class="math inline">\(n\)</span> is a stack of <span class="math inline">\(n\)</span> real numbers:</p>
 <p><span class="math display">\[
 \mathbf{x} = \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix}.
@@ -835,7 +870,7 @@ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2k} \\
 a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nk}
 \end{pmatrix}.
 \]</span></p>
-<p>Throughout this book, the <strong>data matrix</strong> <span class="math inline">\(\mathbf{X}\)</span> has one row per observation and one column per regressor (including a leading column of ones for the intercept). The outcome vector <span class="math inline">\(\mathbf{y}\)</span> has length <span class="math inline">\(n\)</span>. With this convention, the multiple regression model is written in matrix form as <span class="math inline">\(\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{u}\)</span>.</p>
+<p>Throughout this book, the <strong>data matrix</strong> <span class="math inline">\(\mathbf{X}\)</span> has one row per observation and one column per regressor (including a leading column of ones for the intercept). The outcome vector <span class="math inline">\(\mathbf{y}\)</span> has length <span class="math inline">\(n\)</span>. With this convention, the multiple regression model is written in matrix form as <span class="math inline">\(\mathbf{y} = \mathbf{X}\beta + \mathbf{u}\)</span>.</p>
 </section>
 <section id="transpose" class="level3" data-number="A.5.2">
 <h3 data-number="A.5.2" class="anchored" data-anchor-id="transpose"><span class="header-section-number">A.5.2</span> Transpose</h3>
@@ -863,10 +898,11 @@ a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nk}
 (\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1}\mathbf{A}^{-1},\qquad
 (\mathbf{A}')^{-1} = (\mathbf{A}^{-1})'.
 \]</span></p>
-<p>The matrix-form OLS estimator in §3.4 is <span class="math inline">\(\hat{\boldsymbol{\beta}} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}\)</span>, which requires <span class="math inline">\(\mathbf{X}'\mathbf{X}\)</span> to be invertible.</p>
+<p>The matrix-form OLS estimator in §3.4 is <span class="math inline">\(\hat{\beta} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}\)</span>, which requires <span class="math inline">\(\mathbf{X}'\mathbf{X}\)</span> to be invertible.</p>
 </section>
 <section id="rank-and-the-no-multicollinearity-assumption" class="level3" data-number="A.5.5">
 <h3 data-number="A.5.5" class="anchored" data-anchor-id="rank-and-the-no-multicollinearity-assumption"><span class="header-section-number">A.5.5</span> Rank and the no-multicollinearity assumption</h3>
+<p>This is the technical version of “no perfectly redundant regressor” (Wooldridge’s MLR.3): full rank <span class="math inline">\(k\)</span> on the <span class="math inline">\(n \times k\)</span> design matrix is exactly what makes the OLS solution unique.</p>
 <p>The <strong>rank</strong> of a matrix is the number of linearly independent columns (equivalently, of linearly independent rows). A square <span class="math inline">\(k\times k\)</span> matrix is invertible if and only if it has full rank <span class="math inline">\(k\)</span>. For the data matrix <span class="math inline">\(\mathbf{X}\)</span> of dimension <span class="math inline">\(n \times k\)</span>, the condition <span class="math inline">\(\operatorname{rank}(\mathbf{X}) = k\)</span> is the <strong>no perfect multicollinearity</strong> assumption (Wooldridge’s MLR.3): no column of <span class="math inline">\(\mathbf{X}\)</span> is an exact linear combination of the others. When this fails, <span class="math inline">\(\mathbf{X}'\mathbf{X}\)</span> is singular and OLS cannot be computed.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1583,7 +1619,7 @@ Wooldridge, Jeffrey M. 2020. <em>Introductory Econometrics: A Modern Approach</e
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/08-autocorrelation.html" class="pagination-link" aria-label="Autocorrelation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Autocorrelation</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Autocorrelation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1596,476 +1632,576 @@ Wooldridge, Jeffrey M. 2020. <em>Introductory Econometrics: A Modern Approach</e
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Mathematical and Statistical Prerequisites"</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Status: ported 2026-05-18. Includes content translated back from the Spanish edition per gap report G8.*</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>This appendix collects the mathematical and statistical tools used throughout the book. It is meant as a reference: skim it once at the start of the course, then come back to individual sections as they are invoked. The level is deliberately operational --- enough to follow the derivations in the main text without turning the book into a course on real analysis <span class="co">[</span><span class="ot">@wooldridge2020</span><span class="co">]</span>. We adopt Wooldridge's notation everywhere: population parameters are $\beta_0, \beta_1, \dots$; the population error is $u$; the sample residual is $\hat u$; fitted values are $\hat y$; and the usual sums of squares are SST, SSE, and SSR.</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning outcomes {.unnumbered}</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>By the end of this appendix the reader should be able to:</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Manipulate exponents and logarithms confidently, and read off elasticities and semi-elasticities from log-transformed equations.</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Compute single-variable derivatives and partial derivatives, and use first-order conditions to solve a small optimisation problem.</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>State and apply the linearity of expectation, the formulas for variance and covariance, and the conditional-expectation properties used by Wooldridge.</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Recall the shapes and uses of the normal, $t$, $\chi^2$, and $F$ distributions, and locate critical values in standard tables.</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Read and manipulate a vector or matrix, including transpose, inverse, and rank, well enough to follow the matrix form of OLS in §3.4.</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Install R and RStudio, load the <span class="in">`wooldridge`</span> package, and run a first inspection of the <span class="in">`wage1`</span> dataset.</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.1 Algebra refresher</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="fu">### Functions and notation</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>A function $f: \mathbb{R} \to \mathbb{R}$ assigns to each real number $x$ a real number $f(x)$. The graphs we draw in this book are almost always of functions of one or two variables. A linear function takes the form</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>f(x) = \beta_0 + \beta_1 x,</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>with intercept $\beta_0$ and slope $\beta_1$. The slope $\beta_1$ tells us by how many units $f(x)$ changes when $x$ increases by one unit. This is exactly how we will read every estimated coefficient in the book.</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exponents and powers</span></span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>For any real number $a$ and any integers $m, n$:</span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>a^{m} \cdot a^{n} = a^{m+n},\qquad</span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>\frac{a^{m}}{a^{n}} = a^{m-n},\qquad</span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>(a^{m})^{n} = a^{mn},\qquad</span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>a^{0} = 1\ (a\neq 0).</span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>The square-root function is the exponent $1/2$: $\sqrt{a} = a^{1/2}$ for $a\geq 0$.</span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="fu">### Logarithms</span></span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>The natural logarithm $\ln(x)$ is the inverse of the exponential function $e^{x}$: $\ln(e^{x}) = x$ and $e^{\ln(x)} = x$ for $x &gt; 0$. The properties we use over and over are:</span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>\ln(xy) = \ln(x) + \ln(y),\quad</span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>\ln<span class="sc">\!</span>\left(\tfrac{x}{y}\right) = \ln(x) - \ln(y),\quad</span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>\ln(x^{a}) = a\,\ln(x),\quad</span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>\ln(1) = 0.</span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>A useful approximation, exploited throughout the book, is that for small changes,</span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>\ln(x + \Delta x) - \ln(x) \approx \frac{\Delta x}{x}.</span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>That is, a difference of logs is approximately a *percentage change*. This is why log-transformed regressions are so popular in applied work --- they let us read coefficients as elasticities or percentage effects.</span>
-<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
-<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definition: elasticity and semi-elasticity</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>This appendix collects the mathematical and statistical tools used throughout the book. It is meant as a reference: skim it once at the start of the course, then come back to individual sections as they are invoked. The level is deliberately operational --- enough to follow the derivations in the main text without turning the book into a course on real analysis <span class="co">[</span><span class="ot">@wooldridge2020</span><span class="co">]</span>. We adopt Wooldridge's notation everywhere: population parameters are $\beta_0, \beta_1, \dots$; the population error is $u$; the sample residual is $\hat u$; fitted values are $\hat y$; and the usual sums of squares are SST, SSE, and SSR.</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning outcomes {.unnumbered}</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>By the end of this appendix the reader should be able to:</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Manipulate exponents and logarithms confidently, and read off elasticities and semi-elasticities from log-transformed equations.</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Compute single-variable derivatives and partial derivatives, and use first-order conditions to solve a small optimisation problem.</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>State and apply the linearity of expectation, the formulas for variance and covariance, and the conditional-expectation properties used by Wooldridge.</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Recall the shapes and uses of the normal, $t$, $\chi^2$, and $F$ distributions, and locate critical values in standard tables.</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Read and manipulate a vector or matrix, including transpose, inverse, and rank, well enough to follow the matrix form of OLS in §3.4.</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Install R and RStudio, load the <span class="in">`wooldridge`</span> package, and run a first inspection of the <span class="in">`wage1`</span> dataset.</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.1 Algebra refresher</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="fu">### Functions and notation</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>A function $f: \mathbb{R} \to \mathbb{R}$ assigns to each real number $x$ a real number $f(x)$. The graphs we draw in this book are almost always of functions of one or two variables. A linear function takes the form</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>f(x) = \beta_0 + \beta_1 x,</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>with intercept $\beta_0$ and slope $\beta_1$. The slope $\beta_1$ tells us by how many units $f(x)$ changes when $x$ increases by one unit. This is exactly how we will read every estimated coefficient in the book.</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exponents and powers</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>Every interest-rate, growth, and elasticity calculation you will do this term either *is* an exponentiation or hides one inside <span class="in">`exp(...)`</span> or <span class="in">`log(...)`</span>, so the rules below are the algebraic plumbing of the entire course.</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>For any $a &gt; 0$ and any real numbers $m, n$:</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>a^{m} \cdot a^{n} = a^{m+n},\qquad</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>\frac{a^{m}}{a^{n}} = a^{m-n},\qquad</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>(a^{m})^{n} = a^{mn},\qquad</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>a^{0} = 1.</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>(The same identities hold for any real $a \neq 0$ when $m, n$ are integers; the $a &gt; 0$ restriction matters as soon as we allow fractional exponents — for instance, the square root, $\sqrt{a} = a^{1/2}$, is defined for $a \geq 0$ only.)</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### Logarithms</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>Logging a regressor lets us read coefficients as percentage effects, which is half of what makes regressions communicable to non-economists --- so the log rules below are not optional.</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>The natural logarithm $\ln(x)$ is the inverse of the exponential function $e^{x}$: $\ln(e^{x}) = x$ and $e^{\ln(x)} = x$ for $x &gt; 0$. The properties we use over and over are:</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>\ln(xy) = \ln(x) + \ln(y),\quad</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>\ln<span class="sc">\!</span>\left(\tfrac{x}{y}\right) = \ln(x) - \ln(y),\quad</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>\ln(x^{a}) = a\,\ln(x),\quad</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>\ln(1) = 0.</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>A useful approximation, exploited throughout the book, is that for small changes,</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>\ln(x + \Delta x) - \ln(x) \approx \frac{\Delta x}{x}.</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>That is, a difference of logs is approximately a *percentage change*. This is why log-transformed regressions are so popular in applied work --- they let us read coefficients as elasticities or percentage effects.</span>
 <span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>In the **log-log** specification $\ln(y) = \beta_0 + \beta_1 \ln(x) + u$, the coefficient $\beta_1$ is an **elasticity**: a 1% increase in $x$ raises $y$ by approximately $\beta_1$%.</span>
-<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>In the **log-level** specification $\ln(y) = \beta_0 + \beta_1 x + u$, the coefficient $\beta_1$ is a **semi-elasticity**: a one-unit increase in $x$ raises $y$ by approximately $100\,\beta_1\%$.</span>
-<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>Forward reference: these interpretations are used systematically from Chapter 2 onwards, and become central in the dummy-variables chapter where we read $\beta_1$ as a "log-wage gap" of $100\,\beta_1$%.</span>
-<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definition: elasticity and semi-elasticity</span></span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>In the **log-log** specification $\ln(y) = \beta_0 + \beta_1 \ln(x) + u$, the coefficient $\beta_1$ is an **elasticity**: a 1% increase in $x$ raises $y$ by approximately $\beta_1$%.</span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>In the **log-level** specification $\ln(y) = \beta_0 + \beta_1 x + u$, the coefficient $\beta_1$ is a **semi-elasticity**: a one-unit increase in $x$ raises $y$ by approximately $100\,\beta_1\%$.</span>
 <span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summations</span></span>
-<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>The summation symbol $\sum$ is shorthand we cannot live without:</span>
-<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n.</span>
-<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>Two properties used constantly:</span>
-<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^{n} (a x_i + b y_i) = a \sum_{i=1}^{n} x_i + b \sum_{i=1}^{n} y_i,\qquad</span>
-<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^{n} c = n\,c.</span>
-<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>Forward reference: these interpretations are used systematically from Chapter 2 onwards, and become central in the dummy-variables chapter where we read $\beta_1$ as a "log-wage gap" of $100\,\beta_1$%.</span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summations</span></span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>Every estimator in the book is a sum --- $\hat\beta_1$, $\bar y$, $\mathrm{SST}_x$ --- so once you can manipulate $\sum$ cleanly, you can manipulate OLS.</span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>The summation symbol $\sum$ is shorthand we cannot live without:</span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n.</span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>Two properties used constantly:</span>
 <span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>The sample mean is $\bar x = \tfrac{1}{n}\sum_{i=1}^{n} x_i$, and a property we will use in the OLS derivation is $\sum_{i=1}^{n} (x_i - \bar x) = 0$.</span>
-<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>:::{.callout-warning}</span>
-<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a><span class="fu">## Common mistake: $\ln(x + y) \ne \ln(x) + \ln(y)$</span></span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^{n} (a x_i + b y_i) = a \sum_{i=1}^{n} x_i + b \sum_{i=1}^{n} y_i,\qquad</span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^{n} c = n\,c.</span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>The log of a *sum* is not the sum of the logs. This trips up many first-time users when they try to "simplify" terms like $\ln(\beta_0 + \beta_1 x)$ --- they cannot be split. Logarithms split products, not sums.</span>
-<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.2 Calculus refresher</span></span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>The sample mean is $\bar x = \tfrac{1}{n}\sum_{i=1}^{n} x_i$, and a property we will use in the OLS derivation is $\sum_{i=1}^{n} (x_i - \bar x) = 0$.</span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>:::{.callout-warning}</span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a><span class="fu">## Common mistake: $\ln(x + y) \ne \ln(x) + \ln(y)$</span></span>
 <span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a><span class="fu">### Derivatives of a single variable</span></span>
-<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>The derivative $f'(x)$ measures the instantaneous rate of change of $f$ at $x$:</span>
-<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}.</span>
-<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>The rules we need are short:</span>
-<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>\frac{d}{dx}(c) = 0,\quad</span>
-<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>\frac{d}{dx}(x^{n}) = n\,x^{n-1},\quad</span>
-<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>\frac{d}{dx}<span class="sc">\!</span>\left(e^{x}\right) = e^{x},\quad</span>
-<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>\frac{d}{dx}<span class="sc">\!</span>\left(\ln x\right) = \frac{1}{x}.</span>
-<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>The log of a *sum* is not the sum of the logs. This trips up many first-time users when they try to "simplify" terms like $\ln(\beta_0 + \beta_1 x)$ --- they cannot be split. Logarithms split products, not sums.</span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.2 Calculus refresher</span></span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a><span class="fu">### Derivatives of a single variable</span></span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>OLS is the algorithm that sets the derivative of the sum of squared residuals to zero; you cannot derive a single coefficient in this book without this tool.</span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>The derivative $f'(x)$ measures the instantaneous rate of change of $f$ at $x$:</span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}.</span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>Visually, the derivative is the **slope of the tangent** to the graph of $f$ at $x$. The fraction inside the limit is the slope of a **secant** between two nearby points $x$ and $x + h$; as $h$ shrinks, the secant pivots towards the tangent.</span>
 <span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>Linearity, product, quotient, and chain rules:</span>
-<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a>(af + bg)' = a f' + b g',\qquad</span>
-<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a>(fg)' = f'g + fg',</span>
-<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a>\left(\frac{f}{g}\right)' = \frac{f'g - fg'}{g^{2}},\qquad</span>
-<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>(f\circ g)'(x) = f'<span class="sc">\!</span>\bigl(g(x)\bigr)\, g'(x).</span>
-<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a><span class="fu">### Partial derivatives</span></span>
-<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a>For a function of several variables $f(x_1, x_2, \dots, x_k)$, the partial derivative with respect to $x_j$ holds the other variables fixed:</span>
-<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a>\frac{\partial f}{\partial x_j} = \lim_{h\to 0} \frac{f(\dots, x_j + h, \dots) - f(\dots, x_j, \dots)}{h}.</span>
-<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a>This is precisely the *ceteris paribus* reading we want from a multiple regression: for the population model</span>
-<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a>y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u,</span>
-<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-derivative-fig}</span></span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Derivative as the slope of the tangent. The dashed blue line is a secant from $x=2$ to $x=3.5$; as the second point slides toward $x=2$, the secant rotates onto the solid red tangent line. Its slope, $f'(2)=4$, is the derivative of $f(x)=x^2$ at $x=2$."</span></span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xx, xx<span class="sc">^</span><span class="dv">2</span>, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"black"</span>,</span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">f</span>(x) <span class="sc">==</span> x<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a><span class="co"># Tangent at x = 2: slope = 4, value = 4</span></span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">b =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a><span class="co"># Secant from x=2 to x=3.5</span></span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a>sec_x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="fl">3.5</span>); sec_y <span class="ot">&lt;-</span> sec_x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a>slope_sec <span class="ot">&lt;-</span> <span class="fu">diff</span>(sec_y) <span class="sc">/</span> <span class="fu">diff</span>(sec_x)</span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> sec_y[<span class="dv">1</span>] <span class="sc">-</span> slope_sec <span class="sc">*</span> sec_x[<span class="dv">1</span>], <span class="at">b =</span> slope_sec,</span>
+<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(sec_x, sec_y, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>,</span>
+<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="fu">expression</span>(<span class="fu">f</span>(x) <span class="sc">==</span> x<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"tangent at x = 2 (slope 4)"</span>,</span>
+<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"secant from x = 2 to x = 3.5 (slope 5.5)"</span>),</span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span>
+<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a>The rules we need are short:</span>
 <span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>we have $\partial y / \partial x_1 = \beta_1$ holding $x_2$ fixed --- the so-called *partial effect*. Chapter 3 makes this interpretation precise.</span>
-<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a><span class="fu">### First-order conditions and optimisation</span></span>
-<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a>To find an interior minimum or maximum of a smooth function, set the derivative to zero (the **first-order condition**, FOC) and check the second-order condition (FOC for a minimum requires $f''(x^\star) &gt; 0$). For functions of several variables, set every partial derivative to zero simultaneously.</span>
-<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
-<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example: minimising a simple quadratic</span></span>
+<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a>\frac{d}{dx}(c) = 0,\quad</span>
+<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a>\frac{d}{dx}(x^{n}) = n\,x^{n-1},\quad</span>
+<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a>\frac{d}{dx}<span class="sc">\!</span>\left(e^{x}\right) = e^{x},\quad</span>
+<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a>\frac{d}{dx}<span class="sc">\!</span>\left(\ln x\right) = \frac{1}{x}.</span>
+<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a>Linearity, product, quotient, and chain rules:</span>
 <span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a>Consider $f(\beta) = \sum_{i=1}^{n} (y_i - \beta)^{2}$. The FOC is</span>
-<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a>\frac{d f}{d \beta} = -2\sum_{i=1}^{n} (y_i - \beta) = 0 \;\Longleftrightarrow\; \beta = \frac{1}{n}\sum_{i=1}^{n} y_i = \bar y.</span>
+<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a>(af + bg)' = a f' + b g',\qquad</span>
+<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a>(fg)' = f'g + fg',</span>
+<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a>The minimiser is the sample mean. This is exactly the structure of OLS: OLS minimises a sum of squared residuals by setting partial derivatives equal to zero. We carry out this derivation in detail in §2.4.</span>
-<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a>\left(\frac{f}{g}\right)' = \frac{f'g - fg'}{g^{2}},\qquad</span>
+<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a>(f\circ g)'(x) = f'<span class="sc">\!</span>\bigl(g(x)\bigr)\, g'(x).</span>
+<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.3 Probability refresher</span></span>
+<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a><span class="fu">### Partial derivatives</span></span>
 <span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a><span class="fu">### Random variables</span></span>
+<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a>This *is* the ceteris paribus interpretation of $\beta_j$: the partial derivative of $\mathbb{E}<span class="co">[</span><span class="ot">y \mid \mathbf{x}</span><span class="co">]</span>$ with respect to $x_j$, holding the other regressors fixed. Everything Chapter 3 says about "controlling for" is the operator below in disguise.</span>
 <span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a>A **random variable** $X$ is a numerical summary of the outcome of a random experiment. It is *discrete* if it can take only a countable number of values (e.g. the number of children in a household), and *continuous* if it can take any value in an interval (e.g. an hourly wage). Throughout the book we write the (unknown) population mean as $\mu = \mathbb{E}(X)$ and the population variance as $\sigma^{2} = \operatorname{Var}(X)$.</span>
+<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a>For a function of several variables $f(x_1, x_2, \dots, x_k)$, the partial derivative with respect to $x_j$ holds the other variables fixed:</span>
 <span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a><span class="fu">### Expectation</span></span>
-<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a>The expected value of $X$, denoted $\mathbb{E}(X)$, is a population average. The properties below are used on essentially every page of the book.</span>
+<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a>\frac{\partial f}{\partial x_j} = \lim_{h\to 0} \frac{f(\dots, x_j + h, \dots) - f(\dots, x_j, \dots)}{h}.</span>
+<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a>\mathbb{E}(c) = c,\qquad</span>
-<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a>\mathbb{E}(aX + b) = a\,\mathbb{E}(X) + b,</span>
-<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a>This is precisely the *ceteris paribus* reading we want from a multiple regression: for the population model</span>
+<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a>y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u,</span>
 <span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a>\mathbb{E}(aX_1 + bX_2) = a\,\mathbb{E}(X_1) + b\,\mathbb{E}(X_2),\qquad</span>
-<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a>\mathbb{E}<span class="sc">\!</span>\left(\sum_{i=1}^{n} a_i X_i\right) = \sum_{i=1}^{n} a_i\,\mathbb{E}(X_i).</span>
-<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a>The last identity is **linearity of expectation**: it holds whether or not the $X_i$ are independent.</span>
-<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a><span class="fu">### Variance</span></span>
-<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a>The variance measures dispersion around the mean:</span>
-<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a>\operatorname{Var}(X) = \sigma^{2} = \mathbb{E}<span class="sc">\!</span>\bigl<span class="co">[</span><span class="ot">(X - \mathbb{E}(X))^{2}\bigr</span><span class="co">]</span> = \mathbb{E}(X^{2}) - \bigl<span class="co">[</span><span class="ot">\mathbb{E}(X)\bigr</span><span class="co">]</span>^{2}.</span>
-<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a>we have $\partial y / \partial x_1 = \beta_1$ holding $x_2$ fixed --- the so-called *partial effect*. Chapter 3 makes this interpretation precise.</span>
+<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a><span class="fu">### First-order conditions and optimisation</span></span>
+<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a>Both OLS (minimising SSR) and Maximum Likelihood (maximising the log-likelihood) reduce to the same three-step recipe: take derivatives, set them to zero, solve.</span>
+<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a>To find an interior minimum or maximum of a smooth function, set the derivative to zero (the **first-order condition**, FOC) and check the second-order condition. A *sufficient* condition for a strict local minimum is $f''(x^\star) &gt; 0$; the *necessary* second-order condition is the weaker $f''(x^\star) \geq 0$. The distinction matters because edge cases like $f(x) = x^4$ have a minimum at $x = 0$ with $f''(0) = 0$. For functions of several variables, set every partial derivative to zero simultaneously.</span>
+<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example: minimising a simple quadratic</span></span>
+<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a>Consider $f(\beta) = \sum_{i=1}^{n} (y_i - \beta)^{2}$. The FOC is</span>
 <span id="cb16-187"><a href="#cb16-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a>The standard deviation is $\sigma = \sqrt{\operatorname{Var}(X)}$ and has the same units as $X$. Useful properties:</span>
-<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a>\frac{d f}{d \beta} = -2\sum_{i=1}^{n} (y_i - \beta) = 0 \;\Longleftrightarrow\; \beta = \frac{1}{n}\sum_{i=1}^{n} y_i = \bar y.</span>
 <span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a>\operatorname{Var}(c) = 0,\qquad</span>
-<span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a>\operatorname{Var}(aX + b) = a^{2}\operatorname{Var}(X).</span>
-<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a>The minimiser is the sample mean. This is exactly the structure of OLS: OLS minimises a sum of squared residuals by setting partial derivatives equal to zero. We carry out this derivation in detail in §2.4.</span>
+<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a>Notice that an additive constant $b$ shifts the distribution but does *not* affect its dispersion. A multiplicative constant $a$ scales the variance by $a^{2}$, not by $a$.</span>
+<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.3 Probability refresher</span></span>
 <span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a><span class="fu">### Covariance and correlation</span></span>
+<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a><span class="fu">### Random variables</span></span>
 <span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a>The covariance between two random variables measures the direction of their linear co-movement:</span>
+<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a>A **random variable** $X$ is a numerical summary of the outcome of a random experiment. It is *discrete* if it can take only a countable number of values (e.g. the number of children in a household), and *continuous* if it can take any value in an interval (e.g. an hourly wage). Throughout the book we write the (unknown) population mean as $\mu = \mathbb{E}<span class="co">[</span><span class="ot">X</span><span class="co">]</span>$ and the population variance as $\sigma^{2} = \operatorname{Var}(X)$.</span>
 <span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a>\operatorname{Cov}(X, Y) = \mathbb{E}<span class="sc">\!</span>\bigl<span class="co">[</span><span class="ot">(X - \mathbb{E}(X))(Y - \mathbb{E}(Y))\bigr</span><span class="co">]</span> = \mathbb{E}(XY) - \mathbb{E}(X)\,\mathbb{E}(Y).</span>
-<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a><span class="fu">### Expectation</span></span>
+<span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a>The expected value of $X$, denoted $\mathbb{E}<span class="co">[</span><span class="ot">X</span><span class="co">]</span>$, is a population average. The properties below are used on essentially every page of the book.</span>
 <span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a>If either $\mathbb{E}(X) = 0$ or $\mathbb{E}(Y) = 0$, the second expression collapses to $\operatorname{Cov}(X, Y) = \mathbb{E}(XY)$. Properties:</span>
-<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a>\operatorname{Cov}(aX, bY) = ab\,\operatorname{Cov}(X, Y),\qquad</span>
-<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a>\operatorname{Cov}(X, X) = \operatorname{Var}(X).</span>
-<span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a>If $X$ and $Y$ are independent, then $\operatorname{Cov}(X, Y) = 0$. The converse is false in general: zero covariance only rules out *linear* dependence. The **correlation coefficient** rescales the covariance to lie in $<span class="co">[</span><span class="ot">-1, 1</span><span class="co">]</span>$:</span>
+<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a>\mathbb{E}<span class="co">[</span><span class="ot">c</span><span class="co">]</span> = c,\qquad</span>
+<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a>\mathbb{E}<span class="co">[</span><span class="ot">aX + b</span><span class="co">]</span> = a\,\mathbb{E}<span class="co">[</span><span class="ot">X</span><span class="co">]</span> + b,</span>
+<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a>\mathbb{E}<span class="co">[</span><span class="ot">aX_1 + bX_2</span><span class="co">]</span> = a\,\mathbb{E}<span class="co">[</span><span class="ot">X_1</span><span class="co">]</span> + b\,\mathbb{E}<span class="co">[</span><span class="ot">X_2</span><span class="co">]</span>,\qquad</span>
+<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a>\mathbb{E}<span class="sc">\!</span>\left<span class="co">[</span><span class="ot">\sum_{i=1}^{n} a_i X_i\right</span><span class="co">]</span> = \sum_{i=1}^{n} a_i\,\mathbb{E}<span class="co">[</span><span class="ot">X_i</span><span class="co">]</span>.</span>
+<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a>\operatorname{Corr}(X, Y) = \rho_{XY} = \frac{\operatorname{Cov}(X, Y)}{\sqrt{\operatorname{Var}(X)}\sqrt{\operatorname{Var}(Y)}}.</span>
-<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a>The last identity is **linearity of expectation**: it holds whether or not the $X_i$ are independent.</span>
+<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a><span class="fu">### Variance</span></span>
 <span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a><span class="fu">### Variance of a sum</span></span>
+<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a>The variance measures dispersion around the mean:</span>
 <span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a>A formula we will use many times in the book is</span>
-<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a>\operatorname{Var}(X) = \sigma^{2} = \mathbb{E}<span class="sc">\!</span>\bigl<span class="co">[</span><span class="ot">(X - \mathbb{E}[X])^{2}\bigr</span><span class="co">]</span> = \mathbb{E}<span class="co">[</span><span class="ot">X^{2}</span><span class="co">]</span> - \bigl(\mathbb{E}<span class="co">[</span><span class="ot">X</span><span class="co">]</span>\bigr)^{2}.</span>
 <span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a>\operatorname{Var}(aX + bY) = a^{2}\operatorname{Var}(X) + b^{2}\operatorname{Var}(Y) + 2ab\,\operatorname{Cov}(X, Y).</span>
-<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a>The standard deviation is $\sigma = \sqrt{\operatorname{Var}(X)}$ and has the same units as $X$. Useful properties:</span>
 <span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a>When $\operatorname{Cov}(X, Y) = 0$ this simplifies to $\operatorname{Var}(X + Y) = \operatorname{Var}(X) + \operatorname{Var}(Y)$. The general $n$-variable version,</span>
-<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-229"><a href="#cb16-229" aria-hidden="true" tabindex="-1"></a>\operatorname{Var}<span class="sc">\!</span>\left(\sum_{i=1}^{n} a_i X_i\right) = \sum_{i=1}^{n} a_i^{2}\,\operatorname{Var}(X_i) + 2\sum_{i&lt;j} a_i a_j\,\operatorname{Cov}(X_i, X_j),</span>
-<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a>is invoked when we derive the sampling variance of the OLS estimator.</span>
-<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a><span class="fu">### Conditional expectation</span></span>
-<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a>The **conditional expectation** $\mathbb{E}(Y \mid X)$ is the mean of $Y$ given knowledge of $X$. It is itself a function of $X$. The properties we use most often are:</span>
-<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a>\mathbb{E}(X \mid X) = X,\qquad</span>
-<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a>\mathbb{E}\bigl(g(X) \mid X\bigr) = g(X),</span>
-<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a>\mathbb{E}\bigl(a Y + b(X) \mid X\bigr) = a\,\mathbb{E}(Y \mid X) + b(X).</span>
-<span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a>If $X$ and $Y$ are independent, $\mathbb{E}(Y \mid X) = \mathbb{E}(Y)$. Finally, the **Law of Iterated Expectations** (also called the tower property) is the single most useful tool in the book:</span>
-<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a>\mathbb{E}\bigl<span class="co">[</span><span class="ot">\mathbb{E}(Y \mid X)\bigr</span><span class="co">]</span> = \mathbb{E}(Y).</span>
-<span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a>\operatorname{Var}(c) = 0,\qquad</span>
+<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a>\operatorname{Var}(aX + b) = a^{2}\operatorname{Var}(X).</span>
+<span id="cb16-229"><a href="#cb16-229" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a>Notice that an additive constant $b$ shifts the distribution but does *not* affect its dispersion. A multiplicative constant $a$ scales the variance by $a^{2}$, not by $a$.</span>
+<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-variance-fig}</span></span>
+<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Variance as spread, not location. Both samples have the same mean (50), but the right panel has three times the standard deviation. The variance captures the dispersion around the mean --- *not* where the mean is. Adding a constant $b$ would shift each red line left or right without changing the shape; multiplying by $a$ would stretch each histogram horizontally by $|a|$ and the variance by $a^2$."</span></span>
+<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 3.6</span></span>
+<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a>x_narrow <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">2000</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a>x_wide   <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">2000</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x_narrow, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">col =</span> <span class="st">"lightblue"</span>, <span class="at">border =</span> <span class="st">"white"</span>,</span>
+<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Low spread ("</span>, sigma, <span class="st">" = 5)"</span>)),</span>
+<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">300</span>))</span>
+<span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">50</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x_wide, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">col =</span> <span class="st">"lightblue"</span>, <span class="at">border =</span> <span class="st">"white"</span>,</span>
+<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"High spread ("</span>, sigma, <span class="st">" = 15)"</span>)),</span>
+<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">300</span>))</span>
+<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">50</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a>The zero conditional mean assumption $\mathbb{E}(u \mid x) = 0$ that underpins OLS unbiasedness in §3.2 is a statement about conditional expectation in exactly this sense.</span>
+<span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a><span class="fu">### Covariance and correlation</span></span>
 <span id="cb16-253"><a href="#cb16-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-254"><a href="#cb16-254" aria-hidden="true" tabindex="-1"></a>:::{.callout-warning}</span>
-<span id="cb16-255"><a href="#cb16-255" aria-hidden="true" tabindex="-1"></a><span class="fu">## Common mistake: $\operatorname{Cov}(X, Y) = 0$ does not mean independence</span></span>
-<span id="cb16-256"><a href="#cb16-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a>Zero covariance only rules out *linear* association. Two variables can have $\operatorname{Cov}(X, Y) = 0$ and still be deterministically related --- the textbook example is $X \sim \text{Uniform}(-1, 1)$ and $Y = X^{2}$, which satisfy $\operatorname{Cov}(X, Y) = 0$ even though $Y$ is a function of $X$.</span>
-<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-254"><a href="#cb16-254" aria-hidden="true" tabindex="-1"></a>The covariance between two random variables measures the direction of their linear co-movement:</span>
+<span id="cb16-255"><a href="#cb16-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-256"><a href="#cb16-256" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a>\operatorname{Cov}(X, Y) = \mathbb{E}<span class="sc">\!</span>\bigl<span class="co">[</span><span class="ot">(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])\bigr</span><span class="co">]</span> = \mathbb{E}<span class="co">[</span><span class="ot">XY</span><span class="co">]</span> - \mathbb{E}<span class="co">[</span><span class="ot">X</span><span class="co">]</span>\,\mathbb{E}<span class="co">[</span><span class="ot">Y</span><span class="co">]</span>.</span>
+<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.4 Statistical inference refresher</span></span>
+<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a>If either $\mathbb{E}<span class="co">[</span><span class="ot">X</span><span class="co">]</span> = 0$ or $\mathbb{E}<span class="co">[</span><span class="ot">Y</span><span class="co">]</span> = 0$, the second expression collapses to $\operatorname{Cov}(X, Y) = \mathbb{E}<span class="co">[</span><span class="ot">XY</span><span class="co">]</span>$. Properties:</span>
 <span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sampling distributions</span></span>
-<span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a>We will repeatedly contrast a population quantity (e.g. $\beta_1$) with its estimator computed from a sample (e.g. $\hat \beta_1$). The estimator is itself a random variable --- it varies from sample to sample --- and its distribution is called the **sampling distribution**. Two features of the sampling distribution determine the quality of the estimator:</span>
-<span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **mean**: an estimator $\hat\theta$ is *unbiased* for $\theta$ if $\mathbb{E}(\hat\theta) = \theta$.</span>
-<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **variance**: among unbiased estimators, the one with the smallest variance is the most *efficient*. The Gauss-Markov theorem in Chapter 3 makes this comparison formal for OLS.</span>
+<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a>\operatorname{Cov}(aX, bY) = ab\,\operatorname{Cov}(X, Y),\qquad</span>
+<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a>\operatorname{Cov}(X, X) = \operatorname{Var}(X).</span>
+<span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a>If $X$ and $Y$ are independent, then $\operatorname{Cov}(X, Y) = 0$. The converse is false in general: zero covariance only rules out *linear* dependence. The **correlation coefficient** rescales the covariance to lie in $<span class="co">[</span><span class="ot">-1, 1</span><span class="co">]</span>$:</span>
 <span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Central Limit Theorem</span></span>
-<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a>If $X_1, X_2, \dots, X_n$ are independent and identically distributed (i.i.d.) with mean $\mu$ and variance $\sigma^{2} &lt; \infty$, then</span>
+<span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a>\operatorname{Corr}(X, Y) = \rho_{XY} = \frac{\operatorname{Cov}(X, Y)}{\sqrt{\operatorname{Var}(X)}\sqrt{\operatorname{Var}(Y)}}.</span>
+<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a>\sqrt{n}\,\frac{\bar X_n - \mu}{\sigma} \;\xrightarrow{d}\; \mathcal{N}(0, 1)\quad\text{as } n \to \infty.</span>
-<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a><span class="fu">### Variance of a sum</span></span>
+<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a>A formula we will use many times in the book is</span>
 <span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>The remarkable point is that the *shape* of the underlying distribution of $X_i$ does not matter: the sample mean is approximately normal in large samples, whatever $X$ looks like. This is why $t$- and $z$-statistics built from OLS estimators are approximately normal in large samples, even when the errors $u$ are not.</span>
-<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a><span class="fu">### The normal distribution</span></span>
+<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a>\operatorname{Var}(aX + bY) = a^{2}\operatorname{Var}(X) + b^{2}\operatorname{Var}(Y) + 2ab\,\operatorname{Cov}(X, Y).</span>
+<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb16-280"><a href="#cb16-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a>The standard normal $\mathcal{N}(0, 1)$ has density</span>
+<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a>When $\operatorname{Cov}(X, Y) = 0$ this simplifies to $\operatorname{Var}(X + Y) = \operatorname{Var}(X) + \operatorname{Var}(Y)$. The general $n$-variable version,</span>
 <span id="cb16-282"><a href="#cb16-282" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-283"><a href="#cb16-283" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a>\phi(z) = \frac{1}{\sqrt{2\pi}}\,\exp<span class="sc">\!</span>\left(-\tfrac{1}{2} z^{2}\right),</span>
+<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a>\operatorname{Var}<span class="sc">\!</span>\left(\sum_{i=1}^{n} a_i X_i\right) = \sum_{i=1}^{n} a_i^{2}\,\operatorname{Var}(X_i) + 2\sum_{i&lt;j} a_i a_j\,\operatorname{Cov}(X_i, X_j),</span>
 <span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a>is symmetric about $0$, and has $\mathbb{E}(Z) = 0$, $\operatorname{Var}(Z) = 1$. Two-sided critical values you will memorise: $z_{0.975} = 1.96$ (5% level) and $z_{0.995} = 2.576$ (1% level). A general normal $X \sim \mathcal{N}(\mu, \sigma^{2})$ can always be standardised to $Z = (X - \mu)/\sigma$.</span>
+<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a>is invoked when we derive the sampling variance of the OLS estimator.</span>
 <span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a><span class="fu">### The $t$, $\chi^{2}$, and $F$ distributions</span></span>
+<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a><span class="fu">### Conditional expectation</span></span>
 <span id="cb16-290"><a href="#cb16-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a>These three distributions appear naturally when we test hypotheses about regression coefficients.</span>
+<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a>The **conditional expectation** $\mathbb{E}<span class="co">[</span><span class="ot">Y \mid X</span><span class="co">]</span>$ is the mean of $Y$ given knowledge of $X$. It is itself a function of $X$. The properties we use most often are:</span>
 <span id="cb16-292"><a href="#cb16-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The $\chi^{2}_{k}$ distribution is the distribution of a sum of $k$ squared independent standard normals. It is non-negative, right-skewed, and has mean $k$.</span>
-<span id="cb16-294"><a href="#cb16-294" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The $t_{k}$ distribution is the ratio $Z / \sqrt{V/k}$ where $Z \sim \mathcal{N}(0, 1)$ and $V \sim \chi^{2}_{k}$ are independent. It is symmetric and bell-shaped, with heavier tails than the standard normal; as $k\to\infty$ it converges to $\mathcal{N}(0, 1)$.</span>
-<span id="cb16-295"><a href="#cb16-295" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The $F_{k_1, k_2}$ distribution is the ratio $(V_1/k_1) / (V_2/k_2)$ of two independent $\chi^{2}$ random variables divided by their respective degrees of freedom. It is non-negative and right-skewed.</span>
-<span id="cb16-296"><a href="#cb16-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-297"><a href="#cb16-297" aria-hidden="true" tabindex="-1"></a>In §4.3 we will use $t$-statistics for single-coefficient tests, $F$-statistics for joint tests, and $\chi^{2}$ variants for large-sample tests. Critical values are tabulated in any statistical software; in R you will use <span class="in">`qt()`</span>, <span class="in">`qf()`</span>, and <span class="in">`qchisq()`</span>.</span>
-<span id="cb16-298"><a href="#cb16-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-299"><a href="#cb16-299" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
-<span id="cb16-300"><a href="#cb16-300" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definition: $p$-value</span></span>
-<span id="cb16-301"><a href="#cb16-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-302"><a href="#cb16-302" aria-hidden="true" tabindex="-1"></a>The $p$-value of a test is the probability, under the null hypothesis, of observing a test statistic at least as extreme as the one we got. Small $p$-values are evidence against the null. The conventional thresholds are 1%, 5%, and 10%, but the $p$-value itself is what you should report --- not just "rejected" or "not rejected".</span>
-<span id="cb16-303"><a href="#cb16-303" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb16-304"><a href="#cb16-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-305"><a href="#cb16-305" aria-hidden="true" tabindex="-1"></a><span class="fu">### Confidence intervals</span></span>
+<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-294"><a href="#cb16-294" aria-hidden="true" tabindex="-1"></a>\mathbb{E}<span class="co">[</span><span class="ot">X \mid X</span><span class="co">]</span> = X,\qquad</span>
+<span id="cb16-295"><a href="#cb16-295" aria-hidden="true" tabindex="-1"></a>\mathbb{E}\bigl<span class="co">[</span><span class="ot">g(X) \mid X\bigr</span><span class="co">]</span> = g(X),</span>
+<span id="cb16-296"><a href="#cb16-296" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-297"><a href="#cb16-297" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-298"><a href="#cb16-298" aria-hidden="true" tabindex="-1"></a>\mathbb{E}\bigl<span class="co">[</span><span class="ot">a Y + b(X) \mid X\bigr</span><span class="co">]</span> = a\,\mathbb{E}<span class="co">[</span><span class="ot">Y \mid X</span><span class="co">]</span> + b(X).</span>
+<span id="cb16-299"><a href="#cb16-299" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-300"><a href="#cb16-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-301"><a href="#cb16-301" aria-hidden="true" tabindex="-1"></a>If $X$ and $Y$ are independent, $\mathbb{E}<span class="co">[</span><span class="ot">Y \mid X</span><span class="co">]</span> = \mathbb{E}<span class="co">[</span><span class="ot">Y</span><span class="co">]</span>$. Finally, the **Law of Iterated Expectations** (also called the tower property) is the single most useful tool in the book:</span>
+<span id="cb16-302"><a href="#cb16-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-303"><a href="#cb16-303" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-304"><a href="#cb16-304" aria-hidden="true" tabindex="-1"></a>\mathbb{E}\bigl<span class="co">[</span><span class="ot">\mathbb{E}[Y \mid X]\bigr</span><span class="co">]</span> = \mathbb{E}<span class="co">[</span><span class="ot">Y</span><span class="co">]</span>.</span>
+<span id="cb16-305"><a href="#cb16-305" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb16-306"><a href="#cb16-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-307"><a href="#cb16-307" aria-hidden="true" tabindex="-1"></a>A $(1 - \alpha)$ confidence interval for a parameter $\theta$ is a random interval that, in repeated samples, contains the true $\theta$ with probability $1 - \alpha$. For an estimator $\hat\theta$ with approximate normal sampling distribution and standard error $\mathrm{se}(\hat\theta)$, the standard 95% interval is $\hat\theta \pm 1.96 \cdot \mathrm{se}(\hat\theta)$. Chapter 4 builds confidence intervals for individual OLS coefficients in exactly this form.</span>
+<span id="cb16-307"><a href="#cb16-307" aria-hidden="true" tabindex="-1"></a>The zero conditional mean assumption $\mathbb{E}<span class="co">[</span><span class="ot">u \mid x</span><span class="co">]</span> = 0$ that underpins OLS unbiasedness in §3.2 is a statement about conditional expectation in exactly this sense.</span>
 <span id="cb16-308"><a href="#cb16-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-309"><a href="#cb16-309" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.5 Linear algebra refresher</span></span>
-<span id="cb16-310"><a href="#cb16-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-311"><a href="#cb16-311" aria-hidden="true" tabindex="-1"></a>The matrix form of OLS in §3.4 needs a small bag of linear-algebra tools. We collect them here.</span>
-<span id="cb16-312"><a href="#cb16-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-313"><a href="#cb16-313" aria-hidden="true" tabindex="-1"></a><span class="fu">### Vectors and matrices</span></span>
+<span id="cb16-309"><a href="#cb16-309" aria-hidden="true" tabindex="-1"></a>:::{.callout-warning}</span>
+<span id="cb16-310"><a href="#cb16-310" aria-hidden="true" tabindex="-1"></a><span class="fu">## Common mistake: $\operatorname{Cov}(X, Y) = 0$ does not mean independence</span></span>
+<span id="cb16-311"><a href="#cb16-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-312"><a href="#cb16-312" aria-hidden="true" tabindex="-1"></a>Zero covariance only rules out *linear* association. Two variables can have $\operatorname{Cov}(X, Y) = 0$ and still be deterministically related --- the textbook example is $X \sim \text{Uniform}(-1, 1)$ and $Y = X^{2}$, which satisfy $\operatorname{Cov}(X, Y) = 0$ even though $Y$ is a function of $X$.</span>
+<span id="cb16-313"><a href="#cb16-313" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb16-314"><a href="#cb16-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-315"><a href="#cb16-315" aria-hidden="true" tabindex="-1"></a>A column **vector** of length $n$ is a stack of $n$ real numbers:</span>
+<span id="cb16-315"><a href="#cb16-315" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.4 Statistical inference refresher</span></span>
 <span id="cb16-316"><a href="#cb16-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-317"><a href="#cb16-317" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-318"><a href="#cb16-318" aria-hidden="true" tabindex="-1"></a>\mathbf{x} = \begin{pmatrix} x_1 <span class="sc">\\</span> x_2 <span class="sc">\\</span> \vdots <span class="sc">\\</span> x_n \end{pmatrix}.</span>
-<span id="cb16-319"><a href="#cb16-319" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-317"><a href="#cb16-317" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sampling distributions</span></span>
+<span id="cb16-318"><a href="#cb16-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-319"><a href="#cb16-319" aria-hidden="true" tabindex="-1"></a>We will repeatedly contrast a population quantity (e.g. $\beta_1$) with its estimator computed from a sample (e.g. $\hat \beta_1$). The estimator is itself a random variable --- it varies from sample to sample --- and its distribution is called the **sampling distribution**. Two features of the sampling distribution determine the quality of the estimator:</span>
 <span id="cb16-320"><a href="#cb16-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-321"><a href="#cb16-321" aria-hidden="true" tabindex="-1"></a>A **matrix** of dimension $n \times k$ is a rectangular array of $n$ rows and $k$ columns:</span>
-<span id="cb16-322"><a href="#cb16-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-323"><a href="#cb16-323" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-324"><a href="#cb16-324" aria-hidden="true" tabindex="-1"></a>\mathbf{A} = \begin{pmatrix}</span>
-<span id="cb16-325"><a href="#cb16-325" aria-hidden="true" tabindex="-1"></a>a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1k} <span class="sc">\\</span></span>
-<span id="cb16-326"><a href="#cb16-326" aria-hidden="true" tabindex="-1"></a>a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2k} <span class="sc">\\</span></span>
-<span id="cb16-327"><a href="#cb16-327" aria-hidden="true" tabindex="-1"></a>\vdots &amp; \vdots &amp; \ddots &amp; \vdots <span class="sc">\\</span></span>
-<span id="cb16-328"><a href="#cb16-328" aria-hidden="true" tabindex="-1"></a>a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nk}</span>
-<span id="cb16-329"><a href="#cb16-329" aria-hidden="true" tabindex="-1"></a>\end{pmatrix}.</span>
+<span id="cb16-321"><a href="#cb16-321" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **mean**: an estimator $\hat\theta$ is *unbiased* for $\theta$ if $\mathbb{E}<span class="co">[</span><span class="ot">\hat\theta</span><span class="co">]</span> = \theta$.</span>
+<span id="cb16-322"><a href="#cb16-322" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **variance**: among *linear* unbiased estimators, the one with the smallest variance is the most *efficient*. The Gauss-Markov theorem in Chapter 3 makes this comparison formal for OLS. The "linear" qualifier is load-bearing: nonlinear estimators (ridge, LASSO, quantile regression) can sometimes do strictly better in mean-squared-error terms by accepting a small bias in exchange for a large variance reduction.</span>
+<span id="cb16-323"><a href="#cb16-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-324"><a href="#cb16-324" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Central Limit Theorem</span></span>
+<span id="cb16-325"><a href="#cb16-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-326"><a href="#cb16-326" aria-hidden="true" tabindex="-1"></a>If $X_1, X_2, \dots, X_n$ are independent and identically distributed (i.i.d.) with mean $\mu$ and variance $\sigma^{2} &lt; \infty$, then</span>
+<span id="cb16-327"><a href="#cb16-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-328"><a href="#cb16-328" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-329"><a href="#cb16-329" aria-hidden="true" tabindex="-1"></a>\sqrt{n}\,\frac{\bar X_n - \mu}{\sigma} \;\xrightarrow{d}\; \mathcal{N}(0, 1)\quad\text{as } n \to \infty.</span>
 <span id="cb16-330"><a href="#cb16-330" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb16-331"><a href="#cb16-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-332"><a href="#cb16-332" aria-hidden="true" tabindex="-1"></a>Throughout this book, the **data matrix** $\mathbf{X}$ has one row per observation and one column per regressor (including a leading column of ones for the intercept). The outcome vector $\mathbf{y}$ has length $n$. With this convention, the multiple regression model is written in matrix form as $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{u}$.</span>
+<span id="cb16-332"><a href="#cb16-332" aria-hidden="true" tabindex="-1"></a>The remarkable point is that the *shape* of the underlying distribution of $X_i$ does not matter: the sample mean is approximately normal in large samples, whatever $X$ looks like. This is why $t$- and $z$-statistics built from OLS estimators are approximately normal in large samples, even when the errors $u$ are not.</span>
 <span id="cb16-333"><a href="#cb16-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-334"><a href="#cb16-334" aria-hidden="true" tabindex="-1"></a><span class="fu">### Transpose</span></span>
+<span id="cb16-334"><a href="#cb16-334" aria-hidden="true" tabindex="-1"></a><span class="fu">### The normal distribution</span></span>
 <span id="cb16-335"><a href="#cb16-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-336"><a href="#cb16-336" aria-hidden="true" tabindex="-1"></a>The **transpose** $\mathbf{A}'$ swaps rows and columns: if $\mathbf{A}$ is $n \times k$, then $\mathbf{A}'$ is $k \times n$, with $(\mathbf{A}')_{ij} = a_{ji}$. Key properties:</span>
+<span id="cb16-336"><a href="#cb16-336" aria-hidden="true" tabindex="-1"></a>The standard normal $\mathcal{N}(0, 1)$ has density</span>
 <span id="cb16-337"><a href="#cb16-337" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-338"><a href="#cb16-338" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-339"><a href="#cb16-339" aria-hidden="true" tabindex="-1"></a>(\mathbf{A}')' = \mathbf{A},\qquad</span>
-<span id="cb16-340"><a href="#cb16-340" aria-hidden="true" tabindex="-1"></a>(\mathbf{A} + \mathbf{B})' = \mathbf{A}' + \mathbf{B}',\qquad</span>
-<span id="cb16-341"><a href="#cb16-341" aria-hidden="true" tabindex="-1"></a>(\mathbf{A}\mathbf{B})' = \mathbf{B}'\mathbf{A}'.</span>
-<span id="cb16-342"><a href="#cb16-342" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-339"><a href="#cb16-339" aria-hidden="true" tabindex="-1"></a>\phi(z) = \frac{1}{\sqrt{2\pi}}\,\exp<span class="sc">\!</span>\left(-\tfrac{1}{2} z^{2}\right),</span>
+<span id="cb16-340"><a href="#cb16-340" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-341"><a href="#cb16-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-342"><a href="#cb16-342" aria-hidden="true" tabindex="-1"></a>is symmetric about $0$, and has $\mathbb{E}<span class="co">[</span><span class="ot">Z</span><span class="co">]</span> = 0$, $\operatorname{Var}(Z) = 1$. Two-sided critical values you will memorise: $z_{0.975} = 1.96$ (5% level) and $z_{0.995} = 2.576$ (1% level). A general normal $X \sim \mathcal{N}(\mu, \sigma^{2})$ can always be standardised to $Z = (X - \mu)/\sigma$.</span>
 <span id="cb16-343"><a href="#cb16-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-344"><a href="#cb16-344" aria-hidden="true" tabindex="-1"></a><span class="fu">### Matrix multiplication</span></span>
+<span id="cb16-344"><a href="#cb16-344" aria-hidden="true" tabindex="-1"></a><span class="fu">### The $t$, $\chi^{2}$, and $F$ distributions</span></span>
 <span id="cb16-345"><a href="#cb16-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-346"><a href="#cb16-346" aria-hidden="true" tabindex="-1"></a>The product $\mathbf{A}\mathbf{B}$ is defined when the number of columns of $\mathbf{A}$ equals the number of rows of $\mathbf{B}$. If $\mathbf{A}$ is $n\times k$ and $\mathbf{B}$ is $k\times m$, then $\mathbf{A}\mathbf{B}$ is $n\times m$ with entries</span>
+<span id="cb16-346"><a href="#cb16-346" aria-hidden="true" tabindex="-1"></a>These three distributions appear naturally when we test hypotheses about regression coefficients.</span>
 <span id="cb16-347"><a href="#cb16-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-348"><a href="#cb16-348" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-349"><a href="#cb16-349" aria-hidden="true" tabindex="-1"></a>(\mathbf{A}\mathbf{B})_{ij} = \sum_{\ell=1}^{k} a_{i\ell}\, b_{\ell j}.</span>
-<span id="cb16-350"><a href="#cb16-350" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-348"><a href="#cb16-348" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The $\chi^{2}_{k}$ distribution is the distribution of a sum of $k$ squared independent standard normals. It is non-negative, right-skewed, and has mean $k$.</span>
+<span id="cb16-349"><a href="#cb16-349" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The $t_{k}$ distribution is the ratio $Z / \sqrt{V/k}$ where $Z \sim \mathcal{N}(0, 1)$ and $V \sim \chi^{2}_{k}$ are independent. It is symmetric and bell-shaped, with heavier tails than the standard normal; as $k\to\infty$ it converges to $\mathcal{N}(0, 1)$.</span>
+<span id="cb16-350"><a href="#cb16-350" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The $F_{k_1, k_2}$ distribution is the ratio $(V_1/k_1) / (V_2/k_2)$ of two independent $\chi^{2}$ random variables divided by their respective degrees of freedom. It is non-negative and right-skewed.</span>
 <span id="cb16-351"><a href="#cb16-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-352"><a href="#cb16-352" aria-hidden="true" tabindex="-1"></a>Matrix multiplication is associative ($(\mathbf{A}\mathbf{B})\mathbf{C} = \mathbf{A}(\mathbf{B}\mathbf{C})$) and distributive over addition, but **not commutative**: in general $\mathbf{A}\mathbf{B} \ne \mathbf{B}\mathbf{A}$.</span>
+<span id="cb16-352"><a href="#cb16-352" aria-hidden="true" tabindex="-1"></a>In §4.3 we will use $t$-statistics for single-coefficient tests, $F$-statistics for joint tests, and $\chi^{2}$ variants for large-sample tests. Critical values are tabulated in any statistical software; in R you will use <span class="in">`qt()`</span>, <span class="in">`qf()`</span>, and <span class="in">`qchisq()`</span>.</span>
 <span id="cb16-353"><a href="#cb16-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-354"><a href="#cb16-354" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inverse and identity</span></span>
-<span id="cb16-355"><a href="#cb16-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-356"><a href="#cb16-356" aria-hidden="true" tabindex="-1"></a>The $k\times k$ **identity matrix** $\mathbf{I}_k$ has ones on the diagonal and zeros elsewhere. It satisfies $\mathbf{I}_k \mathbf{A} = \mathbf{A} \mathbf{I}_k = \mathbf{A}$ for any conformable $\mathbf{A}$.</span>
-<span id="cb16-357"><a href="#cb16-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-358"><a href="#cb16-358" aria-hidden="true" tabindex="-1"></a>A square matrix $\mathbf{A}$ is **invertible** (or non-singular) if there exists a matrix $\mathbf{A}^{-1}$ with $\mathbf{A}\mathbf{A}^{-1} = \mathbf{A}^{-1}\mathbf{A} = \mathbf{I}_k$. Properties:</span>
-<span id="cb16-359"><a href="#cb16-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-360"><a href="#cb16-360" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-361"><a href="#cb16-361" aria-hidden="true" tabindex="-1"></a>(\mathbf{A}^{-1})^{-1} = \mathbf{A},\qquad</span>
-<span id="cb16-362"><a href="#cb16-362" aria-hidden="true" tabindex="-1"></a>(\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1}\mathbf{A}^{-1},\qquad</span>
-<span id="cb16-363"><a href="#cb16-363" aria-hidden="true" tabindex="-1"></a>(\mathbf{A}')^{-1} = (\mathbf{A}^{-1})'.</span>
-<span id="cb16-364"><a href="#cb16-364" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-365"><a href="#cb16-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-366"><a href="#cb16-366" aria-hidden="true" tabindex="-1"></a>The matrix-form OLS estimator in §3.4 is $\hat{\boldsymbol{\beta}} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}$, which requires $\mathbf{X}'\mathbf{X}$ to be invertible.</span>
-<span id="cb16-367"><a href="#cb16-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-368"><a href="#cb16-368" aria-hidden="true" tabindex="-1"></a><span class="fu">### Rank and the no-multicollinearity assumption</span></span>
-<span id="cb16-369"><a href="#cb16-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-370"><a href="#cb16-370" aria-hidden="true" tabindex="-1"></a>The **rank** of a matrix is the number of linearly independent columns (equivalently, of linearly independent rows). A square $k\times k$ matrix is invertible if and only if it has full rank $k$. For the data matrix $\mathbf{X}$ of dimension $n \times k$, the condition $\operatorname{rank}(\mathbf{X}) = k$ is the **no perfect multicollinearity** assumption (Wooldridge's MLR.3): no column of $\mathbf{X}$ is an exact linear combination of the others. When this fails, $\mathbf{X}'\mathbf{X}$ is singular and OLS cannot be computed.</span>
-<span id="cb16-371"><a href="#cb16-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-372"><a href="#cb16-372" aria-hidden="true" tabindex="-1"></a>:::{.callout-warning}</span>
-<span id="cb16-373"><a href="#cb16-373" aria-hidden="true" tabindex="-1"></a><span class="fu">## Common mistake: confusing perfect and near-perfect multicollinearity</span></span>
-<span id="cb16-374"><a href="#cb16-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-375"><a href="#cb16-375" aria-hidden="true" tabindex="-1"></a>Perfect multicollinearity (e.g. including both a dummy for male and a dummy for female *plus* an intercept --- the "dummy-variable trap") makes OLS literally impossible to compute. Near multicollinearity (highly but not perfectly correlated regressors) is a different beast: the estimator still exists, but its variance becomes large. We discuss both, and the diagnostic VIF, in Chapter 3.</span>
-<span id="cb16-376"><a href="#cb16-376" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb16-377"><a href="#cb16-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-378"><a href="#cb16-378" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.6 Setting up R and RStudio</span></span>
-<span id="cb16-379"><a href="#cb16-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-380"><a href="#cb16-380" aria-hidden="true" tabindex="-1"></a>The empirical labs in every chapter assume a working installation of R (≥ 4.2) and RStudio. If you have never installed them, follow these steps once:</span>
-<span id="cb16-381"><a href="#cb16-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-382"><a href="#cb16-382" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Download and install **R** from <span class="co">[</span><span class="ot">https://cran.r-project.org/</span><span class="co">](https://cran.r-project.org/)</span>.</span>
-<span id="cb16-383"><a href="#cb16-383" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Download and install **RStudio Desktop** (free edition) from <span class="co">[</span><span class="ot">https://posit.co/download/rstudio-desktop/</span><span class="co">](https://posit.co/download/rstudio-desktop/)</span>.</span>
-<span id="cb16-384"><a href="#cb16-384" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Open RStudio. The "Console" pane on the left is where you type R commands.</span>
-<span id="cb16-385"><a href="#cb16-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-386"><a href="#cb16-386" aria-hidden="true" tabindex="-1"></a>We will use a handful of contributed packages throughout the book. Install them once, then in each session load only the ones you need.</span>
-<span id="cb16-387"><a href="#cb16-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-388"><a href="#cb16-388" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-install}</span></span>
-<span id="cb16-389"><a href="#cb16-389" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb16-390"><a href="#cb16-390" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
-<span id="cb16-391"><a href="#cb16-391" aria-hidden="true" tabindex="-1"></a>  <span class="st">"wooldridge"</span>,   <span class="co"># textbook datasets</span></span>
-<span id="cb16-392"><a href="#cb16-392" aria-hidden="true" tabindex="-1"></a>  <span class="st">"readxl"</span>,       <span class="co"># read Excel files</span></span>
-<span id="cb16-393"><a href="#cb16-393" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lmtest"</span>,       <span class="co"># tests after lm() (Chs. 4, 7)</span></span>
-<span id="cb16-394"><a href="#cb16-394" aria-hidden="true" tabindex="-1"></a>  <span class="st">"sandwich"</span>,     <span class="co"># robust standard errors (Ch. 7)</span></span>
-<span id="cb16-395"><a href="#cb16-395" aria-hidden="true" tabindex="-1"></a>  <span class="st">"orcutt"</span>        <span class="co"># Cochrane-Orcutt procedure (Ch. 8)</span></span>
-<span id="cb16-396"><a href="#cb16-396" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb16-397"><a href="#cb16-397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-398"><a href="#cb16-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-399"><a href="#cb16-399" aria-hidden="true" tabindex="-1"></a>The <span class="in">`wooldridge`</span> package ships the datasets that Wooldridge uses in his textbook, including <span class="in">`wage1`</span>, which we work with in Chapter 1.</span>
+<span id="cb16-354"><a href="#cb16-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-distributions-fig}</span></span>
+<span id="cb16-355"><a href="#cb16-355" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb16-356"><a href="#cb16-356" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "The four reference distributions. Normal and $t_5$ live on the real line and are symmetric, with the $t$ noticeably heavier-tailed at low degrees of freedom; the $t_{30}$ overlay (grey dashed) in the second panel shows how quickly the $t$ approaches $N(0,1)$ as df grows. The $\\chi^2_5$ and $F_{5,30}$ live on the non-negative half-line and are right-skewed --- which is why their critical values come from the *upper* tail."</span></span>
+<span id="cb16-357"><a href="#cb16-357" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb16-358"><a href="#cb16-358" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>))</span>
+<span id="cb16-359"><a href="#cb16-359" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard normal</span></span>
+<span id="cb16-360"><a href="#cb16-360" aria-hidden="true" tabindex="-1"></a>xn <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">300</span>)</span>
+<span id="cb16-361"><a href="#cb16-361" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xn, <span class="fu">dnorm</span>(xn), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"black"</span>,</span>
+<span id="cb16-362"><a href="#cb16-362" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Standard normal  N(0,1)"</span>, <span class="at">xlab =</span> <span class="st">"z"</span>, <span class="at">ylab =</span> <span class="st">"density"</span>,</span>
+<span id="cb16-363"><a href="#cb16-363" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.42</span>))</span>
+<span id="cb16-364"><a href="#cb16-364" aria-hidden="true" tabindex="-1"></a><span class="co"># t_5 with N(0,1) overlay</span></span>
+<span id="cb16-365"><a href="#cb16-365" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xn, <span class="fu">dt</span>(xn, <span class="at">df =</span> <span class="dv">5</span>), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"red"</span>,</span>
+<span id="cb16-366"><a href="#cb16-366" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Student's "</span>, <span class="fu">italic</span>(t)[<span class="dv">5</span>])),</span>
+<span id="cb16-367"><a href="#cb16-367" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"t"</span>, <span class="at">ylab =</span> <span class="st">"density"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.42</span>))</span>
+<span id="cb16-368"><a href="#cb16-368" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xn, <span class="fu">dt</span>(xn, <span class="at">df =</span> <span class="dv">30</span>), <span class="at">col =</span> <span class="st">"grey50"</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="fl">1.5</span>)</span>
+<span id="cb16-369"><a href="#cb16-369" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xn, <span class="fu">dnorm</span>(xn), <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb16-370"><a href="#cb16-370" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
+<span id="cb16-371"><a href="#cb16-371" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="fu">expression</span>(<span class="fu">italic</span>(t)[<span class="dv">5</span>]),</span>
+<span id="cb16-372"><a href="#cb16-372" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">expression</span>(<span class="fu">italic</span>(t)[<span class="dv">30</span>]),</span>
+<span id="cb16-373"><a href="#cb16-373" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"N(0,1)"</span>),</span>
+<span id="cb16-374"><a href="#cb16-374" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"grey50"</span>, <span class="st">"black"</span>), <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="fl">1.5</span>, <span class="dv">1</span>),</span>
+<span id="cb16-375"><a href="#cb16-375" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">cex =</span> <span class="fl">0.85</span>)</span>
+<span id="cb16-376"><a href="#cb16-376" aria-hidden="true" tabindex="-1"></a><span class="co"># Chi^2_5</span></span>
+<span id="cb16-377"><a href="#cb16-377" aria-hidden="true" tabindex="-1"></a>xc <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="at">length.out =</span> <span class="dv">300</span>)</span>
+<span id="cb16-378"><a href="#cb16-378" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xc, <span class="fu">dchisq</span>(xc, <span class="at">df =</span> <span class="dv">5</span>), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb16-379"><a href="#cb16-379" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(chi<span class="sc">^</span><span class="dv">2</span>, <span class="st">" with 5 df"</span>)),</span>
+<span id="cb16-380"><a href="#cb16-380" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"density"</span>)</span>
+<span id="cb16-381"><a href="#cb16-381" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">5</span>), <span class="at">col =</span> <span class="st">"darkgreen"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb16-382"><a href="#cb16-382" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">5</span>) <span class="sc">+</span> <span class="dv">1</span>, <span class="fl">0.13</span>,</span>
+<span id="cb16-383"><a href="#cb16-383" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">expression</span>(chi[<span class="fl">0.05</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">==</span> <span class="fl">11.07</span>), <span class="at">cex =</span> <span class="fl">0.8</span>)</span>
+<span id="cb16-384"><a href="#cb16-384" aria-hidden="true" tabindex="-1"></a><span class="co"># F_5,30</span></span>
+<span id="cb16-385"><a href="#cb16-385" aria-hidden="true" tabindex="-1"></a>xf <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="at">length.out =</span> <span class="dv">300</span>)</span>
+<span id="cb16-386"><a href="#cb16-386" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xf, <span class="fu">df</span>(xf, <span class="at">df1 =</span> <span class="dv">5</span>, <span class="at">df2 =</span> <span class="dv">30</span>), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"purple"</span>,</span>
+<span id="cb16-387"><a href="#cb16-387" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="fu">italic</span>(F), <span class="st">" with 5 and 30 df"</span>)),</span>
+<span id="cb16-388"><a href="#cb16-388" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"density"</span>)</span>
+<span id="cb16-389"><a href="#cb16-389" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> <span class="dv">5</span>, <span class="at">df2 =</span> <span class="dv">30</span>), <span class="at">col =</span> <span class="st">"purple"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb16-390"><a href="#cb16-390" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> <span class="dv">5</span>, <span class="at">df2 =</span> <span class="dv">30</span>) <span class="sc">+</span> <span class="fl">0.4</span>, <span class="fl">0.45</span>,</span>
+<span id="cb16-391"><a href="#cb16-391" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">expression</span>(F[<span class="fl">0.05</span>] <span class="sc">==</span> <span class="fl">2.53</span>), <span class="at">cex =</span> <span class="fl">0.8</span>)</span>
+<span id="cb16-392"><a href="#cb16-392" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb16-393"><a href="#cb16-393" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-394"><a href="#cb16-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-395"><a href="#cb16-395" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb16-396"><a href="#cb16-396" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definition: $p$-value</span></span>
+<span id="cb16-397"><a href="#cb16-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-398"><a href="#cb16-398" aria-hidden="true" tabindex="-1"></a>The $p$-value of a test is the probability, under the null hypothesis, of observing a test statistic at least as extreme as the one we got. Small $p$-values are evidence against the null. The conventional thresholds are 1%, 5%, and 10%, but the $p$-value itself is what you should report --- not just "rejected" or "not rejected".</span>
+<span id="cb16-399"><a href="#cb16-399" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb16-400"><a href="#cb16-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-401"><a href="#cb16-401" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-setup}</span></span>
-<span id="cb16-402"><a href="#cb16-402" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-403"><a href="#cb16-403" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wooldridge)</span>
-<span id="cb16-404"><a href="#cb16-404" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"wage1"</span>)</span>
-<span id="cb16-405"><a href="#cb16-405" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-401"><a href="#cb16-401" aria-hidden="true" tabindex="-1"></a><span class="fu">### Confidence intervals</span></span>
+<span id="cb16-402"><a href="#cb16-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-403"><a href="#cb16-403" aria-hidden="true" tabindex="-1"></a>A $(1 - \alpha)$ confidence interval for a parameter $\theta$ is a random interval that, in repeated samples, contains the true $\theta$ with probability $1 - \alpha$. For an estimator $\hat\theta$ with approximate normal sampling distribution and standard error $\mathrm{se}(\hat\theta)$, the standard 95% interval is $\hat\theta \pm 1.96 \cdot \mathrm{se}(\hat\theta)$. Chapter 4 builds confidence intervals for individual OLS coefficients in exactly this form.</span>
+<span id="cb16-404"><a href="#cb16-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-405"><a href="#cb16-405" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.5 Linear algebra refresher</span></span>
 <span id="cb16-406"><a href="#cb16-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-407"><a href="#cb16-407" aria-hidden="true" tabindex="-1"></a>A first sanity check on any dataset is to look at its structure, its head, and a summary.</span>
+<span id="cb16-407"><a href="#cb16-407" aria-hidden="true" tabindex="-1"></a>The matrix form of OLS in §3.4 needs a small bag of linear-algebra tools. We collect them here.</span>
 <span id="cb16-408"><a href="#cb16-408" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-409"><a href="#cb16-409" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-explore}</span></span>
-<span id="cb16-410"><a href="#cb16-410" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(wage1)</span>
-<span id="cb16-411"><a href="#cb16-411" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wage1)</span>
-<span id="cb16-412"><a href="#cb16-412" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wage1[, <span class="fu">c</span>(<span class="st">"wage"</span>, <span class="st">"educ"</span>, <span class="st">"exper"</span>, <span class="st">"tenure"</span>)])</span>
-<span id="cb16-413"><a href="#cb16-413" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-409"><a href="#cb16-409" aria-hidden="true" tabindex="-1"></a><span class="fu">### Vectors and matrices</span></span>
+<span id="cb16-410"><a href="#cb16-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-411"><a href="#cb16-411" aria-hidden="true" tabindex="-1"></a>Wooldridge writes the multiple-regression model as $\mathbf{y} = \mathbf{X}\beta + \mathbf{u}$, and the rest of his Chapter 3 is one long matrix calculation --- you need to be able to follow it.</span>
+<span id="cb16-412"><a href="#cb16-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-413"><a href="#cb16-413" aria-hidden="true" tabindex="-1"></a>A column **vector** of length $n$ is a stack of $n$ real numbers:</span>
 <span id="cb16-414"><a href="#cb16-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-415"><a href="#cb16-415" aria-hidden="true" tabindex="-1"></a>The output of <span class="in">`str()`</span> tells us that <span class="in">`wage1`</span> is a data frame with <span class="in">`r nrow(wage1)`</span> observations and <span class="in">`r ncol(wage1)`</span> variables; <span class="in">`head()`</span> prints the first six rows; and <span class="in">`summary()`</span> gives the five-number summary plus the mean for each variable.</span>
-<span id="cb16-416"><a href="#cb16-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-417"><a href="#cb16-417" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
-<span id="cb16-418"><a href="#cb16-418" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quick R glossary</span></span>
-<span id="cb16-419"><a href="#cb16-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-420"><a href="#cb16-420" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`&lt;-`</span> is the **assignment** operator: <span class="in">`x &lt;- 5`</span> stores 5 in the object <span class="in">`x`</span>.</span>
-<span id="cb16-421"><a href="#cb16-421" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`c()`</span> **combines** values into a vector: <span class="in">`c(1, 2, 3)`</span>.</span>
-<span id="cb16-422"><a href="#cb16-422" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`data.frame`</span> is the standard table structure: one column per variable, one row per observation.</span>
-<span id="cb16-423"><a href="#cb16-423" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`$`</span> extracts a column by name: <span class="in">`wage1$wage`</span>.</span>
-<span id="cb16-424"><a href="#cb16-424" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`?function_name`</span> opens the help file for <span class="in">`function_name`</span>.</span>
-<span id="cb16-425"><a href="#cb16-425" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb16-426"><a href="#cb16-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-427"><a href="#cb16-427" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.7 First plots</span></span>
-<span id="cb16-428"><a href="#cb16-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-429"><a href="#cb16-429" aria-hidden="true" tabindex="-1"></a>A picture is almost always the right place to start. The two functions we use most often in this book are <span class="in">`hist()`</span> for a single variable and <span class="in">`plot()`</span> for a scatterplot of two variables.</span>
-<span id="cb16-430"><a href="#cb16-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-431"><a href="#cb16-431" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-hist}</span></span>
-<span id="cb16-432"><a href="#cb16-432" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribution of hourly wages in wage1 (1976 USD). Note the long right tail."</span></span>
-<span id="cb16-433"><a href="#cb16-433" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wage1<span class="sc">$</span>wage,</span>
-<span id="cb16-434"><a href="#cb16-434" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distribution of hourly wages"</span>,</span>
-<span id="cb16-435"><a href="#cb16-435" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Wage (USD/hour)"</span>,</span>
-<span id="cb16-436"><a href="#cb16-436" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb16-437"><a href="#cb16-437" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">30</span>)</span>
-<span id="cb16-438"><a href="#cb16-438" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-439"><a href="#cb16-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-440"><a href="#cb16-440" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-hist-educ}</span></span>
-<span id="cb16-441"><a href="#cb16-441" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribution of years of education in wage1, with visible piles at 12 and 16 years."</span></span>
-<span id="cb16-442"><a href="#cb16-442" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wage1<span class="sc">$</span>educ,</span>
-<span id="cb16-443"><a href="#cb16-443" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distribution of years of education"</span>,</span>
-<span id="cb16-444"><a href="#cb16-444" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Years of education"</span>,</span>
-<span id="cb16-445"><a href="#cb16-445" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">"lightgreen"</span>,</span>
-<span id="cb16-446"><a href="#cb16-446" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">15</span>)</span>
-<span id="cb16-447"><a href="#cb16-447" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-448"><a href="#cb16-448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-449"><a href="#cb16-449" aria-hidden="true" tabindex="-1"></a>A scatterplot reveals bivariate structure:</span>
-<span id="cb16-450"><a href="#cb16-450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-451"><a href="#cb16-451" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-scatter}</span></span>
-<span id="cb16-452"><a href="#cb16-452" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Wage versus years of education in wage1."</span></span>
-<span id="cb16-453"><a href="#cb16-453" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wage1<span class="sc">$</span>educ, wage1<span class="sc">$</span>wage,</span>
-<span id="cb16-454"><a href="#cb16-454" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Years of education"</span>,</span>
-<span id="cb16-455"><a href="#cb16-455" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Hourly wage (USD)"</span>,</span>
-<span id="cb16-456"><a href="#cb16-456" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Wage vs. education"</span>,</span>
-<span id="cb16-457"><a href="#cb16-457" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch  =</span> <span class="dv">16</span>,</span>
-<span id="cb16-458"><a href="#cb16-458" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>))</span>
-<span id="cb16-459"><a href="#cb16-459" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-460"><a href="#cb16-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-461"><a href="#cb16-461" aria-hidden="true" tabindex="-1"></a>Conditional means --- the average of one variable within bins of another --- are a non-parametric preview of regression. In base R, <span class="in">`tapply()`</span> does the job:</span>
-<span id="cb16-462"><a href="#cb16-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-463"><a href="#cb16-463" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-tapply}</span></span>
-<span id="cb16-464"><a href="#cb16-464" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(wage1<span class="sc">$</span>wage, wage1<span class="sc">$</span>educ,  mean)</span>
-<span id="cb16-465"><a href="#cb16-465" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(wage1<span class="sc">$</span>wage, wage1<span class="sc">$</span>female, mean)</span>
-<span id="cb16-466"><a href="#cb16-466" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-415"><a href="#cb16-415" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-416"><a href="#cb16-416" aria-hidden="true" tabindex="-1"></a>\mathbf{x} = \begin{pmatrix} x_1 <span class="sc">\\</span> x_2 <span class="sc">\\</span> \vdots <span class="sc">\\</span> x_n \end{pmatrix}.</span>
+<span id="cb16-417"><a href="#cb16-417" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-418"><a href="#cb16-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-419"><a href="#cb16-419" aria-hidden="true" tabindex="-1"></a>A **matrix** of dimension $n \times k$ is a rectangular array of $n$ rows and $k$ columns:</span>
+<span id="cb16-420"><a href="#cb16-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-421"><a href="#cb16-421" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-422"><a href="#cb16-422" aria-hidden="true" tabindex="-1"></a>\mathbf{A} = \begin{pmatrix}</span>
+<span id="cb16-423"><a href="#cb16-423" aria-hidden="true" tabindex="-1"></a>a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1k} <span class="sc">\\</span></span>
+<span id="cb16-424"><a href="#cb16-424" aria-hidden="true" tabindex="-1"></a>a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2k} <span class="sc">\\</span></span>
+<span id="cb16-425"><a href="#cb16-425" aria-hidden="true" tabindex="-1"></a>\vdots &amp; \vdots &amp; \ddots &amp; \vdots <span class="sc">\\</span></span>
+<span id="cb16-426"><a href="#cb16-426" aria-hidden="true" tabindex="-1"></a>a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nk}</span>
+<span id="cb16-427"><a href="#cb16-427" aria-hidden="true" tabindex="-1"></a>\end{pmatrix}.</span>
+<span id="cb16-428"><a href="#cb16-428" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-429"><a href="#cb16-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-430"><a href="#cb16-430" aria-hidden="true" tabindex="-1"></a>Throughout this book, the **data matrix** $\mathbf{X}$ has one row per observation and one column per regressor (including a leading column of ones for the intercept). The outcome vector $\mathbf{y}$ has length $n$. With this convention, the multiple regression model is written in matrix form as $\mathbf{y} = \mathbf{X}\beta + \mathbf{u}$.</span>
+<span id="cb16-431"><a href="#cb16-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-432"><a href="#cb16-432" aria-hidden="true" tabindex="-1"></a><span class="fu">### Transpose</span></span>
+<span id="cb16-433"><a href="#cb16-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-434"><a href="#cb16-434" aria-hidden="true" tabindex="-1"></a>The **transpose** $\mathbf{A}'$ swaps rows and columns: if $\mathbf{A}$ is $n \times k$, then $\mathbf{A}'$ is $k \times n$, with $(\mathbf{A}')_{ij} = a_{ji}$. Key properties:</span>
+<span id="cb16-435"><a href="#cb16-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-436"><a href="#cb16-436" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-437"><a href="#cb16-437" aria-hidden="true" tabindex="-1"></a>(\mathbf{A}')' = \mathbf{A},\qquad</span>
+<span id="cb16-438"><a href="#cb16-438" aria-hidden="true" tabindex="-1"></a>(\mathbf{A} + \mathbf{B})' = \mathbf{A}' + \mathbf{B}',\qquad</span>
+<span id="cb16-439"><a href="#cb16-439" aria-hidden="true" tabindex="-1"></a>(\mathbf{A}\mathbf{B})' = \mathbf{B}'\mathbf{A}'.</span>
+<span id="cb16-440"><a href="#cb16-440" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-441"><a href="#cb16-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-442"><a href="#cb16-442" aria-hidden="true" tabindex="-1"></a><span class="fu">### Matrix multiplication</span></span>
+<span id="cb16-443"><a href="#cb16-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-444"><a href="#cb16-444" aria-hidden="true" tabindex="-1"></a>The product $\mathbf{A}\mathbf{B}$ is defined when the number of columns of $\mathbf{A}$ equals the number of rows of $\mathbf{B}$. If $\mathbf{A}$ is $n\times k$ and $\mathbf{B}$ is $k\times m$, then $\mathbf{A}\mathbf{B}$ is $n\times m$ with entries</span>
+<span id="cb16-445"><a href="#cb16-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-446"><a href="#cb16-446" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-447"><a href="#cb16-447" aria-hidden="true" tabindex="-1"></a>(\mathbf{A}\mathbf{B})_{ij} = \sum_{\ell=1}^{k} a_{i\ell}\, b_{\ell j}.</span>
+<span id="cb16-448"><a href="#cb16-448" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-449"><a href="#cb16-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-450"><a href="#cb16-450" aria-hidden="true" tabindex="-1"></a>Matrix multiplication is associative ($(\mathbf{A}\mathbf{B})\mathbf{C} = \mathbf{A}(\mathbf{B}\mathbf{C})$) and distributive over addition, but **not commutative**: in general $\mathbf{A}\mathbf{B} \ne \mathbf{B}\mathbf{A}$.</span>
+<span id="cb16-451"><a href="#cb16-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-452"><a href="#cb16-452" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inverse and identity</span></span>
+<span id="cb16-453"><a href="#cb16-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-454"><a href="#cb16-454" aria-hidden="true" tabindex="-1"></a>The $k\times k$ **identity matrix** $\mathbf{I}_k$ has ones on the diagonal and zeros elsewhere. It satisfies $\mathbf{I}_k \mathbf{A} = \mathbf{A} \mathbf{I}_k = \mathbf{A}$ for any conformable $\mathbf{A}$.</span>
+<span id="cb16-455"><a href="#cb16-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-456"><a href="#cb16-456" aria-hidden="true" tabindex="-1"></a>A square matrix $\mathbf{A}$ is **invertible** (or non-singular) if there exists a matrix $\mathbf{A}^{-1}$ with $\mathbf{A}\mathbf{A}^{-1} = \mathbf{A}^{-1}\mathbf{A} = \mathbf{I}_k$. Properties:</span>
+<span id="cb16-457"><a href="#cb16-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-458"><a href="#cb16-458" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-459"><a href="#cb16-459" aria-hidden="true" tabindex="-1"></a>(\mathbf{A}^{-1})^{-1} = \mathbf{A},\qquad</span>
+<span id="cb16-460"><a href="#cb16-460" aria-hidden="true" tabindex="-1"></a>(\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1}\mathbf{A}^{-1},\qquad</span>
+<span id="cb16-461"><a href="#cb16-461" aria-hidden="true" tabindex="-1"></a>(\mathbf{A}')^{-1} = (\mathbf{A}^{-1})'.</span>
+<span id="cb16-462"><a href="#cb16-462" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-463"><a href="#cb16-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-464"><a href="#cb16-464" aria-hidden="true" tabindex="-1"></a>The matrix-form OLS estimator in §3.4 is $\hat{\beta} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}$, which requires $\mathbf{X}'\mathbf{X}$ to be invertible.</span>
+<span id="cb16-465"><a href="#cb16-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-466"><a href="#cb16-466" aria-hidden="true" tabindex="-1"></a><span class="fu">### Rank and the no-multicollinearity assumption</span></span>
 <span id="cb16-467"><a href="#cb16-467" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-468"><a href="#cb16-468" aria-hidden="true" tabindex="-1"></a>The first table is the average wage at each level of education; the second is the average wage by gender. Chapter 1 discusses the interpretation of these numbers at length (and why they are *not* causal effects). The mechanics of computing them belong here, in the prerequisites.</span>
+<span id="cb16-468"><a href="#cb16-468" aria-hidden="true" tabindex="-1"></a>This is the technical version of "no perfectly redundant regressor" (Wooldridge's MLR.3): full rank $k$ on the $n \times k$ design matrix is exactly what makes the OLS solution unique.</span>
 <span id="cb16-469"><a href="#cb16-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-470"><a href="#cb16-470" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb16-471"><a href="#cb16-471" aria-hidden="true" tabindex="-1"></a><span class="fu">## Where to go next</span></span>
-<span id="cb16-472"><a href="#cb16-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-473"><a href="#cb16-473" aria-hidden="true" tabindex="-1"></a>Readers who feel rusty on any block above should skim a standard reference before tackling Chapter 2: Wooldridge's own Appendices A--D are an excellent and notation-consistent companion <span class="co">[</span><span class="ot">@wooldridge2020</span><span class="co">]</span>. Linear algebra at the level of §A.5 is covered in any first-year text; for a quick refresher tailored to econometrics, see Wooldridge's Appendix D.</span>
-<span id="cb16-474"><a href="#cb16-474" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb16-470"><a href="#cb16-470" aria-hidden="true" tabindex="-1"></a>The **rank** of a matrix is the number of linearly independent columns (equivalently, of linearly independent rows). A square $k\times k$ matrix is invertible if and only if it has full rank $k$. For the data matrix $\mathbf{X}$ of dimension $n \times k$, the condition $\operatorname{rank}(\mathbf{X}) = k$ is the **no perfect multicollinearity** assumption (Wooldridge's MLR.3): no column of $\mathbf{X}$ is an exact linear combination of the others. When this fails, $\mathbf{X}'\mathbf{X}$ is singular and OLS cannot be computed.</span>
+<span id="cb16-471"><a href="#cb16-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-472"><a href="#cb16-472" aria-hidden="true" tabindex="-1"></a>:::{.callout-warning}</span>
+<span id="cb16-473"><a href="#cb16-473" aria-hidden="true" tabindex="-1"></a><span class="fu">## Common mistake: confusing perfect and near-perfect multicollinearity</span></span>
+<span id="cb16-474"><a href="#cb16-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-475"><a href="#cb16-475" aria-hidden="true" tabindex="-1"></a>Perfect multicollinearity (e.g. including both a dummy for male and a dummy for female *plus* an intercept --- the "dummy-variable trap") makes OLS literally impossible to compute. Near multicollinearity (highly but not perfectly correlated regressors) is a different beast: the estimator still exists, but its variance becomes large. We discuss both, and the diagnostic VIF, in Chapter 3.</span>
+<span id="cb16-476"><a href="#cb16-476" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-477"><a href="#cb16-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-478"><a href="#cb16-478" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.6 Setting up R and RStudio</span></span>
+<span id="cb16-479"><a href="#cb16-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-480"><a href="#cb16-480" aria-hidden="true" tabindex="-1"></a>The empirical labs in every chapter assume a working installation of R (≥ 4.2) and RStudio. If you have never installed them, follow these steps once:</span>
+<span id="cb16-481"><a href="#cb16-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-482"><a href="#cb16-482" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Download and install **R** from <span class="co">[</span><span class="ot">https://cran.r-project.org/</span><span class="co">](https://cran.r-project.org/)</span>.</span>
+<span id="cb16-483"><a href="#cb16-483" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Download and install **RStudio Desktop** (free edition) from <span class="co">[</span><span class="ot">https://posit.co/download/rstudio-desktop/</span><span class="co">](https://posit.co/download/rstudio-desktop/)</span>.</span>
+<span id="cb16-484"><a href="#cb16-484" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Open RStudio. The "Console" pane on the left is where you type R commands.</span>
+<span id="cb16-485"><a href="#cb16-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-486"><a href="#cb16-486" aria-hidden="true" tabindex="-1"></a>We will use a handful of contributed packages throughout the book. Install them once, then in each session load only the ones you need.</span>
+<span id="cb16-487"><a href="#cb16-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-488"><a href="#cb16-488" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-install}</span></span>
+<span id="cb16-489"><a href="#cb16-489" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb16-490"><a href="#cb16-490" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
+<span id="cb16-491"><a href="#cb16-491" aria-hidden="true" tabindex="-1"></a>  <span class="st">"wooldridge"</span>,   <span class="co"># textbook datasets</span></span>
+<span id="cb16-492"><a href="#cb16-492" aria-hidden="true" tabindex="-1"></a>  <span class="st">"readxl"</span>,       <span class="co"># read Excel files</span></span>
+<span id="cb16-493"><a href="#cb16-493" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lmtest"</span>,       <span class="co"># tests after lm() (Chs. 4, 7)</span></span>
+<span id="cb16-494"><a href="#cb16-494" aria-hidden="true" tabindex="-1"></a>  <span class="st">"sandwich"</span>,     <span class="co"># robust standard errors (Ch. 7)</span></span>
+<span id="cb16-495"><a href="#cb16-495" aria-hidden="true" tabindex="-1"></a>  <span class="st">"orcutt"</span>        <span class="co"># Cochrane-Orcutt procedure (Ch. 8)</span></span>
+<span id="cb16-496"><a href="#cb16-496" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb16-497"><a href="#cb16-497" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-498"><a href="#cb16-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-499"><a href="#cb16-499" aria-hidden="true" tabindex="-1"></a>The <span class="in">`wooldridge`</span> package ships the datasets that Wooldridge uses in his textbook, including <span class="in">`wage1`</span>, which we work with in Chapter 1.</span>
+<span id="cb16-500"><a href="#cb16-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-501"><a href="#cb16-501" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-setup}</span></span>
+<span id="cb16-502"><a href="#cb16-502" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-503"><a href="#cb16-503" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wooldridge)</span>
+<span id="cb16-504"><a href="#cb16-504" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"wage1"</span>)</span>
+<span id="cb16-505"><a href="#cb16-505" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-506"><a href="#cb16-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-507"><a href="#cb16-507" aria-hidden="true" tabindex="-1"></a>A first sanity check on any dataset is to look at its structure, its head, and a summary.</span>
+<span id="cb16-508"><a href="#cb16-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-509"><a href="#cb16-509" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-explore}</span></span>
+<span id="cb16-510"><a href="#cb16-510" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(wage1)</span>
+<span id="cb16-511"><a href="#cb16-511" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wage1)</span>
+<span id="cb16-512"><a href="#cb16-512" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wage1[, <span class="fu">c</span>(<span class="st">"wage"</span>, <span class="st">"educ"</span>, <span class="st">"exper"</span>, <span class="st">"tenure"</span>)])</span>
+<span id="cb16-513"><a href="#cb16-513" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-514"><a href="#cb16-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-515"><a href="#cb16-515" aria-hidden="true" tabindex="-1"></a>The output of <span class="in">`str()`</span> tells us that <span class="in">`wage1`</span> is a data frame with <span class="in">`r nrow(wage1)`</span> observations and <span class="in">`r ncol(wage1)`</span> variables; <span class="in">`head()`</span> prints the first six rows; and <span class="in">`summary()`</span> gives the five-number summary plus the mean for each variable.</span>
+<span id="cb16-516"><a href="#cb16-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-517"><a href="#cb16-517" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb16-518"><a href="#cb16-518" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quick R glossary</span></span>
+<span id="cb16-519"><a href="#cb16-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-520"><a href="#cb16-520" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`&lt;-`</span> is the **assignment** operator: <span class="in">`x &lt;- 5`</span> stores 5 in the object <span class="in">`x`</span>.</span>
+<span id="cb16-521"><a href="#cb16-521" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`c()`</span> **combines** values into a vector: <span class="in">`c(1, 2, 3)`</span>.</span>
+<span id="cb16-522"><a href="#cb16-522" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`data.frame`</span> is the standard table structure: one column per variable, one row per observation.</span>
+<span id="cb16-523"><a href="#cb16-523" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`$`</span> extracts a column by name: <span class="in">`wage1$wage`</span>.</span>
+<span id="cb16-524"><a href="#cb16-524" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`?function_name`</span> opens the help file for <span class="in">`function_name`</span>.</span>
+<span id="cb16-525"><a href="#cb16-525" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-526"><a href="#cb16-526" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-527"><a href="#cb16-527" aria-hidden="true" tabindex="-1"></a><span class="fu">## A.7 First plots</span></span>
+<span id="cb16-528"><a href="#cb16-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-529"><a href="#cb16-529" aria-hidden="true" tabindex="-1"></a>A picture is almost always the right place to start. The two functions we use most often in this book are <span class="in">`hist()`</span> for a single variable and <span class="in">`plot()`</span> for a scatterplot of two variables.</span>
+<span id="cb16-530"><a href="#cb16-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-531"><a href="#cb16-531" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-hist}</span></span>
+<span id="cb16-532"><a href="#cb16-532" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribution of hourly wages in wage1 (1976 USD). Note the long right tail."</span></span>
+<span id="cb16-533"><a href="#cb16-533" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wage1<span class="sc">$</span>wage,</span>
+<span id="cb16-534"><a href="#cb16-534" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distribution of hourly wages"</span>,</span>
+<span id="cb16-535"><a href="#cb16-535" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Wage (USD/hour)"</span>,</span>
+<span id="cb16-536"><a href="#cb16-536" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb16-537"><a href="#cb16-537" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">30</span>)</span>
+<span id="cb16-538"><a href="#cb16-538" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-539"><a href="#cb16-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-540"><a href="#cb16-540" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-hist-educ}</span></span>
+<span id="cb16-541"><a href="#cb16-541" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribution of years of education in wage1, with visible piles at 12 and 16 years."</span></span>
+<span id="cb16-542"><a href="#cb16-542" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wage1<span class="sc">$</span>educ,</span>
+<span id="cb16-543"><a href="#cb16-543" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distribution of years of education"</span>,</span>
+<span id="cb16-544"><a href="#cb16-544" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Years of education"</span>,</span>
+<span id="cb16-545"><a href="#cb16-545" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">"lightgreen"</span>,</span>
+<span id="cb16-546"><a href="#cb16-546" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">15</span>)</span>
+<span id="cb16-547"><a href="#cb16-547" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-548"><a href="#cb16-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-549"><a href="#cb16-549" aria-hidden="true" tabindex="-1"></a>A scatterplot reveals bivariate structure:</span>
+<span id="cb16-550"><a href="#cb16-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-551"><a href="#cb16-551" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-scatter}</span></span>
+<span id="cb16-552"><a href="#cb16-552" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Wage versus years of education in wage1."</span></span>
+<span id="cb16-553"><a href="#cb16-553" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wage1<span class="sc">$</span>educ, wage1<span class="sc">$</span>wage,</span>
+<span id="cb16-554"><a href="#cb16-554" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Years of education"</span>,</span>
+<span id="cb16-555"><a href="#cb16-555" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Hourly wage (USD)"</span>,</span>
+<span id="cb16-556"><a href="#cb16-556" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Wage vs. education"</span>,</span>
+<span id="cb16-557"><a href="#cb16-557" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch  =</span> <span class="dv">16</span>,</span>
+<span id="cb16-558"><a href="#cb16-558" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>))</span>
+<span id="cb16-559"><a href="#cb16-559" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-560"><a href="#cb16-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-561"><a href="#cb16-561" aria-hidden="true" tabindex="-1"></a>Conditional means --- the average of one variable within bins of another --- are a non-parametric preview of regression. In base R, <span class="in">`tapply()`</span> does the job:</span>
+<span id="cb16-562"><a href="#cb16-562" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-563"><a href="#cb16-563" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appA-tapply}</span></span>
+<span id="cb16-564"><a href="#cb16-564" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(wage1<span class="sc">$</span>wage, wage1<span class="sc">$</span>educ,  mean)</span>
+<span id="cb16-565"><a href="#cb16-565" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(wage1<span class="sc">$</span>wage, wage1<span class="sc">$</span>female, mean)</span>
+<span id="cb16-566"><a href="#cb16-566" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-567"><a href="#cb16-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-568"><a href="#cb16-568" aria-hidden="true" tabindex="-1"></a>The first table is the average wage at each level of education; the second is the average wage by gender. Chapter 1 discusses the interpretation of these numbers at length (and why they are *not* causal effects). The mechanics of computing them belong here, in the prerequisites.</span>
+<span id="cb16-569"><a href="#cb16-569" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-570"><a href="#cb16-570" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb16-571"><a href="#cb16-571" aria-hidden="true" tabindex="-1"></a><span class="fu">## Where to go next</span></span>
+<span id="cb16-572"><a href="#cb16-572" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-573"><a href="#cb16-573" aria-hidden="true" tabindex="-1"></a>Readers who feel rusty on any block above should skim a standard reference before tackling Chapter 2: Wooldridge's own Appendices A--D are an excellent and notation-consistent companion <span class="co">[</span><span class="ot">@wooldridge2020</span><span class="co">]</span>. Linear algebra at the level of §A.5 is covered in any first-year text; for a quick refresher tailored to econometrics, see Wooldridge's Appendix D.</span>
+<span id="cb16-574"><a href="#cb16-574" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

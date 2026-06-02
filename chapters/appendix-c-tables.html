@@ -346,55 +346,55 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Preface</span></span></a>
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/01-initial-concepts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Initial Concepts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Initial Concepts</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/02-simple-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Simple Linear Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Simple Linear Regression Model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/03-multiple-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Multiple Linear Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Multiple Linear Regression Model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/04-inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/05-prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Prediction and Model Selection</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Prediction and Model Selection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/06-nonlinear-qualitative.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Nonlinear Relationships and Qualitative Information</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Nonlinear Relationships and Qualitative Information</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/07-heteroskedasticity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heteroskedasticity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Heteroskedasticity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/08-autocorrelation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Autocorrelation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Autocorrelation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -467,9 +467,6 @@ window.Quarto = {
 </header>
 
 
-<blockquote class="blockquote">
-<p><em>Status: ported 2026-05-18. All tables generated reproducibly from R distribution functions, except the Durbin-Watson bounds (Durbin &amp; Watson 1951).</em></p>
-</blockquote>
 <p>This appendix gathers the critical-value tables we use most often in the book: the <span class="math inline">\(t\)</span>, <span class="math inline">\(F\)</span>, and <span class="math inline">\(\chi^{2}\)</span> distributions for the inferential procedures of Chapter 4, plus the Durbin–Watson bounds used in the serial-correlation diagnostic of Chapter 8. Because the entries below are produced inside R by the quantile functions <code>qt()</code>, <code>qf()</code>, and <code>qchisq()</code>, they are exact to machine precision rather than rounded as in printed appendices. A reader who wants a value not listed here can simply re-run the corresponding chunk with extra rows or columns.</p>
 <section id="sec-c-how-to-read" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="sec-c-how-to-read">How to read these tables</h2>
@@ -2095,153 +2092,152 @@ window.Quarto = {
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Statistical Tables"</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Status: ported 2026-05-18. All tables generated reproducibly from R distribution functions, except the Durbin-Watson bounds (Durbin &amp; Watson 1951).*</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>This appendix gathers the critical-value tables we use most often in the book: the $t$, $F$, and $\chi^{2}$ distributions for the inferential procedures of Chapter 4, plus the Durbin–Watson bounds used in the serial-correlation diagnostic of Chapter 8. Because the entries below are produced inside R by the quantile functions <span class="in">`qt()`</span>, <span class="in">`qf()`</span>, and <span class="in">`qchisq()`</span>, they are exact to machine precision rather than rounded as in printed appendices. A reader who wants a value not listed here can simply re-run the corresponding chunk with extra rows or columns.</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to read these tables {#sec-c-how-to-read .unnumbered}</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>A **critical value** $c_{\alpha}$ is the threshold a test statistic must cross to reject the null at significance level $\alpha$: for a one-sided $t$-test of $H_{0}: \beta_{j} = 0$ against $H_{1}: \beta_{j} &gt; 0$ at the 5% level, we reject when $t &gt; c_{0.05}$. A **$p$-value** turns the question around: it is the smallest $\alpha$ at which the null would have been rejected given the observed statistic. The two views are equivalent --- given a $p$-value you know which critical values you would have crossed --- but the tables here are organised around critical values because that is still how most printed inference works through.</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>For the $t$-distribution, the columns below report **one-tailed** upper-tail critical values: $c$ such that $\Pr(T_{df} &gt; c) = \alpha$. For a **two-tailed** test at level $\alpha$, look up the $\alpha/2$ column instead --- so the 5% two-tailed critical value is the entry in the $\alpha = 0.025$ column. The $F$ and $\chi^{2}$ tables are intrinsically one-tailed (their statistics are non-negative) and need no such adjustment. The $t$ table is invoked in §4.5 for single-coefficient hypothesis testing; the $F$ table is used in §4.7 for joint tests and again in §7.3 for the Breusch–Pagan heteroskedasticity test; the $\chi^{2}$ table covers the large-sample variants of those tests; and the Durbin–Watson bounds in §C.4 are the reference for the serial-correlation diagnostic of §8.3.</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## C.1 Critical values of the $t$-distribution {#sec-c-t}</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>The entries below are one-tailed upper critical values $c$ such that $\Pr(T_{df} &gt; c) = \alpha$. The last row, $df = \infty$, coincides with the standard-normal quantiles $z_{1-\alpha}$ --- the bridge formalised by the CLT in §A.4.</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-t-table}</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>df_t    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>, <span class="cn">Inf</span>)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>alpha_t <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.025</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>, <span class="fl">0.001</span>)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>t_tab <span class="ot">&lt;-</span> <span class="fu">sapply</span>(alpha_t, <span class="cf">function</span>(a) <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> a, <span class="at">df =</span> df_t))</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>t_tab <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(t_tab)</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(t_tab) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"α = "</span>, <span class="fu">format</span>(alpha_t, <span class="at">scientific =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>t_tab <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">df =</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(df_t), <span class="st">"∞"</span>, <span class="fu">as.character</span>(df_t)),</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>               t_tab)</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  t_tab,</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(alpha_t))),</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"One-tailed critical values of the $t$-distribution. For a two-tailed test at level $</span><span class="sc">\\</span><span class="st">alpha$, read the $</span><span class="sc">\\</span><span class="st">alpha/2$ column."</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>A handful of entries are worth memorising. With $df = \infty$ the table reproduces $z_{0.975} = 1.96$ (column $\alpha = 0.025$) and $z_{0.995} = 2.576$ (column $\alpha = 0.005$), the standard-normal critical values for two-sided tests at 5% and 1%. For $df \geq 30$ the rule of thumb that $t$ is "close to normal" already pays off: the 5% two-sided critical value (column $\alpha = 0.025$) sits within 5% of 1.96.</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## C.2 Critical values of the $F$-distribution {#sec-c-f}</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>The $F$-tables tabulate the upper-$\alpha$ critical value of $F_{k_{1}, k_{2}}$, where $k_{1}$ is the **numerator** degrees of freedom (the number of restrictions in a joint test) and $k_{2}$ is the **denominator** degrees of freedom (typically $n - k - 1$ in a $k$-regressor model with an intercept). We tabulate the two conventional significance levels separately.</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-f-table-05}</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>num_df <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">30</span>)</span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>den_df <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">120</span>, <span class="cn">Inf</span>)</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>f_tab_05 <span class="ot">&lt;-</span> <span class="fu">outer</span>(den_df, num_df,</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(d, n) <span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> n, <span class="at">df2 =</span> d))</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>f_tab_05 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(f_tab_05)</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(f_tab_05) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"k1 = "</span>, num_df)</span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>f_tab_05 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="st">`</span><span class="at">k2 (den. df)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(den_df), <span class="st">"∞"</span>,</span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>                                          <span class="fu">as.character</span>(den_df)),</span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>                  f_tab_05)</span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>  f_tab_05,</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(num_df))),</span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Critical values of the $F$-distribution at $</span><span class="sc">\\</span><span class="st">alpha = 0.05$ (upper tail). Rows: denominator df $k_{2}$. Columns: numerator df $k_{1}$."</span></span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-f-table-01}</span></span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>f_tab_01 <span class="ot">&lt;-</span> <span class="fu">outer</span>(den_df, num_df,</span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(d, n) <span class="fu">qf</span>(<span class="fl">0.99</span>, <span class="at">df1 =</span> n, <span class="at">df2 =</span> d))</span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>f_tab_01 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(f_tab_01)</span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(f_tab_01) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"k1 = "</span>, num_df)</span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>f_tab_01 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="st">`</span><span class="at">k2 (den. df)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(den_df), <span class="st">"∞"</span>,</span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>                                          <span class="fu">as.character</span>(den_df)),</span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>                  f_tab_01)</span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  f_tab_01,</span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(num_df))),</span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Critical values of the $F$-distribution at $</span><span class="sc">\\</span><span class="st">alpha = 0.01$ (upper tail). Rows: denominator df $k_{2}$. Columns: numerator df $k_{1}$."</span></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>The bottom row ($k_{2} = \infty$) is a useful sanity check: the $F_{k_{1}, \infty}$ distribution coincides (after scaling) with $\chi^{2}_{k_{1}}/k_{1}$, so its 5% critical value equals $\chi^{2}_{k_{1}, 0.95}/k_{1}$. Compare, for instance, the $(k_{1} = 4, k_{2} = \infty)$ entry of the 5% $F$ table with $\chi^{2}_{4, 0.95}/4$ from the next section.</span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## C.3 Critical values of the $\chi^{2}$-distribution {#sec-c-chi2}</span></span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-chi2-table}</span></span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>df_chi    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">100</span>)</span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>alpha_chi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.025</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>)</span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>chi_tab <span class="ot">&lt;-</span> <span class="fu">sapply</span>(alpha_chi, <span class="cf">function</span>(a) <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> a, <span class="at">df =</span> df_chi))</span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>chi_tab <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(chi_tab)</span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(chi_tab) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"α = "</span>, <span class="fu">format</span>(alpha_chi, <span class="at">scientific =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>chi_tab <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">df =</span> <span class="fu">as.character</span>(df_chi), chi_tab)</span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>  chi_tab,</span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(alpha_chi))),</span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Upper-tail critical values of the $</span><span class="sc">\\</span><span class="st">chi^{2}$-distribution: $c$ such that $</span><span class="sc">\\</span><span class="st">Pr(</span><span class="sc">\\</span><span class="st">chi^{2}_{df} &gt; c) = </span><span class="sc">\\</span><span class="st">alpha$."</span></span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>The $\chi^{2}$ table is the natural reference for large-sample versions of the joint test (the **Wald statistic** is asymptotically $\chi^{2}_{q}$ where $q$ is the number of restrictions) and for the Breusch–Pagan test of §7.3, whose $LM$ statistic is $\chi^{2}_{k}$ under the null of homoskedasticity.</span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a><span class="fu">## C.4 Durbin–Watson bounds {#sec-c-dw}</span></span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>The Durbin–Watson statistic $d = \sum_{t=2}^{n}(\hat u_{t} - \hat u_{t-1})^{2} / \sum_{t=1}^{n}\hat u_{t}^{2}$ does not have a single critical value: its exact null distribution depends on the design matrix $\mathbf{X}$, not just on $n$ and the number of regressors. Durbin and Watson (1951) sidestepped this by tabulating two bounds, $d_{L}$ and $d_{U}$, between which the *true* critical value must lie regardless of $\mathbf{X}$. The bounds below are taken from Durbin, J. and Watson, G. S. (1951), "Testing for serial correlation in least squares regression. II," *Biometrika* **38**(1), 159–178, for $\alpha = 0.05$ and $k'$ regressors excluding the constant. A representative subset is reproduced; consult the original tables for values of $n$ not listed.</span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-dw-table}</span></span>
-<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>dw_05 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a>  <span class="at">n      =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">75</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>),</span>
-<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k1  =</span> <span class="fu">c</span>(<span class="fl">1.08</span>, <span class="fl">1.20</span>, <span class="fl">1.29</span>, <span class="fl">1.35</span>, <span class="fl">1.44</span>, <span class="fl">1.50</span>, <span class="fl">1.60</span>, <span class="fl">1.65</span>, <span class="fl">1.72</span>, <span class="fl">1.76</span>),</span>
-<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k1  =</span> <span class="fu">c</span>(<span class="fl">1.36</span>, <span class="fl">1.41</span>, <span class="fl">1.45</span>, <span class="fl">1.49</span>, <span class="fl">1.54</span>, <span class="fl">1.59</span>, <span class="fl">1.65</span>, <span class="fl">1.69</span>, <span class="fl">1.75</span>, <span class="fl">1.78</span>),</span>
-<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k2  =</span> <span class="fu">c</span>(<span class="fl">0.95</span>, <span class="fl">1.10</span>, <span class="fl">1.21</span>, <span class="fl">1.28</span>, <span class="fl">1.39</span>, <span class="fl">1.46</span>, <span class="fl">1.57</span>, <span class="fl">1.63</span>, <span class="fl">1.71</span>, <span class="fl">1.75</span>),</span>
-<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k2  =</span> <span class="fu">c</span>(<span class="fl">1.54</span>, <span class="fl">1.54</span>, <span class="fl">1.55</span>, <span class="fl">1.57</span>, <span class="fl">1.60</span>, <span class="fl">1.63</span>, <span class="fl">1.68</span>, <span class="fl">1.72</span>, <span class="fl">1.76</span>, <span class="fl">1.79</span>),</span>
-<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k3  =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">1.00</span>, <span class="fl">1.12</span>, <span class="fl">1.21</span>, <span class="fl">1.34</span>, <span class="fl">1.42</span>, <span class="fl">1.54</span>, <span class="fl">1.61</span>, <span class="fl">1.69</span>, <span class="fl">1.74</span>),</span>
-<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k3  =</span> <span class="fu">c</span>(<span class="fl">1.75</span>, <span class="fl">1.68</span>, <span class="fl">1.66</span>, <span class="fl">1.65</span>, <span class="fl">1.66</span>, <span class="fl">1.67</span>, <span class="fl">1.71</span>, <span class="fl">1.74</span>, <span class="fl">1.77</span>, <span class="fl">1.80</span>),</span>
-<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k4  =</span> <span class="fu">c</span>(<span class="fl">0.69</span>, <span class="fl">0.90</span>, <span class="fl">1.04</span>, <span class="fl">1.14</span>, <span class="fl">1.29</span>, <span class="fl">1.38</span>, <span class="fl">1.51</span>, <span class="fl">1.59</span>, <span class="fl">1.68</span>, <span class="fl">1.73</span>),</span>
-<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k4  =</span> <span class="fu">c</span>(<span class="fl">1.97</span>, <span class="fl">1.83</span>, <span class="fl">1.77</span>, <span class="fl">1.74</span>, <span class="fl">1.72</span>, <span class="fl">1.72</span>, <span class="fl">1.74</span>, <span class="fl">1.76</span>, <span class="fl">1.79</span>, <span class="fl">1.81</span>),</span>
-<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k5  =</span> <span class="fu">c</span>(<span class="fl">0.56</span>, <span class="fl">0.79</span>, <span class="fl">0.95</span>, <span class="fl">1.07</span>, <span class="fl">1.23</span>, <span class="fl">1.34</span>, <span class="fl">1.49</span>, <span class="fl">1.57</span>, <span class="fl">1.67</span>, <span class="fl">1.72</span>),</span>
-<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k5  =</span> <span class="fu">c</span>(<span class="fl">2.21</span>, <span class="fl">1.99</span>, <span class="fl">1.89</span>, <span class="fl">1.83</span>, <span class="fl">1.79</span>, <span class="fl">1.77</span>, <span class="fl">1.77</span>, <span class="fl">1.78</span>, <span class="fl">1.80</span>, <span class="fl">1.82</span>)</span>
-<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dw_05) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n"</span>,</span>
-<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=1 dL"</span>, <span class="st">"k'=1 dU"</span>,</span>
-<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=2 dL"</span>, <span class="st">"k'=2 dU"</span>,</span>
-<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=3 dL"</span>, <span class="st">"k'=3 dU"</span>,</span>
-<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=4 dL"</span>, <span class="st">"k'=4 dU"</span>,</span>
-<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=5 dL"</span>, <span class="st">"k'=5 dU"</span></span>
-<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a>  dw_05,</span>
-<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">2</span>,</span>
-<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="dv">10</span>)),</span>
-<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Durbin–Watson 5% bounds $d_{L}$ and $d_{U}$ by sample size $n$ and number of regressors $k'$ excluding the constant. Source: Durbin &amp; Watson (1951)."</span></span>
-<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## The four-region decision rule</span></span>
-<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>Given an observed Durbin–Watson statistic $d$, the test for **positive** first-order autocorrelation at level $\alpha$ partitions the unit-line into four regions:</span>
-<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$d &lt; d_{L}$: **reject** $H_{0}$ in favour of positive autocorrelation.</span>
-<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$d_{L} \leq d \leq d_{U}$: **inconclusive** --- the test cannot decide.</span>
-<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$d_{U} &lt; d &lt; 4 - d_{U}$: **do not reject** $H_{0}$ of no autocorrelation.</span>
-<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$4 - d_{U} \leq d \leq 4 - d_{L}$: **inconclusive** (negative side).</span>
-<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$d &gt; 4 - d_{L}$: **reject** $H_{0}$ in favour of **negative** autocorrelation.</span>
-<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a>Inconclusive regions are the price paid for the design-free bounds: when $d$ falls into one of them, switch to a test that does not depend on the design matrix (e.g. the Breusch–Godfrey LM test of §8.3), which is now standard in applied work.</span>
-<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>This appendix gathers the critical-value tables we use most often in the book: the $t$, $F$, and $\chi^{2}$ distributions for the inferential procedures of Chapter 4, plus the Durbin–Watson bounds used in the serial-correlation diagnostic of Chapter 8. Because the entries below are produced inside R by the quantile functions <span class="in">`qt()`</span>, <span class="in">`qf()`</span>, and <span class="in">`qchisq()`</span>, they are exact to machine precision rather than rounded as in printed appendices. A reader who wants a value not listed here can simply re-run the corresponding chunk with extra rows or columns.</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to read these tables {#sec-c-how-to-read .unnumbered}</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>A **critical value** $c_{\alpha}$ is the threshold a test statistic must cross to reject the null at significance level $\alpha$: for a one-sided $t$-test of $H_{0}: \beta_{j} = 0$ against $H_{1}: \beta_{j} &gt; 0$ at the 5% level, we reject when $t &gt; c_{0.05}$. A **$p$-value** turns the question around: it is the smallest $\alpha$ at which the null would have been rejected given the observed statistic. The two views are equivalent --- given a $p$-value you know which critical values you would have crossed --- but the tables here are organised around critical values because that is still how most printed inference works through.</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>For the $t$-distribution, the columns below report **one-tailed** upper-tail critical values: $c$ such that $\Pr(T_{df} &gt; c) = \alpha$. For a **two-tailed** test at level $\alpha$, look up the $\alpha/2$ column instead --- so the 5% two-tailed critical value is the entry in the $\alpha = 0.025$ column. The $F$ and $\chi^{2}$ tables are intrinsically one-tailed (their statistics are non-negative) and need no such adjustment. The $t$ table is invoked in §4.5 for single-coefficient hypothesis testing; the $F$ table is used in §4.7 for joint tests and again in §7.3 for the Breusch–Pagan heteroskedasticity test; the $\chi^{2}$ table covers the large-sample variants of those tests; and the Durbin–Watson bounds in §C.4 are the reference for the serial-correlation diagnostic of §8.3.</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## C.1 Critical values of the $t$-distribution {#sec-c-t}</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>The entries below are one-tailed upper critical values $c$ such that $\Pr(T_{df} &gt; c) = \alpha$. The last row, $df = \infty$, coincides with the standard-normal quantiles $z_{1-\alpha}$ --- the bridge formalised by the CLT in §A.4.</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-t-table}</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>df_t    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>, <span class="cn">Inf</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>alpha_t <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.025</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>, <span class="fl">0.001</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>t_tab <span class="ot">&lt;-</span> <span class="fu">sapply</span>(alpha_t, <span class="cf">function</span>(a) <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> a, <span class="at">df =</span> df_t))</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>t_tab <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(t_tab)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(t_tab) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"α = "</span>, <span class="fu">format</span>(alpha_t, <span class="at">scientific =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>t_tab <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">df =</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(df_t), <span class="st">"∞"</span>, <span class="fu">as.character</span>(df_t)),</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>               t_tab)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  t_tab,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(alpha_t))),</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"One-tailed critical values of the $t$-distribution. For a two-tailed test at level $</span><span class="sc">\\</span><span class="st">alpha$, read the $</span><span class="sc">\\</span><span class="st">alpha/2$ column."</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>A handful of entries are worth memorising. With $df = \infty$ the table reproduces $z_{0.975} = 1.96$ (column $\alpha = 0.025$) and $z_{0.995} = 2.576$ (column $\alpha = 0.005$), the standard-normal critical values for two-sided tests at 5% and 1%. For $df \geq 30$ the rule of thumb that $t$ is "close to normal" already pays off: the 5% two-sided critical value (column $\alpha = 0.025$) sits within 5% of 1.96.</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## C.2 Critical values of the $F$-distribution {#sec-c-f}</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>The $F$-tables tabulate the upper-$\alpha$ critical value of $F_{k_{1}, k_{2}}$, where $k_{1}$ is the **numerator** degrees of freedom (the number of restrictions in a joint test) and $k_{2}$ is the **denominator** degrees of freedom (typically $n - k - 1$ in a $k$-regressor model with an intercept). We tabulate the two conventional significance levels separately.</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-f-table-05}</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>num_df <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">30</span>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>den_df <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">120</span>, <span class="cn">Inf</span>)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>f_tab_05 <span class="ot">&lt;-</span> <span class="fu">outer</span>(den_df, num_df,</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(d, n) <span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> n, <span class="at">df2 =</span> d))</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>f_tab_05 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(f_tab_05)</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(f_tab_05) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"k1 = "</span>, num_df)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>f_tab_05 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="st">`</span><span class="at">k2 (den. df)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(den_df), <span class="st">"∞"</span>,</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>                                          <span class="fu">as.character</span>(den_df)),</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>                  f_tab_05)</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>  f_tab_05,</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(num_df))),</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Critical values of the $F$-distribution at $</span><span class="sc">\\</span><span class="st">alpha = 0.05$ (upper tail). Rows: denominator df $k_{2}$. Columns: numerator df $k_{1}$."</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-f-table-01}</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>f_tab_01 <span class="ot">&lt;-</span> <span class="fu">outer</span>(den_df, num_df,</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(d, n) <span class="fu">qf</span>(<span class="fl">0.99</span>, <span class="at">df1 =</span> n, <span class="at">df2 =</span> d))</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>f_tab_01 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(f_tab_01)</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(f_tab_01) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"k1 = "</span>, num_df)</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>f_tab_01 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="st">`</span><span class="at">k2 (den. df)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(den_df), <span class="st">"∞"</span>,</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>                                          <span class="fu">as.character</span>(den_df)),</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>                  f_tab_01)</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  f_tab_01,</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(num_df))),</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Critical values of the $F$-distribution at $</span><span class="sc">\\</span><span class="st">alpha = 0.01$ (upper tail). Rows: denominator df $k_{2}$. Columns: numerator df $k_{1}$."</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>The bottom row ($k_{2} = \infty$) is a useful sanity check: the $F_{k_{1}, \infty}$ distribution coincides (after scaling) with $\chi^{2}_{k_{1}}/k_{1}$, so its 5% critical value equals $\chi^{2}_{k_{1}, 0.95}/k_{1}$. Compare, for instance, the $(k_{1} = 4, k_{2} = \infty)$ entry of the 5% $F$ table with $\chi^{2}_{4, 0.95}/4$ from the next section.</span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## C.3 Critical values of the $\chi^{2}$-distribution {#sec-c-chi2}</span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-chi2-table}</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>df_chi    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">100</span>)</span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>alpha_chi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.025</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>)</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>chi_tab <span class="ot">&lt;-</span> <span class="fu">sapply</span>(alpha_chi, <span class="cf">function</span>(a) <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> a, <span class="at">df =</span> df_chi))</span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>chi_tab <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(chi_tab)</span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(chi_tab) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"α = "</span>, <span class="fu">format</span>(alpha_chi, <span class="at">scientific =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>chi_tab <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">df =</span> <span class="fu">as.character</span>(df_chi), chi_tab)</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>  chi_tab,</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">3</span>,</span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="fu">length</span>(alpha_chi))),</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Upper-tail critical values of the $</span><span class="sc">\\</span><span class="st">chi^{2}$-distribution: $c$ such that $</span><span class="sc">\\</span><span class="st">Pr(</span><span class="sc">\\</span><span class="st">chi^{2}_{df} &gt; c) = </span><span class="sc">\\</span><span class="st">alpha$."</span></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>The $\chi^{2}$ table is the natural reference for large-sample versions of the joint test (the **Wald statistic** is asymptotically $\chi^{2}_{q}$ where $q$ is the number of restrictions) and for the Breusch–Pagan test of §7.3, whose $LM$ statistic is $\chi^{2}_{k}$ under the null of homoskedasticity.</span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## C.4 Durbin–Watson bounds {#sec-c-dw}</span></span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>The Durbin–Watson statistic $d = \sum_{t=2}^{n}(\hat u_{t} - \hat u_{t-1})^{2} / \sum_{t=1}^{n}\hat u_{t}^{2}$ does not have a single critical value: its exact null distribution depends on the design matrix $\mathbf{X}$, not just on $n$ and the number of regressors. Durbin and Watson (1951) sidestepped this by tabulating two bounds, $d_{L}$ and $d_{U}$, between which the *true* critical value must lie regardless of $\mathbf{X}$. The bounds below are taken from Durbin, J. and Watson, G. S. (1951), "Testing for serial correlation in least squares regression. II," *Biometrika* **38**(1), 159–178, for $\alpha = 0.05$ and $k'$ regressors excluding the constant. A representative subset is reproduced; consult the original tables for values of $n$ not listed.</span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{r appC-dw-table}</span></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>dw_05 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>  <span class="at">n      =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">75</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>),</span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k1  =</span> <span class="fu">c</span>(<span class="fl">1.08</span>, <span class="fl">1.20</span>, <span class="fl">1.29</span>, <span class="fl">1.35</span>, <span class="fl">1.44</span>, <span class="fl">1.50</span>, <span class="fl">1.60</span>, <span class="fl">1.65</span>, <span class="fl">1.72</span>, <span class="fl">1.76</span>),</span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k1  =</span> <span class="fu">c</span>(<span class="fl">1.36</span>, <span class="fl">1.41</span>, <span class="fl">1.45</span>, <span class="fl">1.49</span>, <span class="fl">1.54</span>, <span class="fl">1.59</span>, <span class="fl">1.65</span>, <span class="fl">1.69</span>, <span class="fl">1.75</span>, <span class="fl">1.78</span>),</span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k2  =</span> <span class="fu">c</span>(<span class="fl">0.95</span>, <span class="fl">1.10</span>, <span class="fl">1.21</span>, <span class="fl">1.28</span>, <span class="fl">1.39</span>, <span class="fl">1.46</span>, <span class="fl">1.57</span>, <span class="fl">1.63</span>, <span class="fl">1.71</span>, <span class="fl">1.75</span>),</span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k2  =</span> <span class="fu">c</span>(<span class="fl">1.54</span>, <span class="fl">1.54</span>, <span class="fl">1.55</span>, <span class="fl">1.57</span>, <span class="fl">1.60</span>, <span class="fl">1.63</span>, <span class="fl">1.68</span>, <span class="fl">1.72</span>, <span class="fl">1.76</span>, <span class="fl">1.79</span>),</span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k3  =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">1.00</span>, <span class="fl">1.12</span>, <span class="fl">1.21</span>, <span class="fl">1.34</span>, <span class="fl">1.42</span>, <span class="fl">1.54</span>, <span class="fl">1.61</span>, <span class="fl">1.69</span>, <span class="fl">1.74</span>),</span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k3  =</span> <span class="fu">c</span>(<span class="fl">1.75</span>, <span class="fl">1.68</span>, <span class="fl">1.66</span>, <span class="fl">1.65</span>, <span class="fl">1.66</span>, <span class="fl">1.67</span>, <span class="fl">1.71</span>, <span class="fl">1.74</span>, <span class="fl">1.77</span>, <span class="fl">1.80</span>),</span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k4  =</span> <span class="fu">c</span>(<span class="fl">0.69</span>, <span class="fl">0.90</span>, <span class="fl">1.04</span>, <span class="fl">1.14</span>, <span class="fl">1.29</span>, <span class="fl">1.38</span>, <span class="fl">1.51</span>, <span class="fl">1.59</span>, <span class="fl">1.68</span>, <span class="fl">1.73</span>),</span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k4  =</span> <span class="fu">c</span>(<span class="fl">1.97</span>, <span class="fl">1.83</span>, <span class="fl">1.77</span>, <span class="fl">1.74</span>, <span class="fl">1.72</span>, <span class="fl">1.72</span>, <span class="fl">1.74</span>, <span class="fl">1.76</span>, <span class="fl">1.79</span>, <span class="fl">1.81</span>),</span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a>  <span class="at">dL_k5  =</span> <span class="fu">c</span>(<span class="fl">0.56</span>, <span class="fl">0.79</span>, <span class="fl">0.95</span>, <span class="fl">1.07</span>, <span class="fl">1.23</span>, <span class="fl">1.34</span>, <span class="fl">1.49</span>, <span class="fl">1.57</span>, <span class="fl">1.67</span>, <span class="fl">1.72</span>),</span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a>  <span class="at">dU_k5  =</span> <span class="fu">c</span>(<span class="fl">2.21</span>, <span class="fl">1.99</span>, <span class="fl">1.89</span>, <span class="fl">1.83</span>, <span class="fl">1.79</span>, <span class="fl">1.77</span>, <span class="fl">1.77</span>, <span class="fl">1.78</span>, <span class="fl">1.80</span>, <span class="fl">1.82</span>)</span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dw_05) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n"</span>,</span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=1 dL"</span>, <span class="st">"k'=1 dU"</span>,</span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=2 dL"</span>, <span class="st">"k'=2 dU"</span>,</span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=3 dL"</span>, <span class="st">"k'=3 dU"</span>,</span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=4 dL"</span>, <span class="st">"k'=4 dU"</span>,</span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a>  <span class="st">"k'=5 dL"</span>, <span class="st">"k'=5 dU"</span></span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>  dw_05,</span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits  =</span> <span class="dv">2</span>,</span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a>  <span class="at">align   =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"r"</span>, <span class="dv">10</span>)),</span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Durbin–Watson 5% bounds $d_{L}$ and $d_{U}$ by sample size $n$ and number of regressors $k'$ excluding the constant. Source: Durbin &amp; Watson (1951)."</span></span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a><span class="fu">## The four-region decision rule</span></span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>Given an observed Durbin–Watson statistic $d$, the test for **positive** first-order autocorrelation at level $\alpha$ partitions the unit-line into four regions:</span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$d &lt; d_{L}$: **reject** $H_{0}$ in favour of positive autocorrelation.</span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$d_{L} \leq d \leq d_{U}$: **inconclusive** --- the test cannot decide.</span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$d_{U} &lt; d &lt; 4 - d_{U}$: **do not reject** $H_{0}$ of no autocorrelation.</span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$4 - d_{U} \leq d \leq 4 - d_{L}$: **inconclusive** (negative side).</span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$d &gt; 4 - d_{L}$: **reject** $H_{0}$ in favour of **negative** autocorrelation.</span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a>Inconclusive regions are the price paid for the design-free bounds: when $d$ falls into one of them, switch to a test that does not depend on the design matrix (e.g. the Breusch–Godfrey LM test of §8.3), which is now standard in applied work.</span>
+<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
