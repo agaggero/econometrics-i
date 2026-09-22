@@ -1,10 +1,13 @@
 name: Publish book
 
-# Rebuilds the book and deploys it to the gh-pages branch on every push to
-# main. GitHub-hosted runners have unrestricted internet, so Quarto, CRAN, and
-# TinyTeX are all available here.
+# Renders the book on GitHub-hosted runners (which have unrestricted internet,
+# so Quarto, CRAN, and TinyTeX are all available). On pull requests it renders
+# only, to validate the build; on pushes to main (and manual runs) it also
+# deploys the rendered site to the gh-pages branch.
 on:
   push:
+    branches: [main]
+  pull_request:
     branches: [main]
   workflow_dispatch:
 
@@ -13,7 +16,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: quarto-publish
+  group: quarto-publish-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -45,7 +48,14 @@ jobs:
             any::readxl
             any::orcutt
 
+      # Pull requests: render only, to validate the build without publishing.
+      - name: Render (validation only)
+        if: github.event_name == 'pull_request'
+        uses: quarto-dev/quarto-actions/render@v2
+
+      # Push to main / manual dispatch: render and deploy to GitHub Pages.
       - name: Render and publish to GitHub Pages
+        if: github.event_name != 'pull_request'
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
