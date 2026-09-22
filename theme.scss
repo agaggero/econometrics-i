@@ -1,0 +1,14 @@
+/*-- scss:rules --*/
+
+// Drop cap on the first letter of each chapter's opening paragraph (HTML/EPUB).
+// The PDF build renders the same effect with the LaTeX `lettrine` package, so
+// each chapter's first line carries two raw variants: a `{=latex}` lettrine and
+// a `{=html}` <span class="dropcap"> … </span>. Keeping both means no output
+// format drops the opening word.
+.dropcap {
+  float: left;
+  font-size: 3.5em;
+  line-height: 0.8;
+  font-weight: 700;
+  padding-right: 0.07em;
+}

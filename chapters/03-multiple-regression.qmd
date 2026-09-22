@@ -22,7 +22,7 @@ Chapter 1 warned that a raw correlation can confound the effect we care about wi
 
 ## Motivation: the problem with simple regression
 
-`\lettrine[lines=3]{T}{he}`{=latex} simple linear regression model
+`\lettrine[lines=3]{T}{he}`{=latex}`<span class="dropcap">T</span>he`{=html} simple linear regression model
 $$
 y = \beta_0 + \beta_1 x + u
 $$

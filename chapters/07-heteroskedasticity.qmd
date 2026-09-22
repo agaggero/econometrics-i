@@ -22,7 +22,7 @@ A regression of hourly wages on years of education delivers a clean point estima
 
 ## Introduction
 
-`\lettrine[lines=3]{I}{n}`{=latex} Chapter 4 we listed the multiple linear regression assumptions MLR.1--MLR.6 that justify OLS. The **homoskedasticity** assumption MLR.5 states that the error variance is the same for every value of the regressors:
+`\lettrine[lines=3]{I}{n}`{=latex}`<span class="dropcap">I</span>n`{=html} Chapter 4 we listed the multiple linear regression assumptions MLR.1--MLR.6 that justify OLS. The **homoskedasticity** assumption MLR.5 states that the error variance is the same for every value of the regressors:
 
 $$
 \operatorname{Var}(u_i \mid \mathbf{x}_i) \;=\; \sigma^2, \qquad i = 1, \dots, n.
@@ -39,7 +39,7 @@ and the error is said to be **heteroskedastic**. The Greek root is helpful: *hom
 ::: {.callout-note}
 ## Example: wage variability and education
 
-Workers with only primary education in a typical European labour market earn between roughly 15{,}000 and 25{,}000 euros per year --- a narrow range. University graduates earn anywhere from 20{,}000 to 200{,}000 euros --- a much wider range. The conditional variance of wages clearly increases with education. The error term in a wage equation $\text{wage}_i = \beta_0 + \beta_1\,\text{educ}_i + u_i$ therefore exhibits heteroskedasticity: $\operatorname{Var}(u_i \mid \text{educ}_i)$ grows with `educ`.
+Workers with only primary education in a typical European labour market earn between roughly 15,000 and 25,000 euros per year --- a narrow range. University graduates earn anywhere from 20,000 to 200,000 euros --- a much wider range. The conditional variance of wages clearly increases with education. The error term in a wage equation $\text{wage}_i = \beta_0 + \beta_1\,\text{educ}_i + u_i$ therefore exhibits heteroskedasticity: $\operatorname{Var}(u_i \mid \text{educ}_i)$ grows with `educ`.
 :::
 
 Heteroskedasticity is **not** a problem of identification. As long as $\mathbb{E}[u_i \mid \mathbf{x}_i] = 0$ (assumption MLR.4) holds, the *meaning* of $\beta_j$ as a *ceteris paribus* effect survives. What heteroskedasticity breaks is **inference** --- the machinery that turns a point estimate $\hat\beta_j$ into a confidence interval or a hypothesis test.
@@ -455,7 +455,7 @@ When should you prefer Weighted Least Squares to OLS with robust standard errors
 
 **Exercise 7.1 ★ --- Spotting heteroskedasticity.** For each of the following regressions, predict whether the error term is likely to be heteroskedastic and explain why in one sentence.
 
-(a) Annual food expenditure regressed on household income across a sample of 4{,}000 households.
+(a) Annual food expenditure regressed on household income across a sample of 4,000 households.
 (b) Number of children regressed on mother's age, in a sample restricted to women aged 30--35.
 (c) Firm-level R&D spending regressed on firm sales in a sample mixing small startups and Fortune 500 companies.
 (d) A linear-probability model where the dependent variable is a $0/1$ indicator for employment.

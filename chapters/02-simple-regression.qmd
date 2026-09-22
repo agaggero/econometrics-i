@@ -23,7 +23,7 @@ The labour-economics literature [@wooldridge2020] has long documented a "beauty 
 
 ## Introduction
 
-`\lettrine[lines=3]{R}{egression}`{=latex} analysis investigates the relationship between two or more variables. In this chapter we focus on the **simple linear regression** model (SLR), which relates a dependent variable $y$ to a single independent variable $x$:
+`\lettrine[lines=3]{R}{egression}`{=latex}`<span class="dropcap">R</span>egression`{=html} analysis investigates the relationship between two or more variables. In this chapter we focus on the **simple linear regression** model (SLR), which relates a dependent variable $y$ to a single independent variable $x$:
 
 $$
 y = \beta_0 + \beta_1 x + u.
@@ -616,7 +616,7 @@ A low $R^2$ in a simple linear regression means:
 
 ## Exercises {.unnumbered}
 
-**Exercise 2.1 ★ --- Reading a fitted equation.** A regression on 1{,}000 workers gives the fitted line $\widehat{\text{Wage}} = 800 + 15 \times \text{Education}$, where wage is in euros per month and education is in years.
+**Exercise 2.1 ★ --- Reading a fitted equation.** A regression on 1,000 workers gives the fitted line $\widehat{\text{Wage}} = 800 + 15 \times \text{Education}$, where wage is in euros per month and education is in years.
 
 (a) Interpret $\hat\beta_0$ and $\hat\beta_1$ in words.
 (b) What is the predicted wage of a worker with 12 years of schooling?
