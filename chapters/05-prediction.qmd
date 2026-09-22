@@ -249,7 +249,7 @@ And, always: model selection criteria choose the model that *fits* best on the c
 
 ## Lab: Prediction and Model Selection in R
 
-We work with the `wage1` dataset of 526 U.S.\ workers (Chapter 1). The goal is to (i) fit a sequence of nested wage models, (ii) compare them using $\bar R^2$, AIC, BIC, and an $F$-test, (iii) produce point predictions and the two interval estimates for a specific worker, and (iv) visualise the difference between the confidence band for the mean and the prediction band for an individual.
+We work with the `wage1` dataset of 526 U.S.\ workers (introduced in Appendix A). The goal is to (i) fit a sequence of nested wage models, (ii) compare them using $\bar R^2$, AIC, BIC, and an $F$-test, (iii) produce point predictions and the two interval estimates for a specific worker, and (iv) visualise the difference between the confidence band for the mean and the prediction band for an individual.
 
 ```{r ch05-setup}
 #| message: false

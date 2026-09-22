@@ -395,7 +395,7 @@ install.packages(c(
 ))
 ```
 
-The `wooldridge` package ships the datasets that Wooldridge uses in his textbook, including `wage1`, which we work with in Chapter 1.
+The `wooldridge` package ships the datasets that Wooldridge uses in his textbook, including `wage1`, which we work with from Chapter 3 onwards.
 
 ```{r appA-setup}
 #| message: false
@@ -464,7 +464,7 @@ tapply(wage1$wage, wage1$educ,  mean)
 tapply(wage1$wage, wage1$female, mean)
 ```
 
-The first table is the average wage at each level of education; the second is the average wage by gender. Chapter 1 discusses the interpretation of these numbers at length (and why they are *not* causal effects). The mechanics of computing them belong here, in the prerequisites.
+The first table is the average wage at each level of education; the second is the average wage by gender. Chapter 3 discusses the interpretation of these numbers (and why they are *not* causal effects). The mechanics of computing them belong here, in the prerequisites.
 
 ::: {.callout-note}
 ## Where to go next

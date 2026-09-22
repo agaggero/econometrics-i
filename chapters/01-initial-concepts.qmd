@@ -7,18 +7,25 @@ title: "Initial Concepts"
 
 By the end of this chapter the reader should be able to:
 
-- Explain what econometrics is and how an econometric model differs from a purely theoretical economic model.
-- Interpret the two components of an econometric model: the systematic part and the random error $u$.
-- Distinguish correlation from causation, and identify selection bias and omitted-variable bias in concrete examples.
-- Explain why randomisation eliminates selection bias on average, and contrast randomised experiments with quasi-experimental and observational designs.
-- Classify a dataset as cross-sectional, time-series, panel, or pooled cross-section, and recognise the research questions each structure can (and cannot) answer.
-- Use basic R commands (`str()`, `summary()`, `head()`, `hist()`, `plot()`, `tapply()`, `cor()`) to explore a microeconomic dataset and compute conditional means.
+- Explain what econometrics is and that its central goal is to **estimate relationships between variables** ($X \Rightarrow Y$).
+- Describe the two components of an econometric model --- the **systematic part** $f(X)$ and the **unobserved error** $u$ --- and give examples of what $u$ contains.
+- Write a simple linear econometric model $y = \beta_0 + \beta_1 x + u$ and identify $\beta_0$ and $\beta_1$ as **unknown parameters** to be estimated from data (the estimation itself is the subject of Chapter 2).
+- Explain why **correlation does not imply causation**, recognise reverse causation and lurking "third variables" in concrete examples, and explain why credible policy needs causal --- not merely correlational --- evidence.
+- Distinguish **experimental** from **non-experimental** data and, crucially, random *sampling* from random *assignment*; explain why randomised experiments are the benchmark for causal questions and why they are rare in economics.
+- Classify a dataset as **cross-sectional**, **time-series**, or **panel**, and explain which questions each structure can answer --- in particular, why a panel is not the same as a time series.
+- Use basic R to enter a small dataset, describe and visualise its variables, and quantify the strength and direction of a relationship with the **correlation coefficient**.
 
 ## Motivating empirical question {.unnumbered}
 
-> *Does going to university **cause** higher wages, or do the people who would have earned more anyway tend to go to university?*
+> *Students who study more tend to get better grades. But does that comparison tell us how **much** an extra hour of study raises a grade --- or even that studying is what makes the difference?*
 
-This single question drives the rest of the course. A correlation between schooling and wages is easy to compute; turning that correlation into a credible statement about the causal return to education is hard. The tools we develop --- the linear model, the assumptions on the error term, randomisation, controls, and tests --- are all in the service of answering questions of this form.
+This deceptively simple question contains the whole of the chapter. To answer it we need three things, and they are the three threads that run through everything below:
+
+1. a way to turn a cloud of data points into a single, quantified relationship --- an **econometric model**;
+2. the discipline to separate a relationship that is merely a **correlation** from one that is **causal**; and
+3. the right kind of **data**, because the structure of the data decides which of these questions we can actually answer.
+
+Keep the studying-and-grades example in mind: we will return to it in the lab at the end of the chapter and answer the question above directly.
 
 ## What is econometrics?
 
@@ -27,451 +34,545 @@ This single question drives the rest of the course. A correlation between school
 - Education $\Rightarrow$ Salary
 - Class attendance $\Rightarrow$ Final grade
 - Tuition fees $\Rightarrow$ Enrolment
+- Health $\Rightarrow$ Retirement age
 - Income $\Rightarrow$ Happiness
 - Government spending $\Rightarrow$ Crime
 - Advertising $\Rightarrow$ Sales
 
-In general we write $X \Rightarrow Y$, where $X$ is the **independent variable** (or regressor, explanatory variable) and $Y$ is the **dependent variable** (or response, outcome). Two questions then arise:
+In general we write $X \Rightarrow Y$, where $X$ is the **independent variable** (also called the *regressor* or *explanatory variable*) and $Y$ is the **dependent variable** (also called the *outcome* or *response*). For any such pair we usually want to know three things:
 
-1. Is there an effect of $X$ on $Y$?
-2. How large is that effect?
+1. Is there a relationship between $X$ and $Y$?
+2. Is the relationship positive or negative?
+3. How strong is it?
 
-These "how much" questions are everywhere. A city council wonders how much violent crime will fall if it spends an additional million euros on policing. A local business must estimate the relationship between advertising spending and sales. A university must estimate how much enrolment will drop if it raises tuition by 300 euros. None of these questions can be answered by economic theory alone --- they require data, a statistical model, and the discipline of econometrics.
+These are "how much" questions, and decision-makers face them every day. A city council wonders how much violent crime will fall if it spends an extra million euros putting more police on the street. A local business --- say, the neighbourhood pizza restaurant --- must decide how much advertising to buy, and so needs the relationship between advertising and sales. A private university in Andalusia must estimate how much enrolment will drop if it raises tuition by €300. None of these questions can be answered by economic theory alone: they require **data**, a **model**, and the discipline of econometrics.
+
+## A first look: study hours and grades
+
+Suppose we collect data on ten students, recording for each one the number of hours studied per day ($X$) and the average grade obtained ($Y$, on a 0--10 scale).
+
+```{r ch01-grades-data}
+grades <- data.frame(
+  study = c(1.5, 2.0, 3.0, 3.5, 4.0, 5.0, 5.5, 6.5, 7.5, 8.0),
+  grade = c(2.0, 3.0, 3.5, 4.5, 5.0, 6.0, 6.5, 7.5, 8.5, 9.0)
+)
+grades
+```
+
+A table of numbers is hard to read at a glance; a picture is not. Plotting each student as a point makes the pattern immediate.
+
+```{r ch01-grades-scatter}
+#| fig-cap: "Daily study hours and average grade for ten students. Each dot is one student."
+plot(grades$study, grades$grade,
+     xlab = "Daily study hours",
+     ylab = "Average grade (0-10)",
+     main = "Study hours and grades",
+     xlim = c(0, 10), ylim = c(0, 10),
+     pch = 19, col = "blue", cex = 1.3)
+```
+
+The cloud of points slopes clearly upward: students who study more tend to earn higher grades. But a scatter plot only *shows* the relationship --- it does not yet *summarise* it in a number we can use to predict, compare, or inform a decision. To do that we need an **econometric model**.
 
 ## The econometric model
 
-An econometric model has **two** components:
+An econometric model splits the outcome $Y$, for each individual, into **two components**:
 
-1. A **systematic component** --- the average or systematic behaviour of many individuals, firms, or other units.
-2. A **random error** $u$ (sometimes called the *disturbance*) --- the many factors that affect $Y$ but are not included in the systematic part.
+1. a **systematic component**, $f(X)$ --- the part of $Y$ that is related to the variables we have included in the model; and
+2. an **unobserved component**, $u$ (also called the *error* or *disturbance*) --- all the other factors that affect $Y$ but are not in the model.
+
+Compactly,
+
+$$
+Y = \underbrace{f(X)}_{\text{systematic component}} \;+\; \underbrace{u}_{\text{unobserved factors}}.
+$$
+
+Why do we need the second term at all? Because no short list of variables ever fully determines an economic outcome. The next figure makes the point. On the left, education alone would fix wages exactly and every worker would sit precisely on the line. On the right --- the real world --- workers with the *same* education still earn *different* wages, and those vertical gaps are exactly the unobserved component $u$.
+
+```{r ch01-two-component}
+#| fig-cap: "Economic model vs. econometric model. Left: the systematic component alone would place every worker on the line. Right: the unobserved component u explains why workers with the same education earn different wages."
+#| fig-width: 9
+#| fig-height: 4.2
+set.seed(1)
+educ <- 1:10
+wage_line <- 1 + 0.7 * educ
+
+op <- par(mfrow = c(1, 2), mar = c(4, 4, 3, 1))
+
+# Panel 1: systematic component only
+plot(educ, wage_line,
+     xlab = "Education", ylab = "Wage", main = "Only the systematic component",
+     pch = 19, col = "navy", cex = 1.2, axes = FALSE)
+box(); abline(1, 0.7, col = "navy", lwd = 2)
+mtext(expression(wage[i] == f(education[i])), side = 3, line = -1, cex = 0.9)
+
+# Panel 2: systematic + unobserved component
+wage_obs <- wage_line + rnorm(10, 0, 1.1)
+plot(educ, wage_obs,
+     xlab = "Education", ylab = "Wage", main = "Systematic + unobserved component",
+     pch = 19, col = "firebrick", cex = 1.2, axes = FALSE)
+box(); abline(1, 0.7, col = "navy", lwd = 2)
+segments(educ, wage_line, educ, wage_obs, col = "firebrick", lty = 3)
+mtext(expression(wage[i] == f(education[i]) + u[i]), side = 3, line = -1, cex = 0.9)
+
+par(op)
+```
 
 ::: {.callout-note}
-## Example: salary determination
+## Example: what is inside $u$?
 
-The factors associated with an individual's salary include age, gender, experience, and education. In general functional form:
-
-$$
-\text{Salary} = f(\text{Age},\,\text{Gender},\,\text{Experience},\,\text{Education}) + u.
-$$
-
-A linear specification is
+Take the relationship Education $\Rightarrow$ Wage:
 
 $$
-\text{Salary} = \beta_0 + \beta_1\,\text{Age} + \beta_2\,\text{Gender} + \beta_3\,\text{Experience} + \beta_4\,\text{Education} + u.
+\text{wage}_i = \underbrace{f(\text{education}_i)}_{\text{wage associated with education}} + \underbrace{u_i}_{\text{ability, experience, luck, family background, }\ldots}
 $$
 
-The coefficients $\beta_0, \beta_1, \dots, \beta_4$ are **unknown population parameters** that we will estimate from data using an econometric technique (typically Ordinary Least Squares, introduced in Chapter 2).
+Two workers with identical schooling can earn very different wages because they differ in ability, experience, contacts, luck, and countless other factors we do not observe. All of these live in $u$. The same is true of our study-and-grades example: two students who study the same number of hours can still obtain different grades because of prior preparation, the difficulty of their courses, health, or plain luck --- everything not captured by study hours ends up in $u$.
 :::
-
-The functional form is itself a hypothesis about how the variables are connected. A key challenge in any applied problem is choosing a functional form that is compatible both with economic theory and with what the data look like.
 
 ::: {.callout-warning}
-## Common mistake: confusing $u$ with the residual $\hat u$
+## The error $u$ is unobservable
 
-The error $u$ is a *population* object: it represents every determinant of $Y$ that is not in the model, and it is **unobservable**. The residual $\hat u_i = y_i - \hat y_i$ is its *sample* counterpart, obtained after estimating the model. Following Wooldridge's notation, we keep $u$ and $\hat u$ strictly separate throughout the book.
+The systematic part $f(X)$ is built from variables we can measure. The error $u$ is not: it is a *population* object that collects everything we left out, and we never observe it directly. This is a point we will sharpen in Chapter 2, where we learn to estimate the model and distinguish the unobservable error $u$ from the quantities we can compute from a sample.
 :::
 
-## Uses of econometrics
+## From a function to parameters
 
-We use econometric models for three broad purposes:
+The model $Y = f(X) + u$ is not yet usable, because we have not said what the function $f$ looks like. The simplest and most common choice is a **straight line**. For the wage example,
 
-- **Test economic theories and hypotheses.** For example: does increasing the minimum wage reduce employment? Does class attendance improve grades?
-- **Predict economic variables.** For example: forecast next quarter's GDP growth, or tomorrow's electricity demand.
-- **Estimate causal relationships.** For example: does an additional year of education *cause* higher wages, or are educated workers simply different to begin with?
+$$
+f(\text{education}_i) = \beta_0 + \beta_1\,\text{education}_i,
+$$
 
-The third use --- credible causal inference from observational data --- is at the heart of the so-called **Credibility Revolution** in empirical economics. Hypothesis testing and prediction are sometimes called "Led Zeppelin" econometrics; causal inference is the modern emphasis [@cgl2017].
+so the model becomes
+
+$$
+\text{wage}_i = \beta_0 + \beta_1\,\text{education}_i + u_i.
+$$
+
+Here $\beta_0$ (the **intercept**) and $\beta_1$ (the **slope**) are **unknown population parameters**. The slope $\beta_1$ is the quantity we are usually after: it tells us how much wage changes, on average, with one more year of education. We do not know these numbers --- we **estimate** them from data using an econometric method. The standard method, Ordinary Least Squares (OLS), is the subject of Chapter 2; in this chapter we stop at *writing down* the model and *quantifying* the relationship with a correlation.
+
+::: {.callout-note}
+## The functional form is a hypothesis
+
+Choosing $f(X) = \beta_0 + \beta_1 X$ is itself an assumption about how the world works --- namely, that the relationship is (at least approximately) linear. A good applied economist picks a functional form that is compatible both with economic reasoning and with what the data actually look like. We study richer, non-linear shapes in Chapter 6.
+:::
+
+## What econometrics is used for
+
+We put econometric models to work for three broad purposes:
+
+- **Testing economic theories and hypotheses.** Does raising the minimum wage reduce employment? Does class attendance improve grades?
+- **Predicting economic variables.** Forecasting next quarter's GDP growth, or tomorrow's electricity demand.
+- **Estimating causal effects.** Does an extra year of education *cause* higher wages, or are more-educated workers simply different to begin with?
+
+The first two are the traditional business of econometrics. The third --- credible causal inference --- is the emphasis of the modern **Credibility Revolution** in empirical economics, which places causal questions at the centre and insists on research designs that can answer them convincingly [@cgl2017]. Sorting out *when* a relationship can be read causally is the theme of the next two sections.
 
 ## Correlation does not imply causation
 
-One of the most important lessons of the course --- repeated, if necessary, on every page --- is that **correlation does not imply causation**. The fact that two variables move together does not establish that one of them causes the other. Two reasons stand out: *selection bias* and *omitted variables*.
-
-### Selection bias
+The single most important lesson of the whole course is this: **two variables moving together does not mean that one causes the other**. It is worth repeating on every page.
 
 ::: {.callout-note}
-## Example: ventilators and deaths
+## Example: ice cream and sunburn
 
-A hospital wants to know whether ventilators save lives. A naive comparison shows that patients on ventilators die *more* often than patients not on ventilators. Should we conclude that ventilators *kill* patients?
+Collect monthly data on ice-cream sales and the number of sunburn cases, and plot them.
 
-Obviously not. The problem is **selection bias**: the sickest patients are precisely the ones who are placed on a ventilator. These patients would have had a higher mortality rate *regardless* of whether they received a ventilator.
+```{r ch01-icecream}
+#| fig-cap: "Ice-cream sales and sunburn cases, by month (stylised data). The relationship in the data is clearly positive."
+icecream <- c(40, 85, 137, 222, 317, 410, 533, 483, 380, 260, 180, 103)
+sunburn  <- c(18, 37,  82, 108, 150, 233, 319, 291, 172, 100,  71,  50)
+plot(icecream, sunburn,
+     xlab = "Ice-cream sales", ylab = "Sunburn cases",
+     main = "Ice-cream sales and sunburn cases",
+     pch = 19, col = "blue", cex = 1.2)
+abline(lm(sunburn ~ icecream), col = "navy", lwd = 2)
+```
 
-The observed correlation between ventilator use and death is *positive*; the true causal effect of ventilators on survival is *negative*. A naive comparison can therefore give us not just the wrong magnitude but the **wrong sign** of the effect.
-:::
-
-The lesson is general: whenever treatment is not assigned randomly, simple comparisons of outcomes between treated and untreated units confound the causal effect of the treatment with the characteristics of the units that selected into it.
-
-### Omitted variable bias
-
-::: {.callout-note}
-## Example: ice cream and drowning
-
-Data show a strong positive correlation between ice-cream sales and drowning deaths. Should we ban ice cream to prevent drowning?
-
-Of course not. The **omitted variable** is *temperature*. Hot weather causes both more ice-cream sales and more swimming (hence more drowning). Without controlling for temperature, the correlation between ice cream and drowning is a **spurious correlation** --- a real statistical association with no causal content.
-:::
-
-Whenever a variable that influences $Y$ is also correlated with $X$ but is left out of the model, the estimate of the effect of $X$ will be biased. We will study this formally as **omitted variable bias** in Chapter 3.
-
-### Why randomisation solves the problem
-
-If we **randomly** assign individuals to a treatment group and a control group, then on average the two groups will have the same observable and unobservable characteristics *before* the treatment is administered. Any difference in outcomes *after* the treatment can therefore be attributed to the treatment itself.
-
-In the ventilator example, if we could randomly assign ventilators (not based on severity of illness), then the treatment and control groups would have the same average severity. The difference in mortality between the two groups would be an unbiased estimate of the causal effect of ventilators.
-
-A useful identity to keep in mind is
+When ice-cream sales rise, sunburn cases rise too. If we fitted the econometric model
 
 $$
-\underbrace{\text{difference in outcomes}}_{\text{what we observe}} = \underbrace{\text{causal effect}}_{\text{what we want}} + \underbrace{\text{selection bias}}_{\text{nuisance}}.
+\text{sunburn}_i = \beta_0 + \beta_1\,\text{icecream}_i + u_i,
 $$
 
-Randomisation forces the second term on the right to zero on average. That is why **Randomised Controlled Trials (RCTs)** are considered the gold standard for establishing causality.
-
-::: {.callout-note}
-## Example: private schools and test scores
-
-A study finds that students at private schools score higher on standardised tests. Can we conclude that private schools *cause* better performance? No --- students at private schools tend to come from wealthier families with more resources at home, more educated parents, and so on. The "treatment" (attending a private school) is not randomly assigned, so the comparison is contaminated by selection.
+we would obtain an estimated slope $\hat\beta_1 > 0$. **But does ice cream cause sunburn?** Of course not. A third factor --- hot, sunny summer weather --- drives *both* ice-cream sales and sun exposure. The positive association is real, but it carries no causal meaning.
 :::
 
-## Types of experiments
+Why does the distinction matter so much? **Because policy requires causality, not just correlation.** If we wrongly concluded that ice cream causes sunburn, we might propose banning ice-cream sales on the beach. That policy would do nothing for sunburn, because it does not touch the real cause. To reduce sunburn we should think about sunscreen, shade, and information --- the levers that actually operate on the outcome.
 
-### Randomised experiments
+A second way a correlation can mislead us is that the causal arrow may run in the **opposite direction** to the one we assume.
 
-A randomised experiment assigns participants to two or more groups by lot: one group receives the intervention (the **treatment**); another serves as the **control** and receives a placebo or standard treatment. Randomisation ensures the groups are comparable, eliminates selection bias on average, and permits causal inference.
+::: {.callout-note}
+## Example: hospital visits and health
 
-Genuine randomised experiments are common in clinical medicine but **rare in economics and business**, for two reasons:
+Suppose we study the relationship Hospital visits $\Rightarrow$ Health status and find that people who visit the hospital more often are, on average, *less* healthy.
 
-- *Ethical constraints* --- we cannot randomly assign individuals to poverty, unemployment, or disease.
-- *Cost* --- well-designed field experiments are expensive and slow to run.
+```{r ch01-hospital}
+#| fig-cap: "Hospital visits in the last year and health status (stylised data). The relationship in the data is negative."
+set.seed(7)
+visits <- sort(runif(30, 0.2, 11.5))
+health <- pmin(pmax(4.7 - 0.30 * visits + rnorm(30, 0, 0.22), 1), 5)
+plot(visits, health,
+     xlab = "Number of hospital visits in the last year",
+     ylab = "Health status (1-5)",
+     main = "Hospital visits and health status",
+     pch = 19, col = "blue", cex = 1.2)
+```
+
+Should we conclude that going to the hospital *ruins* your health, and recommend that people stay away? Clearly not. The arrow runs the other way: people who are already unwell go to the hospital more often. The relationship is genuine, but it reflects **reverse causation** --- health drives visits, not the reverse --- so the naive reading gives us exactly the wrong policy advice.
+:::
+
+::: {.callout-warning}
+## Common mistake: reading a correlation as a causal effect
+
+A strong correlation between $X$ and $Y$ tells us they *move together*. It does **not**, on its own, tell us that $X$ causes $Y$. The association may be produced by a lurking third factor (ice cream and sunburn), by reverse causation (hospital visits and health), or by both. Establishing causation takes more than a scatter plot --- it takes the right data and the right research design, which is where we turn next.
+:::
+
+How, then, could we ever settle a causal question? The honest answer is that it depends on the **kind of data** we have. That is not a detour from the causality discussion --- it is the continuation of it.
+
+## Types of data in econometrics
+
+In econometrics we work with two broad kinds of data, and the difference between them is exactly the difference between data that can, and data that usually cannot, answer a causal question on its own.
+
+### Experimental data
+
+In **experimental data**, the researcher *assigns* or *manipulates* the treatment, and the assignment can be **randomised**. Randomised experiments are considered the **gold standard** for estimating causal effects:
+
+- The researcher controls who receives the **treatment**.
+- Participants are split at random into a **treatment group** (which receives the intervention) and a **control group** (which does not).
+- Because assignment is random, the two groups are, on average, **comparable before the treatment** --- they differ only by chance.
+- Any difference in outcomes *after* the treatment can therefore be attributed to the treatment itself, with far greater credibility than in a simple comparison.
+
+::: {.callout-warning}
+## Random *sampling* is not random *assignment*
+
+These two ideas sound alike and are constantly confused, but they do different jobs.
+
+- **Random sampling** means drawing the individuals in our dataset at random from the population. It makes the sample *representative*, so our estimates generalise to the population.
+- **Random assignment** means randomly deciding *which* sampled individuals receive the treatment. It makes the treatment and control groups *comparable*, which is what licenses a causal interpretation.
+
+A perfectly representative survey (good sampling) still cannot, by itself, establish causation, because the people who happen to receive the "treatment" chose it themselves --- they were not assigned it at random.
+:::
+
+### Experiments are rare in the social sciences
+
+Genuine randomised experiments are routine in medicine but **rare in economics and business**, for two reasons:
+
+- **Ethics** --- we cannot randomly assign people to poverty, unemployment, or disease.
+- **Cost and funding** --- well-designed field experiments are expensive and slow.
 
 ### Quasi-experiments
 
-In a **quasi-experiment**, assignment to treatment is not random but is based on some **observable** criterion --- often a threshold, an eligibility rule, or a policy change that hits some units but not others.
+It is useful to sit between "pure" experiments and pure observation. In a **quasi-experiment**, assignment to treatment is *not* random but follows some **observable** rule --- often a threshold or an eligibility cut-off that affects some units and not others.
 
 ::: {.callout-note}
 ## Example: a regional lockdown
 
-During the COVID-19 pandemic, lockdown (the treatment) was assigned by the *Junta de Andalucía* only to municipalities with infection rates above 1{,}000 per 100{,}000 inhabitants. Municipalities just above and just below the threshold are arguably similar, so comparing their outcomes can approximate a random experiment. We return to this kind of design later in the book.
+During the COVID-19 pandemic, the *Junta de Andalucía* imposed a lockdown (the treatment) only on municipalities with an infection rate above 1{,}000 cases per 100{,}000 inhabitants. Municipalities just above and just below that threshold are otherwise quite similar, so comparing their outcomes can approximate a randomised experiment even though no one was assigned at random.
 :::
 
-### Nonexperimental (observational) data
+### Non-experimental (observational) data
 
-With **nonexperimental** data, all variables are collected simultaneously and the values are neither fixed nor repeatable by the researcher. Survey data are the classic example --- the U.S. Current Population Survey (CPS) and the Spanish *Encuesta de Población Activa* (EPA) both belong to this category. Most of the datasets we use in this book are nonexperimental, which is precisely why the issue of selection bias matters so much.
+With **non-experimental** (or **observational**) data, the researcher simply observes what happens in the real world; all the variables are recorded simultaneously and the researcher fixes or manipulates nothing. Survey data are the classic example --- the U.S. Current Population Survey (CPS) and the Spanish *Encuesta de Población Activa* (EPA) both belong to this category. Most datasets in this book are non-experimental, which is precisely why the correlation-versus-causation warning matters so much.
 
-## Types of economic data
+### The structure of the data: cross-section, time-series, panel
 
-Economic data come in several "flavours". Aggregation can be *micro* (households, firms, workers) or *macro* (regions, countries); variables can be *quantitative* (numbers) or *qualitative* (categories, e.g. employed / unemployed). For econometrics what matters most is the **structure** of the dataset: do we have one snapshot, a sequence over time, or repeated observations of the same units?
+Whatever its origin, a dataset has a **structure**. The three structures below are the ones we meet throughout the course, and telling them apart is essential because each answers a different kind of question.
 
-::: {.callout-note}
-## Definition: cross-sectional data
+**Cross-sectional data** are collected across many sample units --- individuals, firms, households, regions, countries --- in a *single* time period. A survey such as the CPS (United States) or the EPA (Spain) records, for a sample of individuals interviewed in the same period, variables such as education, sex, and wage:
 
-Data collected across sample units --- individuals, firms, households, regions, countries --- in a particular time period. Examples: income by Californian county in 2016; high-school graduation rates by U.S. state in 2015; the `wage1` dataset we use in the lab below.
-:::
-
-::: {.callout-note}
-## Definition: time-series data
-
-Data collected over discrete intervals of time, with the same economic quantity recorded at a regular frequency. Examples: the annual price of wheat, daily General Electric stock prices, monthly Spanish unemployment rates from 1980 to 2024.
-:::
-
-::: {.callout-note}
-## Definition: panel (longitudinal) data
-
-Observations on individual micro-units that are followed over multiple time periods. The defining feature is that *each* unit is observed in *several* periods. If every unit is observed in every period, the panel is **balanced**; otherwise it is **unbalanced**. Typically the number of time periods is small relative to the number of units, but not always.
-:::
-
-::: {.callout-note}
-## Definition: pooled cross-section
-
-Independent cross-sections drawn in different periods and stacked together. Different units are sampled each time --- there is *no* re-interview of the same individuals --- but the periods can be compared. The Spanish EPA, which draws a fresh independent sample of households every quarter, yields a pooled cross-section when several waves are stacked.
-:::
-
-The data structure matters because it determines the questions we can answer. With a cross-section we can study how outcomes vary *across* units at one moment in time. With a time-series we can study how a single quantity evolves *over* time. With a panel we can do both --- and, crucially, we can control for time-invariant unobserved characteristics of each unit, an important tool in modern causal inference. With a pooled cross-section we can study how a relationship changes between periods (for example, before and after a policy reform).
-
-## Lab: Exploring economic data in R
-
-The rest of the chapter is a guided exploration of the `wage1` dataset shipped with the **wooldridge** R package. The dataset is a *cross-section* of 526 U.S. workers observed in May 1976, with information on hourly wages, education, experience, tenure, and a handful of demographic variables. (The mechanics of installing R and the `wooldridge` package are covered in Appendix A; the first formal regression with `lm()` is the opening lab of Chapter 2.)
-
-We start by loading the package and looking at the data.
-
-```{r ch01-setup}
-#| message: false
-library(wooldridge)
-data("wage1")
+```{r ch01-cross-section}
+cross_section <- data.frame(
+  Individual = 1:6,
+  Education  = c("High school", "Bachelor's", "Master's",
+                 "Bachelor's", "High school", "Master's"),
+  Sex        = c("Female", "Male", "Female", "Male", "Male", "Female"),
+  Wage       = c(12.5, 18.0, 24.3, 17.8, 11.2, 30.4)
+)
+knitr::kable(
+  cross_section,
+  align   = c("c", "l", "l", "r"),
+  caption = "A cross-section: many units, all observed in one time period (illustrative data)."
+)
 ```
 
-### Structure, size, and a first look
+**Time-series data** record the *same* quantity at a regular time interval. U.S. annual real GDP is a familiar example:
 
-```{r ch01-structure}
-str(wage1)
-head(wage1)
-nrow(wage1)
-ncol(wage1)
+```{r ch01-gdp-ts}
+#| fig-cap: "A time series: U.S. annual real GDP (billions of 2009 dollars), 2006-2014."
+gdp <- data.frame(
+  year = 2006:2014,
+  gdp  = c(14613.8, 14873.7, 14830.4, 14418.7, 14783.8,
+           15020.6, 15354.6, 15583.3, 15961.7)
+)
+plot(gdp$year, gdp$gdp, type = "o",
+     xlab = "Year", ylab = "Real GDP (billions of 2009 USD)",
+     main = "U.S. annual GDP", pch = 19, col = "blue")
 ```
 
-The output of `str()` tells us that `wage1` is a data frame with `r nrow(wage1)` observations and `r ncol(wage1)` variables. Each row is one worker. The variables we care about most in this chapter are:
+Other examples are the annual price of wheat, or the daily price of a company's shares. The defining feature is a *single* unit (here, the U.S. economy) observed *repeatedly over time*.
 
-- `wage` --- hourly wage, in 1976 U.S. dollars,
-- `educ` --- years of schooling,
-- `exper` --- years of potential labour-market experience,
-- `tenure` --- years with the current employer,
-- `female` --- a dummy equal to 1 for women, 0 for men,
-- `married` --- a dummy equal to 1 for married workers.
+**Panel (or longitudinal) data** combine both dimensions: *many* units are followed *over several time periods*. The table below shows the output of two firms observed across several years --- each firm appears in more than one row, one row per year:
 
-### Summary statistics and distributions
-
-```{r ch01-summary}
-summary(wage1[, c("wage", "educ", "exper", "tenure")])
-sd(wage1$wage)
-sd(wage1$educ)
+```{r ch01-panel}
+panel <- data.frame(
+  Firm   = c(1, 1, 1, 2, 2, 2),
+  Year   = c(2019, 2020, 2021, 2019, 2020, 2021),
+  Output = c(7.9, 7.2, 8.9, 10.4, 10.2, 13.3)
+)
+knitr::kable(
+  panel,
+  align   = c("c", "c", "r"),
+  caption = "A panel: the same units (firms), each observed over several periods (illustrative data)."
+)
 ```
 
-`summary()` gives us min, quartiles, mean, and max for each variable. The mean wage is about $5.90 per hour and the median is about $4.65; the mean exceeds the median, which suggests a **right-skewed** distribution --- a long upper tail of high earners. A histogram makes the shape obvious:
-
-```{r ch01-hist-wage}
-#| fig-cap: "Distribution of hourly wages in wage1 (1976 USD)."
-hist(wage1$wage,
-     main = "Distribution of hourly wages",
-     xlab = "Wage (USD / hour)",
-     col  = "lightblue",
-     breaks = 30)
-```
-
-```{r ch01-hist-educ}
-#| fig-cap: "Distribution of years of education in wage1."
-hist(wage1$educ,
-     main = "Distribution of years of education",
-     xlab = "Years of education",
-     col  = "lightgreen",
-     breaks = 15)
-```
-
-The education distribution piles up at 12 years (high-school completion) and 16 years (a four-year college degree), as one would expect for U.S. data from this era.
-
-### Frequency tables
-
-For categorical or count-like variables, `table()` is more useful than `summary()`:
-
-```{r ch01-tables}
-table(wage1$female)
-table(wage1$married)
-table(wage1$female) / nrow(wage1)
-```
-
-About 48% of the sample are women and 52% are men.
-
-### A first scatter plot
-
-A natural starting question is: do workers with more education earn more?
-
-```{r ch01-scatter}
-#| fig-cap: "Wage versus years of education. Each dot is one of the 526 workers."
-plot(wage1$educ, wage1$wage,
-     xlab = "Years of education",
-     ylab = "Hourly wage (USD)",
-     main = "Wage vs. education",
-     pch  = 16,
-     col  = rgb(0, 0, 1, 0.3))
-```
-
-The cloud of points slopes upward: on average, more educated workers earn higher wages. We can quantify the linear association with the **sample correlation**:
-
-```{r ch01-corr}
-cor(wage1$wage, wage1$educ)
-cor(wage1$wage, wage1$exper)
-cor(wage1$educ, wage1$exper)
-```
-
-The correlation between wage and education is about $0.41$ --- a clearly positive but far-from-perfect linear association. Two further patterns stand out:
-
-- The correlation between wage and *experience* is positive but smaller than the correlation with education.
-- The correlation between *education* and *experience* is **negative**. This is not because schooling destroys experience --- it reflects how individuals allocate time across the life cycle: more years in school mean fewer years in the workforce, mechanically. We will see in Chapter 3 that ignoring this kind of correlation among regressors can severely bias a simple regression of wage on education.
-
-### Conditional means: a preview of regression
-
-A cleaner way to look at the data is to compute the **conditional mean** of wages given another variable. `tapply()` does exactly that:
-
-```{r ch01-cond-means}
-tapply(wage1$wage, wage1$female,  mean)
-tapply(wage1$wage, wage1$married, mean)
-```
-
-Men earn about $7.10 per hour on average; women earn about $4.59. Married workers earn about $6.32 per hour; single workers about $5.16. These are **raw, unconditional** comparisons.
+If every unit is observed in every period, the panel is **balanced**; otherwise it is **unbalanced**. Usually the number of time periods is small relative to the number of units, but not always.
 
 ::: {.callout-warning}
-## Common mistake: reading a conditional mean as a causal effect
+## A panel is not a time series
 
-The 2.51-dollar gender gap and the 1.16-dollar marriage premium are **conditional means**, not causal effects. The men and women in this sample differ in occupation, sector, experience, hours worked, and many other characteristics; married and single workers differ in age and tenure. Without holding those confounders fixed, neither gap can be interpreted as the *ceteris paribus* effect of gender or marriage on wages. Holding confounders fixed is what multiple regression (Chapter 3) is for.
+"Data over time" is not automatically a time series. A time series follows *one* unit over many periods (U.S. GDP, year by year). A panel follows *many* units, each over several periods (many farms, each across years). The extra dimension is what gives panels their power: as we will see later in the book, they let us control for stable, unobserved differences between units.
 :::
 
-A more striking selection-bias illustration uses the conditional mean of *experience* given *education*:
+Two further labels are worth knowing. Data can be collected at different levels of **aggregation** --- *micro* (households, firms, workers) or *macro* (regions, countries) --- and variables can be **quantitative** (numbers, such as wage) or **qualitative** (categories, such as employed / unemployed).
 
-```{r ch01-sel-bias}
-tapply(wage1$exper, wage1$educ, mean)
+The reason to keep all these distinctions straight is the single most useful sentence in the chapter: **the structure of the data determines which questions we can answer and which methods we can use.** Experimental data --- or a clever quasi-experiment --- can deliver credible causal effects; a single observational cross-section, by contrast, usually delivers correlations, and turning those into causal statements is the hard work of the rest of the course.
+
+## Lab: exploring a dataset in R
+
+We now return to the study-and-grades data from the start of the chapter and work through it as an applied economist would. The dataset is small enough to type in by hand, so no external package is needed. (Installing R and RStudio is covered in Appendix A; the first regression with `lm()` is the opening lab of Chapter 2.)
+
+```{r ch01-lab-data}
+grades <- data.frame(
+  study = c(1.5, 2.0, 3.0, 3.5, 4.0, 5.0, 5.5, 6.5, 7.5, 8.0),
+  grade = c(2.0, 3.0, 3.5, 4.5, 5.0, 6.0, 6.5, 7.5, 8.5, 9.0)
+)
 ```
 
-Workers with little schooling have *more* labour-market experience, and workers with a college degree have *less*. So when we compare wages across education levels, we are simultaneously comparing workers who differ in experience --- the comparison is confounded. This is the same kind of selection problem we saw in the ventilator and private-school examples, now in our actual dataset. We will fix it in Chapter 3 by including both `educ` and `exper` in a multiple regression.
+### What kind of data are these?
 
-::: {.callout-note}
-## Why `wage1` is a cross-section
+These are **non-experimental** data: we simply observed ten students; we did not assign anyone a number of study hours. In structure they are a **cross-section** --- ten different units (students), all observed in the same period, with no time dimension and no unit followed over time.
 
-`wage1` records each worker **once**, all in 1976. There is no time index, no person identifier observed in several years. It is a clean cross-section. With this dataset alone we *cannot* track how a given worker's wage grows from one year to the next --- that would require a *panel*, e.g. the U.S. Panel Study of Income Dynamics (PSID) or the Spanish *Muestra Continua de Vidas Laborales* (MCVL). Knowing what your data *can* and *cannot* tell you is half of applied econometrics.
-:::
+### Describing the two variables
+
+For each variable we report the mean, standard deviation, minimum, and maximum.
+
+```{r ch01-lab-describe}
+summary(grades)
+sapply(grades, sd)
+```
+
+`summary()` gives the minimum, quartiles, mean, and maximum; `sd()` gives the standard deviation, a measure of how spread out the values are.
+
+### The distribution of each variable
+
+```{r ch01-lab-hist}
+#| fig-cap: "Distributions of daily study hours and average grades."
+#| fig-width: 9
+#| fig-height: 4
+op <- par(mfrow = c(1, 2))
+hist(grades$study, breaks = 6, col = "lightblue",
+     main = "Daily study hours", xlab = "Study hours")
+hist(grades$grade, breaks = 6, col = "lightgreen",
+     main = "Average grade", xlab = "Grade (0-10)")
+par(op)
+```
+
+### The relationship between them
+
+```{r ch01-lab-scatter}
+#| fig-cap: "Average grade against daily study hours."
+plot(grades$study, grades$grade,
+     xlab = "Daily study hours", ylab = "Average grade (0-10)",
+     main = "Grades vs. study hours",
+     xlim = c(0, 10), ylim = c(0, 10),
+     pch = 19, col = "blue", cex = 1.3)
+```
+
+The scatter slopes upward, so the relationship is **positive**: more study hours go with higher grades. To put a single number on the *strength and direction* of a linear relationship, we compute the **sample correlation coefficient**, which always lies between $-1$ and $+1$:
+
+```{r ch01-lab-cor}
+cor(grades$study, grades$grade)
+```
+
+The correlation is very close to $+1$, confirming a strong, positive, and almost perfectly linear association in these (stylised) data.
+
+### Writing down an econometric model
+
+A simple linear econometric model for these data is
+
+$$
+\text{grade}_i = \beta_0 + \beta_1\,\text{study}_i + u_i.
+$$
+
+The systematic part $\beta_0 + \beta_1\,\text{study}_i$ captures how grades move with study hours; the error $u_i$ collects everything else that affects a student's grade but is not in the model --- **innate ability, prior preparation, course difficulty, health, motivation, luck**. These omitted factors do not disappear; they simply live inside $u$.
+
+### Can we conclude that studying *causes* better grades?
+
+Not from these data alone. The students *chose* how much to study; they were not assigned their study hours at random. The more motivated or better-prepared students may both study more *and* score higher for reasons that have nothing to do with the extra hours --- and those reasons sit in $u$. What we have measured is a **correlation**, not a causal effect.
+
+### How could we find the causal effect?
+
+To isolate the causal effect of studying we would need an **experiment**. We could take a group of students, **randomly assign** some of them to a study programme (the treatment group) and leave the others as they are (the control group), and then compare the two groups' average grades. Because assignment is random, the two groups would be comparable to begin with, so a difference in their later grades could be credibly attributed to the extra studying. Designing such experiments --- and finding credible substitutes for them when they are impossible --- is a central task of modern econometrics.
 
 ## Self-check {.unnumbered}
 
 Eight short multiple-choice questions. Try each one before opening the answer.
 
 ::: {.callout-tip collapse="true"}
-## Q1. What is an econometric model?
+## Q1. What does econometrics do?
 
-An econometric model differs from a purely economic (theoretical) model in that:
+The main objective of econometrics is to:
 
-- A. It assumes the relationship between variables is exact and deterministic.
-- B. It adds a stochastic error term and a functional form so that unknown parameters can be estimated from data.
-- C. It does not require a sample of data because the parameters are derived from theory.
-- D. It is only used in macroeconomic problems, not in microeconomic ones.
+- A. Prove economic theories using only mathematics, without data.
+- B. Estimate relationships between variables from data.
+- C. Collect data without analysing it.
+- D. Forecast the weather.
 
-**Answer: B.** An econometric model couples a functional form with a random disturbance $u$, which makes the unknown parameters estimable from observed data.
+**Answer: B.** Econometrics applies statistical methods to economic data in order to estimate relationships between variables ($X \Rightarrow Y$).
 :::
 
 ::: {.callout-tip collapse="true"}
-## Q2. The role of the error term
+## Q2. The two components of a model
 
-In the population regression model $y = \beta_0 + \beta_1 x + u$, the error term $u$:
+In the econometric model $Y = f(X) + u$, the term $u$:
 
-- A. Is the difference between $y_i$ and the OLS fitted value $\hat y_i$ in our sample.
-- B. Is always equal to zero in the population.
-- C. Captures every factor --- other than $x$ --- that influences $y$.
-- D. Is observable as soon as we have data on $y$ and $x$.
+- A. Is the systematic part of the model.
+- B. Can always be computed once we have the data.
+- C. Collects the factors that affect $Y$ but are not included in the model.
+- D. Is equal to zero for every individual.
 
-**Answer: C.** $u$ is a *population*, *unobservable* quantity collecting all omitted determinants of $y$. The residual $\hat u_i$ is its sample counterpart, computed only after estimation.
+**Answer: C.** The unobserved component $u$ gathers everything that influences $Y$ but is left out of the systematic part --- ability, luck, and so on. It is a population object and is not directly observable.
 :::
 
 ::: {.callout-tip collapse="true"}
-## Q3. Cross-section or not?
+## Q3. Correlation and causation
 
-A dataset with information on 526 workers interviewed in May 1976 (one observation per worker, all measured at the same time) is:
+A positive correlation between ice-cream sales and sunburn cases means that:
 
-- A. Cross-sectional data.
-- B. Time-series data.
-- C. Panel (longitudinal) data.
-- D. Pooled cross-section data.
+- A. Ice cream causes sunburn.
+- B. Sunburn causes ice-cream sales.
+- C. The two move together, but the association may be driven by a third factor such as hot weather.
+- D. There is a mistake in the data.
 
-**Answer: A.** Many units, one time period, no repeated observation of the same unit --- the textbook definition of a cross-section.
+**Answer: C.** The two variables move together because a lurking third factor --- summer heat --- drives both. Correlation alone says nothing about causation.
 :::
 
 ::: {.callout-tip collapse="true"}
-## Q4. Time series
+## Q4. Sampling vs. assignment
 
-Annual Spanish unemployment rates from 1980 to 2024 are an example of:
+Which statement is correct?
+
+- A. Random sampling and random assignment are the same thing.
+- B. Random sampling makes the sample representative; random assignment makes treatment and control groups comparable.
+- C. A representative survey is enough to establish a causal effect.
+- D. Random assignment is only about how we draw the sample from the population.
+
+**Answer: B.** Random *sampling* concerns representativeness; random *assignment* concerns comparability of the treated and untreated groups and is what licenses a causal reading. A representative survey alone does not deliver causation.
+:::
+
+::: {.callout-tip collapse="true"}
+## Q5. Cross-section
+
+A dataset with information on 526 workers interviewed in the same month (one row per worker) is:
 
 - A. Cross-sectional data.
 - B. Time-series data.
 - C. Panel data.
 - D. Experimental data.
 
-**Answer: B.** One quantity (the unemployment rate) recorded at a regular frequency over time.
+**Answer: A.** Many units, one time period, no unit observed repeatedly --- the definition of a cross-section.
 :::
 
 ::: {.callout-tip collapse="true"}
-## Q5. Panel vs pooled cross-section
+## Q6. Time series
 
-A dataset follows 1{,}000 firms during the years 2010--2024, recording sales, employment and exports for each firm in every year. This is:
+U.S. annual GDP recorded every year from 2006 to 2014 is an example of:
 
-- A. Cross-sectional data, since each firm-year is one row.
-- B. Pooled cross-section, since different units are sampled in each period.
-- C. Time-series data, since it has a time dimension.
-- D. Panel (longitudinal) data: the same units observed repeatedly over time.
+- A. Cross-sectional data.
+- B. Time-series data.
+- C. Panel data.
+- D. Experimental data.
 
-**Answer: D.** The same firms are tracked over multiple periods, which is exactly the panel structure.
+**Answer: B.** A single quantity (GDP for one economy) recorded at a regular interval over time.
 :::
 
 ::: {.callout-tip collapse="true"}
-## Q6. What does correlation tell us?
+## Q7. Panel vs. time series
 
-A high positive correlation between two variables $X$ and $Y$ implies that:
+A dataset that follows 1{,}000 firms during 2010--2024, recording sales for each firm in every year, is:
 
-- A. $X$ causes $Y$.
-- B. $Y$ causes $X$.
-- C. There exists a deterministic linear relationship between them.
-- D. They tend to move together, but this association may be driven by a third variable, by reverse causality, or by selection.
+- A. Time-series data, because it has a time dimension.
+- B. Cross-sectional data, because each firm-year is one row.
+- C. Panel (longitudinal) data: many units observed over several periods.
+- D. Experimental data.
 
-**Answer: D.** Correlation is silent about causal direction or confounding. The ice-cream-and-drowning example in §1.4.2 is the canonical warning.
+**Answer: C.** The same firms are tracked over multiple years, giving both a unit dimension and a time dimension. "Data over time" is not automatically a time series.
 :::
 
 ::: {.callout-tip collapse="true"}
-## Q7. Selection bias
+## Q8. Experiments and quasi-experiments
 
-Selection bias arises when:
+Which design gives the most credible evidence on a causal effect, by construction?
 
-- A. The units that select into the treatment group differ systematically from those that do not, even before treatment.
-- B. The researcher chooses regressors based on $t$-statistics.
-- C. The sample size is too small to detect a true effect.
-- D. The dependent variable is measured with error.
+- A. A randomised experiment, where the treatment is assigned by lottery.
+- B. A comparison of people who chose the treatment with those who did not.
+- C. A single observational cross-section.
+- D. A survey with a very large sample size.
 
-**Answer: A.** Selection bias is a property of the *assignment* of treatment, not of estimation or measurement. The ventilator example in §1.4.1 is the prototype.
-:::
-
-::: {.callout-tip collapse="true"}
-## Q8. Randomisation as a remedy
-
-In which of the following research designs does randomisation *by construction* eliminate selection bias?
-
-- A. Comparing employed vs. unemployed individuals using cross-sectional survey data.
-- B. A randomised controlled trial (RCT) where the treatment is assigned by lottery.
-- C. Comparing students who chose to enrol in a private vs. a public school.
-- D. Comparing countries that adopted the euro vs. countries that did not.
-
-**Answer: B.** Only random assignment guarantees that, *on average*, treated and untreated units have the same pre-treatment characteristics.
+**Answer: A.** Only random assignment makes the treatment and control groups comparable on average before treatment, which is why randomised experiments are the gold standard. A large sample (D) does not fix a non-random comparison (B, C).
 :::
 
 ## Exercises {.unnumbered}
 
-**Exercise 1.1 ★ --- Classifying datasets.** Classify each of the following datasets as cross-sectional, time-series, panel, or pooled cross-section.
+**Exercise 1.1 ★ --- Classifying datasets.** Classify each of the following as cross-sectional, time-series, or panel data.
 
-(a) Monthly Spanish CPI from 1980 to 2024.
-(b) `wage1`: 526 workers interviewed in May 1976, one row per worker.
-(c) The Spanish EPA: each quarter, a fresh independent sample of households is drawn (no household is revisited); several quarters are then stacked.
-(d) A dataset that follows the same 800 students from age 6 to age 18, recording their test scores every year.
-
-::: {.callout-tip collapse="true"}
-## Show answer
-
-(a) Time-series. (b) Cross-sectional. (c) Pooled cross-section --- new units each period. (d) Panel: the *same* units are followed over multiple periods.
-:::
-
-**Exercise 1.2 ★ --- Spotting selection bias.** For each scenario, state whether selection bias is a likely problem, and identify which characteristic drives the selection.
-
-(a) A hospital compares mortality of patients who received a ventilator with patients who did not.
-(b) An economist compares the wages of workers who completed a job-training programme with the wages of workers who did not enrol.
-(c) Researchers compare countries that adopted the euro in 1999 with countries that did not.
+(a) U.S. annual real GDP from 2006 to 2014.
+(b) The study-and-grades data: ten students, one observation per student.
+(c) The output of two rice farms recorded every year from 1990 to 1997.
+(d) The wage, education, and sex of 500 individuals interviewed in a single CPS wave.
 
 ::: {.callout-tip collapse="true"}
 ## Show answer
 
-(a) Yes --- severity of illness drives both ventilator assignment and mortality. (b) Yes --- self-selection into training is driven by motivation, prior earnings, and labour-market prospects, all of which also affect wages. (c) Yes --- countries that joined the euro were chosen on the basis of macroeconomic fundamentals (the Maastricht criteria), so they are not a random sample of European countries.
+(a) Time-series --- one quantity for one economy over time. (b) Cross-sectional --- many units, one period. (c) Panel --- the *same* farms observed over several years. (d) Cross-sectional --- many units, one time period.
 :::
 
-**Exercise 1.3 ★★ --- Sign of an omitted-variable bias.** Suppose you regress hourly wage on years of education in a sample of currently employed adults, *without* controlling for innate ability. Assume that (i) more able workers earn more, holding education fixed, and (ii) more able workers tend to acquire more education. Will the coefficient on `educ` be biased upward (too positive) or downward (too negative)? Explain in one sentence.
+**Exercise 1.2 ★ --- Correlation or causation?** For each pair of variables, state (i) the likely sign of the correlation, and (ii) why the correlation should *not* be read as a causal effect. Name the lurking third factor or the direction of reverse causation.
+
+(a) Ice-cream sales and sunburn cases.
+(b) Number of hospital visits and health status.
+(c) Number of firefighters sent to a fire and the amount of damage the fire causes.
+
+::: {.callout-tip collapse="true"}
+## Show answer
+
+(a) Positive; a third factor --- hot, sunny weather --- drives both. (b) Negative; reverse causation --- people who are already unwell go to the hospital more, so health drives visits. (c) Positive; a third factor --- the size of the fire --- drives both the number of firefighters and the damage. Sending fewer firefighters would not reduce damage.
+:::
+
+**Exercise 1.3 ★ --- Sampling vs. assignment.** A researcher draws a large, perfectly representative random sample of workers and observes that those who attended a training course earn more than those who did not. Can the researcher conclude that the course *raised* wages? Explain, using the distinction between random sampling and random assignment.
+
+::: {.callout-tip collapse="true"}
+## Show answer
+
+No. The sample is randomly *drawn* (good sampling, so it represents the population), but the workers *chose* whether to take the course --- the treatment was not randomly *assigned*. More motivated or more able workers may both enrol and earn more anyway; those factors sit in $u$. Without random assignment, the wage gap mixes the effect of the course with pre-existing differences between the two groups.
+:::
+
+**Exercise 1.4 ★★ --- Designing a randomised experiment.** You want to know whether a free study-skills workshop *causes* higher grades among first-year students. Sketch a randomised experiment that would identify this causal effect. Be explicit about: the participants, what is randomly assigned, the treatment and control groups, and the outcome you would compare. Mention one practical or ethical difficulty.
 
 *A full answer is given in the Instructor Edition.*
 
-**Exercise 1.4 ★★ --- Designing a randomised experiment.** You want to know whether a free university preparation course (the treatment) causally raises the probability that high-school students from low-income families enrol in university. Sketch the design of a randomised experiment that would identify this causal effect. Be explicit about: the population, the assignment rule, the treatment and control groups, the outcome variable, and the time horizon. Briefly discuss one ethical objection your design will have to address.
+**Exercise 1.5 ★★ --- Reading a model.** Consider the econometric model $\text{grade}_i = \beta_0 + \beta_1\,\text{study}_i + u_i$.
 
-*A full answer is given in the Instructor Edition.*
+(a) In words, what does $\beta_1$ measure?
+(b) Give three factors that would be contained in $u_i$.
+(c) Explain why $\beta_0$ and $\beta_1$ are called *unknown parameters*.
 
-**Exercise 1.5 ★★ --- A naive omitted-variable model.** A worker's wage is generated by
+::: {.callout-tip collapse="true"}
+## Show answer
 
-$$
-w = 5 + 2 \cdot \mathit{edu} + u, \qquad \mathbb{E}[u] = 0,\ \operatorname{Var}(u) = 1,
-$$
+(a) $\beta_1$ is the change in the average grade associated with one more daily hour of study. (b) Any three of: innate ability, prior preparation, course difficulty, health, motivation, luck. (c) They are fixed features of the population that we do not know; we estimate them from a sample using an econometric method (OLS, Chapter 2).
+:::
 
-where $\mathit{edu}\in\{0,1,2,3\}$ are years of post-compulsory education. Suppose that ability (collected in $u$) is correlated with education: $\mathbb{E}[u\mid \mathit{edu}] = 0.5\cdot \mathit{edu}$.
-
-(a) Compute $\mathbb{E}[w\mid \mathit{edu}]$.
-(b) If we naively assume $\mathbb{E}[u\mid \mathit{edu}] = 0$ and read off the slope, what do we get? By how much do we *miss* the true marginal effect of an extra year of education?
-
-*A full answer is given in the Instructor Edition.*
-
-**Exercise 1.6 ★★★ --- Chocolate and Nobel prizes.** It has been documented [@cgl2017] that countries with higher per-capita chocolate consumption also win more Nobel prizes per capita. Is this evidence that chocolate consumption *causes* Nobel prizes? Identify (i) at least one plausible omitted variable, (ii) at least one alternative causal channel (reverse causation, selection of which countries get measured, etc.), and (iii) describe a *hypothetical* research design --- experimental or quasi-experimental --- that would allow you to learn the causal effect of chocolate on prize-winning. Be honest about why this design is unlikely to be feasible.
+**Exercise 1.6 ★★★ --- Chocolate and Nobel prizes.** It has been noted that countries with higher per-capita chocolate consumption also win more Nobel prizes per capita [@cgl2017]. Is this evidence that eating chocolate causes Nobel prizes? Identify (i) at least one plausible lurking third factor, and (ii) explain why a randomised experiment to settle the question would be difficult to run in practice.
 
 *A full answer is given in the Instructor Edition.*

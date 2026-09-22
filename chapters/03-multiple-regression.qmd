@@ -18,7 +18,7 @@ By the end of this chapter the reader should be able to:
 
 > *Once we hold experience, tenure, gender, and marital status constant, what is the return to one additional year of education?*
 
-Chapter 1 showed that the raw wage gap by education in `wage1` confounds schooling with experience, tenure, and demographics; Chapter 2 fitted a simple regression of `wage` on `educ` and explicitly warned that the OLS slope could not be read causally. The multiple linear regression (MLR) model is the workhorse we use to take that warning seriously: by including controls, we move from raw conditional means to **partial effects** --- the change in $y$ associated with a one-unit change in one regressor, *holding all the others fixed*.
+Chapter 1 warned that a raw correlation can confound the effect we care about with everything else bundled into the error term, and Chapter 2 fitted a simple regression while stressing that its slope cannot, in general, be read causally. The multiple linear regression (MLR) model is the workhorse we use to take that warning seriously: by including controls, we move from raw comparisons to **partial effects** --- the change in $y$ associated with a one-unit change in one regressor, *holding all the others fixed*.
 
 ## Motivation: the problem with simple regression
 
@@ -365,7 +365,7 @@ model3 <- lm(wage ~ educ + exper + tenure + female + married, data = wage1)
 summary(model3)
 ```
 
-The coefficient on `female` is the conditional gender wage gap holding education, experience, tenure, and marital status fixed; the coefficient on `married` is the conditional marriage premium. Both are smaller in magnitude than the raw conditional means of Chapter 1 --- confounders have been partly accounted for.
+The coefficient on `female` is the conditional gender wage gap holding education, experience, tenure, and marital status fixed; the coefficient on `married` is the conditional marriage premium. Both are smaller in magnitude than the corresponding raw differences in average wages --- confounders have been partly accounted for.
 
 Compare goodness of fit across the three nested models:
 
