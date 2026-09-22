@@ -1,9 +1,9 @@
 name: Publish book
 
-# Renders the book on GitHub-hosted runners (which have unrestricted internet,
-# so Quarto, CRAN, and TinyTeX are all available). On pull requests it renders
-# only, to validate the build; on pushes to main (and manual runs) it also
-# deploys the rendered site to the gh-pages branch.
+# Renders the book (HTML) on GitHub-hosted runners, which have unrestricted
+# internet, so Quarto, CRAN, and the GitHub CRAN mirrors are all reachable.
+# On pull requests it renders only, to validate the build; on pushes to main
+# (and manual runs) it also deploys the rendered site to the gh-pages branch.
 on:
   push:
     branches: [main]
@@ -26,16 +26,8 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Quarto (+ TinyTeX for the PDF edition)
+      - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          tinytex: true
-        # Quarto's TinyTeX installer queries the GitHub API for the latest
-        # rstudio/tinytex-releases; without a token it is rate-limited (403 on
-        # shared CI runners). The built-in token authenticates that request.
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
@@ -65,16 +57,15 @@ jobs:
                             c(pkgs, "orcutt"))
           if (length(missing)) stop("Failed to install: ", paste(missing, collapse = ", "))
 
-      # Pull requests: render only, to validate the build without publishing.
-      - name: Render (validation only)
-        if: github.event_name == 'pull_request'
-        uses: quarto-dev/quarto-actions/render@v2
+      - name: Render book (HTML)
+        run: quarto render --to html
 
-      # Push to main / manual dispatch: render and deploy to GitHub Pages.
-      - name: Render and publish to GitHub Pages
+      # Deploy the rendered HTML site to gh-pages on push to main / manual run.
+      - name: Publish to GitHub Pages
         if: github.event_name != 'pull_request'
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
+          render: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
