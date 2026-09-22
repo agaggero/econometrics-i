@@ -261,12 +261,12 @@ Genuine randomised experiments are routine in medicine but **rare in economics a
 
 ### Quasi-experiments
 
-It is useful to sit between "pure" experiments and pure observation. In a **quasi-experiment**, assignment to treatment is *not* random but follows some **observable** rule --- often a threshold or an eligibility cut-off that affects some units and not others.
+A useful middle ground sits between "pure" experiments and pure observation. In a **quasi-experiment**, assignment to treatment is *not* random but follows some **observable** rule --- often a threshold or an eligibility cut-off that affects some units and not others.
 
 ::: {.callout-note}
 ## Example: a regional lockdown
 
-During the COVID-19 pandemic, the *Junta de Andalucía* imposed a lockdown (the treatment) only on municipalities with an infection rate above 1{,}000 cases per 100{,}000 inhabitants. Municipalities just above and just below that threshold are otherwise quite similar, so comparing their outcomes can approximate a randomised experiment even though no one was assigned at random.
+During the COVID-19 pandemic, the *Junta de Andalucía* imposed a lockdown (the treatment) only on municipalities with an infection rate above 1,000 cases per 100,000 inhabitants. Municipalities just above and just below that threshold are otherwise quite similar, so comparing their outcomes can approximate a randomised experiment even though no one was assigned at random.
 :::
 
 ### Non-experimental (observational) data
@@ -499,7 +499,7 @@ U.S. annual GDP recorded every year from 2006 to 2014 is an example of:
 ::: {.callout-tip collapse="true"}
 ## Q7. Panel vs. time series
 
-A dataset that follows 1{,}000 firms during 2010--2024, recording sales for each firm in every year, is:
+A dataset that follows 1,000 firms during 2010--2024, recording sales for each firm in every year, is:
 
 - A. Time-series data, because it has a time dimension.
 - B. Cross-sectional data, because each firm-year is one row.
