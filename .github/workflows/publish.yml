@@ -51,10 +51,15 @@ jobs:
           pkgs <- c("knitr", "rmarkdown", "wooldridge", "lmtest", "sandwich", "readxl")
           install.packages(pkgs)
           # orcutt (used in Ch. 8) has been archived on CRAN, so it is not in the
-          # current CRAN/RSPM index; install it from its read-only CRAN mirror.
+          # current CRAN/RSPM index. Install it from its read-only CRAN mirror over
+          # the git transport (the GitHub API is rate-limited on shared runners).
           if (!requireNamespace("orcutt", quietly = TRUE)) {
-            install.packages("remotes")
-            remotes::install_github("cran/orcutt", upgrade = "never")
+            dest <- file.path(tempdir(), "orcutt-src")
+            if (system2("git", c("clone", "--depth", "1",
+                                 "https://github.com/cran/orcutt.git", dest)) != 0L)
+              stop("Failed to clone orcutt from its CRAN mirror")
+            if (system2(file.path(R.home("bin"), "R"), c("CMD", "INSTALL", dest)) != 0L)
+              stop("Failed to install orcutt")
           }
           missing <- Filter(function(p) !requireNamespace(p, quietly = TRUE),
                             c(pkgs, "orcutt"))
