@@ -43,16 +43,22 @@ jobs:
           use-public-rspm: true
 
       - name: Install R package dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          packages: |
-            any::knitr
-            any::rmarkdown
-            any::wooldridge
-            any::lmtest
-            any::sandwich
-            any::readxl
-            any::orcutt
+        shell: Rscript {0}
+        run: |
+          # setup-r (use-public-rspm) configures the RSPM binary repo, so these
+          # install as prebuilt binaries. Plain install.packages() installs hard
+          # dependencies only (no Suggests) and avoids pak's all-or-nothing solve.
+          pkgs <- c("knitr", "rmarkdown", "wooldridge", "lmtest", "sandwich", "readxl")
+          install.packages(pkgs)
+          # orcutt (used in Ch. 8) has been archived on CRAN, so it is not in the
+          # current CRAN/RSPM index; install it from its read-only CRAN mirror.
+          if (!requireNamespace("orcutt", quietly = TRUE)) {
+            install.packages("remotes")
+            remotes::install_github("cran/orcutt", upgrade = "never")
+          }
+          missing <- Filter(function(p) !requireNamespace(p, quietly = TRUE),
+                            c(pkgs, "orcutt"))
+          if (length(missing)) stop("Failed to install: ", paste(missing, collapse = ", "))
 
       # Pull requests: render only, to validate the build without publishing.
       - name: Render (validation only)
