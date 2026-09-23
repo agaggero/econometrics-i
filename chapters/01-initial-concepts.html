@@ -104,9 +104,9 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-047a7d02611f717c5f368fcfd226f563.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-37e50eaebb01d4b11d0fcf2778b13c7f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-047a7d02611f717c5f368fcfd226f563.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-57209c1f8584c0f524a94fbb0f5cdd20.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-bf48f7fa51dc410e2f1ec2d8eca84458.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-57209c1f8584c0f524a94fbb0f5cdd20.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -551,7 +551,7 @@ window.Quarto = {
 <li>Government spending <span class="math inline">\(\Rightarrow\)</span> Crime</li>
 <li>Advertising <span class="math inline">\(\Rightarrow\)</span> Sales</li>
 </ul>
-<p>In general we write <span class="math inline">\(X \Rightarrow Y\)</span>, where <span class="math inline">\(X\)</span> is the <strong>independent variable</strong> (also called the <em>regressor</em> or <em>explanatory variable</em>) and <span class="math inline">\(Y\)</span> is the <strong>dependent variable</strong> (also called the <em>outcome</em> or <em>response</em>). For any such pair we usually want to know three things:</p>
+<p>In general we write <span class="math inline">\(X \Rightarrow Y\)</span>, where <span class="math inline">\(X\)</span> is the <strong>independent variable</strong> (also called the <em>regressor</em> or <em>explanatory variable</em>) and <span class="math inline">\(Y\)</span> is the <strong>dependent variable</strong> (also called the <em>outcome</em> or <em>response</em>). The arrow captures the <strong>objective</strong> of econometrics: to learn how <span class="math inline">\(X\)</span> shapes <span class="math inline">\(Y\)</span>. Whether that influence turns out to be genuinely <em>causal</em> or merely a <em>correlation</em> is one of the central questions of this chapter — but the arrow is the goal we are always aiming at. For any such pair we usually want to know three things:</p>
 <ol type="1">
 <li>Is there a relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>?</li>
 <li>Is the relationship positive or negative?</li>
@@ -857,7 +857,7 @@ f(\text{education}_i) = \beta_0 + \beta_1\,\text{education}_i,
 </section>
 <section id="quasi-experiments" class="level3" data-number="1.7.3">
 <h3 data-number="1.7.3" class="anchored" data-anchor-id="quasi-experiments"><span class="header-section-number">1.7.3</span> Quasi-experiments</h3>
-<p>A useful middle ground sits between “pure” experiments and pure observation. In a <strong>quasi-experiment</strong>, assignment to treatment is <em>not</em> random but follows some <strong>observable</strong> rule — often a threshold or an eligibility cut-off that affects some units and not others.</p>
+<p>A useful middle ground sits between “pure” experiments and pure observation. In a <strong>quasi-experiment</strong>, assignment to treatment is <em>not</em> random, but neither is it chosen by the participants themselves: it is driven by some external, <strong>observable</strong> circumstance the researcher can exploit — a policy change, a natural event, or an administrative rule such as a threshold or eligibility cut-off — that happens to affect some units and not others.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1067,7 +1067,7 @@ f(\text{education}_i) = \beta_0 + \beta_1\,\text{education}_i,
 </section>
 <section id="describing-the-two-variables" class="level3" data-number="1.8.2">
 <h3 data-number="1.8.2" class="anchored" data-anchor-id="describing-the-two-variables"><span class="header-section-number">1.8.2</span> Describing the two variables</h3>
-<p>For each variable we report the mean, standard deviation, minimum, and maximum.</p>
+<p>For each variable we summarise its centre and its spread.</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -1091,7 +1091,7 @@ f(\text{education}_i) = \beta_0 + \beta_1\,\text{education}_i,
 2.236689 2.362320 </code></pre>
 </div>
 </div>
-<p><code>summary()</code> gives the minimum, quartiles, mean, and maximum; <code>sd()</code> gives the standard deviation, a measure of how spread out the values are.</p>
+<p><code>summary()</code> reports the five-number summary — minimum, first quartile, median, third quartile, and maximum — together with the mean; it does <strong>not</strong> include the standard deviation, so we compute that separately with <code>sd()</code>, a measure of how spread out the values are.</p>
 </section>
 <section id="the-distribution-of-each-variable" class="level3" data-number="1.8.3">
 <h3 data-number="1.8.3" class="anchored" data-anchor-id="the-distribution-of-each-variable"><span class="header-section-number">1.8.3</span> The distribution of each variable</h3>
@@ -1117,6 +1117,7 @@ f(\text{education}_i) = \beta_0 + \beta_1\,\text{education}_i,
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<p>With only ten observations these histograms are necessarily coarse — each bar holds just one or two students — so treat them as a first look at the tool rather than a trustworthy picture of the underlying distribution, which needs many more data points to emerge.</p>
 </section>
 <section id="the-relationship-between-them" class="level3" data-number="1.8.4">
 <h3 data-number="1.8.4" class="anchored" data-anchor-id="the-relationship-between-them"><span class="header-section-number">1.8.4</span> The relationship between them</h3>
@@ -1149,6 +1150,7 @@ f(\text{education}_i) = \beta_0 + \beta_1\,\text{education}_i,
 </div>
 </div>
 <p>The correlation is very close to <span class="math inline">\(+1\)</span>, confirming a strong, positive, and almost perfectly linear association in these (stylised) data.</p>
+<p>Two cautions travel with this single number. First, the correlation coefficient captures only the strength of a <em>linear</em> association: a value near zero means there is no <em>linear</em> relationship, <strong>not</strong> that the two variables are unrelated. Earnings, for example, tend to rise with work experience and then flatten or fall near retirement — a strong but curved (inverted-U) relationship that a correlation close to zero would entirely miss. Second, real economic data are far messier than these stylised numbers: a scatter of wages against education (Appendix A) is a diffuse cloud with a correlation nearer <span class="math inline">\(0.4\)</span> than <span class="math inline">\(1\)</span>. We use tidy numbers here only so that the pattern — and the R commands — stand out clearly.</p>
 </section>
 <section id="writing-down-an-econometric-model" class="level3" data-number="1.8.5">
 <h3 data-number="1.8.5" class="anchored" data-anchor-id="writing-down-an-econometric-model"><span class="header-section-number">1.8.5</span> Writing down an econometric model</h3>
@@ -1983,7 +1985,7 @@ Wooldridge, Jeffrey M. 2020. <em>Introductory Econometrics: A Modern Approach</e
 <span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Government spending $\Rightarrow$ Crime</span>
 <span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Advertising $\Rightarrow$ Sales</span>
 <span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>In general we write $X \Rightarrow Y$, where $X$ is the **independent variable** (also called the *regressor* or *explanatory variable*) and $Y$ is the **dependent variable** (also called the *outcome* or *response*). For any such pair we usually want to know three things:</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>In general we write $X \Rightarrow Y$, where $X$ is the **independent variable** (also called the *regressor* or *explanatory variable*) and $Y$ is the **dependent variable** (also called the *outcome* or *response*). The arrow captures the **objective** of econometrics: to learn how $X$ shapes $Y$. Whether that influence turns out to be genuinely *causal* or merely a *correlation* is one of the central questions of this chapter --- but the arrow is the goal we are always aiming at. For any such pair we usually want to know three things:</span>
 <span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Is there a relationship between $X$ and $Y$?</span>
 <span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Is the relationship positive or negative?</span>
@@ -2205,7 +2207,7 @@ Wooldridge, Jeffrey M. 2020. <em>Introductory Econometrics: A Modern Approach</e
 <span id="cb21-261"><a href="#cb21-261" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-262"><a href="#cb21-262" aria-hidden="true" tabindex="-1"></a><span class="fu">### Quasi-experiments</span></span>
 <span id="cb21-263"><a href="#cb21-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-264"><a href="#cb21-264" aria-hidden="true" tabindex="-1"></a>A useful middle ground sits between "pure" experiments and pure observation. In a **quasi-experiment**, assignment to treatment is *not* random but follows some **observable** rule --- often a threshold or an eligibility cut-off that affects some units and not others.</span>
+<span id="cb21-264"><a href="#cb21-264" aria-hidden="true" tabindex="-1"></a>A useful middle ground sits between "pure" experiments and pure observation. In a **quasi-experiment**, assignment to treatment is *not* random, but neither is it chosen by the participants themselves: it is driven by some external, **observable** circumstance the researcher can exploit --- a policy change, a natural event, or an administrative rule such as a threshold or eligibility cut-off --- that happens to affect some units and not others.</span>
 <span id="cb21-265"><a href="#cb21-265" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-266"><a href="#cb21-266" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
 <span id="cb21-267"><a href="#cb21-267" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example: a regional lockdown</span></span>
@@ -2298,14 +2300,14 @@ Wooldridge, Jeffrey M. 2020. <em>Introductory Econometrics: A Modern Approach</e
 <span id="cb21-354"><a href="#cb21-354" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-355"><a href="#cb21-355" aria-hidden="true" tabindex="-1"></a><span class="fu">### Describing the two variables</span></span>
 <span id="cb21-356"><a href="#cb21-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-357"><a href="#cb21-357" aria-hidden="true" tabindex="-1"></a>For each variable we report the mean, standard deviation, minimum, and maximum.</span>
+<span id="cb21-357"><a href="#cb21-357" aria-hidden="true" tabindex="-1"></a>For each variable we summarise its centre and its spread.</span>
 <span id="cb21-358"><a href="#cb21-358" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-359"><a href="#cb21-359" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch01-lab-describe}</span></span>
 <span id="cb21-360"><a href="#cb21-360" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(grades)</span>
 <span id="cb21-361"><a href="#cb21-361" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(grades, sd)</span>
 <span id="cb21-362"><a href="#cb21-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-363"><a href="#cb21-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-364"><a href="#cb21-364" aria-hidden="true" tabindex="-1"></a><span class="in">`summary()`</span> gives the minimum, quartiles, mean, and maximum; <span class="in">`sd()`</span> gives the standard deviation, a measure of how spread out the values are.</span>
+<span id="cb21-364"><a href="#cb21-364" aria-hidden="true" tabindex="-1"></a><span class="in">`summary()`</span> reports the five-number summary --- minimum, first quartile, median, third quartile, and maximum --- together with the mean; it does **not** include the standard deviation, so we compute that separately with <span class="in">`sd()`</span>, a measure of how spread out the values are.</span>
 <span id="cb21-365"><a href="#cb21-365" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-366"><a href="#cb21-366" aria-hidden="true" tabindex="-1"></a><span class="fu">### The distribution of each variable</span></span>
 <span id="cb21-367"><a href="#cb21-367" aria-hidden="true" tabindex="-1"></a></span>
@@ -2321,205 +2323,209 @@ Wooldridge, Jeffrey M. 2020. <em>Introductory Econometrics: A Modern Approach</e
 <span id="cb21-377"><a href="#cb21-377" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span>
 <span id="cb21-378"><a href="#cb21-378" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-379"><a href="#cb21-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-380"><a href="#cb21-380" aria-hidden="true" tabindex="-1"></a><span class="fu">### The relationship between them</span></span>
+<span id="cb21-380"><a href="#cb21-380" aria-hidden="true" tabindex="-1"></a>With only ten observations these histograms are necessarily coarse --- each bar holds just one or two students --- so treat them as a first look at the tool rather than a trustworthy picture of the underlying distribution, which needs many more data points to emerge.</span>
 <span id="cb21-381"><a href="#cb21-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-382"><a href="#cb21-382" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch01-lab-scatter}</span></span>
-<span id="cb21-383"><a href="#cb21-383" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Average grade against daily study hours."</span></span>
-<span id="cb21-384"><a href="#cb21-384" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grades<span class="sc">$</span>study, grades<span class="sc">$</span>grade,</span>
-<span id="cb21-385"><a href="#cb21-385" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Daily study hours"</span>, <span class="at">ylab =</span> <span class="st">"Average grade (0-10)"</span>,</span>
-<span id="cb21-386"><a href="#cb21-386" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Grades vs. study hours"</span>,</span>
-<span id="cb21-387"><a href="#cb21-387" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
-<span id="cb21-388"><a href="#cb21-388" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">cex =</span> <span class="fl">1.3</span>)</span>
-<span id="cb21-389"><a href="#cb21-389" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-390"><a href="#cb21-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-391"><a href="#cb21-391" aria-hidden="true" tabindex="-1"></a>The scatter slopes upward, so the relationship is **positive**: more study hours go with higher grades. To put a single number on the *strength and direction* of a linear relationship, we compute the **sample correlation coefficient**, which always lies between $-1$ and $+1$:</span>
+<span id="cb21-382"><a href="#cb21-382" aria-hidden="true" tabindex="-1"></a><span class="fu">### The relationship between them</span></span>
+<span id="cb21-383"><a href="#cb21-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-384"><a href="#cb21-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch01-lab-scatter}</span></span>
+<span id="cb21-385"><a href="#cb21-385" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Average grade against daily study hours."</span></span>
+<span id="cb21-386"><a href="#cb21-386" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grades<span class="sc">$</span>study, grades<span class="sc">$</span>grade,</span>
+<span id="cb21-387"><a href="#cb21-387" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Daily study hours"</span>, <span class="at">ylab =</span> <span class="st">"Average grade (0-10)"</span>,</span>
+<span id="cb21-388"><a href="#cb21-388" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Grades vs. study hours"</span>,</span>
+<span id="cb21-389"><a href="#cb21-389" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb21-390"><a href="#cb21-390" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">cex =</span> <span class="fl">1.3</span>)</span>
+<span id="cb21-391"><a href="#cb21-391" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-392"><a href="#cb21-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-393"><a href="#cb21-393" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch01-lab-cor}</span></span>
-<span id="cb21-394"><a href="#cb21-394" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(grades<span class="sc">$</span>study, grades<span class="sc">$</span>grade)</span>
-<span id="cb21-395"><a href="#cb21-395" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-396"><a href="#cb21-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-397"><a href="#cb21-397" aria-hidden="true" tabindex="-1"></a>The correlation is very close to $+1$, confirming a strong, positive, and almost perfectly linear association in these (stylised) data.</span>
+<span id="cb21-393"><a href="#cb21-393" aria-hidden="true" tabindex="-1"></a>The scatter slopes upward, so the relationship is **positive**: more study hours go with higher grades. To put a single number on the *strength and direction* of a linear relationship, we compute the **sample correlation coefficient**, which always lies between $-1$ and $+1$:</span>
+<span id="cb21-394"><a href="#cb21-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-395"><a href="#cb21-395" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch01-lab-cor}</span></span>
+<span id="cb21-396"><a href="#cb21-396" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(grades<span class="sc">$</span>study, grades<span class="sc">$</span>grade)</span>
+<span id="cb21-397"><a href="#cb21-397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-398"><a href="#cb21-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-399"><a href="#cb21-399" aria-hidden="true" tabindex="-1"></a><span class="fu">### Writing down an econometric model</span></span>
+<span id="cb21-399"><a href="#cb21-399" aria-hidden="true" tabindex="-1"></a>The correlation is very close to $+1$, confirming a strong, positive, and almost perfectly linear association in these (stylised) data.</span>
 <span id="cb21-400"><a href="#cb21-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-401"><a href="#cb21-401" aria-hidden="true" tabindex="-1"></a>A simple linear econometric model for these data is</span>
+<span id="cb21-401"><a href="#cb21-401" aria-hidden="true" tabindex="-1"></a>Two cautions travel with this single number. First, the correlation coefficient captures only the strength of a *linear* association: a value near zero means there is no *linear* relationship, **not** that the two variables are unrelated. Earnings, for example, tend to rise with work experience and then flatten or fall near retirement --- a strong but curved (inverted-U) relationship that a correlation close to zero would entirely miss. Second, real economic data are far messier than these stylised numbers: a scatter of wages against education (Appendix A) is a diffuse cloud with a correlation nearer $0.4$ than $1$. We use tidy numbers here only so that the pattern --- and the R commands --- stand out clearly.</span>
 <span id="cb21-402"><a href="#cb21-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-403"><a href="#cb21-403" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb21-404"><a href="#cb21-404" aria-hidden="true" tabindex="-1"></a>\text{grade}_i = \beta_0 + \beta_1\,\text{study}_i + u_i.</span>
-<span id="cb21-405"><a href="#cb21-405" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb21-403"><a href="#cb21-403" aria-hidden="true" tabindex="-1"></a><span class="fu">### Writing down an econometric model</span></span>
+<span id="cb21-404"><a href="#cb21-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-405"><a href="#cb21-405" aria-hidden="true" tabindex="-1"></a>A simple linear econometric model for these data is</span>
 <span id="cb21-406"><a href="#cb21-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-407"><a href="#cb21-407" aria-hidden="true" tabindex="-1"></a>The systematic part $\beta_0 + \beta_1\,\text{study}_i$ captures how grades move with study hours; the error $u_i$ collects everything else that affects a student's grade but is not in the model --- **innate ability, prior preparation, course difficulty, health, motivation, luck**. These omitted factors do not disappear; they simply live inside $u$.</span>
-<span id="cb21-408"><a href="#cb21-408" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-409"><a href="#cb21-409" aria-hidden="true" tabindex="-1"></a><span class="fu">### Can we conclude that studying *causes* better grades?</span></span>
+<span id="cb21-407"><a href="#cb21-407" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb21-408"><a href="#cb21-408" aria-hidden="true" tabindex="-1"></a>\text{grade}_i = \beta_0 + \beta_1\,\text{study}_i + u_i.</span>
+<span id="cb21-409"><a href="#cb21-409" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb21-410"><a href="#cb21-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-411"><a href="#cb21-411" aria-hidden="true" tabindex="-1"></a>Not from these data alone. The students *chose* how much to study; they were not assigned their study hours at random. The more motivated or better-prepared students may both study more *and* score higher for reasons that have nothing to do with the extra hours --- and those reasons sit in $u$. What we have measured is a **correlation**, not a causal effect.</span>
+<span id="cb21-411"><a href="#cb21-411" aria-hidden="true" tabindex="-1"></a>The systematic part $\beta_0 + \beta_1\,\text{study}_i$ captures how grades move with study hours; the error $u_i$ collects everything else that affects a student's grade but is not in the model --- **innate ability, prior preparation, course difficulty, health, motivation, luck**. These omitted factors do not disappear; they simply live inside $u$.</span>
 <span id="cb21-412"><a href="#cb21-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-413"><a href="#cb21-413" aria-hidden="true" tabindex="-1"></a><span class="fu">### How could we find the causal effect?</span></span>
+<span id="cb21-413"><a href="#cb21-413" aria-hidden="true" tabindex="-1"></a><span class="fu">### Can we conclude that studying *causes* better grades?</span></span>
 <span id="cb21-414"><a href="#cb21-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-415"><a href="#cb21-415" aria-hidden="true" tabindex="-1"></a>To isolate the causal effect of studying we would need an **experiment**. We could take a group of students, **randomly assign** some of them to a study programme (the treatment group) and leave the others as they are (the control group), and then compare the two groups' average grades. Because assignment is random, the two groups would be comparable to begin with, so a difference in their later grades could be credibly attributed to the extra studying. Designing such experiments --- and finding credible substitutes for them when they are impossible --- is a central task of modern econometrics.</span>
+<span id="cb21-415"><a href="#cb21-415" aria-hidden="true" tabindex="-1"></a>Not from these data alone. The students *chose* how much to study; they were not assigned their study hours at random. The more motivated or better-prepared students may both study more *and* score higher for reasons that have nothing to do with the extra hours --- and those reasons sit in $u$. What we have measured is a **correlation**, not a causal effect.</span>
 <span id="cb21-416"><a href="#cb21-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-417"><a href="#cb21-417" aria-hidden="true" tabindex="-1"></a><span class="fu">## Self-check {.unnumbered}</span></span>
+<span id="cb21-417"><a href="#cb21-417" aria-hidden="true" tabindex="-1"></a><span class="fu">### How could we find the causal effect?</span></span>
 <span id="cb21-418"><a href="#cb21-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-419"><a href="#cb21-419" aria-hidden="true" tabindex="-1"></a>Eight short multiple-choice questions. Try each one before opening the answer.</span>
+<span id="cb21-419"><a href="#cb21-419" aria-hidden="true" tabindex="-1"></a>To isolate the causal effect of studying we would need an **experiment**. We could take a group of students, **randomly assign** some of them to a study programme (the treatment group) and leave the others as they are (the control group), and then compare the two groups' average grades. Because assignment is random, the two groups would be comparable to begin with, so a difference in their later grades could be credibly attributed to the extra studying. Designing such experiments --- and finding credible substitutes for them when they are impossible --- is a central task of modern econometrics.</span>
 <span id="cb21-420"><a href="#cb21-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-421"><a href="#cb21-421" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-422"><a href="#cb21-422" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q1. What does econometrics do?</span></span>
-<span id="cb21-423"><a href="#cb21-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-424"><a href="#cb21-424" aria-hidden="true" tabindex="-1"></a>The main objective of econometrics is to:</span>
-<span id="cb21-425"><a href="#cb21-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-426"><a href="#cb21-426" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Prove economic theories using only mathematics, without data.</span>
-<span id="cb21-427"><a href="#cb21-427" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Estimate relationships between variables from data.</span>
-<span id="cb21-428"><a href="#cb21-428" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Collect data without analysing it.</span>
-<span id="cb21-429"><a href="#cb21-429" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Forecast the weather.</span>
-<span id="cb21-430"><a href="#cb21-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-431"><a href="#cb21-431" aria-hidden="true" tabindex="-1"></a>**Answer: B.** Econometrics applies statistical methods to economic data in order to estimate relationships between variables ($X \Rightarrow Y$).</span>
-<span id="cb21-432"><a href="#cb21-432" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-433"><a href="#cb21-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-434"><a href="#cb21-434" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-435"><a href="#cb21-435" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q2. The two components of a model</span></span>
-<span id="cb21-436"><a href="#cb21-436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-437"><a href="#cb21-437" aria-hidden="true" tabindex="-1"></a>In the econometric model $Y = f(X) + u$, the term $u$:</span>
-<span id="cb21-438"><a href="#cb21-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-439"><a href="#cb21-439" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Is the systematic part of the model.</span>
-<span id="cb21-440"><a href="#cb21-440" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Can always be computed once we have the data.</span>
-<span id="cb21-441"><a href="#cb21-441" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Collects the factors that affect $Y$ but are not included in the model.</span>
-<span id="cb21-442"><a href="#cb21-442" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Is equal to zero for every individual.</span>
-<span id="cb21-443"><a href="#cb21-443" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-444"><a href="#cb21-444" aria-hidden="true" tabindex="-1"></a>**Answer: C.** The unobserved component $u$ gathers everything that influences $Y$ but is left out of the systematic part --- ability, luck, and so on. It is a population object and is not directly observable.</span>
-<span id="cb21-445"><a href="#cb21-445" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-446"><a href="#cb21-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-447"><a href="#cb21-447" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-448"><a href="#cb21-448" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q3. Correlation and causation</span></span>
-<span id="cb21-449"><a href="#cb21-449" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-450"><a href="#cb21-450" aria-hidden="true" tabindex="-1"></a>A positive correlation between ice-cream sales and sunburn cases means that:</span>
-<span id="cb21-451"><a href="#cb21-451" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-452"><a href="#cb21-452" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Ice cream causes sunburn.</span>
-<span id="cb21-453"><a href="#cb21-453" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Sunburn causes ice-cream sales.</span>
-<span id="cb21-454"><a href="#cb21-454" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. The two move together, but the association may be driven by a third factor such as hot weather.</span>
-<span id="cb21-455"><a href="#cb21-455" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. There is a mistake in the data.</span>
-<span id="cb21-456"><a href="#cb21-456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-457"><a href="#cb21-457" aria-hidden="true" tabindex="-1"></a>**Answer: C.** The two variables move together because a lurking third factor --- summer heat --- drives both. Correlation alone says nothing about causation.</span>
-<span id="cb21-458"><a href="#cb21-458" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-459"><a href="#cb21-459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-460"><a href="#cb21-460" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-461"><a href="#cb21-461" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q4. Sampling vs. assignment</span></span>
-<span id="cb21-462"><a href="#cb21-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-463"><a href="#cb21-463" aria-hidden="true" tabindex="-1"></a>Which statement is correct?</span>
-<span id="cb21-464"><a href="#cb21-464" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-465"><a href="#cb21-465" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Random sampling and random assignment are the same thing.</span>
-<span id="cb21-466"><a href="#cb21-466" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Random sampling makes the sample representative; random assignment makes treatment and control groups comparable.</span>
-<span id="cb21-467"><a href="#cb21-467" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. A representative survey is enough to establish a causal effect.</span>
-<span id="cb21-468"><a href="#cb21-468" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Random assignment is only about how we draw the sample from the population.</span>
-<span id="cb21-469"><a href="#cb21-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-470"><a href="#cb21-470" aria-hidden="true" tabindex="-1"></a>**Answer: B.** Random *sampling* concerns representativeness; random *assignment* concerns comparability of the treated and untreated groups and is what licenses a causal reading. A representative survey alone does not deliver causation.</span>
-<span id="cb21-471"><a href="#cb21-471" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-472"><a href="#cb21-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-473"><a href="#cb21-473" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-474"><a href="#cb21-474" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q5. Cross-section</span></span>
-<span id="cb21-475"><a href="#cb21-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-476"><a href="#cb21-476" aria-hidden="true" tabindex="-1"></a>A dataset with information on 526 workers interviewed in the same month (one row per worker) is:</span>
-<span id="cb21-477"><a href="#cb21-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-478"><a href="#cb21-478" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Cross-sectional data.</span>
-<span id="cb21-479"><a href="#cb21-479" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Time-series data.</span>
-<span id="cb21-480"><a href="#cb21-480" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Panel data.</span>
-<span id="cb21-481"><a href="#cb21-481" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Experimental data.</span>
-<span id="cb21-482"><a href="#cb21-482" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-483"><a href="#cb21-483" aria-hidden="true" tabindex="-1"></a>**Answer: A.** Many units, one time period, no unit observed repeatedly --- the definition of a cross-section.</span>
-<span id="cb21-484"><a href="#cb21-484" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-485"><a href="#cb21-485" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-486"><a href="#cb21-486" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-487"><a href="#cb21-487" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q6. Time series</span></span>
-<span id="cb21-488"><a href="#cb21-488" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-489"><a href="#cb21-489" aria-hidden="true" tabindex="-1"></a>U.S. annual GDP recorded every year from 2006 to 2014 is an example of:</span>
-<span id="cb21-490"><a href="#cb21-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-491"><a href="#cb21-491" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Cross-sectional data.</span>
-<span id="cb21-492"><a href="#cb21-492" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Time-series data.</span>
-<span id="cb21-493"><a href="#cb21-493" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Panel data.</span>
-<span id="cb21-494"><a href="#cb21-494" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Experimental data.</span>
-<span id="cb21-495"><a href="#cb21-495" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-496"><a href="#cb21-496" aria-hidden="true" tabindex="-1"></a>**Answer: B.** A single quantity (GDP for one economy) recorded at a regular interval over time.</span>
-<span id="cb21-497"><a href="#cb21-497" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-498"><a href="#cb21-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-499"><a href="#cb21-499" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-500"><a href="#cb21-500" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q7. Panel vs. time series</span></span>
-<span id="cb21-501"><a href="#cb21-501" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-502"><a href="#cb21-502" aria-hidden="true" tabindex="-1"></a>A dataset that follows 1,000 firms during 2010--2024, recording sales for each firm in every year, is:</span>
-<span id="cb21-503"><a href="#cb21-503" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-504"><a href="#cb21-504" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Time-series data, because it has a time dimension.</span>
-<span id="cb21-505"><a href="#cb21-505" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Cross-sectional data, because each firm-year is one row.</span>
-<span id="cb21-506"><a href="#cb21-506" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Panel (longitudinal) data: many units observed over several periods.</span>
-<span id="cb21-507"><a href="#cb21-507" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Experimental data.</span>
-<span id="cb21-508"><a href="#cb21-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-509"><a href="#cb21-509" aria-hidden="true" tabindex="-1"></a>**Answer: C.** The same firms are tracked over multiple years, giving both a unit dimension and a time dimension. "Data over time" is not automatically a time series.</span>
-<span id="cb21-510"><a href="#cb21-510" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-511"><a href="#cb21-511" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-512"><a href="#cb21-512" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-513"><a href="#cb21-513" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q8. Experiments and quasi-experiments</span></span>
-<span id="cb21-514"><a href="#cb21-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-515"><a href="#cb21-515" aria-hidden="true" tabindex="-1"></a>Which design gives the most credible evidence on a causal effect, by construction?</span>
-<span id="cb21-516"><a href="#cb21-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-517"><a href="#cb21-517" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. A randomised experiment, where the treatment is assigned by lottery.</span>
-<span id="cb21-518"><a href="#cb21-518" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. A comparison of people who chose the treatment with those who did not.</span>
-<span id="cb21-519"><a href="#cb21-519" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. A single observational cross-section.</span>
-<span id="cb21-520"><a href="#cb21-520" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. A survey with a very large sample size.</span>
-<span id="cb21-521"><a href="#cb21-521" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-522"><a href="#cb21-522" aria-hidden="true" tabindex="-1"></a>**Answer: A.** Only random assignment makes the treatment and control groups comparable on average before treatment, which is why randomised experiments are the gold standard. A large sample (D) does not fix a non-random comparison (B, C).</span>
-<span id="cb21-523"><a href="#cb21-523" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-524"><a href="#cb21-524" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-525"><a href="#cb21-525" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises {.unnumbered}</span></span>
-<span id="cb21-526"><a href="#cb21-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-527"><a href="#cb21-527" aria-hidden="true" tabindex="-1"></a>**Exercise 1.1 ★ --- Classifying datasets.** Classify each of the following as cross-sectional, time-series, or panel data.</span>
+<span id="cb21-421"><a href="#cb21-421" aria-hidden="true" tabindex="-1"></a><span class="fu">## Self-check {.unnumbered}</span></span>
+<span id="cb21-422"><a href="#cb21-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-423"><a href="#cb21-423" aria-hidden="true" tabindex="-1"></a>Eight short multiple-choice questions. Try each one before opening the answer.</span>
+<span id="cb21-424"><a href="#cb21-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-425"><a href="#cb21-425" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-426"><a href="#cb21-426" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q1. What does econometrics do?</span></span>
+<span id="cb21-427"><a href="#cb21-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-428"><a href="#cb21-428" aria-hidden="true" tabindex="-1"></a>The main objective of econometrics is to:</span>
+<span id="cb21-429"><a href="#cb21-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-430"><a href="#cb21-430" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Prove economic theories using only mathematics, without data.</span>
+<span id="cb21-431"><a href="#cb21-431" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Estimate relationships between variables from data.</span>
+<span id="cb21-432"><a href="#cb21-432" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Collect data without analysing it.</span>
+<span id="cb21-433"><a href="#cb21-433" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Forecast the weather.</span>
+<span id="cb21-434"><a href="#cb21-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-435"><a href="#cb21-435" aria-hidden="true" tabindex="-1"></a>**Answer: B.** Econometrics applies statistical methods to economic data in order to estimate relationships between variables ($X \Rightarrow Y$).</span>
+<span id="cb21-436"><a href="#cb21-436" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-437"><a href="#cb21-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-438"><a href="#cb21-438" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-439"><a href="#cb21-439" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q2. The two components of a model</span></span>
+<span id="cb21-440"><a href="#cb21-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-441"><a href="#cb21-441" aria-hidden="true" tabindex="-1"></a>In the econometric model $Y = f(X) + u$, the term $u$:</span>
+<span id="cb21-442"><a href="#cb21-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-443"><a href="#cb21-443" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Is the systematic part of the model.</span>
+<span id="cb21-444"><a href="#cb21-444" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Can always be computed once we have the data.</span>
+<span id="cb21-445"><a href="#cb21-445" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Collects the factors that affect $Y$ but are not included in the model.</span>
+<span id="cb21-446"><a href="#cb21-446" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Is equal to zero for every individual.</span>
+<span id="cb21-447"><a href="#cb21-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-448"><a href="#cb21-448" aria-hidden="true" tabindex="-1"></a>**Answer: C.** The unobserved component $u$ gathers everything that influences $Y$ but is left out of the systematic part --- ability, luck, and so on. It is a population object and is not directly observable.</span>
+<span id="cb21-449"><a href="#cb21-449" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-450"><a href="#cb21-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-451"><a href="#cb21-451" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-452"><a href="#cb21-452" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q3. Correlation and causation</span></span>
+<span id="cb21-453"><a href="#cb21-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-454"><a href="#cb21-454" aria-hidden="true" tabindex="-1"></a>A positive correlation between ice-cream sales and sunburn cases means that:</span>
+<span id="cb21-455"><a href="#cb21-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-456"><a href="#cb21-456" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Ice cream causes sunburn.</span>
+<span id="cb21-457"><a href="#cb21-457" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Sunburn causes ice-cream sales.</span>
+<span id="cb21-458"><a href="#cb21-458" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. The two move together, but the association may be driven by a third factor such as hot weather.</span>
+<span id="cb21-459"><a href="#cb21-459" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. There is a mistake in the data.</span>
+<span id="cb21-460"><a href="#cb21-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-461"><a href="#cb21-461" aria-hidden="true" tabindex="-1"></a>**Answer: C.** The two variables move together because a lurking third factor --- summer heat --- drives both. Correlation alone says nothing about causation.</span>
+<span id="cb21-462"><a href="#cb21-462" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-463"><a href="#cb21-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-464"><a href="#cb21-464" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-465"><a href="#cb21-465" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q4. Sampling vs. assignment</span></span>
+<span id="cb21-466"><a href="#cb21-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-467"><a href="#cb21-467" aria-hidden="true" tabindex="-1"></a>Which statement is correct?</span>
+<span id="cb21-468"><a href="#cb21-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-469"><a href="#cb21-469" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Random sampling and random assignment are the same thing.</span>
+<span id="cb21-470"><a href="#cb21-470" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Random sampling makes the sample representative; random assignment makes treatment and control groups comparable.</span>
+<span id="cb21-471"><a href="#cb21-471" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. A representative survey is enough to establish a causal effect.</span>
+<span id="cb21-472"><a href="#cb21-472" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Random assignment is only about how we draw the sample from the population.</span>
+<span id="cb21-473"><a href="#cb21-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-474"><a href="#cb21-474" aria-hidden="true" tabindex="-1"></a>**Answer: B.** Random *sampling* concerns representativeness; random *assignment* concerns comparability of the treated and untreated groups and is what licenses a causal reading. A representative survey alone does not deliver causation.</span>
+<span id="cb21-475"><a href="#cb21-475" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-476"><a href="#cb21-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-477"><a href="#cb21-477" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-478"><a href="#cb21-478" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q5. Cross-section</span></span>
+<span id="cb21-479"><a href="#cb21-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-480"><a href="#cb21-480" aria-hidden="true" tabindex="-1"></a>A dataset with information on 526 workers interviewed in the same month (one row per worker) is:</span>
+<span id="cb21-481"><a href="#cb21-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-482"><a href="#cb21-482" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Cross-sectional data.</span>
+<span id="cb21-483"><a href="#cb21-483" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Time-series data.</span>
+<span id="cb21-484"><a href="#cb21-484" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Panel data.</span>
+<span id="cb21-485"><a href="#cb21-485" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Experimental data.</span>
+<span id="cb21-486"><a href="#cb21-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-487"><a href="#cb21-487" aria-hidden="true" tabindex="-1"></a>**Answer: A.** Many units, one time period, no unit observed repeatedly --- the definition of a cross-section.</span>
+<span id="cb21-488"><a href="#cb21-488" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-489"><a href="#cb21-489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-490"><a href="#cb21-490" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-491"><a href="#cb21-491" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q6. Time series</span></span>
+<span id="cb21-492"><a href="#cb21-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-493"><a href="#cb21-493" aria-hidden="true" tabindex="-1"></a>U.S. annual GDP recorded every year from 2006 to 2014 is an example of:</span>
+<span id="cb21-494"><a href="#cb21-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-495"><a href="#cb21-495" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Cross-sectional data.</span>
+<span id="cb21-496"><a href="#cb21-496" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Time-series data.</span>
+<span id="cb21-497"><a href="#cb21-497" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Panel data.</span>
+<span id="cb21-498"><a href="#cb21-498" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Experimental data.</span>
+<span id="cb21-499"><a href="#cb21-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-500"><a href="#cb21-500" aria-hidden="true" tabindex="-1"></a>**Answer: B.** A single quantity (GDP for one economy) recorded at a regular interval over time.</span>
+<span id="cb21-501"><a href="#cb21-501" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-502"><a href="#cb21-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-503"><a href="#cb21-503" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-504"><a href="#cb21-504" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q7. Panel vs. time series</span></span>
+<span id="cb21-505"><a href="#cb21-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-506"><a href="#cb21-506" aria-hidden="true" tabindex="-1"></a>A dataset that follows 1,000 firms during 2010--2024, recording sales for each firm in every year, is:</span>
+<span id="cb21-507"><a href="#cb21-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-508"><a href="#cb21-508" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Time-series data, because it has a time dimension.</span>
+<span id="cb21-509"><a href="#cb21-509" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. Cross-sectional data, because each firm-year is one row.</span>
+<span id="cb21-510"><a href="#cb21-510" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Panel (longitudinal) data: many units observed over several periods.</span>
+<span id="cb21-511"><a href="#cb21-511" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Experimental data.</span>
+<span id="cb21-512"><a href="#cb21-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-513"><a href="#cb21-513" aria-hidden="true" tabindex="-1"></a>**Answer: C.** The same firms are tracked over multiple years, giving both a unit dimension and a time dimension. "Data over time" is not automatically a time series.</span>
+<span id="cb21-514"><a href="#cb21-514" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-515"><a href="#cb21-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-516"><a href="#cb21-516" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-517"><a href="#cb21-517" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q8. Experiments and quasi-experiments</span></span>
+<span id="cb21-518"><a href="#cb21-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-519"><a href="#cb21-519" aria-hidden="true" tabindex="-1"></a>Which design gives the most credible evidence on a causal effect, by construction?</span>
+<span id="cb21-520"><a href="#cb21-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-521"><a href="#cb21-521" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. A randomised experiment, where the treatment is assigned by lottery.</span>
+<span id="cb21-522"><a href="#cb21-522" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. A comparison of people who chose the treatment with those who did not.</span>
+<span id="cb21-523"><a href="#cb21-523" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. A single observational cross-section.</span>
+<span id="cb21-524"><a href="#cb21-524" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. A survey with a very large sample size.</span>
+<span id="cb21-525"><a href="#cb21-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-526"><a href="#cb21-526" aria-hidden="true" tabindex="-1"></a>**Answer: A.** Only random assignment makes the treatment and control groups comparable on average before treatment, which is why randomised experiments are the gold standard. A large sample (D) does not fix a non-random comparison (B, C).</span>
+<span id="cb21-527"><a href="#cb21-527" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb21-528"><a href="#cb21-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-529"><a href="#cb21-529" aria-hidden="true" tabindex="-1"></a>(a) U.S. annual real GDP from 2006 to 2014.</span>
-<span id="cb21-530"><a href="#cb21-530" aria-hidden="true" tabindex="-1"></a>(b) The study-and-grades data: ten students, one observation per student.</span>
-<span id="cb21-531"><a href="#cb21-531" aria-hidden="true" tabindex="-1"></a>(c) The output of two rice farms recorded every year from 1990 to 1997.</span>
-<span id="cb21-532"><a href="#cb21-532" aria-hidden="true" tabindex="-1"></a>(d) The wage, education, and sex of 500 individuals interviewed in a single CPS wave.</span>
-<span id="cb21-533"><a href="#cb21-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-534"><a href="#cb21-534" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-535"><a href="#cb21-535" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
-<span id="cb21-536"><a href="#cb21-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-537"><a href="#cb21-537" aria-hidden="true" tabindex="-1"></a>(a) Time-series --- one quantity for one economy over time. (b) Cross-sectional --- many units, one period. (c) Panel --- the *same* farms observed over several years. (d) Cross-sectional --- many units, one time period.</span>
-<span id="cb21-538"><a href="#cb21-538" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-539"><a href="#cb21-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-540"><a href="#cb21-540" aria-hidden="true" tabindex="-1"></a>**Exercise 1.2 ★ --- Correlation or causation?** For each pair of variables, state (i) the likely sign of the correlation, and (ii) why the correlation should *not* be read as a causal effect. Name the lurking third factor or the direction of reverse causation.</span>
-<span id="cb21-541"><a href="#cb21-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-542"><a href="#cb21-542" aria-hidden="true" tabindex="-1"></a>(a) Ice-cream sales and sunburn cases.</span>
-<span id="cb21-543"><a href="#cb21-543" aria-hidden="true" tabindex="-1"></a>(b) Number of hospital visits and health status.</span>
-<span id="cb21-544"><a href="#cb21-544" aria-hidden="true" tabindex="-1"></a>(c) Number of firefighters sent to a fire and the amount of damage the fire causes.</span>
+<span id="cb21-529"><a href="#cb21-529" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises {.unnumbered}</span></span>
+<span id="cb21-530"><a href="#cb21-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-531"><a href="#cb21-531" aria-hidden="true" tabindex="-1"></a>**Exercise 1.1 ★ --- Classifying datasets.** Classify each of the following as cross-sectional, time-series, or panel data.</span>
+<span id="cb21-532"><a href="#cb21-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-533"><a href="#cb21-533" aria-hidden="true" tabindex="-1"></a>(a) U.S. annual real GDP from 2006 to 2014.</span>
+<span id="cb21-534"><a href="#cb21-534" aria-hidden="true" tabindex="-1"></a>(b) The study-and-grades data: ten students, one observation per student.</span>
+<span id="cb21-535"><a href="#cb21-535" aria-hidden="true" tabindex="-1"></a>(c) The output of two rice farms recorded every year from 1990 to 1997.</span>
+<span id="cb21-536"><a href="#cb21-536" aria-hidden="true" tabindex="-1"></a>(d) The wage, education, and sex of 500 individuals interviewed in a single CPS wave.</span>
+<span id="cb21-537"><a href="#cb21-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-538"><a href="#cb21-538" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-539"><a href="#cb21-539" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
+<span id="cb21-540"><a href="#cb21-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-541"><a href="#cb21-541" aria-hidden="true" tabindex="-1"></a>(a) Time-series --- one quantity for one economy over time. (b) Cross-sectional --- many units, one period. (c) Panel --- the *same* farms observed over several years. (d) Cross-sectional --- many units, one time period.</span>
+<span id="cb21-542"><a href="#cb21-542" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-543"><a href="#cb21-543" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-544"><a href="#cb21-544" aria-hidden="true" tabindex="-1"></a>**Exercise 1.2 ★ --- Correlation or causation?** For each pair of variables, state (i) the likely sign of the correlation, and (ii) why the correlation should *not* be read as a causal effect. Name the lurking third factor or the direction of reverse causation.</span>
 <span id="cb21-545"><a href="#cb21-545" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-546"><a href="#cb21-546" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-547"><a href="#cb21-547" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
-<span id="cb21-548"><a href="#cb21-548" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-549"><a href="#cb21-549" aria-hidden="true" tabindex="-1"></a>(a) Positive; a third factor --- hot, sunny weather --- drives both. (b) Negative; reverse causation --- people who are already unwell go to the hospital more, so health drives visits. (c) Positive; a third factor --- the size of the fire --- drives both the number of firefighters and the damage. Sending fewer firefighters would not reduce damage.</span>
-<span id="cb21-550"><a href="#cb21-550" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-551"><a href="#cb21-551" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-552"><a href="#cb21-552" aria-hidden="true" tabindex="-1"></a>**Exercise 1.3 ★ --- Sampling vs. assignment.** A researcher draws a large, perfectly representative random sample of workers and observes that those who attended a training course earn more than those who did not. Can the researcher conclude that the course *raised* wages? Explain, using the distinction between random sampling and random assignment.</span>
-<span id="cb21-553"><a href="#cb21-553" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-554"><a href="#cb21-554" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-555"><a href="#cb21-555" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
-<span id="cb21-556"><a href="#cb21-556" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-557"><a href="#cb21-557" aria-hidden="true" tabindex="-1"></a>No. The sample is randomly *drawn* (good sampling, so it represents the population), but the workers *chose* whether to take the course --- the treatment was not randomly *assigned*. More motivated or more able workers may both enrol and earn more anyway; those factors sit in $u$. Without random assignment, the wage gap mixes the effect of the course with pre-existing differences between the two groups.</span>
-<span id="cb21-558"><a href="#cb21-558" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-559"><a href="#cb21-559" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-560"><a href="#cb21-560" aria-hidden="true" tabindex="-1"></a>**Exercise 1.4 ★★ --- Designing a randomised experiment.** You want to know whether a free study-skills workshop *causes* higher grades among first-year students. Sketch a randomised experiment that would identify this causal effect. Be explicit about: the participants, what is randomly assigned, the treatment and control groups, and the outcome you would compare. Mention one practical or ethical difficulty.</span>
-<span id="cb21-561"><a href="#cb21-561" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-562"><a href="#cb21-562" aria-hidden="true" tabindex="-1"></a>*A full answer is given in the Instructor Edition.*</span>
+<span id="cb21-546"><a href="#cb21-546" aria-hidden="true" tabindex="-1"></a>(a) Ice-cream sales and sunburn cases.</span>
+<span id="cb21-547"><a href="#cb21-547" aria-hidden="true" tabindex="-1"></a>(b) Number of hospital visits and health status.</span>
+<span id="cb21-548"><a href="#cb21-548" aria-hidden="true" tabindex="-1"></a>(c) Number of firefighters sent to a fire and the amount of damage the fire causes.</span>
+<span id="cb21-549"><a href="#cb21-549" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-550"><a href="#cb21-550" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-551"><a href="#cb21-551" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
+<span id="cb21-552"><a href="#cb21-552" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-553"><a href="#cb21-553" aria-hidden="true" tabindex="-1"></a>(a) Positive; a third factor --- hot, sunny weather --- drives both. (b) Negative; reverse causation --- people who are already unwell go to the hospital more, so health drives visits. (c) Positive; a third factor --- the size of the fire --- drives both the number of firefighters and the damage. Sending fewer firefighters would not reduce damage.</span>
+<span id="cb21-554"><a href="#cb21-554" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-555"><a href="#cb21-555" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-556"><a href="#cb21-556" aria-hidden="true" tabindex="-1"></a>**Exercise 1.3 ★ --- Sampling vs. assignment.** A researcher draws a large, perfectly representative random sample of workers and observes that those who attended a training course earn more than those who did not. Can the researcher conclude that the course *raised* wages? Explain, using the distinction between random sampling and random assignment.</span>
+<span id="cb21-557"><a href="#cb21-557" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-558"><a href="#cb21-558" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-559"><a href="#cb21-559" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
+<span id="cb21-560"><a href="#cb21-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-561"><a href="#cb21-561" aria-hidden="true" tabindex="-1"></a>No. The sample is randomly *drawn* (good sampling, so it represents the population), but the workers *chose* whether to take the course --- the treatment was not randomly *assigned*. More motivated or more able workers may both enrol and earn more anyway; those factors sit in $u$. Without random assignment, the wage gap mixes the effect of the course with pre-existing differences between the two groups.</span>
+<span id="cb21-562"><a href="#cb21-562" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb21-563"><a href="#cb21-563" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-564"><a href="#cb21-564" aria-hidden="true" tabindex="-1"></a>**Exercise 1.5 ★★ --- Reading a model.** Consider the econometric model $\text{grade}_i = \beta_0 + \beta_1\,\text{study}_i + u_i$.</span>
+<span id="cb21-564"><a href="#cb21-564" aria-hidden="true" tabindex="-1"></a>**Exercise 1.4 ★★ --- Designing a randomised experiment.** You want to know whether a free study-skills workshop *causes* higher grades among first-year students. Sketch a randomised experiment that would identify this causal effect. Be explicit about: the participants, what is randomly assigned, the treatment and control groups, and the outcome you would compare. Mention one practical or ethical difficulty.</span>
 <span id="cb21-565"><a href="#cb21-565" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-566"><a href="#cb21-566" aria-hidden="true" tabindex="-1"></a>(a) In words, what does $\beta_1$ measure?</span>
-<span id="cb21-567"><a href="#cb21-567" aria-hidden="true" tabindex="-1"></a>(b) Give three factors that would be contained in $u_i$.</span>
-<span id="cb21-568"><a href="#cb21-568" aria-hidden="true" tabindex="-1"></a>(c) Explain why $\beta_0$ and $\beta_1$ are called *unknown parameters*.</span>
+<span id="cb21-566"><a href="#cb21-566" aria-hidden="true" tabindex="-1"></a>*A full answer is given in the Instructor Edition.*</span>
+<span id="cb21-567"><a href="#cb21-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-568"><a href="#cb21-568" aria-hidden="true" tabindex="-1"></a>**Exercise 1.5 ★★ --- Reading a model.** Consider the econometric model $\text{grade}_i = \beta_0 + \beta_1\,\text{study}_i + u_i$.</span>
 <span id="cb21-569"><a href="#cb21-569" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-570"><a href="#cb21-570" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-571"><a href="#cb21-571" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
-<span id="cb21-572"><a href="#cb21-572" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-573"><a href="#cb21-573" aria-hidden="true" tabindex="-1"></a>(a) $\beta_1$ is the change in the average grade associated with one more daily hour of study. (b) Any three of: innate ability, prior preparation, course difficulty, health, motivation, luck. (c) They are fixed features of the population that we do not know; we estimate them from a sample using an econometric method (OLS, Chapter 2).</span>
-<span id="cb21-574"><a href="#cb21-574" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-575"><a href="#cb21-575" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-576"><a href="#cb21-576" aria-hidden="true" tabindex="-1"></a>**Exercise 1.6 ★★★ --- Chocolate and Nobel prizes.** It has been noted that countries with higher per-capita chocolate consumption also win more Nobel prizes per capita <span class="co">[</span><span class="ot">@cgl2017</span><span class="co">]</span>. Is this evidence that eating chocolate causes Nobel prizes? Identify (i) at least one plausible lurking third factor, and (ii) explain why a randomised experiment to settle the question would be difficult to run in practice.</span>
-<span id="cb21-577"><a href="#cb21-577" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-578"><a href="#cb21-578" aria-hidden="true" tabindex="-1"></a>*A full answer is given in the Instructor Edition.*</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb21-570"><a href="#cb21-570" aria-hidden="true" tabindex="-1"></a>(a) In words, what does $\beta_1$ measure?</span>
+<span id="cb21-571"><a href="#cb21-571" aria-hidden="true" tabindex="-1"></a>(b) Give three factors that would be contained in $u_i$.</span>
+<span id="cb21-572"><a href="#cb21-572" aria-hidden="true" tabindex="-1"></a>(c) Explain why $\beta_0$ and $\beta_1$ are called *unknown parameters*.</span>
+<span id="cb21-573"><a href="#cb21-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-574"><a href="#cb21-574" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-575"><a href="#cb21-575" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
+<span id="cb21-576"><a href="#cb21-576" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-577"><a href="#cb21-577" aria-hidden="true" tabindex="-1"></a>(a) $\beta_1$ is the change in the average grade associated with one more daily hour of study. (b) Any three of: innate ability, prior preparation, course difficulty, health, motivation, luck. (c) They are fixed features of the population that we do not know; we estimate them from a sample using an econometric method (OLS, Chapter 2).</span>
+<span id="cb21-578"><a href="#cb21-578" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-579"><a href="#cb21-579" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-580"><a href="#cb21-580" aria-hidden="true" tabindex="-1"></a>**Exercise 1.6 ★★★ --- Chocolate and Nobel prizes.** It has been noted that countries with higher per-capita chocolate consumption also win more Nobel prizes per capita <span class="co">[</span><span class="ot">@cgl2017</span><span class="co">]</span>. Is this evidence that eating chocolate causes Nobel prizes? Identify (i) at least one plausible lurking third factor, and (ii) explain why a randomised experiment to settle the question would be difficult to run in practice.</span>
+<span id="cb21-581"><a href="#cb21-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-582"><a href="#cb21-582" aria-hidden="true" tabindex="-1"></a>*A full answer is given in the Instructor Edition.*</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
