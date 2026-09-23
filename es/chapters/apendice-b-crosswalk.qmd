@@ -1,0 +1,11 @@
+---
+title: "Correspondencia Wooldridge ↔ Carter–Griffiths–Lim"
+---
+
+::: {.callout-note}
+## Traducción en preparación
+Apéndice de la edición española (*Econometría I*); el contenido se trasladará
+del original en inglés (`chapters/appendix-b-wooldridge-cgl-crosswalk.qmd`).
+:::
+
+<!-- TODO: traducir el contenido del apéndice. -->

@@ -12,3 +12,5 @@
 *.Rproj
 
 **/*.quarto_ipynb
+es/_book/
+es/.quarto/
