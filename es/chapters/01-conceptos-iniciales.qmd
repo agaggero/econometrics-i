@@ -261,7 +261,7 @@ Los experimentos aleatorizados genuinos son rutinarios en medicina, pero **poco 
 
 ### Cuasiexperimentos
 
-Entre los experimentos "puros" y la observación pura hay un terreno intermedio útil. En un **cuasiexperimento**, la asignación al tratamiento *no* es aleatoria, pero sigue alguna regla **observable** ---a menudo un umbral o un criterio de elegibilidad que afecta a unas unidades y no a otras.
+Entre los experimentos "puros" y la observación pura hay un terreno intermedio útil. En un **cuasiexperimento**, la asignación al tratamiento *no* es aleatoria, pero tampoco la eligen los propios participantes: la impulsa alguna circunstancia externa y **observable** que el investigador puede aprovechar ---un cambio de política, un suceso natural o una regla administrativa como un umbral o un criterio de elegibilidad--- que resulta afectar a unas unidades y no a otras.
 
 ::: {.callout-note}
 ## Ejemplo: un confinamiento regional

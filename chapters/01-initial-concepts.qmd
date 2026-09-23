@@ -261,7 +261,7 @@ Genuine randomised experiments are routine in medicine but **rare in economics a
 
 ### Quasi-experiments
 
-A useful middle ground sits between "pure" experiments and pure observation. In a **quasi-experiment**, assignment to treatment is *not* random but follows some **observable** rule --- often a threshold or an eligibility cut-off that affects some units and not others.
+A useful middle ground sits between "pure" experiments and pure observation. In a **quasi-experiment**, assignment to treatment is *not* random, but neither is it chosen by the participants themselves: it is driven by some external, **observable** circumstance the researcher can exploit --- a policy change, a natural event, or an administrative rule such as a threshold or eligibility cut-off --- that happens to affect some units and not others.
 
 ::: {.callout-note}
 ## Example: a regional lockdown
