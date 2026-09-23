@@ -2,34 +2,579 @@
 title: "Conceptos iniciales"
 ---
 
-::: {.callout-note}
-## Traducción en preparación
-Este capítulo forma parte de la edición española (*Econometría I*) y todavía
-está por traducir. La estructura reproduce la plantilla de seis secciones del
-libro; el contenido se trasladará del capítulo original en inglés
-(`chapters/01-initial-concepts.qmd`).
-:::
 
 ## Resultados de aprendizaje {.unnumbered}
 
-<!-- TODO: traducir de "Learning outcomes". -->
+Al terminar este capítulo, el lector debería ser capaz de:
+
+- Explicar qué es la econometría y que su objetivo central es **estimar relaciones entre variables** ($X \Rightarrow Y$).
+- Describir las dos componentes de un modelo econométrico ---la **parte sistemática** $f(X)$ y el **error no observado** $u$--- y dar ejemplos de qué contiene $u$.
+- Escribir un modelo econométrico lineal simple $y = \beta_0 + \beta_1 x + u$ e identificar $\beta_0$ y $\beta_1$ como **parámetros desconocidos** que hay que estimar a partir de los datos (la estimación en sí es el objeto del Capítulo 2).
+- Explicar por qué la **correlación no implica causalidad**, reconocer la causalidad inversa y las "terceras variables" ocultas en ejemplos concretos, y explicar por qué una política creíble necesita evidencia causal ---y no meramente correlacional.
+- Distinguir los datos **experimentales** de los **no experimentales** y, sobre todo, el *muestreo* aleatorio de la *asignación* aleatoria; explicar por qué los experimentos aleatorizados son el patrón de referencia para las preguntas causales y por qué son poco frecuentes en economía.
+- Clasificar un conjunto de datos como de **sección cruzada**, de **series temporales** o de **panel**, y explicar qué preguntas puede responder cada estructura ---en particular, por qué un panel no es lo mismo que una serie temporal.
+- Usar R a nivel básico para introducir un conjunto de datos pequeño, describir y visualizar sus variables, y cuantificar la fuerza y el sentido de una relación con el **coeficiente de correlación**.
 
 ## Pregunta empírica motivadora {.unnumbered}
 
-<!-- TODO -->
+> *Los estudiantes que estudian más tienden a sacar mejores notas. Pero ¿nos dice esa comparación **cuánto** sube la nota una hora más de estudio ---o siquiera que sea el estudio lo que marca la diferencia?*
 
-## Teoría
+Esta pregunta, engañosamente sencilla, contiene todo el capítulo. Para responderla necesitamos tres cosas, y son los tres hilos que recorren todo lo que sigue:
 
-<!-- TODO -->
+1. una forma de convertir una nube de puntos en una relación única y cuantificada ---un **modelo econométrico**;
+2. la disciplina para separar una relación que es meramente una **correlación** de otra que es **causal**; y
+3. el tipo adecuado de **datos**, porque la estructura de los datos decide cuál de estas preguntas podemos responder realmente.
 
-## Ejemplo resuelto en R
+Ten presente el ejemplo del estudio y las notas: volveremos a él en la práctica del final del capítulo y responderemos directamente a la pregunta de arriba.
 
-<!-- TODO -->
+## ¿Qué es la econometría?
+
+`\lettrine[lines=3]{L}{a econometría}`{=latex}`<span class="dropcap">L</span>a econometría`{=html} es la aplicación de métodos estadísticos a datos económicos, con el objetivo de dar contenido empírico a las relaciones económicas [@wooldridge2020; @cgl2017]. Su principal objetivo es la **estimación de relaciones entre variables**. Algunos pares de interés típicos en este curso son:
+
+- Educación $\Rightarrow$ Salario
+- Asistencia a clase $\Rightarrow$ Nota final
+- Tasas de matrícula $\Rightarrow$ Número de matriculados
+- Salud $\Rightarrow$ Edad de jubilación
+- Renta $\Rightarrow$ Felicidad
+- Gasto público $\Rightarrow$ Delincuencia
+- Publicidad $\Rightarrow$ Ventas
+
+En general escribimos $X \Rightarrow Y$, donde $X$ es la **variable independiente** (también llamada *regresor* o *variable explicativa*) e $Y$ es la **variable dependiente** (también llamada *variable de respuesta* o *resultado*). Para cualquier par de este tipo solemos querer saber tres cosas:
+
+1. ¿Existe una relación entre $X$ e $Y$?
+2. ¿La relación es positiva o negativa?
+3. ¿Cómo de fuerte es?
+
+Son preguntas de "cuánto", y quienes toman decisiones se enfrentan a ellas cada día. Un ayuntamiento se pregunta cuánto bajará la delincuencia violenta si gasta un millón de euros más en poner más policía en la calle. Un negocio local ---por ejemplo, la pizzería del barrio--- tiene que decidir cuánta publicidad contratar, y para ello necesita la relación entre publicidad y ventas. Una universidad privada de Andalucía debe estimar cuánto caerá la matrícula si sube las tasas en 300 €. Ninguna de estas preguntas puede responderse solo con teoría económica: requieren **datos**, un **modelo** y la disciplina de la econometría.
+
+## Una primera mirada: horas de estudio y notas
+
+Supongamos que recogemos datos de diez estudiantes y anotamos, para cada uno, el número de horas de estudio al día ($X$) y la nota media obtenida ($Y$, en una escala de 0 a 10).
+
+```{r ch01-grades-data}
+notas <- data.frame(
+  estudio = c(1.5, 2.0, 3.0, 3.5, 4.0, 5.0, 5.5, 6.5, 7.5, 8.0),
+  nota    = c(2.0, 3.0, 3.5, 4.5, 5.0, 6.0, 6.5, 7.5, 8.5, 9.0)
+)
+notas
+```
+
+Una tabla de números es difícil de captar de un vistazo; una imagen, no. Representar a cada estudiante como un punto hace el patrón inmediato.
+
+```{r ch01-grades-scatter}
+#| fig-cap: "Horas de estudio diarias y nota media de diez estudiantes. Cada punto es un estudiante."
+plot(notas$estudio, notas$nota,
+     xlab = "Horas de estudio diarias",
+     ylab = "Nota media (0-10)",
+     main = "Horas de estudio y notas",
+     xlim = c(0, 10), ylim = c(0, 10),
+     pch = 19, col = "blue", cex = 1.3)
+```
+
+La nube de puntos se inclina claramente hacia arriba: los estudiantes que estudian más tienden a sacar mejores notas. Pero un diagrama de dispersión solo *muestra* la relación ---todavía no la *resume* en un número que podamos usar para predecir, comparar o fundamentar una decisión. Para eso necesitamos un **modelo econométrico**.
+
+## El modelo econométrico
+
+Un modelo econométrico descompone el resultado $Y$, para cada individuo, en **dos componentes**:
+
+1. una **componente sistemática**, $f(X)$ ---la parte de $Y$ que está relacionada con las variables que hemos incluido en el modelo; y
+2. una **componente no observada**, $u$ (también llamada *error* o *perturbación*) ---todos los demás factores que afectan a $Y$ pero no están en el modelo.
+
+De forma compacta,
+
+$$
+Y = \underbrace{f(X)}_{\text{componente sistemática}} \;+\; \underbrace{u}_{\text{factores no observados}}.
+$$
+
+¿Por qué necesitamos siquiera el segundo término? Porque ninguna lista corta de variables determina nunca por completo un resultado económico. La figura siguiente lo ilustra. A la izquierda, la educación por sí sola fijaría el salario de forma exacta y cada trabajador se situaría justo sobre la recta. A la derecha ---el mundo real--- trabajadores con la *misma* educación ganan salarios *distintos*, y esas distancias verticales son exactamente la componente no observada $u$.
+
+```{r ch01-two-component}
+#| fig-cap: "Modelo económico frente a modelo econométrico. Izquierda: la componente sistemática por sí sola situaría a cada trabajador sobre la recta. Derecha: la componente no observada u explica por qué trabajadores con la misma educación ganan salarios distintos."
+#| fig-width: 9
+#| fig-height: 4.2
+set.seed(1)
+educacion <- 1:10
+salario_linea <- 1 + 0.7 * educacion
+
+op <- par(mfrow = c(1, 2), mar = c(4, 4, 3, 1))
+
+# Panel 1: solo la componente sistemática
+plot(educacion, salario_linea,
+     xlab = "Educación", ylab = "Salario", main = "Solo la componente sistemática",
+     pch = 19, col = "navy", cex = 1.2, axes = FALSE)
+box(); abline(1, 0.7, col = "navy", lwd = 2)
+mtext(expression(salario[i] == f(educacion[i])), side = 3, line = -1, cex = 0.9)
+
+# Panel 2: componente sistemática + componente no observada
+salario_obs <- salario_linea + rnorm(10, 0, 1.1)
+plot(educacion, salario_obs,
+     xlab = "Educación", ylab = "Salario", main = "Sistemática + componente no observada",
+     pch = 19, col = "firebrick", cex = 1.2, axes = FALSE)
+box(); abline(1, 0.7, col = "navy", lwd = 2)
+segments(educacion, salario_linea, educacion, salario_obs, col = "firebrick", lty = 3)
+mtext(expression(salario[i] == f(educacion[i]) + u[i]), side = 3, line = -1, cex = 0.9)
+
+par(op)
+```
+
+::: {.callout-note}
+## Ejemplo: ¿qué hay dentro de $u$?
+
+Tomemos la relación Educación $\Rightarrow$ Salario:
+
+$$
+\text{salario}_i = \underbrace{f(\text{educación}_i)}_{\text{salario asociado a la educación}} + \underbrace{u_i}_{\text{capacidad, experiencia, suerte, entorno familiar, }\ldots}
+$$
+
+Dos trabajadores con idéntica formación pueden ganar salarios muy distintos porque difieren en capacidad, experiencia, contactos, suerte y otros innumerables factores que no observamos. Todos ellos viven en $u$. Lo mismo ocurre en nuestro ejemplo de estudio y notas: dos estudiantes que estudian el mismo número de horas pueden obtener notas distintas por su preparación previa, la dificultad de sus asignaturas, la salud o la pura suerte ---todo lo que no captan las horas de estudio acaba en $u$.
+:::
+
+::: {.callout-warning}
+## El error $u$ es inobservable
+
+La parte sistemática $f(X)$ se construye con variables que podemos medir. El error $u$, no: es un objeto *poblacional* que recoge todo lo que hemos dejado fuera, y nunca lo observamos directamente. Es una idea que afinaremos en el Capítulo 2, donde aprenderemos a estimar el modelo y a distinguir el error inobservable $u$ de las magnitudes que sí podemos calcular a partir de una muestra.
+:::
+
+## De una función a unos parámetros
+
+El modelo $Y = f(X) + u$ todavía no es utilizable, porque no hemos dicho qué forma tiene la función $f$. La elección más sencilla y habitual es una **recta**. Para el ejemplo del salario,
+
+$$
+f(\text{educación}_i) = \beta_0 + \beta_1\,\text{educación}_i,
+$$
+
+de modo que el modelo queda
+
+$$
+\text{salario}_i = \beta_0 + \beta_1\,\text{educación}_i + u_i.
+$$
+
+Aquí $\beta_0$ (el **término constante** u ordenada en el origen) y $\beta_1$ (la **pendiente**) son **parámetros poblacionales desconocidos**. La pendiente $\beta_1$ es la magnitud que normalmente buscamos: nos dice cuánto cambia el salario, en promedio, con un año más de educación. No conocemos estos números ---los **estimamos** a partir de los datos usando un método econométrico. El método estándar, Mínimos Cuadrados Ordinarios (MCO), es el objeto del Capítulo 2; en este capítulo nos detenemos en *escribir* el modelo y *cuantificar* la relación con una correlación.
+
+::: {.callout-note}
+## La forma funcional es una hipótesis
+
+Elegir $f(X) = \beta_0 + \beta_1 X$ es en sí misma una hipótesis sobre cómo funciona el mundo ---a saber, que la relación es (al menos aproximadamente) lineal. Un buen economista aplicado escoge una forma funcional compatible tanto con el razonamiento económico como con el aspecto real de los datos. Estudiaremos formas no lineales más ricas en el Capítulo 6.
+:::
+
+## Para qué se usa la econometría
+
+Ponemos los modelos econométricos a trabajar con tres grandes propósitos:
+
+- **Contrastar teorías e hipótesis económicas.** ¿Subir el salario mínimo reduce el empleo? ¿Mejora las notas la asistencia a clase?
+- **Predecir variables económicas.** Prever el crecimiento del PIB del próximo trimestre, o la demanda eléctrica de mañana.
+- **Estimar efectos causales.** ¿Un año más de educación *causa* salarios más altos, o los trabajadores con más estudios son simplemente distintos de partida?
+
+Los dos primeros son la tarea tradicional de la econometría. El tercero ---la inferencia causal creíble--- es el énfasis de la moderna **Revolución de la Credibilidad** en la economía empírica, que sitúa las preguntas causales en el centro e insiste en diseños de investigación capaces de responderlas de forma convincente [@cgl2017]. Averiguar *cuándo* una relación puede leerse en clave causal es el tema de las dos secciones siguientes.
+
+## La correlación no implica causalidad
+
+La lección más importante de todo el curso es esta: **que dos variables se muevan juntas no significa que una cause la otra**. Merece la pena repetirlo en cada página.
+
+::: {.callout-note}
+## Ejemplo: helado y quemaduras solares
+
+Recogemos datos mensuales de las ventas de helado y del número de casos de quemadura solar, y los representamos.
+
+```{r ch01-icecream}
+#| fig-cap: "Ventas de helado y casos de quemadura solar, por mes (datos estilizados). La relación en los datos es claramente positiva."
+helado     <- c(40, 85, 137, 222, 317, 410, 533, 483, 380, 260, 180, 103)
+quemaduras <- c(18, 37,  82, 108, 150, 233, 319, 291, 172, 100,  71,  50)
+plot(helado, quemaduras,
+     xlab = "Ventas de helado", ylab = "Casos de quemadura solar",
+     main = "Ventas de helado y quemaduras solares",
+     pch = 19, col = "blue", cex = 1.2)
+abline(lm(quemaduras ~ helado), col = "navy", lwd = 2)
+```
+
+Cuando suben las ventas de helado, suben también los casos de quemadura solar. Si ajustáramos el modelo econométrico
+
+$$
+\text{quemaduras}_i = \beta_0 + \beta_1\,\text{helado}_i + u_i,
+$$
+
+obtendríamos una pendiente estimada $\hat\beta_1 > 0$. **Pero ¿causa el helado las quemaduras solares?** Por supuesto que no. Un tercer factor ---el tiempo caluroso y soleado del verano--- impulsa *a la vez* las ventas de helado y la exposición al sol. La asociación positiva es real, pero no tiene ningún significado causal.
+:::
+
+¿Por qué importa tanto la distinción? **Porque la política requiere causalidad, no solo correlación.** Si concluyéramos erróneamente que el helado causa quemaduras, podríamos proponer prohibir la venta de helados en la playa. Esa política no haría nada por las quemaduras, porque no toca la causa real. Para reducir las quemaduras deberíamos pensar en la crema solar, la sombra y la información ---las palancas que de verdad operan sobre el resultado.
+
+Una segunda forma en que una correlación puede engañarnos es que la flecha causal apunte en el **sentido contrario** al que suponemos.
+
+::: {.callout-note}
+## Ejemplo: visitas al hospital y salud
+
+Supongamos que estudiamos la relación Visitas al hospital $\Rightarrow$ Estado de salud y encontramos que las personas que van más al hospital están, en promedio, *menos* sanas.
+
+```{r ch01-hospital}
+#| fig-cap: "Visitas al hospital en el último año y estado de salud (datos estilizados). La relación en los datos es negativa."
+set.seed(7)
+visitas <- sort(runif(30, 0.2, 11.5))
+salud <- pmin(pmax(4.7 - 0.30 * visitas + rnorm(30, 0, 0.22), 1), 5)
+plot(visitas, salud,
+     xlab = "Número de visitas al hospital en el último año",
+     ylab = "Estado de salud (1-5)",
+     main = "Visitas al hospital y estado de salud",
+     pch = 19, col = "blue", cex = 1.2)
+```
+
+¿Deberíamos concluir que ir al hospital *arruina* la salud y recomendar que la gente no vaya? Claramente no. La flecha apunta al revés: quienes ya están enfermos van más a menudo al hospital. La relación es genuina, pero refleja **causalidad inversa** ---la salud determina las visitas, y no al revés--- de modo que la lectura ingenua nos da justo el consejo de política equivocado.
+:::
+
+::: {.callout-warning}
+## Error habitual: leer una correlación como un efecto causal
+
+Una correlación fuerte entre $X$ e $Y$ nos dice que *se mueven juntas*. **No** nos dice, por sí sola, que $X$ cause $Y$. La asociación puede deberse a un tercer factor oculto (helado y quemaduras), a causalidad inversa (visitas al hospital y salud) o a ambos. Establecer causalidad exige algo más que un diagrama de dispersión ---exige los datos adecuados y el diseño de investigación adecuado, que es a lo que pasamos a continuación.
+:::
+
+Entonces, ¿cómo podríamos llegar a zanjar una pregunta causal? La respuesta honesta es que depende del **tipo de datos** que tengamos. Eso no es un desvío respecto de la discusión sobre causalidad ---es su continuación.
+
+## Tipos de datos en econometría
+
+En econometría trabajamos con dos grandes clases de datos, y la diferencia entre ellas es exactamente la diferencia entre datos que sí pueden, y datos que normalmente no pueden, responder por sí solos a una pregunta causal.
+
+### Datos experimentales
+
+En los **datos experimentales**, el investigador *asigna* o *manipula* el tratamiento, y la asignación puede ser **aleatorizada**. Los experimentos aleatorizados se consideran el **patrón de referencia** para estimar efectos causales:
+
+- El investigador controla quién recibe el **tratamiento**.
+- Los participantes se dividen al azar en un **grupo de tratamiento** (que recibe la intervención) y un **grupo de control** (que no la recibe).
+- Como la asignación es aleatoria, ambos grupos son, en promedio, **comparables antes del tratamiento** ---solo difieren por azar.
+- Por tanto, cualquier diferencia en los resultados *después* del tratamiento puede atribuirse al propio tratamiento, con mucha más credibilidad que en una comparación simple.
+
+::: {.callout-warning}
+## El *muestreo* aleatorio no es la *asignación* aleatoria
+
+Estas dos ideas suenan parecidas y se confunden constantemente, pero cumplen funciones distintas.
+
+- El **muestreo aleatorio** consiste en extraer al azar de la población a los individuos de nuestro conjunto de datos. Hace que la muestra sea *representativa*, de modo que nuestras estimaciones se generalizan a la población.
+- La **asignación aleatoria** consiste en decidir al azar *cuáles* de los individuos muestreados reciben el tratamiento. Hace que los grupos de tratamiento y de control sean *comparables*, que es lo que autoriza una interpretación causal.
+
+Una encuesta perfectamente representativa (buen muestreo) sigue sin poder, por sí sola, establecer causalidad, porque las personas que resultan recibir el "tratamiento" lo eligieron ellas mismas ---no se les asignó al azar.
+:::
+
+### Los experimentos son poco frecuentes en las ciencias sociales
+
+Los experimentos aleatorizados genuinos son rutinarios en medicina, pero **poco frecuentes en economía y empresa**, por dos motivos:
+
+- **Ética** ---no podemos asignar aleatoriamente a las personas a la pobreza, el desempleo o la enfermedad.
+- **Coste y financiación** ---los experimentos de campo bien diseñados son caros y lentos.
+
+### Cuasiexperimentos
+
+Entre los experimentos "puros" y la observación pura hay un terreno intermedio útil. En un **cuasiexperimento**, la asignación al tratamiento *no* es aleatoria, pero sigue alguna regla **observable** ---a menudo un umbral o un criterio de elegibilidad que afecta a unas unidades y no a otras.
+
+::: {.callout-note}
+## Ejemplo: un confinamiento regional
+
+Durante la pandemia de COVID-19, la *Junta de Andalucía* impuso un confinamiento (el tratamiento) solo a los municipios con una tasa de contagio superior a 1.000 casos por cada 100.000 habitantes. Los municipios justo por encima y justo por debajo de ese umbral son, por lo demás, bastante parecidos, así que comparar sus resultados puede aproximar un experimento aleatorizado aunque a nadie se le asignara al azar.
+:::
+
+### Datos no experimentales (observacionales)
+
+Con los datos **no experimentales** (u **observacionales**), el investigador se limita a observar lo que ocurre en el mundo real; todas las variables se registran a la vez y el investigador no fija ni manipula nada. Los datos de encuesta son el ejemplo clásico ---la *Current Population Survey* (CPS) de EE. UU. y la *Encuesta de Población Activa* (EPA) española pertenecen ambas a esta categoría. La mayoría de los conjuntos de datos de este libro son no experimentales, y precisamente por eso importa tanto la advertencia sobre correlación y causalidad.
+
+### La estructura de los datos: sección cruzada, series temporales, panel
+
+Sea cual sea su origen, un conjunto de datos tiene una **estructura**. Las tres estructuras siguientes son las que encontramos a lo largo del curso, y distinguirlas es esencial porque cada una responde a un tipo distinto de pregunta.
+
+Los **datos de sección cruzada** se recogen sobre muchas unidades muestrales ---individuos, empresas, hogares, regiones, países--- en un *único* periodo de tiempo. Una encuesta como la CPS (Estados Unidos) o la EPA (España) registra, para una muestra de individuos entrevistados en el mismo periodo, variables como la educación, el sexo y el salario:
+
+```{r ch01-cross-section}
+seccion_cruzada <- data.frame(
+  individuo = 1:6,
+  educacion = c("Bachillerato", "Grado", "Máster",
+                "Grado", "Bachillerato", "Máster"),
+  sexo      = c("Mujer", "Hombre", "Mujer", "Hombre", "Hombre", "Mujer"),
+  salario   = c(12.5, 18.0, 24.3, 17.8, 11.2, 30.4)
+)
+knitr::kable(
+  seccion_cruzada,
+  col.names = c("Individuo", "Educación", "Sexo", "Salario"),
+  align     = c("c", "l", "l", "r"),
+  caption   = "Una sección cruzada: muchas unidades, todas observadas en un mismo periodo (datos ilustrativos)."
+)
+```
+
+Los **datos de series temporales** registran la *misma* magnitud a un intervalo de tiempo regular. El PIB real anual de EE. UU. es un ejemplo familiar:
+
+```{r ch01-gdp-ts}
+#| fig-cap: "Una serie temporal: PIB real anual de EE. UU. (miles de millones de dólares de 2009), 2006-2014."
+pib <- data.frame(
+  anio  = 2006:2014,
+  valor = c(14613.8, 14873.7, 14830.4, 14418.7, 14783.8,
+            15020.6, 15354.6, 15583.3, 15961.7)
+)
+plot(pib$anio, pib$valor, type = "o",
+     xlab = "Año", ylab = "PIB real (miles de millones de USD de 2009)",
+     main = "PIB anual de EE. UU.", pch = 19, col = "blue")
+```
+
+Otros ejemplos son el precio anual del trigo o el precio diario de las acciones de una empresa. El rasgo definitorio es una *única* unidad (aquí, la economía de EE. UU.) observada *repetidamente a lo largo del tiempo*.
+
+Los **datos de panel (o longitudinales)** combinan ambas dimensiones: se sigue a *muchas* unidades *durante varios periodos*. La tabla siguiente muestra la producción de dos empresas observadas a lo largo de varios años ---cada empresa aparece en más de una fila, una fila por año:
+
+```{r ch01-panel}
+panel <- data.frame(
+  empresa    = c(1, 1, 1, 2, 2, 2),
+  anio       = c(2019, 2020, 2021, 2019, 2020, 2021),
+  produccion = c(7.9, 7.2, 8.9, 10.4, 10.2, 13.3)
+)
+knitr::kable(
+  panel,
+  col.names = c("Empresa", "Año", "Producción"),
+  align     = c("c", "c", "r"),
+  caption   = "Un panel: las mismas unidades (empresas), cada una observada durante varios periodos (datos ilustrativos)."
+)
+```
+
+Si cada unidad se observa en todos los periodos, el panel está **equilibrado**; en caso contrario, está **no equilibrado**. Normalmente el número de periodos es pequeño en relación con el número de unidades, pero no siempre.
+
+::: {.callout-warning}
+## Un panel no es una serie temporal
+
+"Datos a lo largo del tiempo" no es automáticamente una serie temporal. Una serie temporal sigue a *una* unidad durante muchos periodos (el PIB de EE. UU., año a año). Un panel sigue a *muchas* unidades, cada una durante varios periodos (muchas explotaciones agrarias, cada una a lo largo de los años). La dimensión adicional es lo que da a los paneles su potencia: como veremos más adelante en el libro, permiten controlar por diferencias estables y no observadas entre unidades.
+:::
+
+Conviene conocer dos etiquetas más. Los datos pueden recogerse a distintos niveles de **agregación** ---*micro* (hogares, empresas, trabajadores) o *macro* (regiones, países)--- y las variables pueden ser **cuantitativas** (números, como el salario) o **cualitativas** (categorías, como ocupado / parado).
+
+La razón para tener claras todas estas distinciones es la frase más útil del capítulo: **la estructura de los datos determina qué preguntas podemos responder y qué métodos podemos usar.** Los datos experimentales ---o un cuasiexperimento ingenioso--- pueden proporcionar efectos causales creíbles; una única sección cruzada observacional, en cambio, suele proporcionar correlaciones, y convertirlas en afirmaciones causales es el trabajo difícil del resto del curso.
+
+## Práctica: explorar un conjunto de datos en R
+
+Volvemos ahora a los datos de estudio y notas del comienzo del capítulo y los trabajamos como lo haría un economista aplicado. El conjunto de datos es lo bastante pequeño como para escribirlo a mano, así que no hace falta ningún paquete externo. (La instalación de R y RStudio se trata en el Apéndice A; la primera regresión con `lm()` es la práctica inicial del Capítulo 2.)
+
+```{r ch01-lab-data}
+notas <- data.frame(
+  estudio = c(1.5, 2.0, 3.0, 3.5, 4.0, 5.0, 5.5, 6.5, 7.5, 8.0),
+  nota    = c(2.0, 3.0, 3.5, 4.5, 5.0, 6.0, 6.5, 7.5, 8.5, 9.0)
+)
+```
+
+### ¿Qué tipo de datos son estos?
+
+Son datos **no experimentales**: simplemente observamos a diez estudiantes; no le asignamos a nadie un número de horas de estudio. En cuanto a su estructura, son una **sección cruzada** ---diez unidades distintas (estudiantes), todas observadas en el mismo periodo, sin dimensión temporal y sin ninguna unidad seguida a lo largo del tiempo.
+
+### Describir las dos variables
+
+Para cada variable indicamos la media, la desviación típica, el mínimo y el máximo.
+
+```{r ch01-lab-describe}
+summary(notas)
+sapply(notas, sd)
+```
+
+`summary()` da el mínimo, los cuartiles, la media y el máximo; `sd()` da la desviación típica, una medida de lo dispersos que están los valores.
+
+### La distribución de cada variable
+
+```{r ch01-lab-hist}
+#| fig-cap: "Distribuciones de las horas de estudio diarias y de las notas medias."
+#| fig-width: 9
+#| fig-height: 4
+op <- par(mfrow = c(1, 2))
+hist(notas$estudio, breaks = 6, col = "lightblue",
+     main = "Horas de estudio diarias", xlab = "Horas de estudio")
+hist(notas$nota, breaks = 6, col = "lightgreen",
+     main = "Nota media", xlab = "Nota (0-10)")
+par(op)
+```
+
+### La relación entre ellas
+
+```{r ch01-lab-scatter}
+#| fig-cap: "Nota media frente a horas de estudio diarias."
+plot(notas$estudio, notas$nota,
+     xlab = "Horas de estudio diarias", ylab = "Nota media (0-10)",
+     main = "Notas frente a horas de estudio",
+     xlim = c(0, 10), ylim = c(0, 10),
+     pch = 19, col = "blue", cex = 1.3)
+```
+
+La nube se inclina hacia arriba, así que la relación es **positiva**: más horas de estudio van con notas más altas. Para poner un único número sobre la *fuerza y el sentido* de una relación lineal, calculamos el **coeficiente de correlación muestral**, que siempre está entre $-1$ y $+1$:
+
+```{r ch01-lab-cor}
+cor(notas$estudio, notas$nota)
+```
+
+La correlación es muy cercana a $+1$, lo que confirma una asociación fuerte, positiva y casi perfectamente lineal en estos datos (estilizados).
+
+### Escribir un modelo econométrico
+
+Un modelo econométrico lineal simple para estos datos es
+
+$$
+\text{nota}_i = \beta_0 + \beta_1\,\text{estudio}_i + u_i.
+$$
+
+La parte sistemática $\beta_0 + \beta_1\,\text{estudio}_i$ capta cómo se mueven las notas con las horas de estudio; el error $u_i$ recoge todo lo demás que afecta a la nota de un estudiante pero no está en el modelo ---**capacidad innata, preparación previa, dificultad de la asignatura, salud, motivación, suerte**. Estos factores omitidos no desaparecen; simplemente viven dentro de $u$.
+
+### ¿Podemos concluir que estudiar *causa* mejores notas?
+
+No a partir de estos datos por sí solos. Los estudiantes *eligieron* cuánto estudiar; no se les asignaron sus horas de estudio al azar. Los estudiantes más motivados o mejor preparados pueden a la vez estudiar más *y* sacar mejores notas por razones que nada tienen que ver con las horas de más ---y esas razones están en $u$. Lo que hemos medido es una **correlación**, no un efecto causal.
+
+### ¿Cómo podríamos encontrar el efecto causal?
+
+Para aislar el efecto causal de estudiar necesitaríamos un **experimento**. Podríamos tomar un grupo de estudiantes, **asignar al azar** a algunos de ellos a un programa de estudio (el grupo de tratamiento) y dejar a los demás como están (el grupo de control), y comparar después la nota media de ambos grupos. Como la asignación es aleatoria, los dos grupos serían comparables de partida, de modo que una diferencia en sus notas posteriores podría atribuirse de forma creíble a las horas de estudio de más. Diseñar tales experimentos ---y encontrar sustitutos creíbles cuando son imposibles--- es una tarea central de la econometría moderna.
 
 ## Autoevaluación {.unnumbered}
 
-<!-- TODO -->
+Ocho preguntas cortas de opción múltiple. Intenta cada una antes de abrir la respuesta.
+
+::: {.callout-tip collapse="true"}
+## P1. ¿Qué hace la econometría?
+
+El principal objetivo de la econometría es:
+
+- A. Demostrar teorías económicas usando solo matemáticas, sin datos.
+- B. Estimar relaciones entre variables a partir de datos.
+- C. Recoger datos sin analizarlos.
+- D. Predecir el tiempo meteorológico.
+
+**Respuesta: B.** La econometría aplica métodos estadísticos a datos económicos para estimar relaciones entre variables ($X \Rightarrow Y$).
+:::
+
+::: {.callout-tip collapse="true"}
+## P2. Las dos componentes de un modelo
+
+En el modelo econométrico $Y = f(X) + u$, el término $u$:
+
+- A. Es la parte sistemática del modelo.
+- B. Siempre puede calcularse una vez que tenemos los datos.
+- C. Recoge los factores que afectan a $Y$ pero no están incluidos en el modelo.
+- D. Es igual a cero para cada individuo.
+
+**Respuesta: C.** La componente no observada $u$ reúne todo lo que influye en $Y$ pero queda fuera de la parte sistemática ---capacidad, suerte, etcétera. Es un objeto poblacional y no es directamente observable.
+:::
+
+::: {.callout-tip collapse="true"}
+## P3. Correlación y causalidad
+
+Una correlación positiva entre las ventas de helado y los casos de quemadura solar significa que:
+
+- A. El helado causa las quemaduras solares.
+- B. Las quemaduras solares causan las ventas de helado.
+- C. Ambas se mueven juntas, pero la asociación puede estar impulsada por un tercer factor como el calor.
+- D. Hay un error en los datos.
+
+**Respuesta: C.** Las dos variables se mueven juntas porque un tercer factor oculto ---el calor del verano--- impulsa a ambas. La correlación por sí sola no dice nada sobre la causalidad.
+:::
+
+::: {.callout-tip collapse="true"}
+## P4. Muestreo frente a asignación
+
+¿Cuál de las siguientes afirmaciones es correcta?
+
+- A. El muestreo aleatorio y la asignación aleatoria son lo mismo.
+- B. El muestreo aleatorio hace la muestra representativa; la asignación aleatoria hace comparables los grupos de tratamiento y de control.
+- C. Una encuesta representativa basta para establecer un efecto causal.
+- D. La asignación aleatoria solo tiene que ver con cómo extraemos la muestra de la población.
+
+**Respuesta: B.** El *muestreo* aleatorio se refiere a la representatividad; la *asignación* aleatoria se refiere a la comparabilidad de los grupos tratado y no tratado, y es lo que autoriza una lectura causal. Una encuesta representativa por sí sola no proporciona causalidad.
+:::
+
+::: {.callout-tip collapse="true"}
+## P5. Sección cruzada
+
+Un conjunto de datos con información sobre 526 trabajadores entrevistados en el mismo mes (una fila por trabajador) es:
+
+- A. Datos de sección cruzada.
+- B. Datos de series temporales.
+- C. Datos de panel.
+- D. Datos experimentales.
+
+**Respuesta: A.** Muchas unidades, un solo periodo, ninguna unidad observada repetidamente ---la definición de una sección cruzada.
+:::
+
+::: {.callout-tip collapse="true"}
+## P6. Series temporales
+
+El PIB anual de EE. UU. registrado cada año de 2006 a 2014 es un ejemplo de:
+
+- A. Datos de sección cruzada.
+- B. Datos de series temporales.
+- C. Datos de panel.
+- D. Datos experimentales.
+
+**Respuesta: B.** Una única magnitud (el PIB de una economía) registrada a un intervalo regular a lo largo del tiempo.
+:::
+
+::: {.callout-tip collapse="true"}
+## P7. Panel frente a serie temporal
+
+Un conjunto de datos que sigue a 1.000 empresas durante 2010--2024, registrando las ventas de cada empresa en cada año, es:
+
+- A. Datos de series temporales, porque tiene una dimensión temporal.
+- B. Datos de sección cruzada, porque cada empresa-año es una fila.
+- C. Datos de panel (longitudinales): muchas unidades observadas durante varios periodos.
+- D. Datos experimentales.
+
+**Respuesta: C.** Se sigue a las mismas empresas durante varios años, lo que da a la vez una dimensión de unidad y una dimensión temporal. "Datos a lo largo del tiempo" no es automáticamente una serie temporal.
+:::
+
+::: {.callout-tip collapse="true"}
+## P8. Experimentos y cuasiexperimentos
+
+¿Qué diseño ofrece, por construcción, la evidencia más creíble sobre un efecto causal?
+
+- A. Un experimento aleatorizado, en el que el tratamiento se asigna por sorteo.
+- B. Una comparación entre personas que eligieron el tratamiento y las que no.
+- C. Una única sección cruzada observacional.
+- D. Una encuesta con un tamaño de muestra muy grande.
+
+**Respuesta: A.** Solo la asignación aleatoria hace que los grupos de tratamiento y de control sean comparables en promedio antes del tratamiento, y por eso los experimentos aleatorizados son el patrón de referencia. Un tamaño de muestra grande (D) no arregla una comparación no aleatoria (B, C).
+:::
 
 ## Ejercicios {.unnumbered}
 
-<!-- TODO -->
+**Ejercicio 1.1 ★ --- Clasificar conjuntos de datos.** Clasifica cada uno de los siguientes como datos de sección cruzada, de series temporales o de panel.
+
+(a) El PIB real anual de EE. UU. de 2006 a 2014.
+(b) Los datos de estudio y notas: diez estudiantes, una observación por estudiante.
+(c) La producción de dos explotaciones arroceras registrada cada año de 1990 a 1997.
+(d) El salario, la educación y el sexo de 500 individuos entrevistados en una única ola de la CPS.
+
+::: {.callout-tip collapse="true"}
+## Mostrar respuesta
+
+(a) Series temporales ---una magnitud para una economía a lo largo del tiempo. (b) Sección cruzada ---muchas unidades, un periodo. (c) Panel ---las *mismas* explotaciones observadas durante varios años. (d) Sección cruzada ---muchas unidades, un solo periodo.
+:::
+
+**Ejercicio 1.2 ★ --- ¿Correlación o causalidad?** Para cada par de variables, indica (i) el signo probable de la correlación y (ii) por qué la correlación *no* debería leerse como un efecto causal. Nombra la tercera variable oculta o el sentido de la causalidad inversa.
+
+(a) Ventas de helado y casos de quemadura solar.
+(b) Número de visitas al hospital y estado de salud.
+(c) Número de bomberos enviados a un incendio y la cantidad de daños que causa el incendio.
+
+::: {.callout-tip collapse="true"}
+## Mostrar respuesta
+
+(a) Positiva; un tercer factor ---el tiempo caluroso y soleado--- impulsa a ambas. (b) Negativa; causalidad inversa ---quienes ya están enfermos van más al hospital, así que la salud determina las visitas. (c) Positiva; un tercer factor ---el tamaño del incendio--- impulsa tanto el número de bomberos como los daños. Enviar menos bomberos no reduciría los daños.
+:::
+
+**Ejercicio 1.3 ★ --- Muestreo frente a asignación.** Un investigador extrae una muestra aleatoria grande y perfectamente representativa de trabajadores y observa que quienes asistieron a un curso de formación ganan más que quienes no lo hicieron. ¿Puede el investigador concluir que el curso *subió* los salarios? Explícalo usando la distinción entre muestreo aleatorio y asignación aleatoria.
+
+::: {.callout-tip collapse="true"}
+## Mostrar respuesta
+
+No. La muestra está *extraída* al azar (buen muestreo, así que representa a la población), pero los trabajadores *eligieron* si hacer el curso ---el tratamiento no se *asignó* al azar. Los trabajadores más motivados o más capaces pueden a la vez apuntarse y ganar más de todos modos; esos factores están en $u$. Sin asignación aleatoria, la diferencia salarial mezcla el efecto del curso con diferencias preexistentes entre los dos grupos.
+:::
+
+**Ejercicio 1.4 ★★ --- Diseñar un experimento aleatorizado.** Quieres saber si un taller gratuito de técnicas de estudio *causa* mejores notas entre los estudiantes de primer curso. Esboza un experimento aleatorizado que identificara este efecto causal. Sé explícito sobre: los participantes, qué se asigna al azar, los grupos de tratamiento y de control, y el resultado que compararías. Menciona una dificultad práctica o ética.
+
+*La solución completa se ofrece en la Edición para el profesorado.*
+
+**Ejercicio 1.5 ★★ --- Leer un modelo.** Considera el modelo econométrico $\text{nota}_i = \beta_0 + \beta_1\,\text{estudio}_i + u_i$.
+
+(a) En palabras, ¿qué mide $\beta_1$?
+(b) Da tres factores que estarían contenidos en $u_i$.
+(c) Explica por qué $\beta_0$ y $\beta_1$ se llaman *parámetros desconocidos*.
+
+::: {.callout-tip collapse="true"}
+## Mostrar respuesta
+
+(a) $\beta_1$ es el cambio en la nota media asociado a una hora diaria más de estudio. (b) Tres cualesquiera de: capacidad innata, preparación previa, dificultad de la asignatura, salud, motivación, suerte. (c) Son rasgos fijos de la población que no conocemos; los estimamos a partir de una muestra usando un método econométrico (MCO, Capítulo 2).
+:::
+
+**Ejercicio 1.6 ★★★ --- Chocolate y premios Nobel.** Se ha observado que los países con mayor consumo de chocolate per cápita también ganan más premios Nobel per cápita [@cgl2017]. ¿Es esto evidencia de que comer chocolate causa premios Nobel? Identifica (i) al menos una tercera variable oculta plausible y (ii) explica por qué sería difícil llevar a cabo en la práctica un experimento aleatorizado para zanjar la cuestión.
+
+*La solución completa se ofrece en la Edición para el profesorado.*
