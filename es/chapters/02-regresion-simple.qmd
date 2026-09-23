@@ -2,34 +2,676 @@
 title: "El modelo de regresión lineal simple"
 ---
 
-::: {.callout-note}
-## Traducción en preparación
-Este capítulo forma parte de la edición española (*Econometría I*) y todavía
-está por traducir. La estructura reproduce la plantilla de seis secciones del
-libro; el contenido se trasladará del capítulo original en inglés
-(`chapters/02-simple-regression.qmd`).
-:::
 
 ## Resultados de aprendizaje {.unnumbered}
 
-<!-- TODO: traducir de "Learning outcomes". -->
+Al terminar este capítulo, el lector debería ser capaz de:
+
+- Escribir la función de regresión poblacional (FRP) y la función de regresión muestral (FRM) del modelo lineal simple, y explicar qué representa cada una.
+- Derivar los estimadores MCO $\hat\beta_0$ y $\hat\beta_1$ como los minimizadores de la suma de cuadrados de los residuos.
+- Enunciar los cinco supuestos de Gauss--Markov para el modelo de regresión lineal simple (RLS) y explicar qué garantiza cada uno.
+- Demostrar (o seguir la demostración de) la insesgadez de MCO e identificar qué supuestos se usan en cada paso.
+- Escribir la varianza muestral de $\hat\beta_1$, nombrar los tres factores que determinan su precisión y explicar qué significa que un estimador sea BLUE.
+- Descomponer la variación total en $\mathrm{SCT} = \mathrm{SCE} + \mathrm{SCR}$ y calcular e interpretar el $R^2$.
+- Usar `lm()` en R para estimar, interpretar y visualizar una regresión simple con los conjuntos de datos `beauty` y `bwght`.
 
 ## Pregunta empírica motivadora {.unnumbered}
 
-<!-- TODO -->
+> *¿Cuánto más alto es el salario de un trabajador valorado como de aspecto físico "por encima de la media", en comparación con uno valorado como "medio"?*
 
-## Teoría
+La literatura de economía laboral [@wooldridge2020] lleva mucho tiempo documentando una "prima de belleza": los trabajadores valorados como más atractivos físicamente tienden a ganar salarios más altos. Que la prima sea causal (el aspecto abre puertas) o esté impulsada por confusión (el aspecto se correlaciona con la salud, las habilidades sociales, el entorno familiar) es una cuestión aparte. Antes de poder siquiera *plantear* esa pregunta necesitamos una herramienta que convierta una nube de puntos en un único número. Esa herramienta es la **regresión lineal simple** del salario sobre una medida del atractivo. En la §2.11 estimamos exactamente esta regresión con el conjunto de datos `beauty` de Hamermesh.
 
-<!-- TODO -->
+## Introducción
 
-## Ejemplo resuelto en R
+`\lettrine[lines=3]{E}{l análisis}`{=latex}`<span class="dropcap">E</span>l análisis`{=html} de regresión investiga la relación entre dos o más variables. En este capítulo nos centramos en el modelo de **regresión lineal simple** (RLS), que relaciona una variable dependiente $y$ con una única variable independiente $x$:
 
-<!-- TODO -->
+$$
+y = \beta_0 + \beta_1 x + u.
+$$
+
+Aquí $y$ es la variable dependiente, $x$ es la variable independiente (también llamada regresor o variable explicativa), $\beta_0$ es el **término constante** (ordenada en el origen), $\beta_1$ es la **pendiente** y $u$ es el **término de error** o *perturbación* inobservable, que recoge todo determinante de $y$ que no sea $x$ [@wooldridge2020]. El parámetro de pendiente $\beta_1$ mide el cambio en $y$ asociado a un cambio de una unidad en $x$, *manteniendo constantes todos los factores de $u$*:
+
+$$
+\beta_1 = \frac{\Delta y}{\Delta x} \quad \text{cuando } \Delta u = 0.
+$$
+
+El término constante $\beta_0$ es el valor de $y$ cuando $x = 0$. En muchas aplicaciones $x = 0$ queda fuera del rango de los datos (cero años de educación, cero metros cuadrados, cero cigarrillos al día para un no fumador) y el término constante no tiene un significado económico inmediato ---aun así es esencial para que la recta quede en el lugar correcto.
+
+::: {.callout-note}
+## Un pequeño muestrario de ejemplos de RLS
+
+Cada uno de los siguientes es una regresión lineal simple de un resultado sobre un regresor. Volveremos a varios de ellos a lo largo del capítulo.
+
+- Salario sobre años de educación: $\widehat{\text{Salario}} = 800 + 15\cdot\text{Educación}$. Cada año adicional de escolarización se asocia, en promedio, con 15 euros más al mes.
+- Precio de la vivienda sobre superficie: $\widehat{\text{Precio}} = 100{.}000 + 50\cdot\text{Superficie}$.
+- Valor de reventa de un coche sobre su antigüedad: $\widehat{\text{Reventa}} = 30{.}000 - 1{.}500\cdot\text{Antigüedad}$.
+- Ventas sobre gasto en publicidad: $\widehat{\text{Ventas}} = 50 + 2\cdot\text{Publicidad}$.
+- Presión arterial sobre edad: $\widehat{\text{PA}} = 100 + 0{,}5\cdot\text{Edad}$.
+:::
+
+## La función de regresión poblacional
+
+El modelo $y = \beta_0 + \beta_1 x + u$ contiene la perturbación inobservable $u$. Para convertirlo en una afirmación que, en principio, podamos contrastar, imponemos un supuesto clave sobre la media condicional del error:
+
+$$
+\mathbb{E}[u \mid x] = 0.
+$$
+
+Esto dice que, cualesquiera que sean los determinantes de $y$ agrupados en $u$, no están relacionados *en promedio* con $x$. Tomando esperanzas condicionales a ambos lados del modelo y usando este supuesto se obtiene la **función de regresión poblacional (FRP)**:
+
+$$
+\mathbb{E}[y \mid x] = \beta_0 + \beta_1 x.
+$$
+
+La FRP describe el valor *medio* de $y$ para cada valor de $x$ en la población. Es una recta con término constante $\beta_0$ y pendiente $\beta_1$.
+
+::: {.callout-note}
+## La regresión es una comparación
+
+Lee $\beta_1$ como una *comparación entre subpoblaciones*. Si comparamos el grupo de individuos con $x = a$ con el grupo con $x = a + 1$, este último tiene un valor de $y$ que es, en promedio, $\beta_1$ unidades más alto. Que esa comparación refleje un efecto causal depende de si se cumple $\mathbb{E}[u \mid x] = 0$ ---una cuestión a la que volvemos una y otra vez a lo largo del libro.
+:::
+
+El problema fundamental de la FRP es que **no puede observarse**. Es una afirmación sobre toda una población que nunca vemos. Lo mejor que podemos hacer es tomar una muestra y estimar la recta que, según la evidencia disponible, más se acerca a la verdad.
+
+::: {.callout-warning}
+## Error habitual: confundir la FRP con la FRM
+
+La FRP $\mathbb{E}[y \mid x] = \beta_0 + \beta_1 x$ es una propiedad de la *población*: $\beta_0$ y $\beta_1$ son fijos pero desconocidos. La FRM $\hat y = \hat\beta_0 + \hat\beta_1 x$ (siguiente sección) es una recta *aleatoria* cuyo término constante y pendiente cambian de una muestra a otra. Confundir ambas es el error conceptual más habitual de este curso.
+:::
+
+## La función de regresión muestral
+
+Sea $\{(x_i, y_i) : i = 1, 2, \ldots, n\}$ una muestra aleatoria de tamaño $n$ de la población. Para cada observación $i$, el modelo poblacional es
+
+$$
+y_i = \beta_0 + \beta_1 x_i + u_i.
+$$
+
+Definimos la **función de regresión muestral (FRM)** como
+
+$$
+\hat y_i = \hat\beta_0 + \hat\beta_1 x_i,
+$$
+
+donde $\hat\beta_0$ y $\hat\beta_1$ son **estimaciones** de los parámetros poblacionales $\beta_0$ y $\beta_1$, obtenidas de los datos. Los "sombreros" nos recuerdan en todo momento que son magnitudes basadas en la muestra. Dos muestras distintas de la misma población darían, en general, dos FRM distintas.
+
+## Mínimos Cuadrados Ordinarios (MCO)
+
+Dado un diagrama de dispersión de puntos $(x_i, y_i)$, podrían trazarse infinitas rectas a través de la nube, cada una con un $(\hat\beta_0, \hat\beta_1)$ distinto. ¿Cómo elegimos la "mejor" recta?
+
+### Por qué necesitamos un criterio {.unnumbered}
+
+Aquí hay un diagrama de dispersión de 41 estudiantes de una cohorte reciente de Econometría I de la UGR, que representa su tasa de asistencia frente a su nota final. Muchas rectas parecen ajustar "más o menos" la nube de puntos; la cuestión es cuál elegimos y por qué. Antes de derivar ninguna fórmula, ayuda *ver* el problema.
+
+```{r slr-ols-criterion-fig}
+# 41 estudiantes, cohorte de Econometría I 2024-25 de la UGR
+asistencia <- c(38.89, 94.44, 94.44, 33.33, 83.33, 0, 0, 66.67, 88.89,
+                66.67, 27.78, 83.33, 0, 61.11, 0, 22.22, 0, 0, 72.22,
+                88.89, 88.89, 11.11, 5.56, 33.33, 16.67, 0, 11.11,
+                33.33, 100, 38.89, 5.56, 72.22, 44.44, 0, 55.56, 33.33,
+                0, 66.67, 5.56, 88.89, 88.89)
+nota       <- c(3.45, 5.5, 6, 3.7, 7, 2.55, 5, 2.1, 5.8, 1.9, 5.1, 5,
+                2, 3.5, 2, 5.15, 0.35, 1.45, 5, 4.5, 7.8, 5.2, 3.8, 6,
+                1.55, 1, 4.1, 5.7, 6.5, 4.2, 0.8, 6.5, 5.8, 0, 5.1,
+                0.95, 1.4, 5.6, 1.7, 6.5, 6)
+
+# Tres rectas candidatas (calcularemos su SCR)
+candidatas <- data.frame(
+  etiqueta = c("A) demasiado plana", "B) demasiado inclinada", "C) MCO"),
+  b0       = c(3.0, 0.0, 2.256),
+  b1       = c(0.015, 0.08, 0.0411)
+)
+
+# Dispersión + las tres rectas candidatas
+plot(asistencia, nota,
+     xlab = "Asistencia (%)", ylab = "Nota final (0-10)",
+     pch = 19, col = "grey40", cex = 0.9,
+     main = "Tres rectas candidatas para los mismos datos")
+cols <- c("steelblue", "tomato", "black")
+ltys <- c(2, 3, 1)
+for (k in seq_len(nrow(candidatas))) {
+  abline(a = candidatas$b0[k], b = candidatas$b1[k],
+         col = cols[k], lwd = 2, lty = ltys[k])
+}
+legend("topleft", legend = candidatas$etiqueta,
+       col = cols, lty = ltys, lwd = 2, bty = "n")
+
+# SCR de cada candidata
+scr <- sapply(seq_len(nrow(candidatas)), function(k) {
+  yhat <- candidatas$b0[k] + candidatas$b1[k] * asistencia
+  sum((nota - yhat)^2)
+})
+data.frame(recta = candidatas$etiqueta,
+           beta0 = candidatas$b0,
+           beta1 = candidatas$b1,
+           SCR   = round(scr, 2))
+```
+
+Cada recta candidata da una suma de cuadrados de los residuos (SCR) distinta. MCO es el *único* par $(\hat\beta_0, \hat\beta_1)$ que minimiza esta suma ---la recta C de arriba. La figura siguiente muestra los residuos (las magnitudes que se elevan al cuadrado y se suman) como segmentos verticales discontinuos desde cada punto hasta la recta MCO.
+
+```{r slr-ols-residuals-fig}
+modelo <- lm(nota ~ asistencia)
+plot(asistencia, nota,
+     xlab = "Asistencia (%)", ylab = "Nota final (0-10)",
+     pch = 19, col = "grey40", cex = 0.9,
+     main = "Recta MCO con los residuos (lo que se eleva al cuadrado y se suma)")
+abline(modelo, col = "black", lwd = 2)
+yhat <- predict(modelo)
+segments(asistencia, nota, asistencia, yhat,
+         col = "tomato", lty = 3)
+```
+
+La definición formal del residuo $\hat u_i$ llega en la §2.4.1; la derivación algebraica de los minimizadores $\hat\beta_0$ y $\hat\beta_1$ llega en la §2.4.3. La intuición visual permanece con nosotros: MCO es la recta que hace la suma de los segmentos discontinuos al cuadrado lo más pequeña posible.
+
+::: {.callout-note appearance="simple"}
+*Datos: 41 estudiantes de Econometría I, curso 2024--25, UGR (recogidos por el autor).*
+:::
+
+### El residuo
+
+Para cada observación $i$, el **residuo** es la distancia vertical entre el $y_i$ observado y el valor predicho por la FRM:
+
+$$
+\hat u_i = y_i - \hat y_i = y_i - \hat\beta_0 - \hat\beta_1 x_i.
+$$
+
+El residuo es el análogo muestral de la perturbación poblacional $u_i$. Es observable en cuanto tenemos las estimaciones $(\hat\beta_0, \hat\beta_1)$; la perturbación $u_i$ *nunca* es observable.
+
+### La suma de cuadrados de los residuos
+
+Queremos la recta que haga los residuos lo más pequeños posible en algún sentido global. Elevar al cuadrado (en lugar de tomar valores absolutos) penaliza con más fuerza las desviaciones grandes y da una función objetivo suave y diferenciable. El método MCO elige $\hat\beta_0$ y $\hat\beta_1$ para minimizar la **suma de cuadrados de los residuos**:
+
+$$
+\mathrm{SCR} = \sum_{i=1}^{n} \hat u_i^{\,2} = \sum_{i=1}^{n}\bigl(y_i - \hat\beta_0 - \hat\beta_1 x_i\bigr)^2.
+$$
+
+### Derivación de los estimadores MCO
+
+Derivando $\mathrm{SCR}$ respecto de $\hat\beta_0$ y $\hat\beta_1$ e igualando las derivadas a cero se obtienen las *condiciones de primer orden* (CPO):
+
+$$
+-2\sum_{i=1}^{n}\bigl(y_i - \hat\beta_0 - \hat\beta_1 x_i\bigr) = 0, \qquad
+-2\sum_{i=1}^{n} x_i\bigl(y_i - \hat\beta_0 - \hat\beta_1 x_i\bigr) = 0.
+$$
+
+La primera CPO, dividida por $n$, da $\bar y - \hat\beta_0 - \hat\beta_1 \bar x = 0$, de donde
+
+$$
+\hat\beta_0 = \bar y - \hat\beta_1 \bar x.
+$$
+
+Sustituyendo esto en la segunda CPO y simplificando se obtiene la célebre fórmula de la pendiente:
+
+$$
+\hat\beta_1 = \frac{\sum_{i=1}^{n}(x_i - \bar x)(y_i - \bar y)}{\sum_{i=1}^{n}(x_i - \bar x)^2} = \frac{\widehat{\operatorname{Cov}}(x,y)}{\widehat{\operatorname{Var}}(x)}.
+$$
+
+La pendiente es la covarianza muestral entre $x$ e $y$ dividida por la varianza muestral de $x$. Dos consecuencias son inmediatas:
+
+- La pendiente MCO es una **medida de asociación reescalada**. Si $x$ e $y$ están correlacionadas positivamente en la muestra, $\hat\beta_1 > 0$; si no están correlacionadas, $\hat\beta_1 = 0$.
+- La fórmula requiere $\sum_{i=1}^{n}(x_i - \bar x)^2 > 0$, es decir, tiene que haber **variación en $x$**. Si todas las observaciones tienen el mismo valor de $x$, el denominador es cero y MCO no está definido ---sencillamente no hay forma de aprender cómo responde $y$ a $x$ cuando $x$ nunca varía.
+
+::: {.callout-note}
+## Ejemplo: salario y educación
+
+Supongamos que tenemos una muestra de $n = 1{.}000$ trabajadores y obtenemos
+
+$$
+\widehat{\text{Salario}} = 800 + 15 \times \text{Educación}.
+$$
+
+Leemos:
+
+- $\hat\beta_0 = 800$: el salario mensual predicho para alguien con cero años de educación es de 800 euros (extrapolación fuera del rango de los datos).
+- $\hat\beta_1 = 15$: un año más de escolarización se asocia, en promedio, con 15 euros más al mes.
+:::
+
+La solución MCO tiene tres propiedades mecánicas que se siguen directamente de las condiciones de primer orden y que usaremos repetidamente:
+
+1. $\sum_{i=1}^{n} \hat u_i = 0$ ---los residuos suman cero.
+2. $\sum_{i=1}^{n} x_i \hat u_i = 0$ ---los residuos no están correlacionados con $x$ en la muestra.
+3. La recta MCO pasa por el punto $(\bar x, \bar y)$ ---consecuencia directa de $\hat\beta_0 = \bar y - \hat\beta_1 \bar x$.
+
+Estas son propiedades **algebraicas** de MCO: se cumplen por construcción en *cada* muestra, sin importar cómo se generaron los datos. No son propiedades estadísticas sobre la población.
+
+## Los supuestos de Gauss--Markov para la RLS
+
+MCO da un número a partir de cualquier muestra, pero para que ese número tenga propiedades *estadísticas* deseables ---insesgadez, varianza mínima, errores estándar razonables--- necesitamos supuestos sobre la población. Los cinco **supuestos de Gauss--Markov para la RLS** son el cimiento del resto del capítulo.
+
+**RLS.1 --- Linealidad en los parámetros.** El modelo poblacional puede escribirse como
+
+$$
+y = \beta_0 + \beta_1 x + u,
+$$
+
+donde $\beta_0$ y $\beta_1$ son los parámetros desconocidos y $u$ es la perturbación inobservable.
+
+**RLS.2 --- Muestreo aleatorio.** Disponemos de una muestra aleatoria $\{(x_i, y_i) : i = 1, \ldots, n\}$ extraída de la población de RLS.1.
+
+**RLS.3 --- Variación muestral en $x$.** Los valores muestrales $x_1, x_2, \ldots, x_n$ no son todos iguales, es decir, $\sum_{i=1}^{n}(x_i - \bar x)^2 > 0$.
+
+**RLS.4 --- Media condicional cero.** El error tiene valor esperado cero dado cualquier valor de $x$:
+
+$$
+\mathbb{E}[u \mid x] = 0.
+$$
+
+**RLS.5 --- Homocedasticidad.** La varianza del error es constante en $x$:
+
+$$
+\operatorname{Var}(u \mid x) = \sigma^2.
+$$
+
+::: {.callout-warning}
+## Error habitual: olvidar qué hace cada supuesto
+
+RLS.1--RLS.3 son condiciones técnicas que hacen que el estimador esté bien definido. RLS.4 es lo que hace que el estimador sea **insesgado** y permite interpretar $\beta_1$ como un efecto *ceteris paribus*; es también el supuesto más difícil de verificar y el que más a menudo se incumple en la práctica. RLS.5 solo es necesario para la fórmula de la **varianza** y para el resultado de eficiencia de Gauss--Markov, no para la insesgadez.
+:::
+
+## Insesgadez de MCO
+
+Bajo RLS.1--RLS.4, los estimadores MCO son insesgados. Esbozamos el argumento para $\hat\beta_1$; el álgebra para $\hat\beta_0$ es similar.
+
+Partimos de la fórmula MCO y sustituimos el modelo poblacional $y_i = \beta_0 + \beta_1 x_i + u_i$:
+
+$$
+\hat\beta_1 = \frac{\sum_{i=1}^{n}(x_i - \bar x)(y_i - \bar y)}{\sum_{i=1}^{n}(x_i - \bar x)^2} = \beta_1 + \frac{\sum_{i=1}^{n}(x_i - \bar x)\,u_i}{\sum_{i=1}^{n}(x_i - \bar x)^2}.
+$$
+
+El segundo término es una media ponderada de los errores inobservables, con pesos $(x_i - \bar x) / \mathrm{SCT}_x$ que suman cero. Tomando esperanzas condicionales dado $\mathbf{x} = (x_1, \ldots, x_n)$ y usando RLS.4 ($\mathbb{E}[u_i \mid x_i] = 0$ para todo $i$),
+
+$$
+\mathbb{E}[\hat\beta_1 \mid \mathbf{x}] = \beta_1 + \frac{\sum_{i=1}^{n}(x_i - \bar x)\,\mathbb{E}[u_i \mid \mathbf{x}]}{\sum_{i=1}^{n}(x_i - \bar x)^2} = \beta_1.
+$$
+
+Por la ley de las esperanzas iteradas, $\mathbb{E}[\hat\beta_1] = \beta_1$. El mismo argumento aplicado a $\hat\beta_0 = \bar y - \hat\beta_1 \bar x$ da $\mathbb{E}[\hat\beta_0] = \beta_0$.
+
+::: {.callout-note}
+## La insesgadez es una propiedad del estimador, no de una estimación concreta
+
+La afirmación $\mathbb{E}[\hat\beta_1] = \beta_1$ *no* dice "nuestro número es exactamente correcto". Dice que si extrajéramos muchas muestras independientes de la misma población y calculáramos $\hat\beta_1$ en cada una, el promedio a largo plazo de todas esas estimaciones sería igual a $\beta_1$. Cualquier estimación individual puede estar por encima o por debajo de la verdad.
+:::
+
+## Varianzas muestrales de los estimadores MCO
+
+¿Cómo de precisas son las estimaciones MCO? Bajo RLS.1--RLS.5, condicionando en los regresores:
+
+$$
+\operatorname{Var}(\hat\beta_1 \mid \mathbf{x}) = \frac{\sigma^2}{\sum_{i=1}^{n}(x_i - \bar x)^2} = \frac{\sigma^2}{\mathrm{SCT}_x},
+$$
+
+$$
+\operatorname{Var}(\hat\beta_0 \mid \mathbf{x}) = \frac{\sigma^2 \sum_{i=1}^{n} x_i^{\,2}}{n\sum_{i=1}^{n}(x_i - \bar x)^2}.
+$$
+
+Destacan tres factores que determinan la precisión de $\hat\beta_1$:
+
+1. **La varianza del error $\sigma^2$.** Datos más ruidosos dan estimaciones menos precisas. Añadir buenos controles en el Capítulo 3 reducirá $\sigma^2$ y afinará nuestras estimaciones.
+2. **La variación en $x$ (la dispersión del regresor, $\mathrm{SCT}_x$).** Un regresor que apenas varía es poco informativo; uno que abarca un rango amplio fija la pendiente con nitidez.
+3. **El tamaño muestral $n$.** Una muestra mayor suele elevar $\mathrm{SCT}_x$, lo que reduce directamente $\operatorname{Var}(\hat\beta_1)$.
+
+Estos tres factores reaparecen, de forma similar, en todos los modelos de regresión del resto del libro.
+
+## El teorema de Gauss--Markov
+
+El resultado más importante de "¿por qué usar MCO?" es el **teorema de Gauss--Markov**.
+
+> Bajo RLS.1--RLS.5, los estimadores MCO $\hat\beta_0$ y $\hat\beta_1$ son los **mejores estimadores lineales insesgados (BLUE)** de $\beta_0$ y $\beta_1$.
+
+"Mejores" significa *de varianza mínima* dentro de la clase de todos los estimadores que son (i) lineales en $y$ e (ii) insesgados para $\beta$. La demostración considera un competidor lineal insesgado arbitrario $\tilde\beta_1 = \sum_i w_i y_i$, escribe sus pesos como $w_i = (x_i - \bar x)/\mathrm{SCT}_x + d_i$ para cierta desviación $d_i$, impone las condiciones $\sum_i d_i = 0$ y $\sum_i d_i x_i = 0$ requeridas para la insesgadez, y calcula
+
+$$
+\operatorname{Var}(\tilde\beta_1 \mid \mathbf{x}) = \frac{\sigma^2}{\mathrm{SCT}_x} + \sigma^2 \sum_{i=1}^{n} d_i^{\,2} \geq \frac{\sigma^2}{\mathrm{SCT}_x} = \operatorname{Var}(\hat\beta_1 \mid \mathbf{x}),
+$$
+
+con igualdad solo cuando todos los $d_i = 0$, es decir, cuando $\tilde\beta_1 = \hat\beta_1$.
+
+::: {.callout-warning}
+## Lo que Gauss--Markov *no* dice
+
+El teorema de Gauss--Markov **no** dice que MCO sea el mejor estimador en algún sentido absoluto. Dice que, entre los estimadores *lineales e insesgados*, MCO tiene varianza mínima. Bien puede haber estimadores *sesgados* (ridge, LASSO) o *no lineales* (regresión por cuantiles) con menor error cuadrático medio en contextos concretos.
+:::
+
+## Estimación de $\sigma^2$
+
+La varianza del error $\sigma^2$ aparece en las fórmulas de varianza anteriores, pero es en sí misma desconocida ---nunca observamos los errores poblacionales $u_i$, solo los residuos $\hat u_i$. El estimador muestral natural es
+
+$$
+\hat\sigma^2 = \frac{\mathrm{SCR}}{n - 2} = \frac{\sum_{i=1}^{n} \hat u_i^{\,2}}{n - 2}.
+$$
+
+Bajo RLS.1--RLS.5 este estimador es insesgado: $\mathbb{E}[\hat\sigma^2] = \sigma^2$. Dividimos por $n - 2$ en lugar de por $n$ porque dos grados de libertad ya se han "consumido" al estimar $\beta_0$ y $\beta_1$ con los mismos datos. La raíz cuadrada $\hat\sigma$ se llama a veces **error estándar de la regresión** (R lo muestra como *Residual standard error*).
+
+Combinando $\hat\sigma^2$ con la fórmula de la varianza se obtiene el **error estándar** de la estimación de la pendiente:
+
+$$
+\operatorname{se}(\hat\beta_1) = \frac{\hat\sigma}{\sqrt{\mathrm{SCT}_x}}.
+$$
+
+El error estándar es el caballo de batalla de la inferencia en el Capítulo 4 ---todo lo que diremos sobre intervalos de confianza y contrastes $t$ se construye sobre él.
+
+## Bondad del ajuste: $R^2$
+
+Dos regresiones pueden tener la misma estimación de la pendiente y, sin embargo, ajustes muy distintos, según cuánta variación de $y$ explique el regresor. Para medir el ajuste, descomponemos la variación total de $y$ como
+
+$$
+\underbrace{\sum_{i=1}^{n}(y_i - \bar y)^2}_{\mathrm{SCT}}
+\;=\; \underbrace{\sum_{i=1}^{n}(\hat y_i - \bar y)^2}_{\mathrm{SCE}}
+\;+\; \underbrace{\sum_{i=1}^{n} \hat u_i^{\,2}}_{\mathrm{SCR}},
+$$
+
+donde $\mathrm{SCT}$ es la *suma de cuadrados total*, $\mathrm{SCE}$ es la *suma de cuadrados explicada* y $\mathrm{SCR}$ es la *suma de cuadrados de los residuos*. La descomposición usa las propiedades algebraicas de MCO ($\sum_i \hat u_i = 0$ y $\sum_i x_i \hat u_i = 0$); no se cumpliría para una recta arbitraria.
+
+El **coeficiente de determinación** es entonces
+
+$$
+R^2 = \frac{\mathrm{SCE}}{\mathrm{SCT}} = 1 - \frac{\mathrm{SCR}}{\mathrm{SCT}}.
+$$
+
+El $R^2$ es la fracción de la variación muestral de $y$ que "explica" $x$. Está entre 0 y 1, con $R^2 = 1$ cuando todos los puntos caen sobre la recta y $R^2 = 0$ cuando $\hat\beta_1 = 0$. En la regresión lineal simple, $R^2$ es igual al cuadrado de la correlación muestral entre $y$ y $x$.
+
+::: {.callout-warning}
+## Un $R^2$ bajo *no* significa un modelo inútil
+
+En economía laboral, de la salud y de la educación, valores del $R^2$ del 5--15 % son completamente normales: los resultados individuales dependen de muchas cosas que nunca medimos. Un $R^2$ pequeño *no* invalida por sí solo la estimación de la pendiente ---$\hat\beta_1$ puede seguir siendo insesgada, estadísticamente significativa y relevante para la política. A la inversa, un $R^2$ alto *no* valida un modelo en el que falla RLS.4: $\hat\beta_1$ puede estar estimada con precisión y a la vez muy sesgada.
+:::
+
+## Práctica: regresión lineal simple en R
+
+En esta práctica estimamos dos regresiones simples con el paquete **wooldridge**: la regresión salario--atractivo de la §2.4 ("Práctica A") y la regresión peso al nacer--tabaquismo ("Práctica B"). Ambas son secciones cruzadas breves, ambas tienen un $R^2$ pequeño y ambas ilustran la advertencia anterior.
+
+```{r ch02-setup}
+#| message: false
+library(wooldridge)
+data("beauty")
+data("bwght")
+```
+
+### Práctica A --- Salarios y aspecto físico (`beauty`)
+
+El conjunto de datos `beauty`, usado por Hamermesh y Biddle (1994) y reproducido en @wooldridge2020, contiene salarios por hora y una valoración en cinco puntos del aspecto físico para una muestra de trabajadores estadounidenses. La variable `looks` toma valores enteros de 1 ("poco agraciado") a 5 ("muy atractivo"), siendo 3 "medio". La variable `wage` es el salario por hora en dólares estadounidenses.
+
+Empezamos con estadísticos descriptivos y una tabla de frecuencias de `looks`.
+
+```{r ch02-beauty-summary}
+summary(beauty$wage)
+summary(beauty$looks)
+table(beauty$looks)
+```
+
+La mayoría de los trabajadores están valorados con un 3 ("medio") ---las categorías extremas 1 y 5 son escasas. Esto ya nos dice que la pendiente de una regresión del salario sobre el atractivo estará determinada casi por completo por el contraste entre las categorías 2, 3 y 4.
+
+Antes de cualquier regresión, calculemos el salario medio en cada categoría de atractivo. Esta es la media condicional *no paramétrica* y nos da una referencia con la que comparar el ajuste MCO.
+
+```{r ch02-beauty-condmean}
+tapply(beauty$wage, beauty$looks, mean)
+```
+
+Los salarios medios aumentan (de forma modesta y no del todo monótona) con el atractivo. El resumen natural en un solo número de este patrón es la pendiente de la recta MCO.
+
+Un diagrama de dispersión de los datos brutos, con las medias condicionales superpuestas, hace visible la historia.
+
+```{r ch02-beauty-scatter}
+#| fig-cap: "Salario por hora frente a la valoración del atractivo en el conjunto de datos beauty. Los puntos azules son las medias condicionales por categoría de atractivo."
+medias_cond <- tapply(beauty$wage, beauty$looks, mean)
+plot(beauty$looks, beauty$wage,
+     xlab = "Valoración del atractivo (1 = poco agraciado, 5 = muy atractivo)",
+     ylab = "Salario por hora (USD)",
+     main = "Salario frente a atractivo",
+     pch = 16, col = rgb(0, 0, 0, 0.15))
+points(as.numeric(names(medias_cond)), medias_cond, pch = 19, col = "blue", cex = 1.6)
+```
+
+Ahora estimamos la regresión lineal simple del salario sobre el atractivo con `lm()`:
+
+```{r ch02-beauty-lm}
+modelo_beauty <- lm(wage ~ looks, data = beauty)
+summary(modelo_beauty)
+```
+
+Leyendo la salida:
+
+- El término constante estimado $\hat\beta_0$ es el salario predicho para un trabajador con `looks = 0` ---un valor fuera del rango de los datos, así que aquí el término constante no tiene interpretación económica directa.
+- La pendiente estimada $\hat\beta_1$ sobre `looks` es el cambio en el salario por hora predicho ante un aumento de un punto en la valoración del atractivo. Se predice que un trabajador valorado con 4 ("por encima de la media") gana unos $\hat\beta_1$ dólares por hora más que uno valorado con 3 ("medio"), en promedio.
+- El error estándar de $\hat\beta_1$, el estadístico $t$ y el valor $p$ nos dicen si la pendiente es estadísticamente distinguible de cero. Los tratamos formalmente en el Capítulo 4; por ahora, nótese que la pendiente es significativamente distinta de cero a los niveles convencionales.
+- El **Residual standard error** al final de `summary()` es $\hat\sigma$ de la §2.9.
+- El **Multiple R-squared** es el $R^2$ de la §2.10. Es pequeño (1--2 %): el atractivo por sí solo explica solo una parte minúscula de la variación de los salarios. Eso no invalida la pendiente ---simplemente nos recuerda que los salarios dependen de mucho más que del atractivo (educación, experiencia, ocupación, …), la mayor parte de lo cual añadiremos como controles en el Capítulo 3.
+
+Para terminar, superponemos la recta MCO sobre la dispersión:
+
+```{r ch02-beauty-fitline}
+#| fig-cap: "Recta MCO y medias condicionales para la regresión salario--atractivo."
+plot(beauty$looks, beauty$wage,
+     xlab = "Valoración del atractivo", ylab = "Salario por hora (USD)",
+     main = "Salario frente a atractivo con recta MCO",
+     pch = 16, col = rgb(0, 0, 0, 0.15))
+abline(modelo_beauty, col = "red", lwd = 2)
+points(as.numeric(names(medias_cond)), medias_cond, pch = 19, col = "blue", cex = 1.6)
+```
+
+La recta MCO roja aproxima la tendencia de las medias condicionales azules, pero no las interpola con exactitud ---un modelo lineal es una aproximación.
+
+Una comprobación útil es verificar la descomposición $\mathrm{SCT} = \mathrm{SCE} + \mathrm{SCR}$ y la identidad $R^2 = 1 - \mathrm{SCR}/\mathrm{SCT}$ de la §2.10:
+
+```{r ch02-beauty-r2}
+yhat <- fitted(modelo_beauty)
+uhat <- resid(modelo_beauty)
+y    <- beauty$wage
+SCT  <- sum((y - mean(y))^2)
+SCE  <- sum((yhat - mean(y))^2)
+SCR  <- sum(uhat^2)
+c(SCT = SCT, SCE_mas_SCR = SCE + SCR)
+c(R2_manual = 1 - SCR / SCT, R2_lm = summary(modelo_beauty)$r.squared)
+```
+
+Los dos pares de números coinciden (hasta redondeo numérico), como predice la teoría.
+
+### Práctica B --- Peso al nacer y tabaquismo (`bwght`)
+
+El conjunto de datos `bwght` registra el peso al nacer (en onzas) y el consumo medio diario de cigarrillos de la madre durante el embarazo, entre otras variables, para una muestra de nacimientos estadounidenses. El tabaquismo materno es uno de los determinantes más estudiados del peso al nacer, con una clara plausibilidad médica de un efecto *negativo*.
+
+```{r ch02-bwght-summary}
+summary(bwght$bwght)
+summary(bwght$cigs)
+mean(bwght$cigs)
+```
+
+La mayoría de las madres de la muestra no fuman (la mediana de `cigs` es cero). Entre las que sí, el consumo diario puede llegar a los 50 cigarrillos. El histograma hace evidente la larga cola por la derecha:
+
+```{r ch02-bwght-hist}
+#| fig-cap: "Distribución de los cigarrillos fumados al día durante el embarazo (bwght)."
+hist(bwght$cigs,
+     main  = "Cigarrillos al día durante el embarazo",
+     xlab  = "Cigarrillos al día",
+     col   = "lightblue",
+     breaks = 20)
+```
+
+Un diagrama de dispersión del peso al nacer frente a los cigarrillos:
+
+```{r ch02-bwght-scatter}
+#| fig-cap: "Peso al nacer en onzas frente a cigarrillos al día."
+plot(bwght$cigs, bwght$bwght,
+     xlab = "Cigarrillos al día",
+     ylab = "Peso al nacer (oz)",
+     main = "Peso al nacer frente a tabaquismo materno",
+     pch  = 16, col = rgb(0, 0, 0, 0.25))
+```
+
+Ahora la regresión lineal simple de `bwght` sobre `cigs`:
+
+```{r ch02-bwght-lm}
+modelo_bwght <- lm(bwght ~ cigs, data = bwght)
+summary(modelo_bwght)
+plot(bwght$cigs, bwght$bwght,
+     xlab = "Cigarrillos al día durante el embarazo",
+     ylab = "Peso al nacer (onzas)",
+     main = "Peso al nacer frente a tabaquismo materno (recta ajustada)",
+     pch  = 16, col = rgb(0, 0, 0, 0.25))
+abline(modelo_bwght, col = "red", lwd = 2)
+```
+
+Interpretación:
+
+- $\hat\beta_0$ es el peso al nacer predicho para un bebé cuya madre *no* fuma durante el embarazo (`cigs = 0`). A diferencia de la regresión del atractivo, este es un valor con sentido, porque la mediana de `cigs` es cero.
+- $\hat\beta_1$ es el cambio en el peso al nacer predicho por un cigarrillo más al día. La pendiente estimada es aproximadamente $-0{,}51$ onzas por cigarrillo, así que fumar diez cigarrillos más al día se asocia con unas $10 \times (-0{,}51) \approx -5{,}1$ onzas de peso al nacer. El signo negativo es coherente con todo lo que sabemos por la medicina.
+- El $R^2$ es de nuevo pequeño. El peso al nacer depende de decenas de factores ---nutrición materna, edad, partos previos, atención prenatal--- y `cigs` es solo uno de ellos. Como en la Práctica A, un $R^2$ pequeño no invalida la estimación de la pendiente.
+
+Que el $-0{,}51$ estimado sea el efecto *causal* del tabaquismo sobre el peso al nacer es otra cuestión. Si las madres que fuman también difieren de las no fumadoras en renta, educación y nutrición, y si esas características afectan por su cuenta al peso al nacer, entonces falla RLS.4 y $\hat\beta_1$ está sesgada. Volveremos a este mismo conjunto de datos en el Capítulo 3, una vez que dispongamos de las herramientas de regresión múltiple necesarias para abordarlo.
 
 ## Autoevaluación {.unnumbered}
 
-<!-- TODO -->
+Siete preguntas cortas de opción múltiple. Intenta cada una antes de abrir la respuesta.
+
+::: {.callout-tip collapse="true"}
+## P1. La pendiente $\beta_1$
+
+En el modelo de regresión simple $y = \beta_0 + \beta_1 x + u$, la pendiente $\beta_1$ mide:
+
+- A. La correlación entre $x$ e $y$.
+- B. El cambio esperado en $y$ cuando $x$ aumenta en una unidad, manteniendo fijos todos los factores de $u$.
+- C. El valor esperado de $y$ cuando $x = 0$.
+- D. La varianza de $y$ explicada por $x$.
+
+**Respuesta: B.** $\beta_1$ es el cambio *ceteris paribus* en la media condicional de $y$. C describe el término constante $\beta_0$; A es la correlación (una magnitud distinta, sin unidades); D es el $R^2$.
+:::
+
+::: {.callout-tip collapse="true"}
+## P2. El supuesto de media condicional cero
+
+El supuesto $\mathbb{E}[u \mid x] = 0$ implica:
+
+- A. Que el error $u$ se distribuye normalmente.
+- B. Que $\operatorname{Var}(u \mid x)$ es constante en $x$.
+- C. Que $\mathbb{E}[u] = 0$ y $\operatorname{Cov}(x, u) = 0$.
+- D. Que $x$ se mide sin error.
+
+**Respuesta: C.** La media condicional cero implica a la vez una media incondicional de cero (por esperanzas iteradas) y covarianza cero entre $x$ y $u$. B es el supuesto aparte de homocedasticidad RLS.5; A y D no guardan relación.
+:::
+
+::: {.callout-tip collapse="true"}
+## P3. La fórmula de la pendiente MCO
+
+El estimador MCO de $\beta_1$ en la regresión simple $y = \beta_0 + \beta_1 x + u$ puede escribirse como:
+
+- A. $\hat\beta_1 = \bar y / \bar x$.
+- B. $\hat\beta_1 = \widehat{\operatorname{Var}}(y) / \widehat{\operatorname{Cov}}(x, y)$.
+- C. $\hat\beta_1 = \widehat{\operatorname{Cov}}(x, y) / \widehat{\operatorname{Var}}(x)$.
+- D. $\hat\beta_1 = \bar y - \hat\beta_0 \bar x$.
+
+**Respuesta: C.** La pendiente es la covarianza muestral de $x$ e $y$ sobre la varianza muestral de $x$. D es (una reordenación de) la fórmula del término constante; A y B no son estimadores MCO.
+:::
+
+::: {.callout-tip collapse="true"}
+## P4. Propiedades mecánicas de los residuos MCO
+
+¿Cuál de las siguientes **NO** es una propiedad algebraica de los residuos MCO $\hat u_i$?
+
+- A. $\sum_i \hat u_i = 0$.
+- B. $\sum_i x_i \hat u_i = 0$.
+- C. La recta MCO pasa por $(\bar x, \bar y)$.
+- D. Los $\hat u_i$ no están correlacionados con el error inobservable $u_i$.
+
+**Respuesta: D.** A, B y C se siguen directamente de las condiciones de primer orden y se cumplen en cada muestra. D es una afirmación sobre la perturbación poblacional $u_i$, que nunca es observable; no hay ninguna identidad algebraica que relacione $\hat u_i$ con $u_i$.
+:::
+
+::: {.callout-tip collapse="true"}
+## P5. Insesgadez frente a BLUE
+
+Bajo RLS.1--RLS.4 únicamente (sin homocedasticidad), MCO es:
+
+- A. Insesgado: $\mathbb{E}[\hat\beta_j] = \beta_j$.
+- B. El mejor estimador lineal insesgado (BLUE).
+- C. Consistente pero sesgado.
+- D. De distribución normal.
+
+**Respuesta: A.** La insesgadez solo necesita RLS.1--RLS.4. Añadir RLS.5 (homocedasticidad) es lo que eleva MCO a BLUE mediante el teorema de Gauss--Markov.
+:::
+
+::: {.callout-tip collapse="true"}
+## P6. Precisión de $\hat\beta_1$
+
+¿Cuál de las siguientes aumenta la precisión de $\hat\beta_1$ (menor varianza muestral)?
+
+- A. Una varianza del error $\sigma^2$ mayor.
+- B. Un tamaño muestral menor.
+- C. Menos variación en $x$.
+- D. Más variación en $x$ (mayor $\mathrm{SCT}_x$).
+
+**Respuesta: D.** La fórmula de la varianza es $\operatorname{Var}(\hat\beta_1 \mid \mathbf{x}) = \sigma^2 / \mathrm{SCT}_x$. Un $\mathrm{SCT}_x$ mayor reduce la varianza. A y B hacen lo contrario; C es una reformulación de "menos precisión".
+:::
+
+::: {.callout-tip collapse="true"}
+## P7. Lo que el $R^2$ dice y no dice
+
+Un $R^2$ bajo en una regresión lineal simple significa que:
+
+- A. MCO está sesgado.
+- B. $x$ no tiene efecto causal sobre $y$.
+- C. $x$ explica una parte pequeña de la variación de $y$, pero $\hat\beta_1$ puede seguir siendo insesgada y relevante para la política.
+- D. Se incumplen los supuestos de Gauss--Markov.
+
+**Respuesta: C.** El $R^2$ es una medida de ajuste, no de sesgo ni de causalidad. Un $R^2$ pequeño es plenamente compatible con una pendiente insesgada y económicamente relevante, como ilustran las prácticas de salario--atractivo y peso al nacer--tabaquismo.
+:::
 
 ## Ejercicios {.unnumbered}
 
-<!-- TODO -->
+**Ejercicio 2.1 ★ --- Leer una ecuación ajustada.** Una regresión sobre 1.000 trabajadores da la recta ajustada $\widehat{\text{Salario}} = 800 + 15 \times \text{Educación}$, donde el salario está en euros al mes y la educación en años.
+
+(a) Interpreta $\hat\beta_0$ y $\hat\beta_1$ con palabras.
+(b) ¿Cuál es el salario predicho de un trabajador con 12 años de escolarización?
+(c) Dos trabajadores difieren en 4 años de escolarización. ¿En cuánto difieren sus salarios predichos?
+(d) ¿Por qué deberías desconfiar de la predicción en `educ = 0`?
+
+::: {.callout-tip collapse="true"}
+## Mostrar respuesta
+
+(a) $\hat\beta_0 = 800$ es el salario predicho en `educ = 0` (800 €/mes). $\hat\beta_1 = 15$ es el aumento predicho del salario mensual por cada año más de escolarización.
+(b) $800 + 15 \times 12 = 980$ €/mes.
+(c) $4 \times 15 = 60$ €/mes.
+(d) Porque `educ = 0` está muy por debajo del valor más bajo de cualquier muestra realista de escolarización ---la predicción es una extrapolación y puede no ser fiable.
+:::
+
+**Ejercicio 2.2 ★ --- Álgebra de MCO, a mano.** Considera los datos de juguete $x = (1, 2, 3, 4, 5)$ e $y = (3, 4, 2, 5, 6)$.
+
+(a) Calcula $\bar x$ y $\bar y$.
+(b) Calcula $\hat\beta_1$ usando la fórmula de la §2.4.3.
+(c) Calcula $\hat\beta_0$.
+(d) Verifica tu respuesta en R con `coef(lm(y ~ x))`.
+
+::: {.callout-tip collapse="true"}
+## Mostrar respuesta
+
+(a) $\bar x = 3$, $\bar y = 4$.
+(b) Numerador: $\sum (x_i - \bar x)(y_i - \bar y) = (-2)(-1) + (-1)(0) + 0(-2) + 1(1) + 2(2) = 2 + 0 + 0 + 1 + 4 = 7$. Denominador: $\sum (x_i - \bar x)^2 = 4 + 1 + 0 + 1 + 4 = 10$. Así que $\hat\beta_1 = 7/10 = 0{,}7$.
+(c) $\hat\beta_0 = \bar y - \hat\beta_1 \bar x = 4 - 0{,}7 \times 3 = 1{,}9$.
+(d) En R: `coef(lm(c(3,4,2,5,6) ~ c(1,2,3,4,5)))` devuelve los mismos números.
+:::
+
+**Ejercicio 2.3 ★ --- Varianza de la pendiente MCO.** Indica, en una frase cada apartado, cómo cambia la varianza $\operatorname{Var}(\hat\beta_1)$ si:
+
+(a) el tamaño muestral $n$ se duplica (manteniendo fija la distribución de $x$);
+(b) la varianza del error $\sigma^2$ se duplica;
+(c) el regresor $x$ se reescala de minutos a horas (se divide por 60).
+
+::: {.callout-tip collapse="true"}
+## Mostrar respuesta
+
+(a) $\mathrm{SCT}_x$ se duplica aproximadamente, así que la varianza se reduce a la mitad, más o menos. (b) La varianza se duplica (es lineal en $\sigma^2$). (c) La varianza de la *pendiente sobre el regresor reescalado* aumenta en un factor de $60^2 = 3600$: escalar $x$ por $c$ multiplica $\hat\beta_1$ por $1/c$, así que su varianza se multiplica por $1/c^2$.
+:::
+
+**Ejercicio 2.4 ★★ --- Cambio de unidades.** Demuestra que si redefinimos el regresor como $x^* = c \cdot x$ (para alguna constante $c \neq 0$) sin cambiar $y$, los nuevos estimadores MCO son $\hat\beta_1^* = \hat\beta_1 / c$ y $\hat\beta_0^* = \hat\beta_0$. Verifica tu derivación empíricamente con `sleep75`: regresa `sleep` sobre `totwrk` (minutos por semana) y luego sobre `totwrk/60` (horas por semana), y confirma que el término constante no cambia mientras que la pendiente se reescala por $60$.
+
+*La solución completa se ofrece en la Edición para el profesorado.*
+
+**Ejercicio 2.5 ★★ --- Insesgadez por simulación.** Simula $1.000$ muestras de tamaño $n = 200$ del modelo $y = 1 + 2x + u$ con $x \sim N(0, 1)$ y $u \sim N(0, 1)$. Calcula $\hat\beta_1$ en cada muestra y demuestra que su media entre réplicas se acerca a 2, mientras que la desviación típica entre réplicas se acerca al valor teórico $\sigma / \sqrt{\mathrm{SCT}_x}$ para una extracción típica. Representa el histograma de $\hat\beta_1$.
+
+*La solución completa se ofrece en la Edición para el profesorado.*
+
+**Ejercicio 2.6 ★★★ --- Por qué eliminar el término constante sesga la pendiente.** Supón que el modelo verdadero es $y = \beta_0 + \beta_1 x + u$ con $\beta_0 \neq 0$ y $\mathbb{E}[u \mid x] = 0$, pero el investigador *impone* $\beta_0 = 0$ y ajusta la regresión por el origen $\tilde y_i = \tilde\beta_1 x_i$.
+
+(a) Deriva la expresión cerrada $\tilde\beta_1 = \sum_i x_i y_i / \sum_i x_i^2$ como minimizador de $\sum_i (y_i - \tilde\beta_1 x_i)^2$.
+(b) Demuestra que $\mathbb{E}[\tilde\beta_1] = \beta_1 + \beta_0 \cdot \mathbb{E}[x] / \mathbb{E}[x^2]$, de modo que $\tilde\beta_1$ está sesgado siempre que $\beta_0 \neq 0$ y $\mathbb{E}[x] \neq 0$.
+(c) ¿Bajo qué condición concreta sobre la población es, no obstante, insesgada la pendiente sin término constante?
+
+*La solución completa se ofrece en la Edición para el profesorado.*
