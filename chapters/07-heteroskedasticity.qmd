@@ -229,7 +229,23 @@ The original tutorial uses a relative path (`read_excel("het_data.xlsx")`) after
 het_path <- file.path(
   "..", "..", "..", "Practicas", "2025", "Tutorial 8", "het_data.xlsx"
 )
-het_data <- read_excel(het_path)
+
+# The original Tutorial-8 file is not distributed with this book. To keep the
+# chapter reproducible (the same approach Ch. 8 takes for its lab), we fall back
+# to a synthetic cross-section with the same structure when the file is absent:
+# household income and consumption whose error variance grows with income, i.e.
+# Var(u | income) is proportional to income --- exactly the structure the WLS
+# weights 1/income below are designed to correct. Drop the real het_data.xlsx at
+# the path above and it will be used instead.
+if (file.exists(het_path)) {
+  het_data <- read_excel(het_path)
+} else {
+  set.seed(2026)
+  n_h         <- 120
+  income      <- round(runif(n_h, 1000, 6000))
+  consumption <- 300 + 0.6 * income + rnorm(n_h, 0, 8 * sqrt(income))
+  het_data    <- data.frame(income = income, consumption = consumption)
+}
 
 # Construct a tercile-of-income indicator for the Goldfeld-Quandt split:
 # group == 1 = low-income third, 2 = middle third, 3 = high-income third.

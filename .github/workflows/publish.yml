@@ -1,0 +1,71 @@
+name: Publish book
+
+# Renders the book (HTML) on GitHub-hosted runners, which have unrestricted
+# internet, so Quarto, CRAN, and the GitHub CRAN mirrors are all reachable.
+# On pull requests it renders only, to validate the build; on pushes to main
+# (and manual runs) it also deploys the rendered site to the gh-pages branch.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Needed so the built-in GITHUB_TOKEN can push the rendered site to gh-pages.
+permissions:
+  contents: write
+
+concurrency:
+  group: quarto-publish-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R package dependencies
+        shell: Rscript {0}
+        run: |
+          # setup-r (use-public-rspm) configures the RSPM binary repo, so these
+          # install as prebuilt binaries. Plain install.packages() installs hard
+          # dependencies only (no Suggests) and avoids pak's all-or-nothing solve.
+          pkgs <- c("knitr", "rmarkdown", "wooldridge", "lmtest", "sandwich", "readxl")
+          install.packages(pkgs)
+          # orcutt (used in Ch. 8) has been archived on CRAN, so it is not in the
+          # current CRAN/RSPM index. Install it from its read-only CRAN mirror over
+          # the git transport (the GitHub API is rate-limited on shared runners).
+          if (!requireNamespace("orcutt", quietly = TRUE)) {
+            dest <- file.path(tempdir(), "orcutt-src")
+            if (system2("git", c("clone", "--depth", "1",
+                                 "https://github.com/cran/orcutt.git", dest)) != 0L)
+              stop("Failed to clone orcutt from its CRAN mirror")
+            if (system2(file.path(R.home("bin"), "R"), c("CMD", "INSTALL", dest)) != 0L)
+              stop("Failed to install orcutt")
+          }
+          missing <- Filter(function(p) !requireNamespace(p, quietly = TRUE),
+                            c(pkgs, "orcutt"))
+          if (length(missing)) stop("Failed to install: ", paste(missing, collapse = ", "))
+
+      - name: Render book (HTML)
+        run: quarto render --to html
+
+      # Deploy the rendered HTML site to gh-pages on push to main / manual run.
+      - name: Publish to GitHub Pages
+        if: github.event_name != 'pull_request'
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+          render: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
