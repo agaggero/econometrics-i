@@ -1,0 +1,53 @@
+
+# Prefacio {.unnumbered}
+
+> *Econometría I — Teoría, práctica y aplicaciones* es el libro de texto abierto que acompaña a la asignatura de Econometría I de la Universidad de Granada (UGR), Facultad de Ciencias Económicas y Empresariales. Es la edición española de *Econometrics I*.
+
+::: {.callout-note}
+## Edición en preparación
+Esta edición española se está construyendo a partir de la edición inglesa. Los capítulos que siguen son esqueletos con la estructura definitiva; el contenido se irá traduciendo progresivamente.
+:::
+
+## Qué es este libro
+
+Un texto unificado de segundo curso de grado que lleva al lector desde la *idea* de un modelo econométrico hasta las destrezas prácticas de estimación, inferencia y diagnóstico necesarias para analizar datos económicos reales. Cada capítulo sigue la misma plantilla de seis secciones:
+
+1. **Resultados de aprendizaje**
+2. **Pregunta empírica motivadora**
+3. **Teoría**
+4. **Ejemplo resuelto en R**
+5. **Autoevaluación** (cuestionario interactivo)
+6. **Ejercicios** (★ fácil, ★★ medio, ★★★ analítico)
+
+## Cómo está organizado
+
+| Capítulo | Tema |
+|---|---|
+| 1 | Conceptos iniciales |
+| 2 | El modelo de regresión lineal simple |
+| 3 | El modelo de regresión lineal múltiple |
+| 4 | Inferencia |
+| 5 | Predicción y selección de modelos |
+| 6 | Relaciones no lineales e información cualitativa |
+| 7 | Heterocedasticidad |
+| 8 | Autocorrelación |
+| Ap. A | Prerrequisitos matemáticos y estadísticos |
+| Ap. B | Correspondencia Wooldridge ↔ Carter–Griffiths–Lim |
+| Ap. C | Tablas estadísticas |
+
+## Ediciones y licencia
+
+Este libro se publica bajo una licencia **Creative Commons Reconocimiento 4.0 Internacional (CC BY 4.0)**. La edición inglesa equivalente está disponible como *Econometrics I — Theory, Practice, and Applications*.
+
+## Cómo reconstruir el libro
+
+El libro se construye con [Quarto](https://quarto.org). Desde la raíz del repositorio:
+
+```bash
+quarto render es               # edición española (este sub-proyecto)
+quarto render                  # edición inglesa (por defecto)
+```
+
+## Agradecimientos
+
+Departamento de Métodos Cuantitativos para la Economía y la Empresa de la UGR; y el alumnado de tres cursos consecutivos (2023/24, 2024/25, 2025/26).

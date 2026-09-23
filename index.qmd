@@ -40,7 +40,7 @@ The textbook is built with [Quarto](https://quarto.org). Each chapter is a `.qmd
 
 ```bash
 quarto render                  # English edition (default)
-quarto render --profile es     # Spanish edition
+quarto render es               # Spanish edition
 ```
 
 ## Required R packages

@@ -1,0 +1,47 @@
+# Spanish edition — self-contained Quarto book sub-project.
+# Build from the repository root with:  quarto render es
+# Kept separate from the root (English) project so the two builds never clash.
+# theme.scss and references.bib are shared with the English edition (../).
+
+project:
+  type: book
+  output-dir: _book
+
+lang: es
+
+book:
+  title: "Econometría I"
+  subtitle: "Teoría, práctica y aplicaciones"
+  author: "Alessio Gaggero"
+  date: today
+  description: |
+    Edición española del libro de texto abierto de Econometría I de la
+    Universidad de Granada. En preparación.
+  chapters:
+    - index.qmd
+    - chapters/01-conceptos-iniciales.qmd
+    - chapters/02-regresion-simple.qmd
+    - chapters/03-regresion-multiple.qmd
+    - chapters/04-inferencia.qmd
+    - chapters/05-prediccion.qmd
+    - chapters/06-no-lineal-cualitativa.qmd
+    - chapters/07-heterocedasticidad.qmd
+    - chapters/08-autocorrelacion.qmd
+  appendices:
+    - chapters/apendice-a-prerequisitos.qmd
+    - chapters/apendice-b-crosswalk.qmd
+    - chapters/apendice-c-tablas.qmd
+
+format:
+  html:
+    theme:
+      light: [cosmo, ../theme.scss]
+      dark: [darkly, ../theme.scss]
+    number-sections: true
+    toc: true
+    toc-depth: 3
+    fig-align: center
+
+bibliography: ../references.bib
+
+license: "CC BY 4.0"
