@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -96,14 +99,14 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-acff971833d9769290026d534105daaa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-57209c1f8584c0f524a94fbb0f5cdd20.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-bf48f7fa51dc410e2f1ec2d8eca84458.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-57209c1f8584c0f524a94fbb0f5cdd20.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -133,7 +136,7 @@ div.csl-indent {
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -474,7 +477,7 @@ window.Quarto = {
   <li><a href="#the-gaussmarkov-theorem" id="toc-the-gaussmarkov-theorem" class="nav-link" data-scroll-target="#the-gaussmarkov-theorem"><span class="header-section-number">2.8</span> The Gauss–Markov theorem</a></li>
   <li><a href="#estimation-of-sigma2" id="toc-estimation-of-sigma2" class="nav-link" data-scroll-target="#estimation-of-sigma2"><span class="header-section-number">2.9</span> Estimation of <span class="math inline">\(\sigma^2\)</span></a></li>
   <li><a href="#goodness-of-fit-r2" id="toc-goodness-of-fit-r2" class="nav-link" data-scroll-target="#goodness-of-fit-r2"><span class="header-section-number">2.10</span> Goodness of fit: <span class="math inline">\(R^2\)</span></a></li>
-  <li><a href="#lab-simple-linear-regression" id="toc-lab-simple-linear-regression" class="nav-link" data-scroll-target="#lab-simple-linear-regression"><span class="header-section-number">2.11</span> Lab: simple linear regression</a>
+  <li><a href="#lab-simple-linear-regression-in-r" id="toc-lab-simple-linear-regression-in-r" class="nav-link" data-scroll-target="#lab-simple-linear-regression-in-r"><span class="header-section-number">2.11</span> Lab: simple linear regression in R</a>
   <ul class="collapse">
   <li><a href="#lab-a-wages-and-physical-appearance-beauty" id="toc-lab-a-wages-and-physical-appearance-beauty" class="nav-link" data-scroll-target="#lab-a-wages-and-physical-appearance-beauty"><span class="header-section-number">2.11.1</span> Lab A — Wages and physical appearance (<code>beauty</code>)</a></li>
   <li><a href="#lab-b-birth-weight-and-smoking-bwght" id="toc-lab-b-birth-weight-and-smoking-bwght" class="nav-link" data-scroll-target="#lab-b-birth-weight-and-smoking-bwght"><span class="header-section-number">2.11.2</span> Lab B — Birth weight and smoking (<code>bwght</code>)</a></li>
@@ -529,7 +532,7 @@ window.Quarto = {
 </section>
 <section id="introduction" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">2.1</span> Introduction</h2>
-<p> analysis investigates the relationship between two or more variables. In this chapter we focus on the <strong>simple linear regression</strong> model (SLR), which relates a dependent variable <span class="math inline">\(y\)</span> to a single independent variable <span class="math inline">\(x\)</span>:</p>
+<p><span class="dropcap">R</span>egression analysis investigates the relationship between two or more variables. In this chapter we focus on the <strong>simple linear regression</strong> model (SLR), which relates a dependent variable <span class="math inline">\(y\)</span> to a single independent variable <span class="math inline">\(x\)</span>:</p>
 <p><span class="math display">\[
 y = \beta_0 + \beta_1 x + u.
 \]</span></p>
@@ -917,8 +920,8 @@ R^2 = \frac{\mathrm{SSE}}{\mathrm{SST}} = 1 - \frac{\mathrm{SSR}}{\mathrm{SST}}.
 </div>
 </div>
 </section>
-<section id="lab-simple-linear-regression" class="level2" data-number="2.11">
-<h2 data-number="2.11" class="anchored" data-anchor-id="lab-simple-linear-regression"><span class="header-section-number">2.11</span> Lab: simple linear regression</h2>
+<section id="lab-simple-linear-regression-in-r" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="lab-simple-linear-regression-in-r"><span class="header-section-number">2.11</span> Lab: simple linear regression in R</h2>
 <p>In this lab we estimate two simple regressions using the <strong>wooldridge</strong> package: the wage–looks regression from §2.4 (“Lab A”) and the birth-weight–smoking regression (“Lab B”). Both are short cross-sections, both have small <span class="math inline">\(R^2\)</span>, and both illustrate the warning above.</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
@@ -1019,28 +1022,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Residual standard error: 4.655 on 1258 degrees of freedom
 Multiple R-squared:  0.003027,  Adjusted R-squared:  0.002235 
 F-statistic:  3.82 on 1 and 1258 DF,  p-value: 0.05088</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Reading the <code>summary()</code> output, column by column
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Every column of R’s <code>lm()</code> summary maps to a quantity we have already named in this chapter (or will name in Chapter 4). Use this once as a Rosetta stone — the columns recur in every regression <code>summary()</code> you will ever read.</p>
-<ul>
-<li><code>Estimate</code> → the OLS coefficient <span class="math inline">\(\hat\beta_j\)</span> (intercept <span class="math inline">\(\hat\beta_0\)</span> in the first row, slope <span class="math inline">\(\hat\beta_1\)</span> in the second), defined in §2.4.3.</li>
-<li><code>Std. Error</code> → the standard error <span class="math inline">\(\operatorname{se}(\hat\beta_j) = \hat\sigma / \sqrt{\mathrm{SST}_x}\)</span> from §2.9.</li>
-<li><code>t value</code> → the ratio <span class="math inline">\(\hat\beta_j / \operatorname{se}(\hat\beta_j)\)</span>. We treat it formally in Chapter 4 §4.3; for now, read it as “how many standard errors is the estimate away from zero.”</li>
-<li><code>Pr(&gt;|t|)</code> → the two-sided <span class="math inline">\(p\)</span>-value for <span class="math inline">\(H_0: \beta_j = 0\)</span>. We treat it formally in Chapter 4 §4.7.</li>
-<li><code>Residual standard error</code> → <span class="math inline">\(\hat\sigma\)</span> from §2.9, i.e.&nbsp;the square root of <span class="math inline">\(\hat\sigma^2 = \mathrm{SSR}/(n - 2)\)</span>.</li>
-<li><code>Multiple R-squared</code> → the <span class="math inline">\(R^2\)</span> from §2.10 — the fraction of the variation in <code>wage</code> explained by <code>looks</code>.</li>
-<li>The bottom-line <code>F-statistic</code> tests <span class="math inline">\(H_0: \beta_1 = 0\)</span> in this single-regressor setting; in Chapter 4 we generalise it to joint hypotheses on several coefficients.</li>
-</ul>
 </div>
 </div>
 <p>Reading the output:</p>
@@ -1222,7 +1203,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 <h2 class="unnumbered anchored" data-anchor-id="self-check">Self-check</h2>
 <p>Seven short multiple-choice questions. Try each one before opening the answer.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1231,7 +1212,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>In the simple regression model <span class="math inline">\(y = \beta_0 + \beta_1 x + u\)</span>, the slope <span class="math inline">\(\beta_1\)</span> measures:</p>
 <ul>
@@ -1245,7 +1226,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1254,7 +1235,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The assumption <span class="math inline">\(\mathbb{E}[u \mid x] = 0\)</span> implies:</p>
 <ul>
@@ -1268,7 +1249,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1277,7 +1258,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The OLS estimator of <span class="math inline">\(\beta_1\)</span> in the simple regression <span class="math inline">\(y = \beta_0 + \beta_1 x + u\)</span> can be written as:</p>
 <ul>
@@ -1291,7 +1272,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1300,7 +1281,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Which of the following is <strong>NOT</strong> an algebraic property of OLS residuals <span class="math inline">\(\hat u_i\)</span>?</p>
 <ul>
@@ -1314,7 +1295,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1323,7 +1304,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Under SLR.1–SLR.4 only (no homoskedasticity), OLS is:</p>
 <ul>
@@ -1337,7 +1318,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1346,7 +1327,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Which of the following increases the precision of <span class="math inline">\(\hat\beta_1\)</span> (smaller sampling variance)?</p>
 <ul>
@@ -1360,7 +1341,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1369,7 +1350,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A low <span class="math inline">\(R^2\)</span> in a simple linear regression means:</p>
 <ul>
@@ -1385,7 +1366,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </section>
 <section id="exercises" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
-<p><strong>Exercise 2.1 ★ — Reading a fitted equation.</strong> A regression on 1{,}000 workers gives the fitted line <span class="math inline">\(\widehat{\text{Wage}} = 800 + 15 \times \text{Education}\)</span>, where wage is in euros per month and education is in years.</p>
+<p><strong>Exercise 2.1 ★ — Reading a fitted equation.</strong> A regression on 1,000 workers gives the fitted line <span class="math inline">\(\widehat{\text{Wage}} = 800 + 15 \times \text{Education}\)</span>, where wage is in euros per month and education is in years.</p>
 <ol type="a">
 <li>Interpret <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span> in words.</li>
 <li>What is the predicted wage of a worker with 12 years of schooling?</li>
@@ -1393,7 +1374,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 <li>Why should you be wary of the prediction at <code>educ = 0</code>?</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1402,7 +1383,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li><span class="math inline">\(\hat\beta_0 = 800\)</span> is the predicted wage at <code>educ = 0</code> (800 €/month). <span class="math inline">\(\hat\beta_1 = 15\)</span> is the predicted increase in monthly wage per extra year of schooling.</li>
@@ -1421,7 +1402,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 <li>Verify your answer in R against <code>coef(lm(y ~ x))</code>.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1430,7 +1411,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li><span class="math inline">\(\bar x = 3\)</span>, <span class="math inline">\(\bar y = 4\)</span>.</li>
@@ -1448,7 +1429,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 <li>the regressor <span class="math inline">\(x\)</span> is rescaled from minutes to hours (divided by 60).</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1457,7 +1438,7 @@ F-statistic: 32.24 on 1 and 1386 DF,  p-value: 1.662e-08</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li><span class="math inline">\(\mathrm{SST}_x\)</span> roughly doubles, so the variance is approximately halved. (b) The variance doubles (it is linear in <span class="math inline">\(\sigma^2\)</span>). (c) The variance of the <em>slope on the rescaled regressor</em> increases by a factor of <span class="math inline">\(60^2 = 3600\)</span>: scaling <span class="math inline">\(x\)</span> by <span class="math inline">\(c\)</span> multiplies <span class="math inline">\(\hat\beta_1\)</span> by <span class="math inline">\(1/c\)</span>, so its variance is multiplied by <span class="math inline">\(1/c^2\)</span>.</li>
@@ -1593,16 +1574,16 @@ Wooldridge, Jeffrey M. 2020. <em>Introductory Econometrics: A Modern Approach</e
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
@@ -1989,7 +1970,7 @@ Wooldridge, Jeffrey M. 2020. <em>Introductory Econometrics: A Modern Approach</e
 <span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
 <span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a><span class="in">`\lettrine[lines=3]{R}{egression}`</span>{=latex} analysis investigates the relationship between two or more variables. In this chapter we focus on the **simple linear regression** model (SLR), which relates a dependent variable $y$ to a single independent variable $x$:</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a><span class="in">`\lettrine[lines=3]{R}{egression}`</span>{=latex}<span class="in">`&lt;span class="dropcap"&gt;R&lt;/span&gt;egression`</span>{=html} analysis investigates the relationship between two or more variables. In this chapter we focus on the **simple linear regression** model (SLR), which relates a dependent variable $y$ to a single independent variable $x$:</span>
 <span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>y = \beta_0 + \beta_1 x + u.</span>
@@ -2342,7 +2323,7 @@ Wooldridge, Jeffrey M. 2020. <em>Introductory Econometrics: A Modern Approach</e
 <span id="cb33-376"><a href="#cb33-376" aria-hidden="true" tabindex="-1"></a>In labour, health, and education economics, $R^2$ values of 5--15 % are completely normal: individual outcomes depend on many things we never measure. A small $R^2$ does *not* by itself invalidate the slope estimate --- $\hat\beta_1$ can still be unbiased, statistically significant, and policy-relevant. Conversely, a high $R^2$ does *not* validate a model in which SLR.4 fails: $\hat\beta_1$ can be precisely estimated and badly biased.</span>
 <span id="cb33-377"><a href="#cb33-377" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb33-378"><a href="#cb33-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-379"><a href="#cb33-379" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lab: simple linear regression</span></span>
+<span id="cb33-379"><a href="#cb33-379" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lab: simple linear regression in R</span></span>
 <span id="cb33-380"><a href="#cb33-380" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-381"><a href="#cb33-381" aria-hidden="true" tabindex="-1"></a>In this lab we estimate two simple regressions using the **wooldridge** package: the wage--looks regression from §2.4 ("Lab A") and the birth-weight--smoking regression ("Lab B"). Both are short cross-sections, both have small $R^2$, and both illustrate the warning above.</span>
 <span id="cb33-382"><a href="#cb33-382" aria-hidden="true" tabindex="-1"></a></span>
@@ -2395,266 +2376,252 @@ Wooldridge, Jeffrey M. 2020. <em>Introductory Econometrics: A Modern Approach</e
 <span id="cb33-429"><a href="#cb33-429" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_beauty)</span>
 <span id="cb33-430"><a href="#cb33-430" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb33-431"><a href="#cb33-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-432"><a href="#cb33-432" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb33-433"><a href="#cb33-433" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reading the `summary()` output, column by column</span></span>
-<span id="cb33-434"><a href="#cb33-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-435"><a href="#cb33-435" aria-hidden="true" tabindex="-1"></a>Every column of R's <span class="in">`lm()`</span> summary maps to a quantity we have already named in this chapter (or will name in Chapter 4). Use this once as a Rosetta stone --- the columns recur in every regression <span class="in">`summary()`</span> you will ever read.</span>
-<span id="cb33-436"><a href="#cb33-436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-437"><a href="#cb33-437" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Estimate`</span> → the OLS coefficient $\hat\beta_j$ (intercept $\hat\beta_0$ in the first row, slope $\hat\beta_1$ in the second), defined in §2.4.3.</span>
-<span id="cb33-438"><a href="#cb33-438" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Std. Error`</span> → the standard error $\operatorname{se}(\hat\beta_j) = \hat\sigma / \sqrt{\mathrm{SST}_x}$ from §2.9.</span>
-<span id="cb33-439"><a href="#cb33-439" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`t value`</span> → the ratio $\hat\beta_j / \operatorname{se}(\hat\beta_j)$. We treat it formally in Chapter 4 §4.3; for now, read it as "how many standard errors is the estimate away from zero."</span>
-<span id="cb33-440"><a href="#cb33-440" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Pr(&gt;|t|)`</span> → the two-sided $p$-value for $H_0: \beta_j = 0$. We treat it formally in Chapter 4 §4.7.</span>
-<span id="cb33-441"><a href="#cb33-441" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Residual standard error`</span> → $\hat\sigma$ from §2.9, i.e. the square root of $\hat\sigma^2 = \mathrm{SSR}/(n - 2)$.</span>
-<span id="cb33-442"><a href="#cb33-442" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Multiple R-squared`</span> → the $R^2$ from §2.10 --- the fraction of the variation in <span class="in">`wage`</span> explained by <span class="in">`looks`</span>.</span>
-<span id="cb33-443"><a href="#cb33-443" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The bottom-line <span class="in">`F-statistic`</span> tests $H_0: \beta_1 = 0$ in this single-regressor setting; in Chapter 4 we generalise it to joint hypotheses on several coefficients.</span>
-<span id="cb33-444"><a href="#cb33-444" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-445"><a href="#cb33-445" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-446"><a href="#cb33-446" aria-hidden="true" tabindex="-1"></a>Reading the output:</span>
-<span id="cb33-447"><a href="#cb33-447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-448"><a href="#cb33-448" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The estimated intercept $\hat\beta_0$ is the predicted wage for a worker with <span class="in">`looks = 0`</span> --- a value outside the range of the data, so the intercept has no direct economic interpretation here.</span>
-<span id="cb33-449"><a href="#cb33-449" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The estimated slope $\hat\beta_1$ on <span class="in">`looks`</span> is the change in predicted hourly wage for a one-point increase in the looks rating. A worker rated 4 ("above average") is predicted to earn about $\hat\beta_1$ dollars per hour more than a worker rated 3 ("average"), on average.</span>
-<span id="cb33-450"><a href="#cb33-450" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The standard error of $\hat\beta_1$, the $t$-statistic and the $p$-value tell us whether the slope is statistically distinguishable from zero. We treat these formally in Chapter 4; for now, note that the slope is significantly different from zero at conventional levels.</span>
-<span id="cb33-451"><a href="#cb33-451" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **Residual standard error** at the bottom of <span class="in">`summary()`</span> is $\hat\sigma$ from §2.9.</span>
-<span id="cb33-452"><a href="#cb33-452" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **Multiple R-squared** is the $R^2$ from §2.10. It is small (1--2 %): looks alone explains only a tiny share of the variation in wages. That does not invalidate the slope --- it simply reminds us that wages depend on far more than looks (education, experience, occupation, …), most of which we will add as controls in Chapter 3.</span>
+<span id="cb33-432"><a href="#cb33-432" aria-hidden="true" tabindex="-1"></a>Reading the output:</span>
+<span id="cb33-433"><a href="#cb33-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-434"><a href="#cb33-434" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The estimated intercept $\hat\beta_0$ is the predicted wage for a worker with <span class="in">`looks = 0`</span> --- a value outside the range of the data, so the intercept has no direct economic interpretation here.</span>
+<span id="cb33-435"><a href="#cb33-435" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The estimated slope $\hat\beta_1$ on <span class="in">`looks`</span> is the change in predicted hourly wage for a one-point increase in the looks rating. A worker rated 4 ("above average") is predicted to earn about $\hat\beta_1$ dollars per hour more than a worker rated 3 ("average"), on average.</span>
+<span id="cb33-436"><a href="#cb33-436" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The standard error of $\hat\beta_1$, the $t$-statistic and the $p$-value tell us whether the slope is statistically distinguishable from zero. We treat these formally in Chapter 4; for now, note that the slope is significantly different from zero at conventional levels.</span>
+<span id="cb33-437"><a href="#cb33-437" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **Residual standard error** at the bottom of <span class="in">`summary()`</span> is $\hat\sigma$ from §2.9.</span>
+<span id="cb33-438"><a href="#cb33-438" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **Multiple R-squared** is the $R^2$ from §2.10. It is small (1--2 %): looks alone explains only a tiny share of the variation in wages. That does not invalidate the slope --- it simply reminds us that wages depend on far more than looks (education, experience, occupation, …), most of which we will add as controls in Chapter 3.</span>
+<span id="cb33-439"><a href="#cb33-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-440"><a href="#cb33-440" aria-hidden="true" tabindex="-1"></a>To finish, overlay the OLS line on the scatter:</span>
+<span id="cb33-441"><a href="#cb33-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-442"><a href="#cb33-442" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch02-beauty-fitline}</span></span>
+<span id="cb33-443"><a href="#cb33-443" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "OLS line and conditional means for the wage--looks regression."</span></span>
+<span id="cb33-444"><a href="#cb33-444" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(beauty<span class="sc">$</span>looks, beauty<span class="sc">$</span>wage,</span>
+<span id="cb33-445"><a href="#cb33-445" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Looks rating"</span>, <span class="at">ylab =</span> <span class="st">"Hourly wage (USD)"</span>,</span>
+<span id="cb33-446"><a href="#cb33-446" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Wage vs. looks with OLS line"</span>,</span>
+<span id="cb33-447"><a href="#cb33-447" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.15</span>))</span>
+<span id="cb33-448"><a href="#cb33-448" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit_beauty, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb33-449"><a href="#cb33-449" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">as.numeric</span>(<span class="fu">names</span>(cm)), cm, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">cex =</span> <span class="fl">1.6</span>)</span>
+<span id="cb33-450"><a href="#cb33-450" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-451"><a href="#cb33-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-452"><a href="#cb33-452" aria-hidden="true" tabindex="-1"></a>The red OLS line approximates the trend in the blue conditional means but does not interpolate them exactly --- a linear model is an approximation.</span>
 <span id="cb33-453"><a href="#cb33-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-454"><a href="#cb33-454" aria-hidden="true" tabindex="-1"></a>To finish, overlay the OLS line on the scatter:</span>
+<span id="cb33-454"><a href="#cb33-454" aria-hidden="true" tabindex="-1"></a>A useful sanity check is to verify the decomposition $\mathrm{SST} = \mathrm{SSE} + \mathrm{SSR}$ and the identity $R^2 = 1 - \mathrm{SSR}/\mathrm{SST}$ from §2.10:</span>
 <span id="cb33-455"><a href="#cb33-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-456"><a href="#cb33-456" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch02-beauty-fitline}</span></span>
-<span id="cb33-457"><a href="#cb33-457" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "OLS line and conditional means for the wage--looks regression."</span></span>
-<span id="cb33-458"><a href="#cb33-458" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(beauty<span class="sc">$</span>looks, beauty<span class="sc">$</span>wage,</span>
-<span id="cb33-459"><a href="#cb33-459" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Looks rating"</span>, <span class="at">ylab =</span> <span class="st">"Hourly wage (USD)"</span>,</span>
-<span id="cb33-460"><a href="#cb33-460" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Wage vs. looks with OLS line"</span>,</span>
-<span id="cb33-461"><a href="#cb33-461" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.15</span>))</span>
-<span id="cb33-462"><a href="#cb33-462" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit_beauty, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb33-463"><a href="#cb33-463" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">as.numeric</span>(<span class="fu">names</span>(cm)), cm, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">cex =</span> <span class="fl">1.6</span>)</span>
-<span id="cb33-464"><a href="#cb33-464" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-465"><a href="#cb33-465" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-466"><a href="#cb33-466" aria-hidden="true" tabindex="-1"></a>The red OLS line approximates the trend in the blue conditional means but does not interpolate them exactly --- a linear model is an approximation.</span>
-<span id="cb33-467"><a href="#cb33-467" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-468"><a href="#cb33-468" aria-hidden="true" tabindex="-1"></a>A useful sanity check is to verify the decomposition $\mathrm{SST} = \mathrm{SSE} + \mathrm{SSR}$ and the identity $R^2 = 1 - \mathrm{SSR}/\mathrm{SST}$ from §2.10:</span>
-<span id="cb33-469"><a href="#cb33-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-470"><a href="#cb33-470" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch02-beauty-r2}</span></span>
-<span id="cb33-471"><a href="#cb33-471" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> <span class="fu">fitted</span>(fit_beauty)</span>
-<span id="cb33-472"><a href="#cb33-472" aria-hidden="true" tabindex="-1"></a>uhat <span class="ot">&lt;-</span> <span class="fu">resid</span>(fit_beauty)</span>
-<span id="cb33-473"><a href="#cb33-473" aria-hidden="true" tabindex="-1"></a>y    <span class="ot">&lt;-</span> beauty<span class="sc">$</span>wage</span>
-<span id="cb33-474"><a href="#cb33-474" aria-hidden="true" tabindex="-1"></a>SST  <span class="ot">&lt;-</span> <span class="fu">sum</span>((y <span class="sc">-</span> <span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb33-475"><a href="#cb33-475" aria-hidden="true" tabindex="-1"></a>SSE  <span class="ot">&lt;-</span> <span class="fu">sum</span>((yhat <span class="sc">-</span> <span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb33-476"><a href="#cb33-476" aria-hidden="true" tabindex="-1"></a>SSR  <span class="ot">&lt;-</span> <span class="fu">sum</span>(uhat<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb33-477"><a href="#cb33-477" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">SST =</span> SST, <span class="at">SSE_plus_SSR =</span> SSE <span class="sc">+</span> SSR)</span>
-<span id="cb33-478"><a href="#cb33-478" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">R2_manual =</span> <span class="dv">1</span> <span class="sc">-</span> SSR <span class="sc">/</span> SST, <span class="at">R2_lm =</span> <span class="fu">summary</span>(fit_beauty)<span class="sc">$</span>r.squared)</span>
-<span id="cb33-479"><a href="#cb33-479" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-456"><a href="#cb33-456" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch02-beauty-r2}</span></span>
+<span id="cb33-457"><a href="#cb33-457" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> <span class="fu">fitted</span>(fit_beauty)</span>
+<span id="cb33-458"><a href="#cb33-458" aria-hidden="true" tabindex="-1"></a>uhat <span class="ot">&lt;-</span> <span class="fu">resid</span>(fit_beauty)</span>
+<span id="cb33-459"><a href="#cb33-459" aria-hidden="true" tabindex="-1"></a>y    <span class="ot">&lt;-</span> beauty<span class="sc">$</span>wage</span>
+<span id="cb33-460"><a href="#cb33-460" aria-hidden="true" tabindex="-1"></a>SST  <span class="ot">&lt;-</span> <span class="fu">sum</span>((y <span class="sc">-</span> <span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb33-461"><a href="#cb33-461" aria-hidden="true" tabindex="-1"></a>SSE  <span class="ot">&lt;-</span> <span class="fu">sum</span>((yhat <span class="sc">-</span> <span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb33-462"><a href="#cb33-462" aria-hidden="true" tabindex="-1"></a>SSR  <span class="ot">&lt;-</span> <span class="fu">sum</span>(uhat<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb33-463"><a href="#cb33-463" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">SST =</span> SST, <span class="at">SSE_plus_SSR =</span> SSE <span class="sc">+</span> SSR)</span>
+<span id="cb33-464"><a href="#cb33-464" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">R2_manual =</span> <span class="dv">1</span> <span class="sc">-</span> SSR <span class="sc">/</span> SST, <span class="at">R2_lm =</span> <span class="fu">summary</span>(fit_beauty)<span class="sc">$</span>r.squared)</span>
+<span id="cb33-465"><a href="#cb33-465" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-466"><a href="#cb33-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-467"><a href="#cb33-467" aria-hidden="true" tabindex="-1"></a>The two pairs of numbers match (up to numerical rounding), as the theory predicts.</span>
+<span id="cb33-468"><a href="#cb33-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-469"><a href="#cb33-469" aria-hidden="true" tabindex="-1"></a><span class="fu">### Lab B --- Birth weight and smoking (`bwght`)</span></span>
+<span id="cb33-470"><a href="#cb33-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-471"><a href="#cb33-471" aria-hidden="true" tabindex="-1"></a>The <span class="in">`bwght`</span> dataset records the birth weight (in ounces) and average daily cigarette consumption of the mother during pregnancy, among other variables, for a sample of U.S. births. Maternal smoking is one of the most studied determinants of birth weight, with clear medical plausibility for a *negative* effect.</span>
+<span id="cb33-472"><a href="#cb33-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-473"><a href="#cb33-473" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch02-bwght-summary}</span></span>
+<span id="cb33-474"><a href="#cb33-474" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bwght<span class="sc">$</span>bwght)</span>
+<span id="cb33-475"><a href="#cb33-475" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bwght<span class="sc">$</span>cigs)</span>
+<span id="cb33-476"><a href="#cb33-476" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(bwght<span class="sc">$</span>cigs)</span>
+<span id="cb33-477"><a href="#cb33-477" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-478"><a href="#cb33-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-479"><a href="#cb33-479" aria-hidden="true" tabindex="-1"></a>Most mothers in the sample do not smoke (the median of <span class="in">`cigs`</span> is zero). Among those who do, daily consumption can be as high as 50 cigarettes. The histogram makes the heavy right tail obvious:</span>
 <span id="cb33-480"><a href="#cb33-480" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-481"><a href="#cb33-481" aria-hidden="true" tabindex="-1"></a>The two pairs of numbers match (up to numerical rounding), as the theory predicts.</span>
-<span id="cb33-482"><a href="#cb33-482" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-483"><a href="#cb33-483" aria-hidden="true" tabindex="-1"></a><span class="fu">### Lab B --- Birth weight and smoking (`bwght`)</span></span>
-<span id="cb33-484"><a href="#cb33-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-485"><a href="#cb33-485" aria-hidden="true" tabindex="-1"></a>The <span class="in">`bwght`</span> dataset records the birth weight (in ounces) and average daily cigarette consumption of the mother during pregnancy, among other variables, for a sample of U.S. births. Maternal smoking is one of the most studied determinants of birth weight, with clear medical plausibility for a *negative* effect.</span>
-<span id="cb33-486"><a href="#cb33-486" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-487"><a href="#cb33-487" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch02-bwght-summary}</span></span>
-<span id="cb33-488"><a href="#cb33-488" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bwght<span class="sc">$</span>bwght)</span>
-<span id="cb33-489"><a href="#cb33-489" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bwght<span class="sc">$</span>cigs)</span>
-<span id="cb33-490"><a href="#cb33-490" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(bwght<span class="sc">$</span>cigs)</span>
-<span id="cb33-491"><a href="#cb33-491" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-492"><a href="#cb33-492" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-493"><a href="#cb33-493" aria-hidden="true" tabindex="-1"></a>Most mothers in the sample do not smoke (the median of <span class="in">`cigs`</span> is zero). Among those who do, daily consumption can be as high as 50 cigarettes. The histogram makes the heavy right tail obvious:</span>
-<span id="cb33-494"><a href="#cb33-494" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-495"><a href="#cb33-495" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch02-bwght-hist}</span></span>
-<span id="cb33-496"><a href="#cb33-496" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribution of cigarettes smoked per day during pregnancy (bwght)."</span></span>
-<span id="cb33-497"><a href="#cb33-497" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(bwght<span class="sc">$</span>cigs,</span>
-<span id="cb33-498"><a href="#cb33-498" aria-hidden="true" tabindex="-1"></a>     <span class="at">main  =</span> <span class="st">"Cigarettes per day during pregnancy"</span>,</span>
-<span id="cb33-499"><a href="#cb33-499" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab  =</span> <span class="st">"Cigarettes per day"</span>,</span>
-<span id="cb33-500"><a href="#cb33-500" aria-hidden="true" tabindex="-1"></a>     <span class="at">col   =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb33-501"><a href="#cb33-501" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">20</span>)</span>
-<span id="cb33-502"><a href="#cb33-502" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-503"><a href="#cb33-503" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-504"><a href="#cb33-504" aria-hidden="true" tabindex="-1"></a>A scatter of birth weight against cigarettes:</span>
-<span id="cb33-505"><a href="#cb33-505" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-506"><a href="#cb33-506" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch02-bwght-scatter}</span></span>
-<span id="cb33-507"><a href="#cb33-507" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Birth weight in ounces vs. cigarettes per day."</span></span>
-<span id="cb33-508"><a href="#cb33-508" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bwght<span class="sc">$</span>cigs, bwght<span class="sc">$</span>bwght,</span>
-<span id="cb33-509"><a href="#cb33-509" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Cigarettes per day"</span>,</span>
-<span id="cb33-510"><a href="#cb33-510" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Birth weight (oz)"</span>,</span>
-<span id="cb33-511"><a href="#cb33-511" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Birth weight vs. maternal smoking"</span>,</span>
-<span id="cb33-512"><a href="#cb33-512" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch  =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.25</span>))</span>
-<span id="cb33-513"><a href="#cb33-513" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-514"><a href="#cb33-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-515"><a href="#cb33-515" aria-hidden="true" tabindex="-1"></a>Now the simple linear regression of <span class="in">`bwght`</span> on <span class="in">`cigs`</span>:</span>
-<span id="cb33-516"><a href="#cb33-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-517"><a href="#cb33-517" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch02-bwght-lm}</span></span>
-<span id="cb33-518"><a href="#cb33-518" aria-hidden="true" tabindex="-1"></a>fit_bwght <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwght <span class="sc">~</span> cigs, <span class="at">data =</span> bwght)</span>
-<span id="cb33-519"><a href="#cb33-519" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_bwght)</span>
-<span id="cb33-520"><a href="#cb33-520" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bwght<span class="sc">$</span>cigs, bwght<span class="sc">$</span>bwght,</span>
-<span id="cb33-521"><a href="#cb33-521" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Cigarettes per day during pregnancy"</span>,</span>
-<span id="cb33-522"><a href="#cb33-522" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Birth weight (ounces)"</span>,</span>
-<span id="cb33-523"><a href="#cb33-523" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Birth weight vs. maternal smoking (fitted line)"</span>,</span>
-<span id="cb33-524"><a href="#cb33-524" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch  =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.25</span>))</span>
-<span id="cb33-525"><a href="#cb33-525" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit_bwght, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb33-526"><a href="#cb33-526" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-527"><a href="#cb33-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-528"><a href="#cb33-528" aria-hidden="true" tabindex="-1"></a>Interpretation:</span>
-<span id="cb33-529"><a href="#cb33-529" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-530"><a href="#cb33-530" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\hat\beta_0$ is the predicted birth weight for a baby whose mother does *not* smoke during pregnancy (<span class="in">`cigs = 0`</span>). Unlike the beauty regression, this is a meaningful value because the median of <span class="in">`cigs`</span> is zero.</span>
-<span id="cb33-531"><a href="#cb33-531" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\hat\beta_1$ is the change in predicted birth weight for one extra cigarette per day. The estimated slope is approximately $-0.51$ ounces per cigarette, so smoking ten more cigarettes per day is associated with roughly $10 \times (-0.51) \approx -5.1$ ounces of birth weight. The negative sign is consistent with everything we know from medicine.</span>
-<span id="cb33-532"><a href="#cb33-532" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The $R^2$ is again small. Birth weight depends on dozens of factors --- maternal nutrition, age, prior births, prenatal care --- and <span class="in">`cigs`</span> is only one of them. As in Lab A, a small $R^2$ does not invalidate the slope estimate.</span>
-<span id="cb33-533"><a href="#cb33-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-534"><a href="#cb33-534" aria-hidden="true" tabindex="-1"></a>Whether the estimated $-0.51$ is the *causal* effect of smoking on birth weight is a different question. If mothers who smoke also differ from non-smokers in income, education, and nutrition, and if those characteristics independently affect birth weight, then SLR.4 fails and $\hat\beta_1$ is biased. We will revisit this exact dataset in Chapter 3 once we have the multiple regression tools needed to address it.</span>
+<span id="cb33-481"><a href="#cb33-481" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch02-bwght-hist}</span></span>
+<span id="cb33-482"><a href="#cb33-482" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribution of cigarettes smoked per day during pregnancy (bwght)."</span></span>
+<span id="cb33-483"><a href="#cb33-483" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(bwght<span class="sc">$</span>cigs,</span>
+<span id="cb33-484"><a href="#cb33-484" aria-hidden="true" tabindex="-1"></a>     <span class="at">main  =</span> <span class="st">"Cigarettes per day during pregnancy"</span>,</span>
+<span id="cb33-485"><a href="#cb33-485" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab  =</span> <span class="st">"Cigarettes per day"</span>,</span>
+<span id="cb33-486"><a href="#cb33-486" aria-hidden="true" tabindex="-1"></a>     <span class="at">col   =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb33-487"><a href="#cb33-487" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">20</span>)</span>
+<span id="cb33-488"><a href="#cb33-488" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-489"><a href="#cb33-489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-490"><a href="#cb33-490" aria-hidden="true" tabindex="-1"></a>A scatter of birth weight against cigarettes:</span>
+<span id="cb33-491"><a href="#cb33-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-492"><a href="#cb33-492" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch02-bwght-scatter}</span></span>
+<span id="cb33-493"><a href="#cb33-493" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Birth weight in ounces vs. cigarettes per day."</span></span>
+<span id="cb33-494"><a href="#cb33-494" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bwght<span class="sc">$</span>cigs, bwght<span class="sc">$</span>bwght,</span>
+<span id="cb33-495"><a href="#cb33-495" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Cigarettes per day"</span>,</span>
+<span id="cb33-496"><a href="#cb33-496" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Birth weight (oz)"</span>,</span>
+<span id="cb33-497"><a href="#cb33-497" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Birth weight vs. maternal smoking"</span>,</span>
+<span id="cb33-498"><a href="#cb33-498" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch  =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.25</span>))</span>
+<span id="cb33-499"><a href="#cb33-499" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-500"><a href="#cb33-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-501"><a href="#cb33-501" aria-hidden="true" tabindex="-1"></a>Now the simple linear regression of <span class="in">`bwght`</span> on <span class="in">`cigs`</span>:</span>
+<span id="cb33-502"><a href="#cb33-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-503"><a href="#cb33-503" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ch02-bwght-lm}</span></span>
+<span id="cb33-504"><a href="#cb33-504" aria-hidden="true" tabindex="-1"></a>fit_bwght <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwght <span class="sc">~</span> cigs, <span class="at">data =</span> bwght)</span>
+<span id="cb33-505"><a href="#cb33-505" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_bwght)</span>
+<span id="cb33-506"><a href="#cb33-506" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bwght<span class="sc">$</span>cigs, bwght<span class="sc">$</span>bwght,</span>
+<span id="cb33-507"><a href="#cb33-507" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Cigarettes per day during pregnancy"</span>,</span>
+<span id="cb33-508"><a href="#cb33-508" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Birth weight (ounces)"</span>,</span>
+<span id="cb33-509"><a href="#cb33-509" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Birth weight vs. maternal smoking (fitted line)"</span>,</span>
+<span id="cb33-510"><a href="#cb33-510" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch  =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.25</span>))</span>
+<span id="cb33-511"><a href="#cb33-511" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit_bwght, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb33-512"><a href="#cb33-512" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-513"><a href="#cb33-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-514"><a href="#cb33-514" aria-hidden="true" tabindex="-1"></a>Interpretation:</span>
+<span id="cb33-515"><a href="#cb33-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-516"><a href="#cb33-516" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\hat\beta_0$ is the predicted birth weight for a baby whose mother does *not* smoke during pregnancy (<span class="in">`cigs = 0`</span>). Unlike the beauty regression, this is a meaningful value because the median of <span class="in">`cigs`</span> is zero.</span>
+<span id="cb33-517"><a href="#cb33-517" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\hat\beta_1$ is the change in predicted birth weight for one extra cigarette per day. The estimated slope is approximately $-0.51$ ounces per cigarette, so smoking ten more cigarettes per day is associated with roughly $10 \times (-0.51) \approx -5.1$ ounces of birth weight. The negative sign is consistent with everything we know from medicine.</span>
+<span id="cb33-518"><a href="#cb33-518" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The $R^2$ is again small. Birth weight depends on dozens of factors --- maternal nutrition, age, prior births, prenatal care --- and <span class="in">`cigs`</span> is only one of them. As in Lab A, a small $R^2$ does not invalidate the slope estimate.</span>
+<span id="cb33-519"><a href="#cb33-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-520"><a href="#cb33-520" aria-hidden="true" tabindex="-1"></a>Whether the estimated $-0.51$ is the *causal* effect of smoking on birth weight is a different question. If mothers who smoke also differ from non-smokers in income, education, and nutrition, and if those characteristics independently affect birth weight, then SLR.4 fails and $\hat\beta_1$ is biased. We will revisit this exact dataset in Chapter 3 once we have the multiple regression tools needed to address it.</span>
+<span id="cb33-521"><a href="#cb33-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-522"><a href="#cb33-522" aria-hidden="true" tabindex="-1"></a><span class="fu">## Self-check {.unnumbered}</span></span>
+<span id="cb33-523"><a href="#cb33-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-524"><a href="#cb33-524" aria-hidden="true" tabindex="-1"></a>Seven short multiple-choice questions. Try each one before opening the answer.</span>
+<span id="cb33-525"><a href="#cb33-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-526"><a href="#cb33-526" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb33-527"><a href="#cb33-527" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q1. The slope $\beta_1$</span></span>
+<span id="cb33-528"><a href="#cb33-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-529"><a href="#cb33-529" aria-hidden="true" tabindex="-1"></a>In the simple regression model $y = \beta_0 + \beta_1 x + u$, the slope $\beta_1$ measures:</span>
+<span id="cb33-530"><a href="#cb33-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-531"><a href="#cb33-531" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. The correlation between $x$ and $y$.</span>
+<span id="cb33-532"><a href="#cb33-532" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. The expected change in $y$ when $x$ increases by one unit, holding all factors in $u$ fixed.</span>
+<span id="cb33-533"><a href="#cb33-533" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. The expected value of $y$ when $x = 0$.</span>
+<span id="cb33-534"><a href="#cb33-534" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. The variance of $y$ explained by $x$.</span>
 <span id="cb33-535"><a href="#cb33-535" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-536"><a href="#cb33-536" aria-hidden="true" tabindex="-1"></a><span class="fu">## Self-check {.unnumbered}</span></span>
-<span id="cb33-537"><a href="#cb33-537" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-538"><a href="#cb33-538" aria-hidden="true" tabindex="-1"></a>Seven short multiple-choice questions. Try each one before opening the answer.</span>
-<span id="cb33-539"><a href="#cb33-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-540"><a href="#cb33-540" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb33-541"><a href="#cb33-541" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q1. The slope $\beta_1$</span></span>
-<span id="cb33-542"><a href="#cb33-542" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-543"><a href="#cb33-543" aria-hidden="true" tabindex="-1"></a>In the simple regression model $y = \beta_0 + \beta_1 x + u$, the slope $\beta_1$ measures:</span>
-<span id="cb33-544"><a href="#cb33-544" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-545"><a href="#cb33-545" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. The correlation between $x$ and $y$.</span>
-<span id="cb33-546"><a href="#cb33-546" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. The expected change in $y$ when $x$ increases by one unit, holding all factors in $u$ fixed.</span>
-<span id="cb33-547"><a href="#cb33-547" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. The expected value of $y$ when $x = 0$.</span>
-<span id="cb33-548"><a href="#cb33-548" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. The variance of $y$ explained by $x$.</span>
-<span id="cb33-549"><a href="#cb33-549" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-550"><a href="#cb33-550" aria-hidden="true" tabindex="-1"></a>**Answer: B.** $\beta_1$ is the *ceteris paribus* change in the conditional mean of $y$. C describes the intercept $\beta_0$; A is the correlation (a different, scale-free quantity); D is $R^2$.</span>
-<span id="cb33-551"><a href="#cb33-551" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-552"><a href="#cb33-552" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-553"><a href="#cb33-553" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb33-554"><a href="#cb33-554" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q2. The zero-conditional-mean assumption</span></span>
-<span id="cb33-555"><a href="#cb33-555" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-556"><a href="#cb33-556" aria-hidden="true" tabindex="-1"></a>The assumption $\mathbb{E}<span class="co">[</span><span class="ot">u \mid x</span><span class="co">]</span> = 0$ implies:</span>
-<span id="cb33-557"><a href="#cb33-557" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-558"><a href="#cb33-558" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. The error $u$ is normally distributed.</span>
-<span id="cb33-559"><a href="#cb33-559" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. $\operatorname{Var}(u \mid x)$ is constant in $x$.</span>
-<span id="cb33-560"><a href="#cb33-560" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. $\mathbb{E}<span class="co">[</span><span class="ot">u</span><span class="co">]</span> = 0$ and $\operatorname{Cov}(x, u) = 0$.</span>
-<span id="cb33-561"><a href="#cb33-561" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. $x$ is measured without error.</span>
-<span id="cb33-562"><a href="#cb33-562" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-563"><a href="#cb33-563" aria-hidden="true" tabindex="-1"></a>**Answer: C.** Zero conditional mean implies both an unconditional mean of zero (by iterated expectations) and zero covariance between $x$ and $u$. B is the separate homoskedasticity assumption SLR.5; A and D are unrelated.</span>
-<span id="cb33-564"><a href="#cb33-564" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-565"><a href="#cb33-565" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-566"><a href="#cb33-566" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb33-567"><a href="#cb33-567" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q3. The OLS slope formula</span></span>
-<span id="cb33-568"><a href="#cb33-568" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-569"><a href="#cb33-569" aria-hidden="true" tabindex="-1"></a>The OLS estimator of $\beta_1$ in the simple regression $y = \beta_0 + \beta_1 x + u$ can be written as:</span>
-<span id="cb33-570"><a href="#cb33-570" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-571"><a href="#cb33-571" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. $\hat\beta_1 = \bar y / \bar x$.</span>
-<span id="cb33-572"><a href="#cb33-572" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. $\hat\beta_1 = \widehat{\operatorname{Var}}(y) / \widehat{\operatorname{Cov}}(x, y)$.</span>
-<span id="cb33-573"><a href="#cb33-573" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. $\hat\beta_1 = \widehat{\operatorname{Cov}}(x, y) / \widehat{\operatorname{Var}}(x)$.</span>
-<span id="cb33-574"><a href="#cb33-574" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. $\hat\beta_1 = \bar y - \hat\beta_0 \bar x$.</span>
-<span id="cb33-575"><a href="#cb33-575" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-576"><a href="#cb33-576" aria-hidden="true" tabindex="-1"></a>**Answer: C.** The slope is the sample covariance of $x$ and $y$ over the sample variance of $x$. D is (a rearranged) formula for the intercept; A and B are not OLS estimators.</span>
-<span id="cb33-577"><a href="#cb33-577" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-578"><a href="#cb33-578" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-579"><a href="#cb33-579" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb33-580"><a href="#cb33-580" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q4. Mechanical properties of OLS residuals</span></span>
-<span id="cb33-581"><a href="#cb33-581" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-582"><a href="#cb33-582" aria-hidden="true" tabindex="-1"></a>Which of the following is **NOT** an algebraic property of OLS residuals $\hat u_i$?</span>
-<span id="cb33-583"><a href="#cb33-583" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-584"><a href="#cb33-584" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. $\sum_i \hat u_i = 0$.</span>
-<span id="cb33-585"><a href="#cb33-585" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. $\sum_i x_i \hat u_i = 0$.</span>
-<span id="cb33-586"><a href="#cb33-586" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. The OLS line passes through $(\bar x, \bar y)$.</span>
-<span id="cb33-587"><a href="#cb33-587" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. $\hat u_i$ are uncorrelated with the unobserved error $u_i$.</span>
-<span id="cb33-588"><a href="#cb33-588" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-589"><a href="#cb33-589" aria-hidden="true" tabindex="-1"></a>**Answer: D.** A, B, and C follow directly from the first-order conditions and hold in every sample. D is a statement about the population disturbance $u_i$, which is never observable; there is no algebraic identity relating $\hat u_i$ to $u_i$.</span>
-<span id="cb33-590"><a href="#cb33-590" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-591"><a href="#cb33-591" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-592"><a href="#cb33-592" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb33-593"><a href="#cb33-593" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q5. Unbiasedness vs. BLUE</span></span>
-<span id="cb33-594"><a href="#cb33-594" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-595"><a href="#cb33-595" aria-hidden="true" tabindex="-1"></a>Under SLR.1--SLR.4 only (no homoskedasticity), OLS is:</span>
-<span id="cb33-596"><a href="#cb33-596" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-597"><a href="#cb33-597" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Unbiased: $\mathbb{E}<span class="co">[</span><span class="ot">\hat\beta_j</span><span class="co">]</span> = \beta_j$.</span>
-<span id="cb33-598"><a href="#cb33-598" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. The Best Linear Unbiased Estimator (BLUE).</span>
-<span id="cb33-599"><a href="#cb33-599" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Consistent but biased.</span>
-<span id="cb33-600"><a href="#cb33-600" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Normally distributed.</span>
-<span id="cb33-601"><a href="#cb33-601" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-602"><a href="#cb33-602" aria-hidden="true" tabindex="-1"></a>**Answer: A.** Unbiasedness needs only SLR.1--SLR.4. Adding SLR.5 (homoskedasticity) is what upgrades OLS to BLUE via the Gauss--Markov theorem.</span>
-<span id="cb33-603"><a href="#cb33-603" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-604"><a href="#cb33-604" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-605"><a href="#cb33-605" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb33-606"><a href="#cb33-606" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q6. Precision of $\hat\beta_1$</span></span>
-<span id="cb33-607"><a href="#cb33-607" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-608"><a href="#cb33-608" aria-hidden="true" tabindex="-1"></a>Which of the following increases the precision of $\hat\beta_1$ (smaller sampling variance)?</span>
-<span id="cb33-609"><a href="#cb33-609" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-610"><a href="#cb33-610" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. A larger error variance $\sigma^2$.</span>
-<span id="cb33-611"><a href="#cb33-611" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. A smaller sample size.</span>
-<span id="cb33-612"><a href="#cb33-612" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Less variation in $x$.</span>
-<span id="cb33-613"><a href="#cb33-613" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. More variation in $x$ (larger $\mathrm{SST}_x$).</span>
-<span id="cb33-614"><a href="#cb33-614" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-615"><a href="#cb33-615" aria-hidden="true" tabindex="-1"></a>**Answer: D.** The variance formula is $\operatorname{Var}(\hat\beta_1 \mid \mathbf{x}) = \sigma^2 / \mathrm{SST}_x$. Larger $\mathrm{SST}_x$ shrinks the variance. A and B do the opposite; C is a re-statement of "less precision".</span>
-<span id="cb33-616"><a href="#cb33-616" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-617"><a href="#cb33-617" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-618"><a href="#cb33-618" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb33-619"><a href="#cb33-619" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q7. What $R^2$ does and does not tell us</span></span>
+<span id="cb33-536"><a href="#cb33-536" aria-hidden="true" tabindex="-1"></a>**Answer: B.** $\beta_1$ is the *ceteris paribus* change in the conditional mean of $y$. C describes the intercept $\beta_0$; A is the correlation (a different, scale-free quantity); D is $R^2$.</span>
+<span id="cb33-537"><a href="#cb33-537" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb33-538"><a href="#cb33-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-539"><a href="#cb33-539" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb33-540"><a href="#cb33-540" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q2. The zero-conditional-mean assumption</span></span>
+<span id="cb33-541"><a href="#cb33-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-542"><a href="#cb33-542" aria-hidden="true" tabindex="-1"></a>The assumption $\mathbb{E}<span class="co">[</span><span class="ot">u \mid x</span><span class="co">]</span> = 0$ implies:</span>
+<span id="cb33-543"><a href="#cb33-543" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-544"><a href="#cb33-544" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. The error $u$ is normally distributed.</span>
+<span id="cb33-545"><a href="#cb33-545" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. $\operatorname{Var}(u \mid x)$ is constant in $x$.</span>
+<span id="cb33-546"><a href="#cb33-546" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. $\mathbb{E}<span class="co">[</span><span class="ot">u</span><span class="co">]</span> = 0$ and $\operatorname{Cov}(x, u) = 0$.</span>
+<span id="cb33-547"><a href="#cb33-547" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. $x$ is measured without error.</span>
+<span id="cb33-548"><a href="#cb33-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-549"><a href="#cb33-549" aria-hidden="true" tabindex="-1"></a>**Answer: C.** Zero conditional mean implies both an unconditional mean of zero (by iterated expectations) and zero covariance between $x$ and $u$. B is the separate homoskedasticity assumption SLR.5; A and D are unrelated.</span>
+<span id="cb33-550"><a href="#cb33-550" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb33-551"><a href="#cb33-551" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-552"><a href="#cb33-552" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb33-553"><a href="#cb33-553" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q3. The OLS slope formula</span></span>
+<span id="cb33-554"><a href="#cb33-554" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-555"><a href="#cb33-555" aria-hidden="true" tabindex="-1"></a>The OLS estimator of $\beta_1$ in the simple regression $y = \beta_0 + \beta_1 x + u$ can be written as:</span>
+<span id="cb33-556"><a href="#cb33-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-557"><a href="#cb33-557" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. $\hat\beta_1 = \bar y / \bar x$.</span>
+<span id="cb33-558"><a href="#cb33-558" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. $\hat\beta_1 = \widehat{\operatorname{Var}}(y) / \widehat{\operatorname{Cov}}(x, y)$.</span>
+<span id="cb33-559"><a href="#cb33-559" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. $\hat\beta_1 = \widehat{\operatorname{Cov}}(x, y) / \widehat{\operatorname{Var}}(x)$.</span>
+<span id="cb33-560"><a href="#cb33-560" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. $\hat\beta_1 = \bar y - \hat\beta_0 \bar x$.</span>
+<span id="cb33-561"><a href="#cb33-561" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-562"><a href="#cb33-562" aria-hidden="true" tabindex="-1"></a>**Answer: C.** The slope is the sample covariance of $x$ and $y$ over the sample variance of $x$. D is (a rearranged) formula for the intercept; A and B are not OLS estimators.</span>
+<span id="cb33-563"><a href="#cb33-563" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb33-564"><a href="#cb33-564" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-565"><a href="#cb33-565" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb33-566"><a href="#cb33-566" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q4. Mechanical properties of OLS residuals</span></span>
+<span id="cb33-567"><a href="#cb33-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-568"><a href="#cb33-568" aria-hidden="true" tabindex="-1"></a>Which of the following is **NOT** an algebraic property of OLS residuals $\hat u_i$?</span>
+<span id="cb33-569"><a href="#cb33-569" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-570"><a href="#cb33-570" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. $\sum_i \hat u_i = 0$.</span>
+<span id="cb33-571"><a href="#cb33-571" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. $\sum_i x_i \hat u_i = 0$.</span>
+<span id="cb33-572"><a href="#cb33-572" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. The OLS line passes through $(\bar x, \bar y)$.</span>
+<span id="cb33-573"><a href="#cb33-573" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. $\hat u_i$ are uncorrelated with the unobserved error $u_i$.</span>
+<span id="cb33-574"><a href="#cb33-574" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-575"><a href="#cb33-575" aria-hidden="true" tabindex="-1"></a>**Answer: D.** A, B, and C follow directly from the first-order conditions and hold in every sample. D is a statement about the population disturbance $u_i$, which is never observable; there is no algebraic identity relating $\hat u_i$ to $u_i$.</span>
+<span id="cb33-576"><a href="#cb33-576" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb33-577"><a href="#cb33-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-578"><a href="#cb33-578" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb33-579"><a href="#cb33-579" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q5. Unbiasedness vs. BLUE</span></span>
+<span id="cb33-580"><a href="#cb33-580" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-581"><a href="#cb33-581" aria-hidden="true" tabindex="-1"></a>Under SLR.1--SLR.4 only (no homoskedasticity), OLS is:</span>
+<span id="cb33-582"><a href="#cb33-582" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-583"><a href="#cb33-583" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. Unbiased: $\mathbb{E}<span class="co">[</span><span class="ot">\hat\beta_j</span><span class="co">]</span> = \beta_j$.</span>
+<span id="cb33-584"><a href="#cb33-584" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. The Best Linear Unbiased Estimator (BLUE).</span>
+<span id="cb33-585"><a href="#cb33-585" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Consistent but biased.</span>
+<span id="cb33-586"><a href="#cb33-586" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. Normally distributed.</span>
+<span id="cb33-587"><a href="#cb33-587" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-588"><a href="#cb33-588" aria-hidden="true" tabindex="-1"></a>**Answer: A.** Unbiasedness needs only SLR.1--SLR.4. Adding SLR.5 (homoskedasticity) is what upgrades OLS to BLUE via the Gauss--Markov theorem.</span>
+<span id="cb33-589"><a href="#cb33-589" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb33-590"><a href="#cb33-590" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-591"><a href="#cb33-591" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb33-592"><a href="#cb33-592" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q6. Precision of $\hat\beta_1$</span></span>
+<span id="cb33-593"><a href="#cb33-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-594"><a href="#cb33-594" aria-hidden="true" tabindex="-1"></a>Which of the following increases the precision of $\hat\beta_1$ (smaller sampling variance)?</span>
+<span id="cb33-595"><a href="#cb33-595" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-596"><a href="#cb33-596" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. A larger error variance $\sigma^2$.</span>
+<span id="cb33-597"><a href="#cb33-597" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. A smaller sample size.</span>
+<span id="cb33-598"><a href="#cb33-598" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. Less variation in $x$.</span>
+<span id="cb33-599"><a href="#cb33-599" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. More variation in $x$ (larger $\mathrm{SST}_x$).</span>
+<span id="cb33-600"><a href="#cb33-600" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-601"><a href="#cb33-601" aria-hidden="true" tabindex="-1"></a>**Answer: D.** The variance formula is $\operatorname{Var}(\hat\beta_1 \mid \mathbf{x}) = \sigma^2 / \mathrm{SST}_x$. Larger $\mathrm{SST}_x$ shrinks the variance. A and B do the opposite; C is a re-statement of "less precision".</span>
+<span id="cb33-602"><a href="#cb33-602" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb33-603"><a href="#cb33-603" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-604"><a href="#cb33-604" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb33-605"><a href="#cb33-605" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q7. What $R^2$ does and does not tell us</span></span>
+<span id="cb33-606"><a href="#cb33-606" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-607"><a href="#cb33-607" aria-hidden="true" tabindex="-1"></a>A low $R^2$ in a simple linear regression means:</span>
+<span id="cb33-608"><a href="#cb33-608" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-609"><a href="#cb33-609" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. OLS is biased.</span>
+<span id="cb33-610"><a href="#cb33-610" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. $x$ has no causal effect on $y$.</span>
+<span id="cb33-611"><a href="#cb33-611" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. $x$ explains a small share of the variation in $y$, but $\hat\beta_1$ can still be unbiased and policy-relevant.</span>
+<span id="cb33-612"><a href="#cb33-612" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. The Gauss--Markov assumptions are violated.</span>
+<span id="cb33-613"><a href="#cb33-613" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-614"><a href="#cb33-614" aria-hidden="true" tabindex="-1"></a>**Answer: C.** $R^2$ is a measure of fit, not of bias or causality. A small $R^2$ is fully compatible with an unbiased and economically meaningful slope, as the wage--looks and birth-weight--smoking labs illustrate.</span>
+<span id="cb33-615"><a href="#cb33-615" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb33-616"><a href="#cb33-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-617"><a href="#cb33-617" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises {.unnumbered}</span></span>
+<span id="cb33-618"><a href="#cb33-618" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-619"><a href="#cb33-619" aria-hidden="true" tabindex="-1"></a>**Exercise 2.1 ★ --- Reading a fitted equation.** A regression on 1,000 workers gives the fitted line $\widehat{\text{Wage}} = 800 + 15 \times \text{Education}$, where wage is in euros per month and education is in years.</span>
 <span id="cb33-620"><a href="#cb33-620" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-621"><a href="#cb33-621" aria-hidden="true" tabindex="-1"></a>A low $R^2$ in a simple linear regression means:</span>
-<span id="cb33-622"><a href="#cb33-622" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-623"><a href="#cb33-623" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A. OLS is biased.</span>
-<span id="cb33-624"><a href="#cb33-624" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>B. $x$ has no causal effect on $y$.</span>
-<span id="cb33-625"><a href="#cb33-625" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>C. $x$ explains a small share of the variation in $y$, but $\hat\beta_1$ can still be unbiased and policy-relevant.</span>
-<span id="cb33-626"><a href="#cb33-626" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D. The Gauss--Markov assumptions are violated.</span>
-<span id="cb33-627"><a href="#cb33-627" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-628"><a href="#cb33-628" aria-hidden="true" tabindex="-1"></a>**Answer: C.** $R^2$ is a measure of fit, not of bias or causality. A small $R^2$ is fully compatible with an unbiased and economically meaningful slope, as the wage--looks and birth-weight--smoking labs illustrate.</span>
-<span id="cb33-629"><a href="#cb33-629" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-630"><a href="#cb33-630" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-631"><a href="#cb33-631" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises {.unnumbered}</span></span>
-<span id="cb33-632"><a href="#cb33-632" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-633"><a href="#cb33-633" aria-hidden="true" tabindex="-1"></a>**Exercise 2.1 ★ --- Reading a fitted equation.** A regression on 1{,}000 workers gives the fitted line $\widehat{\text{Wage}} = 800 + 15 \times \text{Education}$, where wage is in euros per month and education is in years.</span>
+<span id="cb33-621"><a href="#cb33-621" aria-hidden="true" tabindex="-1"></a>(a) Interpret $\hat\beta_0$ and $\hat\beta_1$ in words.</span>
+<span id="cb33-622"><a href="#cb33-622" aria-hidden="true" tabindex="-1"></a>(b) What is the predicted wage of a worker with 12 years of schooling?</span>
+<span id="cb33-623"><a href="#cb33-623" aria-hidden="true" tabindex="-1"></a>(c) Two workers differ by 4 years of schooling. By how much do their predicted wages differ?</span>
+<span id="cb33-624"><a href="#cb33-624" aria-hidden="true" tabindex="-1"></a>(d) Why should you be wary of the prediction at <span class="in">`educ = 0`</span>?</span>
+<span id="cb33-625"><a href="#cb33-625" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-626"><a href="#cb33-626" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb33-627"><a href="#cb33-627" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
+<span id="cb33-628"><a href="#cb33-628" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-629"><a href="#cb33-629" aria-hidden="true" tabindex="-1"></a>(a) $\hat\beta_0 = 800$ is the predicted wage at <span class="in">`educ = 0`</span> (800 €/month). $\hat\beta_1 = 15$ is the predicted increase in monthly wage per extra year of schooling.</span>
+<span id="cb33-630"><a href="#cb33-630" aria-hidden="true" tabindex="-1"></a>(b) $800 + 15 \times 12 = 980$ €/month.</span>
+<span id="cb33-631"><a href="#cb33-631" aria-hidden="true" tabindex="-1"></a>(c) $4 \times 15 = 60$ €/month.</span>
+<span id="cb33-632"><a href="#cb33-632" aria-hidden="true" tabindex="-1"></a>(d) Because <span class="in">`educ = 0`</span> is far below the lowest value in any realistic schooling sample --- the prediction is an extrapolation and may be unreliable.</span>
+<span id="cb33-633"><a href="#cb33-633" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb33-634"><a href="#cb33-634" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-635"><a href="#cb33-635" aria-hidden="true" tabindex="-1"></a>(a) Interpret $\hat\beta_0$ and $\hat\beta_1$ in words.</span>
-<span id="cb33-636"><a href="#cb33-636" aria-hidden="true" tabindex="-1"></a>(b) What is the predicted wage of a worker with 12 years of schooling?</span>
-<span id="cb33-637"><a href="#cb33-637" aria-hidden="true" tabindex="-1"></a>(c) Two workers differ by 4 years of schooling. By how much do their predicted wages differ?</span>
-<span id="cb33-638"><a href="#cb33-638" aria-hidden="true" tabindex="-1"></a>(d) Why should you be wary of the prediction at <span class="in">`educ = 0`</span>?</span>
-<span id="cb33-639"><a href="#cb33-639" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-640"><a href="#cb33-640" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb33-641"><a href="#cb33-641" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
-<span id="cb33-642"><a href="#cb33-642" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-643"><a href="#cb33-643" aria-hidden="true" tabindex="-1"></a>(a) $\hat\beta_0 = 800$ is the predicted wage at <span class="in">`educ = 0`</span> (800 €/month). $\hat\beta_1 = 15$ is the predicted increase in monthly wage per extra year of schooling.</span>
-<span id="cb33-644"><a href="#cb33-644" aria-hidden="true" tabindex="-1"></a>(b) $800 + 15 \times 12 = 980$ €/month.</span>
-<span id="cb33-645"><a href="#cb33-645" aria-hidden="true" tabindex="-1"></a>(c) $4 \times 15 = 60$ €/month.</span>
-<span id="cb33-646"><a href="#cb33-646" aria-hidden="true" tabindex="-1"></a>(d) Because <span class="in">`educ = 0`</span> is far below the lowest value in any realistic schooling sample --- the prediction is an extrapolation and may be unreliable.</span>
-<span id="cb33-647"><a href="#cb33-647" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-648"><a href="#cb33-648" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-649"><a href="#cb33-649" aria-hidden="true" tabindex="-1"></a>**Exercise 2.2 ★ --- Algebra of OLS, by hand.** Consider the toy data $x = (1, 2, 3, 4, 5)$ and $y = (3, 4, 2, 5, 6)$.</span>
+<span id="cb33-635"><a href="#cb33-635" aria-hidden="true" tabindex="-1"></a>**Exercise 2.2 ★ --- Algebra of OLS, by hand.** Consider the toy data $x = (1, 2, 3, 4, 5)$ and $y = (3, 4, 2, 5, 6)$.</span>
+<span id="cb33-636"><a href="#cb33-636" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-637"><a href="#cb33-637" aria-hidden="true" tabindex="-1"></a>(a) Compute $\bar x$ and $\bar y$.</span>
+<span id="cb33-638"><a href="#cb33-638" aria-hidden="true" tabindex="-1"></a>(b) Compute $\hat\beta_1$ using the formula in §2.4.3.</span>
+<span id="cb33-639"><a href="#cb33-639" aria-hidden="true" tabindex="-1"></a>(c) Compute $\hat\beta_0$.</span>
+<span id="cb33-640"><a href="#cb33-640" aria-hidden="true" tabindex="-1"></a>(d) Verify your answer in R against <span class="in">`coef(lm(y ~ x))`</span>.</span>
+<span id="cb33-641"><a href="#cb33-641" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-642"><a href="#cb33-642" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb33-643"><a href="#cb33-643" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
+<span id="cb33-644"><a href="#cb33-644" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-645"><a href="#cb33-645" aria-hidden="true" tabindex="-1"></a>(a) $\bar x = 3$, $\bar y = 4$.</span>
+<span id="cb33-646"><a href="#cb33-646" aria-hidden="true" tabindex="-1"></a>(b) Numerator: $\sum (x_i - \bar x)(y_i - \bar y) = (-2)(-1) + (-1)(0) + 0(-2) + 1(1) + 2(2) = 2 + 0 + 0 + 1 + 4 = 7$. Denominator: $\sum (x_i - \bar x)^2 = 4 + 1 + 0 + 1 + 4 = 10$. So $\hat\beta_1 = 7/10 = 0.7$.</span>
+<span id="cb33-647"><a href="#cb33-647" aria-hidden="true" tabindex="-1"></a>(c) $\hat\beta_0 = \bar y - \hat\beta_1 \bar x = 4 - 0.7 \times 3 = 1.9$.</span>
+<span id="cb33-648"><a href="#cb33-648" aria-hidden="true" tabindex="-1"></a>(d) In R: <span class="in">`coef(lm(c(3,4,2,5,6) ~ c(1,2,3,4,5)))`</span> returns the same numbers.</span>
+<span id="cb33-649"><a href="#cb33-649" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb33-650"><a href="#cb33-650" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-651"><a href="#cb33-651" aria-hidden="true" tabindex="-1"></a>(a) Compute $\bar x$ and $\bar y$.</span>
-<span id="cb33-652"><a href="#cb33-652" aria-hidden="true" tabindex="-1"></a>(b) Compute $\hat\beta_1$ using the formula in §2.4.3.</span>
-<span id="cb33-653"><a href="#cb33-653" aria-hidden="true" tabindex="-1"></a>(c) Compute $\hat\beta_0$.</span>
-<span id="cb33-654"><a href="#cb33-654" aria-hidden="true" tabindex="-1"></a>(d) Verify your answer in R against <span class="in">`coef(lm(y ~ x))`</span>.</span>
-<span id="cb33-655"><a href="#cb33-655" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-656"><a href="#cb33-656" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb33-657"><a href="#cb33-657" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
-<span id="cb33-658"><a href="#cb33-658" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-659"><a href="#cb33-659" aria-hidden="true" tabindex="-1"></a>(a) $\bar x = 3$, $\bar y = 4$.</span>
-<span id="cb33-660"><a href="#cb33-660" aria-hidden="true" tabindex="-1"></a>(b) Numerator: $\sum (x_i - \bar x)(y_i - \bar y) = (-2)(-1) + (-1)(0) + 0(-2) + 1(1) + 2(2) = 2 + 0 + 0 + 1 + 4 = 7$. Denominator: $\sum (x_i - \bar x)^2 = 4 + 1 + 0 + 1 + 4 = 10$. So $\hat\beta_1 = 7/10 = 0.7$.</span>
-<span id="cb33-661"><a href="#cb33-661" aria-hidden="true" tabindex="-1"></a>(c) $\hat\beta_0 = \bar y - \hat\beta_1 \bar x = 4 - 0.7 \times 3 = 1.9$.</span>
-<span id="cb33-662"><a href="#cb33-662" aria-hidden="true" tabindex="-1"></a>(d) In R: <span class="in">`coef(lm(c(3,4,2,5,6) ~ c(1,2,3,4,5)))`</span> returns the same numbers.</span>
-<span id="cb33-663"><a href="#cb33-663" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb33-651"><a href="#cb33-651" aria-hidden="true" tabindex="-1"></a>**Exercise 2.3 ★ --- Variance of the OLS slope.** State, in one sentence each, how the variance $\operatorname{Var}(\hat\beta_1)$ changes if:</span>
+<span id="cb33-652"><a href="#cb33-652" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-653"><a href="#cb33-653" aria-hidden="true" tabindex="-1"></a>(a) the sample size $n$ doubles (holding the distribution of $x$ fixed);</span>
+<span id="cb33-654"><a href="#cb33-654" aria-hidden="true" tabindex="-1"></a>(b) the error variance $\sigma^2$ doubles;</span>
+<span id="cb33-655"><a href="#cb33-655" aria-hidden="true" tabindex="-1"></a>(c) the regressor $x$ is rescaled from minutes to hours (divided by 60).</span>
+<span id="cb33-656"><a href="#cb33-656" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-657"><a href="#cb33-657" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb33-658"><a href="#cb33-658" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
+<span id="cb33-659"><a href="#cb33-659" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-660"><a href="#cb33-660" aria-hidden="true" tabindex="-1"></a>(a) $\mathrm{SST}_x$ roughly doubles, so the variance is approximately halved. (b) The variance doubles (it is linear in $\sigma^2$). (c) The variance of the *slope on the rescaled regressor* increases by a factor of $60^2 = 3600$: scaling $x$ by $c$ multiplies $\hat\beta_1$ by $1/c$, so its variance is multiplied by $1/c^2$.</span>
+<span id="cb33-661"><a href="#cb33-661" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb33-662"><a href="#cb33-662" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-663"><a href="#cb33-663" aria-hidden="true" tabindex="-1"></a>**Exercise 2.4 ★★ --- Change of units.** Show that if we redefine the regressor as $x^* = c \cdot x$ (for some constant $c \neq 0$) without changing $y$, the new OLS estimators are $\hat\beta_1^* = \hat\beta_1 / c$ and $\hat\beta_0^* = \hat\beta_0$. Verify your derivation empirically on <span class="in">`sleep75`</span>: regress <span class="in">`sleep`</span> on <span class="in">`totwrk`</span> (minutes per week) and then on <span class="in">`totwrk/60`</span> (hours per week), and confirm that the intercept is unchanged while the slope scales by $60$.</span>
 <span id="cb33-664"><a href="#cb33-664" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-665"><a href="#cb33-665" aria-hidden="true" tabindex="-1"></a>**Exercise 2.3 ★ --- Variance of the OLS slope.** State, in one sentence each, how the variance $\operatorname{Var}(\hat\beta_1)$ changes if:</span>
+<span id="cb33-665"><a href="#cb33-665" aria-hidden="true" tabindex="-1"></a>*A full answer is given in the Instructor Edition.*</span>
 <span id="cb33-666"><a href="#cb33-666" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-667"><a href="#cb33-667" aria-hidden="true" tabindex="-1"></a>(a) the sample size $n$ doubles (holding the distribution of $x$ fixed);</span>
-<span id="cb33-668"><a href="#cb33-668" aria-hidden="true" tabindex="-1"></a>(b) the error variance $\sigma^2$ doubles;</span>
-<span id="cb33-669"><a href="#cb33-669" aria-hidden="true" tabindex="-1"></a>(c) the regressor $x$ is rescaled from minutes to hours (divided by 60).</span>
+<span id="cb33-667"><a href="#cb33-667" aria-hidden="true" tabindex="-1"></a>**Exercise 2.5 ★★ --- Unbiasedness by simulation.** Simulate $1{,}000$ samples of size $n = 200$ from $y = 1 + 2x + u$ with $x \sim N(0, 1)$ and $u \sim N(0, 1)$. Compute $\hat\beta_1$ in each sample and show that its mean across replications is close to 2, while the standard deviation across replications is close to the theoretical $\sigma / \sqrt{\mathrm{SST}_x}$ for a typical draw. Plot the histogram of $\hat\beta_1$.</span>
+<span id="cb33-668"><a href="#cb33-668" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-669"><a href="#cb33-669" aria-hidden="true" tabindex="-1"></a>*A full answer is given in the Instructor Edition.*</span>
 <span id="cb33-670"><a href="#cb33-670" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-671"><a href="#cb33-671" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb33-672"><a href="#cb33-672" aria-hidden="true" tabindex="-1"></a><span class="fu">## Show answer</span></span>
-<span id="cb33-673"><a href="#cb33-673" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-674"><a href="#cb33-674" aria-hidden="true" tabindex="-1"></a>(a) $\mathrm{SST}_x$ roughly doubles, so the variance is approximately halved. (b) The variance doubles (it is linear in $\sigma^2$). (c) The variance of the *slope on the rescaled regressor* increases by a factor of $60^2 = 3600$: scaling $x$ by $c$ multiplies $\hat\beta_1$ by $1/c$, so its variance is multiplied by $1/c^2$.</span>
-<span id="cb33-675"><a href="#cb33-675" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb33-671"><a href="#cb33-671" aria-hidden="true" tabindex="-1"></a>**Exercise 2.6 ★★★ --- Why dropping the intercept biases the slope.** Suppose the true model is $y = \beta_0 + \beta_1 x + u$ with $\beta_0 \neq 0$ and $\mathbb{E}<span class="co">[</span><span class="ot">u \mid x</span><span class="co">]</span> = 0$, but the researcher *imposes* $\beta_0 = 0$ and fits the regression through the origin $\tilde y_i = \tilde\beta_1 x_i$.</span>
+<span id="cb33-672"><a href="#cb33-672" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-673"><a href="#cb33-673" aria-hidden="true" tabindex="-1"></a>(a) Derive the closed-form expression for $\tilde\beta_1 = \sum_i x_i y_i / \sum_i x_i^2$ as the minimiser of $\sum_i (y_i - \tilde\beta_1 x_i)^2$.</span>
+<span id="cb33-674"><a href="#cb33-674" aria-hidden="true" tabindex="-1"></a>(b) Show that $\mathbb{E}<span class="co">[</span><span class="ot">\tilde\beta_1</span><span class="co">]</span> = \beta_1 + \beta_0 \cdot \mathbb{E}<span class="co">[</span><span class="ot">x</span><span class="co">]</span> / \mathbb{E}<span class="co">[</span><span class="ot">x^2</span><span class="co">]</span>$, so $\tilde\beta_1$ is biased whenever $\beta_0 \neq 0$ and $\mathbb{E}<span class="co">[</span><span class="ot">x</span><span class="co">]</span> \neq 0$.</span>
+<span id="cb33-675"><a href="#cb33-675" aria-hidden="true" tabindex="-1"></a>(c) Under what specific condition on the population is the no-intercept slope nonetheless unbiased?</span>
 <span id="cb33-676"><a href="#cb33-676" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-677"><a href="#cb33-677" aria-hidden="true" tabindex="-1"></a>**Exercise 2.4 ★★ --- Change of units.** Show that if we redefine the regressor as $x^* = c \cdot x$ (for some constant $c \neq 0$) without changing $y$, the new OLS estimators are $\hat\beta_1^* = \hat\beta_1 / c$ and $\hat\beta_0^* = \hat\beta_0$. Verify your derivation empirically on <span class="in">`sleep75`</span>: regress <span class="in">`sleep`</span> on <span class="in">`totwrk`</span> (minutes per week) and then on <span class="in">`totwrk/60`</span> (hours per week), and confirm that the intercept is unchanged while the slope scales by $60$.</span>
-<span id="cb33-678"><a href="#cb33-678" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-679"><a href="#cb33-679" aria-hidden="true" tabindex="-1"></a>*A full answer is given in the Instructor Edition.*</span>
-<span id="cb33-680"><a href="#cb33-680" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-681"><a href="#cb33-681" aria-hidden="true" tabindex="-1"></a>**Exercise 2.5 ★★ --- Unbiasedness by simulation.** Simulate $1{,}000$ samples of size $n = 200$ from $y = 1 + 2x + u$ with $x \sim N(0, 1)$ and $u \sim N(0, 1)$. Compute $\hat\beta_1$ in each sample and show that its mean across replications is close to 2, while the standard deviation across replications is close to the theoretical $\sigma / \sqrt{\mathrm{SST}_x}$ for a typical draw. Plot the histogram of $\hat\beta_1$.</span>
-<span id="cb33-682"><a href="#cb33-682" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-683"><a href="#cb33-683" aria-hidden="true" tabindex="-1"></a>*A full answer is given in the Instructor Edition.*</span>
-<span id="cb33-684"><a href="#cb33-684" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-685"><a href="#cb33-685" aria-hidden="true" tabindex="-1"></a>**Exercise 2.6 ★★★ --- Why dropping the intercept biases the slope.** Suppose the true model is $y = \beta_0 + \beta_1 x + u$ with $\beta_0 \neq 0$ and $\mathbb{E}<span class="co">[</span><span class="ot">u \mid x</span><span class="co">]</span> = 0$, but the researcher *imposes* $\beta_0 = 0$ and fits the regression through the origin $\tilde y_i = \tilde\beta_1 x_i$.</span>
-<span id="cb33-686"><a href="#cb33-686" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-687"><a href="#cb33-687" aria-hidden="true" tabindex="-1"></a>(a) Derive the closed-form expression for $\tilde\beta_1 = \sum_i x_i y_i / \sum_i x_i^2$ as the minimiser of $\sum_i (y_i - \tilde\beta_1 x_i)^2$.</span>
-<span id="cb33-688"><a href="#cb33-688" aria-hidden="true" tabindex="-1"></a>(b) Show that $\mathbb{E}<span class="co">[</span><span class="ot">\tilde\beta_1</span><span class="co">]</span> = \beta_1 + \beta_0 \cdot \mathbb{E}<span class="co">[</span><span class="ot">x</span><span class="co">]</span> / \mathbb{E}<span class="co">[</span><span class="ot">x^2</span><span class="co">]</span>$, so $\tilde\beta_1$ is biased whenever $\beta_0 \neq 0$ and $\mathbb{E}<span class="co">[</span><span class="ot">x</span><span class="co">]</span> \neq 0$.</span>
-<span id="cb33-689"><a href="#cb33-689" aria-hidden="true" tabindex="-1"></a>(c) Under what specific condition on the population is the no-intercept slope nonetheless unbiased?</span>
-<span id="cb33-690"><a href="#cb33-690" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-691"><a href="#cb33-691" aria-hidden="true" tabindex="-1"></a>*A full answer is given in the Instructor Edition.*</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb33-677"><a href="#cb33-677" aria-hidden="true" tabindex="-1"></a>*A full answer is given in the Instructor Edition.*</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
