@@ -44,7 +44,7 @@
     "href": "index.html#how-to-use-the-source-materials",
     "title": "Econometrics I",
     "section": "How to use the source materials",
-    "text": "How to use the source materials\nThe textbook is built with Quarto. Each chapter is a .qmd file that combines prose, executable R code, and interactive quizzes. To rebuild the book locally:\nquarto render                  # English edition (default)\nquarto render --profile es     # Spanish edition",
+    "text": "How to use the source materials\nThe textbook is built with Quarto. Each chapter is a .qmd file that combines prose, executable R code, and interactive quizzes. To rebuild the book locally:\nquarto render                  # English edition (default)\nquarto render es               # Spanish edition",
     "crumbs": [
       "Preface"
     ]
