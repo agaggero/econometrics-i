@@ -354,14 +354,14 @@ These are **non-experimental** data: we simply observed ten students; we did not
 
 ### Describing the two variables
 
-For each variable we report the mean, standard deviation, minimum, and maximum.
+For each variable we summarise its centre and its spread.
 
 ```{r ch01-lab-describe}
 summary(grades)
 sapply(grades, sd)
 ```
 
-`summary()` gives the minimum, quartiles, mean, and maximum; `sd()` gives the standard deviation, a measure of how spread out the values are.
+`summary()` reports the five-number summary --- minimum, first quartile, median, third quartile, and maximum --- together with the mean; it does **not** include the standard deviation, so we compute that separately with `sd()`, a measure of how spread out the values are.
 
 ### The distribution of each variable
 
