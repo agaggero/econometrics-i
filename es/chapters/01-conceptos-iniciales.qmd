@@ -39,7 +39,7 @@ Ten presente el ejemplo del estudio y las notas: volveremos a él en la práctic
 - Gasto público $\Rightarrow$ Delincuencia
 - Publicidad $\Rightarrow$ Ventas
 
-En general escribimos $X \Rightarrow Y$, donde $X$ es la **variable independiente** (también llamada *regresor* o *variable explicativa*) e $Y$ es la **variable dependiente** (también llamada *variable de respuesta* o *resultado*). Para cualquier par de este tipo solemos querer saber tres cosas:
+En general escribimos $X \Rightarrow Y$, donde $X$ es la **variable independiente** (también llamada *regresor* o *variable explicativa*) e $Y$ es la **variable dependiente** (también llamada *variable de respuesta* o *resultado*). La flecha expresa el **objetivo** de la econometría: aprender cómo $X$ influye en $Y$. Que esa influencia resulte ser genuinamente *causal* o meramente una *correlación* es una de las preguntas centrales de este capítulo ---pero la flecha es la meta a la que siempre apuntamos. Para cualquier par de este tipo solemos querer saber tres cosas:
 
 1. ¿Existe una relación entre $X$ e $Y$?
 2. ¿La relación es positiva o negativa?
@@ -261,7 +261,7 @@ Los experimentos aleatorizados genuinos son rutinarios en medicina, pero **poco 
 
 ### Cuasiexperimentos
 
-Entre los experimentos "puros" y la observación pura hay un terreno intermedio útil. En un **cuasiexperimento**, la asignación al tratamiento *no* es aleatoria, pero sigue alguna regla **observable** ---a menudo un umbral o un criterio de elegibilidad que afecta a unas unidades y no a otras.
+Entre los experimentos "puros" y la observación pura hay un terreno intermedio útil. En un **cuasiexperimento**, la asignación al tratamiento *no* es aleatoria, pero tampoco la eligen los propios participantes: la impulsa alguna circunstancia externa y **observable** que el investigador puede aprovechar ---un cambio de política, un suceso natural o una regla administrativa como un umbral o un criterio de elegibilidad--- que resulta afectar a unas unidades y no a otras.
 
 ::: {.callout-note}
 ## Ejemplo: un confinamiento regional
@@ -356,14 +356,14 @@ Son datos **no experimentales**: simplemente observamos a diez estudiantes; no l
 
 ### Describir las dos variables
 
-Para cada variable indicamos la media, la desviación típica, el mínimo y el máximo.
+Para cada variable resumimos su centro y su dispersión.
 
 ```{r ch01-lab-describe}
 summary(notas)
 sapply(notas, sd)
 ```
 
-`summary()` da el mínimo, los cuartiles, la media y el máximo; `sd()` da la desviación típica, una medida de lo dispersos que están los valores.
+`summary()` ofrece el resumen de cinco números ---mínimo, primer cuartil, mediana, tercer cuartil y máximo--- junto con la media; **no** incluye la desviación típica, así que la calculamos aparte con `sd()`, una medida de lo dispersos que están los valores.
 
 ### La distribución de cada variable
 
@@ -378,6 +378,8 @@ hist(notas$nota, breaks = 6, col = "lightgreen",
      main = "Nota media", xlab = "Nota (0-10)")
 par(op)
 ```
+
+Con solo diez observaciones, estos histogramas son forzosamente toscos ---cada barra contiene apenas uno o dos estudiantes---, así que conviene tomarlos como un primer contacto con la herramienta y no como una imagen fiable de la distribución subyacente, que necesita muchos más datos para emerger.
 
 ### La relación entre ellas
 
@@ -397,6 +399,8 @@ cor(notas$estudio, notas$nota)
 ```
 
 La correlación es muy cercana a $+1$, lo que confirma una asociación fuerte, positiva y casi perfectamente lineal en estos datos (estilizados).
+
+Dos advertencias acompañan a este único número. En primer lugar, el coeficiente de correlación capta solo la fuerza de una asociación *lineal*: un valor cercano a cero significa que no hay relación *lineal*, **no** que las dos variables no estén relacionadas. Los salarios, por ejemplo, tienden a subir con la experiencia laboral y luego se estabilizan o caen cerca de la jubilación ---una relación fuerte pero curva (una U invertida) que una correlación próxima a cero pasaría por alto por completo. En segundo lugar, los datos económicos reales son mucho más desordenados que estos números estilizados: un diagrama de dispersión de salarios frente a educación (Apéndice A) es una nube difusa de puntos con una correlación más cercana a 0,4 que a 1. Aquí usamos números limpios solo para que el patrón ---y los comandos de R--- destaquen con claridad.
 
 ### Escribir un modelo econométrico
 

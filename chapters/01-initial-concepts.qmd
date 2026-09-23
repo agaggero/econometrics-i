@@ -39,7 +39,7 @@ Keep the studying-and-grades example in mind: we will return to it in the lab at
 - Government spending $\Rightarrow$ Crime
 - Advertising $\Rightarrow$ Sales
 
-In general we write $X \Rightarrow Y$, where $X$ is the **independent variable** (also called the *regressor* or *explanatory variable*) and $Y$ is the **dependent variable** (also called the *outcome* or *response*). For any such pair we usually want to know three things:
+In general we write $X \Rightarrow Y$, where $X$ is the **independent variable** (also called the *regressor* or *explanatory variable*) and $Y$ is the **dependent variable** (also called the *outcome* or *response*). The arrow captures the **objective** of econometrics: to learn how $X$ shapes $Y$. Whether that influence turns out to be genuinely *causal* or merely a *correlation* is one of the central questions of this chapter --- but the arrow is the goal we are always aiming at. For any such pair we usually want to know three things:
 
 1. Is there a relationship between $X$ and $Y$?
 2. Is the relationship positive or negative?
@@ -261,7 +261,7 @@ Genuine randomised experiments are routine in medicine but **rare in economics a
 
 ### Quasi-experiments
 
-A useful middle ground sits between "pure" experiments and pure observation. In a **quasi-experiment**, assignment to treatment is *not* random but follows some **observable** rule --- often a threshold or an eligibility cut-off that affects some units and not others.
+A useful middle ground sits between "pure" experiments and pure observation. In a **quasi-experiment**, assignment to treatment is *not* random, but neither is it chosen by the participants themselves: it is driven by some external, **observable** circumstance the researcher can exploit --- a policy change, a natural event, or an administrative rule such as a threshold or eligibility cut-off --- that happens to affect some units and not others.
 
 ::: {.callout-note}
 ## Example: a regional lockdown
@@ -354,14 +354,14 @@ These are **non-experimental** data: we simply observed ten students; we did not
 
 ### Describing the two variables
 
-For each variable we report the mean, standard deviation, minimum, and maximum.
+For each variable we summarise its centre and its spread.
 
 ```{r ch01-lab-describe}
 summary(grades)
 sapply(grades, sd)
 ```
 
-`summary()` gives the minimum, quartiles, mean, and maximum; `sd()` gives the standard deviation, a measure of how spread out the values are.
+`summary()` reports the five-number summary --- minimum, first quartile, median, third quartile, and maximum --- together with the mean; it does **not** include the standard deviation, so we compute that separately with `sd()`, a measure of how spread out the values are.
 
 ### The distribution of each variable
 
@@ -376,6 +376,8 @@ hist(grades$grade, breaks = 6, col = "lightgreen",
      main = "Average grade", xlab = "Grade (0-10)")
 par(op)
 ```
+
+With only ten observations these histograms are necessarily coarse --- each bar holds just one or two students --- so treat them as a first look at the tool rather than a trustworthy picture of the underlying distribution, which needs many more data points to emerge.
 
 ### The relationship between them
 
@@ -395,6 +397,8 @@ cor(grades$study, grades$grade)
 ```
 
 The correlation is very close to $+1$, confirming a strong, positive, and almost perfectly linear association in these (stylised) data.
+
+Two cautions travel with this single number. First, the correlation coefficient captures only the strength of a *linear* association: a value near zero means there is no *linear* relationship, **not** that the two variables are unrelated. Earnings, for example, tend to rise with work experience and then flatten or fall near retirement --- a strong but curved (inverted-U) relationship that a correlation close to zero would entirely miss. Second, real economic data are far messier than these stylised numbers: a scatter of wages against education (Appendix A) is a diffuse cloud with a correlation nearer $0.4$ than $1$. We use tidy numbers here only so that the pattern --- and the R commands --- stand out clearly.
 
 ### Writing down an econometric model
 
