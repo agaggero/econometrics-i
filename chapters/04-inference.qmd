@@ -36,7 +36,7 @@ The **standard error** $\operatorname{se}(\hat{\beta}_j)$ is the estimated stand
 The figure below makes the thought experiment concrete. Each of two thousand simulated samples produces its own slope estimate; the estimates pile up into a bell-shaped distribution centred on the true slope.
 
 ```{r ch04-fig-sampling}
-#| fig-cap: "Two thousand OLS slope estimates, each from an independently simulated sample of a fertility-style regression with true slope -0.139 (red line). The estimates pile up into a bell-shaped sampling distribution; its spread is what the standard error measures."
+#| fig-cap: "Two thousand OLS slope estimates, each from an independently simulated sample (illustrative, n = 200) of a fertility-style regression with true slope -0.139 (red line). The estimates pile up into a bell-shaped sampling distribution; its spread is what the standard error measures."
 set.seed(4)
 beta1_true <- -0.139
 n   <- 200
@@ -71,7 +71,7 @@ Gauss--Markov gave us unbiasedness, a closed-form variance and the BLUE property
 ::: {.callout-note}
 ## Definition: MLR.6 (Normality of the error term)
 
-Conditional on the regressors $\mathbf{X}$, the population error $u$ is independent of $\mathbf{X}$ and normally distributed with mean zero and constant variance:
+The population error $u$ is independent of the regressors $\mathbf{X}$ and normally distributed with mean zero and constant variance:
 
 $$
 u \mid \mathbf{X} \;\sim\; \mathcal{N}(0,\,\sigma^2).
@@ -124,7 +124,7 @@ legend("topright", bty = "n", lwd = 2, lty = c(1, 2),
        legend = c("N(0, 1)", expression(t[3])))
 ```
 
-It is because of these heavier tails that a 95% interval uses a $t$ critical value --- $2.013$ for $df = 45$, say --- rather than the familiar $1.96$ from the normal table, with the gap shrinking as the sample grows.
+It is because of these heavier tails that a 95% interval uses a $t$ critical value --- $2.014$ for $df = 45$, say --- rather than the familiar $1.96$ from the normal table, with the gap shrinking as the sample grows.
 
 ## Confidence intervals
 
@@ -494,7 +494,7 @@ $$
 \widehat{wage} = -2.822 + 0.413\,looks + 0.457\,educ + 0.114\,exper.
 $$
 
-Holding schooling and experience fixed, a one-point increase in the looks rating is associated with about $\$0.41$ more per hour; an extra year of schooling with about $\$0.46$. The $R^2$ is $0.1265$, so these three regressors together explain roughly 12.6% of the variation in wages --- a large step up from the 1--2% that `looks` alone explained in Chapter 2, but still a reminder that wages depend on much more than we have measured.
+Holding schooling and experience fixed, a one-point increase in the looks rating is associated with about $\$0.41$ more per hour; an extra year of schooling with about $\$0.46$. The $R^2$ is $0.1265$, so these three regressors together explain roughly 12.6% of the variation in wages --- a large step up from the near-flat fit that `looks` alone produced in Chapter 2, but still a reminder that wages depend on much more than we have measured.
 
 ### A manual 95% confidence interval for `looks`
 
