@@ -2,34 +2,766 @@
 title: "Inferencia"
 ---
 
-::: {.callout-note}
-## Traducción en preparación
-Este capítulo forma parte de la edición española (*Econometría I*) y todavía
-está por traducir. La estructura reproduce la plantilla de seis secciones del
-libro; el contenido se trasladará del capítulo original en inglés
-(`chapters/04-inference.qmd`).
-:::
 
 ## Resultados de aprendizaje {.unnumbered}
 
-<!-- TODO: traducir de "Learning outcomes". -->
+Al terminar este capítulo, el lector debería ser capaz de:
+
+- Explicar por qué una estimación $\hat{\beta}_j$ está sujeta a **incertidumbre muestral**, y leer el error estándar como la dispersión de la distribución muestral del estimador.
+- Enunciar los supuestos del modelo lineal clásico (RLM.1--RLM.6) y explicar qué añade el supuesto de normalidad RLM.6 a Gauss--Markov.
+- Derivar la distribución muestral de $\hat{\beta}_j$ bajo el MLC y explicar por qué la estandarización produce un estadístico $t_{n-k-1}$ en lugar de una normal estándar.
+- Construir e interpretar un intervalo de confianza al $(1-\alpha)\times 100\%$ para un coeficiente individual, y hallar el valor crítico $t_c$ en la tabla $t$.
+- Realizar un contraste de hipótesis en cuatro pasos (bilateral y unilateral) para un único coeficiente, y leer el valor $p$ correspondiente.
+- Llevar a cabo un contraste $F$ de significación conjunta, distinguiendo el contraste $F$ global de una comparación entre modelo restringido y no restringido.
+- Reproducir todo lo anterior en R sobre la regresión salarial `beauty`, usando `summary()`, `confint()`, `qt()`, `pt()`, `anova()` y aritmética manual sobre el modelo ajustado.
 
 ## Pregunta empírica motivadora {.unnumbered}
 
-<!-- TODO -->
+> *Una regresión simple de la fecundidad completada sobre la escolarización da una pendiente de $-0{,}139$: en esta muestra, las mujeres con más educación tienen menos hijos. Pero si extrajéramos una muestra distinta, ¿obtendríamos de nuevo $-0{,}139$ ---o podría ser que la verdadera pendiente poblacional fuese $0$, y que $-0{,}139$ no fuera más que el azar del muestreo?*
 
-## Teoría
+Toda estimación de este curso se calcula a partir de *una sola* muestra, y una muestra distinta habría dado un número distinto. La inferencia es la disciplina que convierte una única estimación en una afirmación creíble sobre el parámetro poblacional desconocido que hay detrás. Las herramientas del capítulo ---el error estándar, los intervalos de confianza, los estadísticos $t$, los valores $p$ y el contraste $F$--- están pensadas precisamente para esa tarea. Responderemos directamente a la pregunta sobre la fecundidad y, en la práctica, aplicaremos la misma maquinaria a la regresión salarial `beauty` que vimos en el Capítulo 2 y a la que volveremos en el Capítulo 6.
 
-<!-- TODO -->
+## De la estimación a la inferencia
 
-## Ejemplo resuelto en R
+`\lettrine[lines=3]{T}{oda estimación}`{=latex}`<span class="dropcap">T</span>oda estimación`{=html} puntual de los Capítulos 2 y 3 se calculó a partir de una única muestra y es, por tanto, **aleatoria**: si extraemos otra muestra de la misma población, la aritmética devuelve un número distinto. Esta es la cuestión de fondo. El coeficiente poblacional $\beta_j$ es un rasgo *fijo y desconocido* del mundo; el estimador $\hat{\beta}_j$ es una magnitud *aleatoria* que varía de una muestra a otra. La inferencia es el estudio de esa variación de muestra a muestra.
 
-<!-- TODO -->
+Imaginemos ---como experimento mental--- que extraemos muchas muestras independientes y estimamos la misma regresión en cada una. Las estimaciones no coinciden todas; se dispersan. Reunidas forman la **distribución muestral** de $\hat{\beta}_j$: bajo RLM.1--RLM.4 está centrada en el verdadero $\beta_j$ (MCO es insesgado), y su dispersión mide cuánto se mueve típicamente $\hat{\beta}_j$ cuando cambia la muestra. Esa dispersión tiene nombre.
+
+::: {.callout-note}
+## Definición: el error estándar
+
+El **error estándar** $\operatorname{se}(\hat{\beta}_j)$ es la desviación típica estimada de la distribución muestral de $\hat{\beta}_j$ ---una medida de cuánto variaría la estimación de una muestra aleatoria a la siguiente. Una distribución muestral *más ancha* significa un error estándar *mayor* y una estimación *menos precisa*.
+:::
+
+La figura siguiente hace concreto el experimento mental. Cada una de dos mil muestras simuladas produce su propia estimación de la pendiente; las estimaciones se acumulan en una distribución con forma de campana centrada en la pendiente verdadera.
+
+```{r ch04-fig-sampling}
+#| fig-cap: "Dos mil estimaciones MCO de la pendiente, cada una a partir de una muestra simulada de forma independiente (ilustrativo, n = 200) de una regresión de tipo fecundidad con pendiente verdadera -0,139 (línea roja). Las estimaciones se acumulan en una distribución muestral con forma de campana; su dispersión es lo que mide el error estándar."
+set.seed(4)
+beta1_true <- -0.139
+n   <- 200
+reps <- 2000
+bhat <- numeric(reps)
+for (r in 1:reps) {
+  x <- rnorm(n, mean = 12, sd = 3)      # p. ej., años de escolarización
+  u <- rnorm(n, mean = 0,  sd = 2)      # factores no observados
+  y <- 4.51 + beta1_true * x + u
+  bhat[r] <- coef(lm(y ~ x))[2]
+}
+hist(bhat, breaks = 40, freq = FALSE,
+     col = "lightblue", border = "white",
+     main = "Distribución muestral de la pendiente MCO",
+     xlab = expression(hat(beta)[1]))
+curve(dnorm(x, mean = mean(bhat), sd = sd(bhat)),
+      add = TRUE, col = "navy", lwd = 2)
+abline(v = beta1_true, col = "firebrick", lwd = 2)
+```
+
+Conocer el *centro* y la *dispersión* de la distribución muestral todavía no basta: para calcular probabilidades ---"¿qué probabilidad hay de obtener una estimación tan alejada de cero si la verdad fuera cero?"--- necesitamos su *forma*. Una vez que la tenemos, la inferencia estadística ofrece dos herramientas complementarias [@wooldridge2020], ambas construidas con los mismos dos ingredientes, $\hat{\beta}_j$ y $\operatorname{se}(\hat{\beta}_j)$:
+
+1. **Intervalos de confianza.** Un rango de valores plausibles para el $\beta_j$ desconocido, con una probabilidad de cobertura a largo plazo calibrada.
+2. **Contrastes de hipótesis** (contrastes $t$ y contrastes $F$). Un procedimiento formal para decidir si una afirmación concreta sobre $\beta_j$ es compatible con los datos.
+
+El siguiente supuesto aporta la forma que falta.
+
+## Los supuestos del modelo lineal clásico (MLC)
+
+Gauss--Markov nos dio la insesgadez, una varianza en forma cerrada y la propiedad BLUE de MCO. Para la inferencia exacta (en muestras finitas) necesitamos un supuesto más.
+
+::: {.callout-note}
+## Definición: RLM.6 (normalidad del término de error)
+
+El error poblacional $u$ es independiente de los regresores $\mathbf{X}$ y se distribuye normalmente con media cero y varianza constante:
+
+$$
+u \mid \mathbf{X} \;\sim\; \mathcal{N}(0,\,\sigma^2).
+$$
+
+Al conjunto completo RLM.1--RLM.6 se le llama **supuestos del modelo lineal clásico (MLC)**.
+:::
+
+¿Por qué la normalidad, y de dónde sale? En muchos contextos aplicados $u$ es la suma de un gran número de factores omitidos, pequeños e independientes, y un argumento heurístico de tipo límite central sugiere que su distribución debería ser aproximadamente acampanada. El supuesto es fuerte: puede fallar estrepitosamente con resultados asimétricos como los salarios o los recuentos. Veremos en el Capítulo 6 que tomar el $\log$ de la variable dependiente suele ayudar mucho a que los residuos parezcan simétricos.
+
+La recompensa es grande. Bajo RLM.1--RLM.6 el estimador MCO hereda la normalidad de $u$:
+
+$$
+\hat{\beta}_j \mid \mathbf{X} \;\sim\; \mathcal{N}\!\left(\beta_j,\,\operatorname{Var}(\hat{\beta}_j)\right).
+$$
+
+Es una afirmación *exacta* que se cumple con cualquier tamaño muestral, no solo asintóticamente. Con $n$ grande, el teorema central del límite ofrece aproximadamente la misma conclusión incluso sin RLM.6, pero solo el MLC nos da inferencia exacta en muestras pequeñas.
+
+::: {.callout-warning}
+## Error habitual: confundir la normalidad de $u$ con la normalidad de $y$
+
+RLM.6 es una afirmación sobre el *error* $u$, condicional a los regresores. *No* es la afirmación de que la distribución marginal de $y$ sea normal. Los salarios, por ejemplo, son asimétricos por la derecha; eso no contradice por sí solo RLM.6, porque la componente sistemática $\beta_0 + \beta_1 x_1 + \cdots$ puede absorber la asimetría.
+:::
+
+## La distribución $t$
+
+Si $\sigma^2$ fuera conocida, podríamos estandarizar $\hat{\beta}_j$ directamente:
+
+$$
+Z \;=\; \frac{\hat{\beta}_j - \beta_j}{\sqrt{\operatorname{Var}(\hat{\beta}_j)}} \;\sim\; \mathcal{N}(0,1).
+$$
+
+En la práctica $\sigma^2$ es desconocida y se sustituye por el estimador MCO $\hat{\sigma}^2 = \mathrm{SCR}/(n-k-1)$. Al introducir $\hat{\sigma}^2$ en el error estándar aparece una fuente adicional de variabilidad, y el estadístico estandarizado ya no es normal estándar: sigue una **distribución $t$** con $n-k-1$ grados de libertad,
+
+$$
+t \;=\; \frac{\hat{\beta}_j - \beta_j}{\operatorname{se}(\hat{\beta}_j)} \;\sim\; t_{\,n-k-1}.
+$$
+
+Aquí $k$ es el número de regresores *excluyendo* el término constante, de modo que se estiman $k+1$ coeficientes y queda información equivalente a $n-k-1$ observaciones. La distribución $t$ es simétrica, acampanada y centrada en cero, pero tiene **colas más pesadas** que $\mathcal{N}(0,1)$ ---reflejo de la incertidumbre adicional de estimar $\sigma^2$. A medida que crecen los grados de libertad, las colas se adelgazan y $t_{n-k-1}$ converge a $\mathcal{N}(0,1)$: para $n-k-1 \geq 120$ ambas son prácticamente indistinguibles, mientras que en muestras pequeñas la $t$ es apreciablemente más ancha.
+
+```{r ch04-fig-normal-t}
+#| fig-cap: "Normal estándar frente a la t de Student con 3 grados de libertad. Ambas comparten la misma forma de campana, pero la t sitúa más probabilidad en las colas; a medida que crecen los grados de libertad las curvas se vuelven indistinguibles."
+x <- seq(-4, 4, length.out = 400)
+plot(x, dnorm(x), type = "l", lwd = 2, col = "navy",
+     xlab = "t", ylab = "Densidad",
+     main = "Normal estándar frente a t de Student")
+lines(x, dt(x, df = 3), lwd = 2, lty = 2, col = "firebrick")
+legend("topright", bty = "n", lwd = 2, lty = c(1, 2),
+       col = c("navy", "firebrick"),
+       legend = c("N(0, 1)", expression(t[3])))
+```
+
+Es por estas colas más pesadas por lo que un intervalo del 95 % usa un valor crítico $t$ ---por ejemplo, $2{,}014$ para $df = 45$--- en lugar del familiar $1{,}96$ de la tabla normal, con una diferencia que se reduce a medida que crece la muestra.
+
+## Intervalos de confianza
+
+Una estimación puntual da un único número pero oculta su incertidumbre. Un intervalo de confianza lo remedia dando un *rango* de valores plausibles para $\beta_j$. La idea es la misma que subyace a toda estimación por intervalo:
+
+$$
+\text{estimación} \;\pm\; \text{margen de error}.
+$$
+
+La estimación ocupa el centro; el margen de error se construye a partir del error estándar, de modo que una distribución muestral *más ancha* da un intervalo *más ancho*. Precisar esta idea conduce a la fórmula siguiente.
+
+::: {.callout-note}
+## Definición: intervalo de confianza para $\beta_j$
+
+Un intervalo de confianza al $(1-\alpha)\times 100\%$ para $\beta_j$ es
+
+$$
+\hat{\beta}_j \;\pm\; t_c\,\cdot\,\operatorname{se}(\hat{\beta}_j),
+\qquad t_c = t_{\alpha/2,\,n-k-1},
+$$
+
+donde $\alpha$ es el **nivel de significación** y $t_c$ es el valor crítico de la distribución $t$ que deja probabilidad $\alpha/2$ en cada cola.
+:::
+
+Para el intervalo canónico del 95 %, $\alpha = 0{,}05$ y el valor crítico es $t_{0{,}025,\,n-k-1}$. Con muestras moderadamente grandes está cerca de $1{,}96$, pero en muestras pequeñas puede ser apreciablemente mayor. Hallar $t_c$ es un procedimiento breve y mecánico.
+
+::: {.callout-note}
+## Cómo hallar el valor crítico $t_c$
+
+El valor crítico depende de tres cosas: el nivel de significación $\alpha$, el número de colas y los grados de libertad.
+
+1. **Elegir el nivel de significación** $\alpha = 1 - \text{nivel de confianza}$. Para un intervalo del 95 %, $\alpha = 1 - 0{,}95 = 0{,}05$.
+2. **Decidir si es unilateral o bilateral.** Un intervalo o contraste bilateral reparte $\alpha$ entre las dos colas, así que se usa $\alpha/2$; un contraste unilateral usa $\alpha$. Para un intervalo bilateral al 5 %, $\alpha/2 = 0{,}025$.
+3. **Calcular los grados de libertad** $df = n-k-1$.
+4. **Leer la tabla $t$.** Busca la fila de $df$ y la columna de la probabilidad de la cola ($\alpha$ si es unilateral, $\alpha/2$ si es bilateral). La tabla de valores críticos de $t$ está en el Apéndice C.
+:::
+
+::: {.callout-warning}
+## Error habitual: malinterpretar el "95 %"
+
+Un intervalo de confianza del 95 % es una afirmación sobre el **procedimiento**, no sobre el intervalo concreto que hemos obtenido. Si extrajéramos muchas muestras independientes y construyéramos un intervalo a partir de cada una, en torno al 95 % de esos intervalos contendrían el verdadero $\beta_j$. **No** es correcto decir que hay una probabilidad del 95 % de que el intervalo concreto $[L, U]$ que hemos calculado con nuestra única muestra contenga $\beta_j$: una vez calculado, $\beta_j$ es un número fijo (aunque desconocido), y este intervalo lo cubre o no lo cubre. El 95 % es una propiedad del método, no de ningún intervalo concreto.
+:::
+
+::: {.callout-note}
+## Ejemplo: un intervalo del 95 % para la pendiente de fecundidad
+
+Un modelo simple relaciona la fecundidad completada con la escolarización, $\text{children} = \beta_0 + \beta_1\,\text{educ} + u$. Una muestra da (errores estándar debajo):
+
+$$
+\widehat{\text{children}} \;=\; \underset{(0{,}23)}{4{,}51} \;-\; \underset{(0{,}018)}{0{,}139}\,\text{educ},
+\qquad n = 1129.
+$$
+
+Para un intervalo bilateral del 95 %, $\alpha/2 = 0{,}025$ y $df = n-k-1 = 1129-1-1 = 1127$, así que $t_c \approx 1{,}96$. El intervalo para $\beta_1$ es
+
+$$
+-0{,}139 \;\pm\; 1{,}96 \times 0{,}018 \;=\; -0{,}139 \pm 0{,}0353 \;=\; [\,-0{,}174,\ -0{,}104\,].
+$$
+
+Con un 95 % de confianza, este procedimiento encierra $\beta_1$ en un rango de valores enteramente *negativos*. El intervalo excluye el $0$, un hecho sobre el que volvemos más abajo.
+:::
+
+## El contraste de hipótesis en cuatro pasos
+
+Un intervalo de confianza resume *todos* los valores de $\beta_j$ que los datos consideran plausibles. A menudo, sin embargo, queremos evaluar una afirmación concreta ---lo más habitual, que un coeficiente sea igual a cero (la variable "no importa"), o de forma más general que $\beta_j = c$ para cierto valor $c$ fijado por la teoría. Un contraste de hipótesis plantea una única pregunta directa:
+
+> *Si esta afirmación fuera verdadera, ¿resultaría sorprendente nuestra estimación muestral?*
+
+Para responderla comparamos $\hat{\beta}_j$ con el valor afirmado $c$, medido en unidades de error estándar. Esa distancia es el **estadístico $t$**,
+
+$$
+t \;=\; \frac{\hat{\beta}_j - c}{\operatorname{se}(\hat{\beta}_j)}.
+$$
+
+Un $|t|$ grande significa que una estimación tan alejada de $c$ como la que hemos obtenido sería inusual si $\beta_j = c$ fuera realmente cierto ---evidencia en contra de la afirmación. Lo hacemos operativo en cuatro pasos.
+
+**Paso 1. Enunciar $H_0$ y $H_1$.** La **hipótesis nula** fija un valor, siempre como una igualdad, y el contraste se realiza *suponiendo que $H_0$ es verdadera*:
+
+$$
+H_0:\ \beta_j = c.
+$$
+
+La **hipótesis alternativa** es la desigualdad complementaria, en una de tres formas:
+
+- *Bilateral:* $H_1: \beta_j \neq c$.
+- *Unilateral por la derecha:* $H_1: \beta_j > c$.
+- *Unilateral por la izquierda:* $H_1: \beta_j < c$.
+
+La elección entre unilateral y bilateral la dicta la **teoría económica**, no los datos: si la teoría nos dice a priori que $\beta_j$ no puede ser positivo, un contraste unilateral por la izquierda es lo apropiado. La conclusión es siempre *rechazar $H_0$* o *no rechazar $H_0$* ---nunca "aceptamos" $H_1$.
+
+**Paso 2. Hallar el valor crítico.** Elegir $\alpha$ (por defecto $0{,}05$) y leer $t_c$ en la tabla $t$ con $n-k-1$ grados de libertad, usando la probabilidad de la cola del caso correspondiente: $\alpha/2$ para un contraste bilateral, $\alpha$ para un contraste unilateral (véase el Apéndice C).
+
+**Paso 3. Calcular el estadístico $t$.**
+
+$$
+t \;=\; \frac{\hat{\beta}_j - c}{\operatorname{se}(\hat{\beta}_j)}.
+$$
+
+Para el caso por defecto $c = 0$ esto se reduce a $t = \hat{\beta}_j / \operatorname{se}(\hat{\beta}_j)$, que es exactamente el número que R da en la tercera columna de `summary(lm(...))`.
+
+**Paso 4. Comparar y concluir.** Aplicar la regla de rechazo para la $H_1$ elegida:
+
+| caso | $H_1$ | se rechaza $H_0$ si |
+|---|---|---|
+| Cola derecha | $\beta_j > c$ | $t > t_c$, con $t_c = t_{\alpha,\,n-k-1}$ |
+| Cola izquierda | $\beta_j < c$ | $t < -t_c$, con $t_c = t_{\alpha,\,n-k-1}$ |
+| Dos colas | $\beta_j \neq c$ | $\lvert t\rvert > t_c$, con $t_c = t_{\alpha/2,\,n-k-1}$ |
+
+```{r ch04-fig-rejection}
+#| fig-cap: "La región de rechazo bilateral al 5 %. Un estadístico que caiga en cualquiera de las dos colas sombreadas rechaza la hipótesis nula; con muchos grados de libertad los valores críticos son los valores de la normal estándar ±1,96 que se muestran aquí."
+x <- seq(-4, 4, length.out = 400)
+plot(x, dnorm(x), type = "l", lwd = 2, col = "navy",
+     xlab = "estadístico t", ylab = "Densidad",
+     main = "Región de rechazo bilateral al 5 %")
+tc <- 1.96
+xl <- seq(-4, -tc, length.out = 120)
+polygon(c(xl, rev(xl)), c(dnorm(xl), rep(0, length(xl))),
+        col = rgb(0.70, 0.10, 0.10, 0.45), border = NA)
+xr <- seq(tc, 4, length.out = 120)
+polygon(c(xr, rev(xr)), c(dnorm(xr), rep(0, length(xr))),
+        col = rgb(0.70, 0.10, 0.10, 0.45), border = NA)
+abline(v = c(-tc, tc), col = "firebrick", lwd = 1.5, lty = 2)
+text(c(-tc, tc), 0.03, labels = c("-1.96", "1.96"),
+     pos = c(2, 4), cex = 0.9)
+```
+
+Si se rechaza $H_0$ decimos que el coeficiente es *estadísticamente significativo* al nivel $\alpha$. Si no podemos rechazarla, decimos que los datos son *compatibles con* $H_0$ ---nunca que la hemos "demostrado".
+
+::: {.callout-note}
+## Ejemplo: ¿es negativa la pendiente de fecundidad?
+
+Tomamos las mismas estimaciones de fecundidad. La teoría sugiere que la escolarización no *aumenta* la fecundidad, así que contrastamos frente a una alternativa *negativa* ---un contraste de **cola izquierda**:
+
+$$
+H_0:\ \beta_1 = 0 \qquad\text{vs.}\qquad H_1:\ \beta_1 < 0.
+$$
+
+- **Paso 2.** $df = 1129-1-1 = 1127$ y $\alpha = 0{,}05$ en *una* cola, así que de la tabla $t$ se obtiene $t_c \approx 1{,}645$.
+- **Paso 3.** $\displaystyle t = \frac{-0{,}139 - 0}{0{,}018} = -7{,}72.$
+- **Paso 4 (cola izquierda, se rechaza si $t < -t_c$).** $-7{,}72 < -1{,}645$, así que **rechazamos $H_0$**.
+
+Al nivel del 5 % $\hat{\beta}_1$ es estadísticamente significativo: los datos son difíciles de conciliar con $\beta_1 = 0$.
+:::
+
+¿Qué nos aporta realmente rechazar $H_0$ aquí? Dice que, dada la incertidumbre muestral, $\beta_1 = 0$ es implausible ---la *asociación negativa* estimada entre escolarización y fecundidad es distinguible de cero. **No** dice que la escolarización *cause* una menor fecundidad (no hay identificación causal en una sola regresión de este tipo), ni que el resultado se traslade automáticamente a otras poblaciones, ni nada sobre el *tamaño* del efecto. Esas son cuestiones aparte, que abordamos más abajo y en capítulos posteriores.
+
+::: {.callout-warning}
+## Error habitual: "no rechazar" no es "demostrar $H_0$"
+
+Cuando $|t|$ es pequeño **no rechazamos** $H_0$. La lectura correcta es "los datos no aportan suficiente evidencia en contra de $H_0$", **no** "hemos demostrado que $H_0$ es verdadera". Un $|t|$ pequeño puede deberse simplemente a que la muestra es demasiado pequeña o demasiado ruidosa para detectar una desviación respecto de $c$ ---la ausencia de evidencia no es evidencia de ausencia.
+:::
+
+## Intervalos de confianza y contrastes bilaterales
+
+Los intervalos de confianza y los contrastes bilaterales no son dos procedimientos distintos; son dos vistas de la misma comparación.
+
+::: {.callout-note}
+## Equivalencia
+
+Para un contraste bilateral de $H_0:\beta_j = c$ al nivel $\alpha$,
+
+$$
+\text{rechazar } H_0 \quad\Longleftrightarrow\quad c \text{ queda fuera del intervalo de confianza } (1-\alpha).
+$$
+:::
+
+El intervalo del 95 % para la fecundidad era $[-0{,}174,\ -0{,}104]$. ¿Contiene el $0$? No ---así que el contraste bilateral de $H_0:\beta_1 = 0$ rechaza al nivel del 5 %, sin aritmética adicional.
+
+::: {.callout-warning}
+## Atención: ¿qué contraste es este?
+
+Nuestro contraste resuelto de $H_0:\beta_1 = 0$ de arriba era **unilateral** ($H_1:\beta_1 < 0$, $t_c = 1{,}645$). La equivalencia que acabamos de enunciar es para el contraste **bilateral** ($H_1:\beta_1 \neq 0$, $t_c = 1{,}96$). Ambos rechazan aquí, pero son contrastes *distintos* ---solo el bilateral se corresponde con el intervalo de confianza del 95 %.
+:::
+
+## El valor $p$
+
+El procedimiento en cuatro pasos nos obliga a fijar $\alpha$ de antemano. Una alternativa más informativa es dar el valor $p$.
+
+::: {.callout-note}
+## Definición: valor $p$
+
+El valor $p$ es la probabilidad, calculada *bajo $H_0$*, de observar un estadístico de contraste al menos tan extremo como el que hemos obtenido. De forma equivalente, es el *menor* nivel de significación $\alpha$ al que rechazaríamos $H_0$.
+:::
+
+Para un contraste bilateral de $H_0:\beta_j = 0$ con estadístico calculado $t$,
+
+$$
+p \;=\; 2 \cdot \Pr\!\left(T_{n-k-1} > |t|\right),
+$$
+
+y para un contraste unilateral el valor $p$ es la mitad de esto (cuando el signo de $\hat{\beta}_j$ concuerda con la alternativa). La regla de decisión es simplemente
+
+$$
+p < \alpha \;\Rightarrow\; \text{rechazar}, \qquad p \geq \alpha \;\Rightarrow\; \text{no rechazar}.
+$$
+
+Reglas prácticas convencionales [@wooldridge2020]: $p < 0{,}01$ es evidencia fuerte en contra de $H_0$; $p < 0{,}05$ es evidencia en contra; $p < 0{,}10$ es evidencia débil; $p \geq 0{,}10$ es insuficiente para rechazar. R da por defecto los valores $p$ bilaterales en la columna `Pr(>|t|)` de `summary(lm(...))`, con asteriscos de significación (`***` para $p < 0{,}001$, `**` para $p < 0{,}01$, `*` para $p < 0{,}05$, `.` para $p < 0{,}10$).
+
+::: {.callout-warning}
+## Error habitual: el valor $p$ no es la probabilidad de que $H_0$ sea verdadera
+
+Un valor $p$ de $0{,}024$ **no** significa "hay una probabilidad del 2,4 % de que $H_0$ sea verdadera". El valor $p$ se calcula *suponiendo* que $H_0$ es verdadera; es una afirmación sobre los datos bajo la nula, no una probabilidad asignada a la propia nula. Un valor $p$ pequeño tampoco certifica causalidad: nos dice que es improbable que $\hat{\beta}_j$ haya surgido por ruido muestral si la verdad fuera cero, pero no dice nada sobre si $x_j$ *causa* $y$. La interpretación causal sigue requiriendo el supuesto poblacional $\mathbb{E}[u \mid \mathbf{X}] = 0$ (RLM.4) ---ningún valor $p$, por pequeño que sea, puede salvar una regresión contaminada por sesgo de variable omitida o causalidad inversa.
+:::
+
+## Significación estadística frente a significación económica
+
+La significación estadística y la significación *económica* (práctica) son cuestiones distintas, y un buen análisis empírico siempre se plantea las dos.
+
+- La **significación estadística** pregunta: ¿podemos distinguir el coeficiente de cero? Esto lo determina el error estándar y, por tanto, el valor $p$.
+- La **significación económica** pregunta: ¿es el *tamaño* del coeficiente lo bastante grande como para importar en la decisión en cuestión?
+
+Las dos pueden divergir porque una muestra muy grande reduce $\operatorname{se}(\hat{\beta}_j)$, de modo que incluso un coeficiente *diminuto* puede ser estadísticamente significativo. Un $\hat{\beta} = 0{,}0004$ estimado con precisión puede ser "significativamente distinto de cero" y, aun así, económicamente despreciable.
+
+::: {.callout-warning}
+## Error habitual: leer la significación como importancia
+
+Un coeficiente puede ser estadísticamente significativo (valor $p$ pequeño) pero económicamente trivial, y un coeficiente puede ser económicamente grande pero estadísticamente no significativo en una muestra pequeña. Conviene informar siempre de ambas cosas: la *magnitud* de $\hat{\beta}_j$ en las unidades del problema y la precisión con que está estimado. Un rendimiento del 1 % y uno del 10 % por un año de escolarización pueden ser ambos "significativos" en una muestra grande, pero solo uno de ellos es relevante para la política.
+:::
+
+## El contraste $F$ de significación conjunta
+
+Los contrastes $t$ de un solo coeficiente son la herramienta adecuada cuando tenemos un parámetro en mente. A menudo, sin embargo, la pregunta es sobre **varios** coeficientes a la vez. Para
+
+$$
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + u,
+$$
+
+podríamos querer contrastar
+
+$$
+H_0:\ \beta_2 = 0 \ \text{ y }\ \beta_3 = 0
+$$
+
+frente a la alternativa de que *al menos uno* de ellos es no nulo. Esto **no** es lo mismo que dos contrastes $t$ separados: realizar $q$ contrastes separados infla la tasa de error global, y dos regresores pueden ser conjuntamente informativos aun cuando cada uno sea individualmente dudoso. Nos preguntamos si $x_2$ y $x_3$ importan *juntos*.
+
+### Modelos restringido y no restringido
+
+La lógica es una comparación de ajuste. El modelo **no restringido** mantiene todos los regresores; el modelo **restringido** impone $H_0$ eliminando los que se fijan en cero. Eliminar variables nunca puede mejorar el ajuste, así que la suma de cuadrados de los residuos del modelo restringido es al menos tan grande como la del no restringido,
+
+$$
+\mathrm{SCR}_R \;\geq\; \mathrm{SCR}_U.
+$$
+
+La cuestión es si imponer $H_0$ nos cuesta *mucho* ajuste. Si la restricción eleva la SCR solo ligeramente, los datos están cómodos con $H_0$; si la eleva mucho, la restricción es difícil de conciliar con los datos. El estadístico $F$ convierte ese "cuánto peor" en un número que podemos contrastar.
+
+::: {.callout-note}
+## Definición: el estadístico $F$
+
+Bajo $H_0$ y RLM.1--RLM.6, con $q$ restricciones,
+
+$$
+F \;=\; \frac{(\mathrm{SCR}_R - \mathrm{SCR}_U)/q}{\mathrm{SCR}_U/(n-k-1)} \;\sim\; F_{q,\,n-k-1}.
+$$
+
+Aquí $q$ son los grados de libertad del **numerador** (el número de restricciones) y $n-k-1$ los grados de libertad del **denominador**. Se rechaza $H_0$ al nivel $\alpha$ si $F > F_c$, el valor crítico que deja una probabilidad $\alpha$ en la cola superior de $F_{q,\,n-k-1}$ (véase el Apéndice C).
+:::
+
+El contraste sigue los mismos cuatro pasos de antes: enunciar $H_0$ (las restricciones) y $H_1$ (no $H_0$); hallar $F_c$; calcular $F$; comparar, rechazando cuando $F > F_c$. Una fórmula equivalente usa el $R^2$ de cada modelo,
+
+$$
+F \;=\; \frac{(R^2_U - R^2_R)/q}{(1 - R^2_U)/(n-k-1)}.
+$$
+
+Las dos fórmulas son algebraicamente idénticas **siempre que la variable dependiente sea la misma** en ambas regresiones. Divergen si el modelo restringido cambia el lado izquierdo (por ejemplo, un $F$ que compara un modelo en $\log y$ con uno en $y$), caso que la forma del $R^2$ *no* cubre.
+
+::: {.callout-note}
+## Ejemplo: un contraste conjunto sobre planes de pensiones
+
+La tasa de participación en el plan de pensiones de una empresa, *prate*, se regresa sobre la tasa de aportación del empleador *mrate*, la antigüedad del plan *age* y el tamaño de la empresa *totemp*:
+
+$$
+prate = \beta_0 + \beta_1\,mrate + \beta_2\,age + \beta_3\,totemp + u, \qquad n = 1534.
+$$
+
+¿Importan *age* y *totemp* **conjuntamente**, dado *mrate*? Contrastamos $H_0:\ \beta_2 = \beta_3 = 0$ frente a $H_1:$ no $H_0$, de modo que $q = 2$.
+
+- **Paso 2.** $n-k-1 = 1534-3-1 = 1530$ y $\alpha = 0{,}05$, así que $F_c = F_{2,1530} \approx 3$.
+- **Los dos modelos** (ajustes y sumas de cuadrados de los residuos):
+
+$$
+\begin{aligned}
+\text{No restringido:}\quad \widehat{prate} &= 80{,}29 + 5{,}44\,mrate + 0{,}26\,age - 0{,}0001\,totemp,
+& \mathrm{SCR}_U &= 385719,\\[2pt]
+\text{Restringido:}\quad \widehat{prate} &= 87{,}36 + 5{,}82\,mrate,
+& \mathrm{SCR}_R &= 428385{,}5.
+\end{aligned}
+$$
+
+- **Paso 3.**
+$$
+F = \frac{(\mathrm{SCR}_R - \mathrm{SCR}_U)/q}{\mathrm{SCR}_U/(n-k-1)}
+= \frac{(428385{,}5 - 385719)/2}{385719/1530}
+= \frac{21333{,}25}{252{,}10}
+= 84{,}62.
+$$
+- **Paso 4.** $84{,}62 > 3$, así que **rechazamos $H_0$**: los datos aportan evidencia fuerte de que *age* y *totemp* son conjuntamente relevantes para *prate*, condicionando en *mrate*.
+:::
+
+El resultado de un contraste no es una regla automática para "mantener" o "eliminar" variables. Qué regresores deben figurar en un modelo lo guían la teoría, la identificación y la pregunta de investigación ---el contraste $F$ solo nos dice si los datos pueden distinguir el modelo restringido del no restringido.
+
+### El contraste $F$ global
+
+Un caso especial contrasta que **todas** las pendientes son cero,
+
+$$
+H_0:\ \beta_1 = \beta_2 = \cdots = \beta_k = 0,
+$$
+
+frente a la alternativa de que al menos una pendiente es no nula. El modelo restringido es entonces la regresión sobre una constante sola, de modo que $R^2_R = 0$ y el estadístico se reduce a
+
+$$
+F \;=\; \frac{R^2/k}{(1-R^2)/(n-k-1)}.
+$$
+
+Esto pregunta si los regresores son *conjuntamente informativos* en relación con un modelo de solo término constante; es exactamente el número que R imprime en la línea final "F-statistic" de `summary(lm(...))`, junto con su valor $p$.
+
+::: {.callout-warning}
+## Error habitual: sobreinterpretar un $F$ global significativo
+
+Rechazar la nula global significa que los regresores explican *conjuntamente* $y$ mejor que la media sola. **No** establece:
+
+- causalidad,
+- especificación correcta,
+- buena predicción fuera de la muestra,
+- importancia económica,
+- ni que *cada* coeficiente individual sea significativo.
+
+Un $F$ global significativo es un punto de partida para el análisis, no un certificado de que el modelo sea "bueno".
+:::
+
+### $F$ frente a $t$: una identidad útil
+
+Para una *única* restricción ($q = 1$), el estadístico $F$ es igual al cuadrado del estadístico $t$ correspondiente:
+
+$$
+F \;=\; t^2, \qquad F_{1,\,n-k-1} \;=\; \bigl(t_{n-k-1}\bigr)^2.
+$$
+
+Los contrastes $t$ y $F$ ofrecen entonces conclusiones idénticas; la maquinaria del $F$ solo es estrictamente necesaria cuando $q \geq 2$.
+
+## Práctica: inferencia en R (Tutorial 5)
+
+Ahora ponemos a trabajar todo el capítulo en R sobre el conjunto de datos `beauty` del paquete **wooldridge** ---los mismos datos de salario por hora que vimos en el Capítulo 2 y que ampliaremos en el Capítulo 6. El modelo regresa el salario por hora sobre la puntuación de atractivo físico `looks` (de 1 a 5), los años de escolarización `educ` y los años de experiencia `exper`, para $n = 1260$ trabajadores:
+
+$$
+wage = \beta_0 + \beta_1\,looks + \beta_2\,educ + \beta_3\,exper + u.
+$$
+
+El objetivo es verificar que R automatiza exactamente los cálculos que acabamos de hacer a mano.
+
+```{r ch04-setup}
+#| message: false
+library(wooldridge)
+data("beauty")
+```
+
+### Cargar los datos y ajustar el modelo
+
+```{r ch04-fit}
+model <- lm(wage ~ looks + educ + exper, data = beauty)
+summary(model)
+```
+
+El bloque de `summary()` da, para cada coeficiente, la estimación $\hat{\beta}_j$, su error estándar, el estadístico $t$ $\hat{\beta}_j/\operatorname{se}(\hat{\beta}_j)$ (que contrasta $H_0:\beta_j = 0$) y el valor $p$ bilateral; la línea final da el estadístico $F$ global y el $R^2$. La ecuación estimada es
+
+$$
+\widehat{wage} = -2{,}822 + 0{,}413\,looks + 0{,}457\,educ + 0{,}114\,exper.
+$$
+
+Manteniendo fijas la escolarización y la experiencia, un aumento de un punto en la valoración del atractivo se asocia con en torno a $\$0{,}41$ más por hora; un año más de escolarización, con en torno a $\$0{,}46$. El $R^2$ es $0{,}1265$, así que estos tres regresores explican conjuntamente en torno al 12,6 % de la variación de los salarios ---un salto notable respecto del ajuste casi plano que `looks` producía por sí solo en el Capítulo 2, pero también un recordatorio de que los salarios dependen de mucho más de lo que hemos medido.
+
+### Un intervalo de confianza del 95 % para `looks`, a mano
+
+Extraemos los coeficientes y los errores estándar mediante código, formamos los grados de libertad y leemos el valor crítico con `qt()`.
+
+```{r ch04-ci-manual}
+beta_hat <- coef(model)
+se_hat   <- summary(model)$coefficients[, "Std. Error"]
+
+n  <- nobs(model)
+k  <- length(beta_hat) - 1        # pendientes, excluyendo el término constante
+df <- n - k - 1                   # 1260 - 3 - 1 = 1256
+
+t_crit <- qt(0.975, df)
+t_crit                            # valor crítico t_{0.025, df}
+
+looks_LB <- beta_hat["looks"] - t_crit * se_hat["looks"]
+looks_UB <- beta_hat["looks"] + t_crit * se_hat["looks"]
+c(lower = looks_LB, upper = looks_UB)
+```
+
+El margen de error es $t_c \times \operatorname{se} \approx 1{,}96 \times 0{,}18318 = 0{,}359$, lo que da un intervalo del 95 % de aproximadamente $[0{,}054,\ 0{,}772]$. El atajo incorporado entrega todos los intervalos en una sola llamada:
+
+```{r ch04-ci-check}
+confint(model)
+```
+
+La fila de `looks` coincide con nuestro cálculo a mano salvo por una diferencia mínima: `confint()` usa el cuantil $t$ exacto $t_{0{,}025,1256} \approx 1{,}962$ en lugar del $1{,}96$ redondeado. El intervalo excluye el cero, lo que ---por la equivalencia de arriba--- ya nos dice que el contraste bilateral de $H_0:\beta_{looks} = 0$ rechazará al nivel del 5 %.
+
+### Un contraste $t$ bilateral para `looks`
+
+Contrastamos $H_0:\beta_{looks} = 0$ frente a $H_1:\beta_{looks} \neq 0$ al nivel del 5 %, paso a paso, y lo comprobamos con la salida de `summary()`.
+
+```{r ch04-ttest-looks}
+b_looks  <- coef(model)["looks"]
+se_looks <- summary(model)$coefficients["looks", "Std. Error"]
+
+t_looks  <- b_looks / se_looks
+p_looks  <- 2 * pt(-abs(t_looks), df)       # valor p bilateral
+c(t = t_looks, p = p_looks)
+
+summary(model)$coefficients["looks", c("t value", "Pr(>|t|)")]
+```
+
+El cálculo manual reproduce exactamente lo que da R: $t = 0{,}41300/0{,}18318 \approx 2{,}26$. Como $|2{,}26| > 1{,}96$, **rechazamos $H_0$** ---el coeficiente poblacional de looks es estadísticamente distinguible de cero al nivel del 5 %. Es una afirmación sobre la evidencia estadística, no sobre la causalidad.
+
+### Contrastar una hipótesis nula no nula: `educ` $= 0{,}50$
+
+Los estadísticos $t$ de `summary()` contrastan todos la nula de que el coeficiente es *cero*. Para contrastar un valor distinto debemos usar la fórmula general $t = (\hat{\beta}_j - c)/\operatorname{se}(\hat{\beta}_j)$ con el $c$ adecuado. Supongamos que la teoría sugiere que el rendimiento de un año de escolarización es exactamente $0{,}50$, y contrastamos $H_0:\beta_{educ} = 0{,}50$ frente a $H_1:\beta_{educ} \neq 0{,}50$.
+
+```{r ch04-ttest-educ}
+b_educ  <- coef(model)["educ"]
+se_educ <- summary(model)$coefficients["educ", "Std. Error"]
+
+t_educ <- (b_educ - 0.50) / se_educ
+t_educ
+```
+
+Esto da $t = (0{,}45703 - 0{,}50)/0{,}04807 \approx -0{,}89$. Como $|-0{,}89| < 1{,}96$, **no rechazamos** $H_0$: la muestra no aporta suficiente evidencia al nivel del 5 % de que el rendimiento difiera de $0{,}50$ (lo que *no* es lo mismo que demostrar que es igual a $0{,}50$). Nótese por qué el estadístico $t$ por defecto de `summary()`, de $9{,}5$, sería erróneo aquí: ese número contrasta $\beta_{educ} = 0$, una nula completamente distinta. Contrastar un valor no nulo exige restar $c = 0{,}50$ en el numerador.
+
+### Leer el valor $p$ de `looks`
+
+En la tabla de regresión, el valor $p$ de `looks` es $0{,}02433$.
+
+```{r ch04-pvalue}
+summary(model)$coefficients["looks", "Pr(>|t|)"]
+```
+
+Como $0{,}02433 < 0{,}05$, rechazamos $H_0:\beta_{looks} = 0$ al nivel del 5 %; como $0{,}02433 > 0{,}01$, *no* podríamos rechazarla al nivel del 1 %. En palabras, $0{,}02433$ es la probabilidad ---*calculada suponiendo $\beta_{looks} = 0$*--- de ver un estadístico $t$ al menos tan extremo como el que hemos obtenido y, de forma equivalente, el menor nivel de significación al que se rechazaría esta nula. **No** es "la probabilidad de que $H_0$ sea verdadera".
+
+### El contraste $F$ global: restringido frente a no restringido
+
+El $F$ global contrasta $H_0:\beta_{looks} = \beta_{educ} = \beta_{exper} = 0$, así que el modelo restringido es solo el término constante ($R^2_R = 0$) y $q = k = 3$. Lo calculamos a partir de la forma del $R^2$ y luego lo comprobamos con `anova()`.
+
+```{r ch04-foverall}
+R2 <- summary(model)$r.squared
+q  <- k                                   # las tres pendientes restringidas
+F_overall <- (R2 / q) / ((1 - R2) / df)
+F_overall
+```
+
+Esto devuelve $\approx 60{,}6$, que coincide con el $60{,}62$ que R imprime en la línea de `summary()` (salvo un pequeño redondeo). El valor crítico es $F_{3,1256} \approx 2{,}60$, y $60{,}62 \gg 2{,}60$, así que rechazamos la nula conjunta de forma contundente. R da el mismo contraste comparando directamente los modelos restringido y no restringido:
+
+```{r ch04-anova}
+model_r <- lm(wage ~ 1, data = beauty)
+model_u <- lm(wage ~ looks + educ + exper, data = beauty)
+anova(model_r, model_u)
+```
+
+La columna `F` reproduce $60{,}62$ y la columna `Pr(>F)` es esencialmente cero. Los regresores son conjuntamente informativos en relación con un modelo de solo término constante ---aunque, como se ha subrayado arriba, eso es un punto de partida para el análisis, no una prueba de que el modelo sea causal o esté correctamente especificado.
+
+La cadena de herramientas queda ahora completa y engranada: $\hat{\beta} \rightarrow \operatorname{se}(\hat{\beta}) \rightarrow \text{IC} \rightarrow t \rightarrow p$, con el contraste $F$ encargándose de varias restricciones a la vez. R automatiza la aritmética, pero el razonamiento es exactamente la lógica en cuatro pasos que aplicamos a mano.
 
 ## Autoevaluación {.unnumbered}
 
-<!-- TODO -->
+Ocho preguntas cortas de opción múltiple. Intenta cada una antes de abrir la respuesta.
+
+::: {.callout-tip collapse="true"}
+## P1. Qué nos aporta RLM.6
+
+Añadir RLM.6 (normalidad de $u$) a los supuestos de Gauss--Markov nos permite:
+
+- A. Demostrar que MCO es insesgado.
+- B. Demostrar que MCO tiene la varianza más pequeña entre los estimadores lineales insesgados.
+- C. Derivar la distribución *exacta* en muestras finitas de $\hat{\beta}_j$ y realizar contrastes $t$ y $F$ con cualquier tamaño muestral.
+- D. Estimar $\sigma^2$.
+
+**Respuesta: C.** La insesgadez (A) se sigue de RLM.1--RLM.4; BLUE (B), de RLM.1--RLM.5; el estimador $\hat{\sigma}^2$ (D) está definido con independencia de RLM.6. Solo RLM.6 nos da la normalidad *exacta* de $\hat{\beta}_j$ y, por tanto, inferencia $t$ y $F$ exacta en muestras finitas.
+:::
+
+::: {.callout-tip collapse="true"}
+## P2. ¿Por qué $t$ y no $z$?
+
+Bajo RLM.1--RLM.6 usamos $t_{n-k-1}$ en lugar de $\mathcal{N}(0,1)$ para la inferencia sobre un único coeficiente porque:
+
+- A. MCO es sesgado en muestras finitas.
+- B. El error estándar usa un $\hat{\sigma}^2$ *estimado*, y el estadístico estandarizado resultante tiene colas más pesadas que la normal estándar.
+- C. El término de error es heterocedástico.
+- D. Los regresores son no estocásticos.
+
+**Respuesta: B.** Sustituir la $\sigma$ desconocida del error estándar por $\hat{\sigma}$ introduce una variabilidad adicional que la distribución $t$ recoge con sus colas más pesadas. A medida que $n - k - 1 \to \infty$, la $t$ converge a la normal estándar.
+:::
+
+::: {.callout-tip collapse="true"}
+## P3. Qué significa "95 % de confianza"
+
+El intervalo del 95 % para la pendiente de fecundidad es $[-0{,}174,\ -0{,}104]$. La interpretación correcta es:
+
+- A. Hay una probabilidad del 95 % de que el verdadero $\beta_1$ esté entre $-0{,}174$ y $-0{,}104$.
+- B. Si muestreáramos repetidamente y construyéramos intervalos de este modo, en torno al 95 % de ellos contendrían el verdadero $\beta_1$.
+- C. El 95 % de las mujeres de la muestra tienen la respuesta que predice el modelo.
+- D. La estimación $-0{,}139$ es correcta el 95 % de las veces.
+
+**Respuesta: B.** El 95 % es una propiedad del *procedimiento*, no de este único intervalo obtenido. Una vez calculado, $\beta_1$ es un número fijo que el intervalo cubre o no cubre ---así que A es la lectura errónea clásica.
+:::
+
+::: {.callout-tip collapse="true"}
+## P4. Un intervalo de confianza y un contraste bilateral
+
+El intervalo del 95 % para $\beta_{looks}$ en la regresión `beauty` es aproximadamente $[0{,}054,\ 0{,}772]$, que excluye el cero. Esto implica:
+
+- A. El contraste $t$ bilateral de $H_0:\beta_{looks} = 0$ rechaza al nivel del 5 %.
+- B. El verdadero $\beta_{looks}$ es con seguridad positivo.
+- C. El coeficiente de looks es económicamente grande.
+- D. El aspecto físico causa salarios más altos.
+
+**Respuesta: A.** Un IC y el contraste bilateral correspondiente son equivalentes: el intervalo excluye el valor de la nula si y solo si el contraste rechaza. El intervalo no dice nada sobre la magnitud (C), sobre la causalidad (D) ni sobre la certeza para una única muestra (B).
+:::
+
+::: {.callout-tip collapse="true"}
+## P5. Leer un valor $p$
+
+El coeficiente de `looks` tiene un valor $p$ bilateral de $0{,}02433$. ¿Qué afirmación es correcta?
+
+- A. Es estadísticamente significativo al nivel del 5 % pero no al del 1 %.
+- B. Es significativo a todos los niveles convencionales.
+- C. No es significativo al nivel del 5 %.
+- D. Hay una probabilidad del 2,433 % de que $H_0$ sea verdadera.
+
+**Respuesta: A.** El valor $p$ es el menor $\alpha$ al que rechazamos, y $0{,}01 < 0{,}02433 < 0{,}05$ sitúa la significación entre los niveles del 1 % y del 5 %. El valor $p$ se calcula *suponiendo* $H_0$, así que no es una probabilidad de que $H_0$ sea verdadera (D).
+:::
+
+::: {.callout-tip collapse="true"}
+## P6. El contraste $F$ conjunto
+
+Para contrastar si *age* y *totemp* son conjuntamente cero en la regresión de planes de pensiones ($q = 2$ restricciones, $n = 1534$), usamos:
+
+- A. Dos contrastes $t$ separados, uno por cada coeficiente.
+- B. $F = \dfrac{(\mathrm{SCR}_R - \mathrm{SCR}_U)/q}{\mathrm{SCR}_U/(n-k-1)}$, distribuido como $F_{q,\,n-k-1}$ bajo $H_0$.
+- C. Un contraste $\chi^2$ sobre $\hat{\beta}_{age} + \hat{\beta}_{totemp}$.
+- D. Un contraste $z$ que compara la suma de las estimaciones con $1{,}96$.
+
+**Respuesta: B.** Los contrastes $t$ separados (A) no controlan el tamaño del procedimiento conjunto y pueden pasar por alto el caso en que dos regresores son individualmente débiles pero conjuntamente informativos. El modelo restringido elimina *age* y *totemp*; eliminarlos solo puede elevar la SCR, y el estadístico $F$ convierte esa pérdida de ajuste en un número contrastable.
+:::
+
+::: {.callout-tip collapse="true"}
+## P7. Unilateral frente a bilateral
+
+Para la pendiente de fecundidad realizamos un contraste *unilateral* ($H_1:\beta_1 < 0$, $t_c = 1{,}645$) y también construimos un intervalo de confianza del 95 %. ¿A qué contraste corresponde el intervalo?
+
+- A. Al contraste unilateral, porque ambos rechazan $H_0$.
+- B. Al contraste bilateral ($H_1:\beta_1 \neq 0$, $t_c = 1{,}96$).
+- C. A ninguno ---intervalos y contrastes no guardan relación.
+- D. A ambos por igual.
+
+**Respuesta: B.** Un intervalo de confianza $(1-\alpha)$ se corresponde con el contraste *bilateral* al nivel $\alpha$. El contraste unilateral usa un valor crítico distinto ($1{,}645$ en lugar de $1{,}96$); ambos resultan rechazar aquí, pero solo el bilateral se alinea con el intervalo.
+:::
+
+::: {.callout-tip collapse="true"}
+## P8. Significación frente a causalidad
+
+El coeficiente de `looks` es significativo al nivel del 5 %. ¿Cuál de las siguientes afirmaciones es verdadera?
+
+- A. Un valor $p$ pequeño descarta el sesgo de variable omitida.
+- B. La significación estadística demuestra que un mejor aspecto físico *causa* salarios más altos.
+- C. La significación estadística y la identificación causal son lo mismo.
+- D. El contraste nos dice que es improbable que $\hat{\beta}_{looks}$ sea cero por azar muestral, pero no dice nada sobre si el aspecto físico *causa* salarios más altos ---la identificación causal sigue requiriendo $\mathbb{E}[u \mid \mathbf{X}] = 0$.
+
+**Respuesta: D.** La inferencia consiste en descartar el ruido muestral, no la confusión. Un coeficiente significativo en una regresión salarial observacional es una asociación condicional; leerlo en clave causal requiere el supuesto de exogeneidad RLM.4, que ningún valor $p$ puede aportar.
+:::
 
 ## Ejercicios {.unnumbered}
 
-<!-- TODO -->
+**Ejercicio 4.1 ★ --- Leer una salida de `summary()`.** Con el conjunto de datos `beauty`, estima $wage = \beta_0 + \beta_1\,looks + \beta_2\,educ + \beta_3\,exper + u$ con `lm()` e inspecciona `summary()`. (a) ¿Qué coeficientes de pendiente son significativos al nivel del 5 %? (b) Da la magnitud *y* el error estándar de $\hat{\beta}_{looks}$, y su interpretación económica. (c) Enuncia la hipótesis nula que contrasta el estadístico $F$ global del final de `summary()`.
+
+::: {.callout-tip collapse="true"}
+## Mostrar respuesta
+
+(a) Las tres pendientes son significativas al nivel del 5 %: `educ` y `exper` tienen valores $p$ por debajo de $2\times10^{-16}$ (estadísticos $t$ enormes, $9{,}5$ y $10{,}8$), y `looks` tiene $p = 0{,}024 < 0{,}05$ ($t = 2{,}26$). (b) $\hat{\beta}_{looks} = 0{,}413$ con un error estándar de $0{,}183$: manteniendo fijas la escolarización y la experiencia, un aumento de un punto en la valoración del atractivo se asocia con en torno a $\$0{,}41$ más por hora ---estadísticamente distinguible de cero, pero modesto en tamaño. (c) El $F$ global contrasta $H_0:\beta_{looks} = \beta_{educ} = \beta_{exper} = 0$ (ninguno de los regresores importa) frente a la alternativa de que al menos una pendiente es no nula.
+:::
+
+**Ejercicio 4.2 ★ --- IC del 95 % a mano.** Para el mismo modelo, construye desde cero un intervalo de confianza del 95 % para $\beta_{educ}$, usando `coef()`, `summary(model)$coefficients[, "Std. Error"]` y `qt()`. Verifícalo con `confint(model)["educ", ]`. ¿Contiene el intervalo el cero y qué implica eso para un contraste bilateral de $H_0:\beta_{educ} = 0$ al nivel del 5 %?
+
+::: {.callout-tip collapse="true"}
+## Mostrar respuesta
+
+Con $\hat{\beta}_{educ} = 0{,}45703$, $\operatorname{se} = 0{,}04807$ y $t_c \approx 1{,}96$, el margen de error es $1{,}96 \times 0{,}04807 = 0{,}0942$, lo que da
+
+$$
+0{,}45703 \pm 0{,}0942 = [\,0{,}363,\ 0{,}551\,].
+$$
+
+```r
+m  <- lm(wage ~ looks + educ + exper, data = beauty)
+b  <- coef(m)["educ"]
+se <- summary(m)$coefficients["educ", "Std. Error"]
+df <- nobs(m) - length(coef(m))      # n - k - 1
+tc <- qt(0.975, df)
+c(b - tc * se, b + tc * se)
+confint(m)["educ", ]                 # debería coincidir
+```
+
+El intervalo excluye el cero, así que el contraste bilateral de $H_0:\beta_{educ} = 0$ rechaza al nivel del 5 % ---coherente con el minúsculo `Pr(>|t|)` de `summary()`.
+:::
+
+**Ejercicio 4.3 ★★ --- Una nula no nula.** Todavía en el modelo `beauty`, contrasta $H_0:\beta_{exper} = 0{,}10$ frente a $H_1:\beta_{exper} \neq 0{,}10$ al nivel del 5 %, usando $\hat{\beta}_{exper} = 0{,}11374$ y $\operatorname{se} = 0{,}01055$. (a) Calcula el estadístico $t$ con el valor correcto de $c$. (b) ¿Rechazas o no rechazas, usando $t_c = 1{,}96$? (c) Explica por qué el estadístico $t$ que imprime `summary()` *no* responde a esta pregunta.
+
+::: {.callout-tip collapse="true"}
+## Mostrar respuesta
+
+(a) $t = (0{,}11374 - 0{,}10)/0{,}01055 = 0{,}01374/0{,}01055 \approx 1{,}30$. (b) $|1{,}30| < 1{,}96$, así que **no rechazamos** $H_0$: los datos son compatibles con un rendimiento por año de $0{,}10$ al nivel del 5 % (lo que no demuestra que sea igual a $0{,}10$). (c) El estadístico $t$ de `summary()`, $0{,}11374/0{,}01055 \approx 10{,}8$, contrasta $H_0:\beta_{exper} = 0$, una nula distinta. Todo $c$ no nulo debe restarse en el numerador: $t = (\hat{\beta} - c)/\operatorname{se}$.
+:::
+
+**Ejercicio 4.4 ★★ --- Un contraste $F$ conjunto en R.** En el modelo `beauty`, contrasta $H_0:\beta_{educ} = \beta_{exper} = 0$ (de modo que $q = 2$) comparando el modelo no restringido con el modelo restringido que mantiene solo `looks`. Calcula el estadístico $F$ a partir de las dos SCR, halla el valor crítico al 5 % con `qf()` y el valor $p$ con `pf()`, y verifícalo con `anova()`.
+
+*La solución completa se ofrece en la Edición para el profesorado.*
+
+**Ejercicio 4.5 ★★ --- El $F$ de los planes de pensiones a mano.** Usando los modelos de planes de pensiones del capítulo ---$\mathrm{SCR}_U = 385719$, $\mathrm{SCR}_R = 428385{,}5$, $n = 1534$, $k = 3$ regresores y $q = 2$ restricciones ($\beta_{age} = \beta_{totemp} = 0$)--- (a) calcula el estadístico $F$, (b) compáralo con $F_c = F_{2,1530} \approx 3$, (c) enuncia la conclusión con palabras y (d) explica por qué rechazar $H_0$ no demuestra *por sí solo* que `age` y `totemp` deban figurar en el modelo.
+
+::: {.callout-tip collapse="true"}
+## Mostrar respuesta
+
+(a) $n - k - 1 = 1534 - 3 - 1 = 1530$, así que
+
+$$
+F = \frac{(428385{,}5 - 385719)/2}{385719/1530} = \frac{21333{,}25}{252{,}10} = 84{,}62.
+$$
+
+(b) $84{,}62 > 3$. (c) **Rechazamos $H_0$**: `age` y `totemp` son conjuntamente relevantes para la tasa de participación, condicionando en `mrate`. (d) El contraste $F$ solo muestra que eliminar las dos variables cuesta una cantidad de ajuste estadísticamente detectable; no establece causalidad, especificación correcta ni importancia económica, y si las variables deben figurar en el modelo es, en última instancia, una cuestión de teoría y de diseño de la investigación, no de un único contraste.
+:::
+
+**Ejercicio 4.6 ★★★ --- El $F$ a partir del $R^2$.** Demuestra, partiendo de la fórmula basada en la SCR, que siempre que los modelos no restringido y restringido compartan la misma variable dependiente, el estadístico $F$ puede escribirse como
+
+$$
+F \;=\; \frac{(R^2_U - R^2_R)/q}{(1 - R^2_U)/(n-k-1)}.
+$$
+
+Después, verifica la identidad numéricamente para el contraste $F$ global del modelo `beauty`, sustituyendo $R^2_U = 0{,}1265$, $R^2_R = 0$, $q = 3$, $n = 1260$ y $k = 3$ en la fórmula y comprobando que reproduce el $60{,}62$ que da R. Por último, explica por qué la fórmula *falla* si el modelo restringido se ajusta sobre $\log(wage)$ en lugar de sobre $wage$.
+
+*La solución completa se ofrece en la Edición para el profesorado.*
